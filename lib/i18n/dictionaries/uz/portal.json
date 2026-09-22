@@ -78,5 +78,103 @@
     "loginLink": "Kirish",
     "noAccount": "Hisobingiz yo'qmi?",
     "link": "Ro'yxatdan o'tish"
+  },
+  "info": {
+    "show": "Ko'rsatish",
+    "hide": "Yashirish",
+    "canDo": "Bu yerda nima qilasiz",
+    "sections": {
+      "campaigns": {
+        "title": "Kampaniyalar bo'limi nima uchun?",
+        "purpose": "Bu yerda barcha reklama kampaniyalaringiz jamlangan. Kampaniya — reklamangiz MangaBox'ning qaysi joyida, qancha muddat va qancha ulush bilan ko'rsatilishini belgilaydigan buyurtma.",
+        "actions": [
+          "Yangi kampaniya yaratish va narxini oldindan bilish",
+          "Holat bo'yicha saralash: qoralama, moderatsiya, efirda va boshqalar",
+          "Kampaniyani moderatsiyaga yuborish yoki tasdiqlangach to'lash",
+          "Efirdagi kampaniyani to'xtatish va davom ettirish",
+          "\"Batafsil\" orqali kreativ, statistika va to'lovlarni ko'rish"
+        ],
+        "note": "Tartib: Qoralama → Moderatsiya → Tasdiqlandi → To'lov → Efirda → Tugadi. Kampaniyani faqat qoralama yoki rad etilgan holatda tahrirlash mumkin."
+      },
+      "orders": {
+        "title": "To'lovlar bo'limi nima uchun?",
+        "purpose": "Kampaniyalaringiz uchun qilingan barcha to'lovlar tarixi. Har bir yozuv bitta kampaniyaga tegishli.",
+        "actions": [
+          "Qaysi kampaniya uchun qachon va qancha to'langanini ko'rish",
+          "To'lov holatini kuzatish: kutilmoqda, to'langan, bekor qilingan, qaytarilgan",
+          "Buxgalteriya uchun summa va provayderni aniqlash"
+        ],
+        "note": "Yangi to'lov bu yerdan emas, kampaniyaning o'zidan boshlanadi — kampaniya moderatsiyadan o'tgach \"To'lash\" tugmasi chiqadi."
+      },
+      "rateCard": {
+        "title": "Narxnoma bo'limi nima uchun?",
+        "purpose": "MangaBox'dagi reklama joylari (slotlar), ularning narxi va kunlik auditoriyasi. Kampaniya yaratishdan oldin budjetni shu yerda hisoblab ko'rishingiz mumkin.",
+        "actions": [
+          "Har bir slot qayerda chiqishini va CPM narxini ko'rish",
+          "Kunlik ko'rsatishlar sonini solishtirish",
+          "Kalkulyatorda slot, ulush va kunni tanlab narxni hisoblash"
+        ],
+        "note": "Ulush — slotdagi barcha ko'rsatishlarning qancha qismi sizning reklamangizga berilishi. Masalan 25% — har to'rt ko'rsatishdan biri."
+      },
+      "settings": {
+        "title": "Sozlamalar bo'limi nima uchun?",
+        "purpose": "Kompaniyangiz ma'lumotlari va hisob xavfsizligi. Bu ma'lumotlar moderatorlarga va to'lov hujjatlarida ko'rinadi.",
+        "actions": [
+          "Brend, yuridik nom, STIR va emailni yangilash",
+          "Parolni almashtirish"
+        ],
+        "note": "Parol almashtirilsa, boshqa qurilmalardagi barcha sessiyalar yopiladi. Telefon raqami kirish uchun ishlatiladi va bu yerda o'zgartirilmaydi."
+      },
+      "form": {
+        "title": "Kampaniya formasi qanday ishlaydi?",
+        "purpose": "Reklamangiz qayerda, qachondan va necha kun ko'rsatilishini tanlaysiz. Narx narxnoma bo'yicha avtomatik hisoblanadi — summani qo'lda kiritish shart emas.",
+        "actions": [
+          "Bir yoki bir nechta slot va har biriga ulush tanlash",
+          "Boshlanish sanasi va muddatni (7–90 kun) belgilash",
+          "Bitta o'quvchiga kuniga necha marta ko'rsatilishini cheklash",
+          "Pastda jami narx va taxminiy ko'rsatishlarni ko'rish"
+        ],
+        "note": "Eng kam buyurtma — 100 000 so'm. Saqlangandan so'ng kampaniya qoralama bo'ladi: kreativ qo'shib, moderatsiyaga yuborasiz."
+      },
+      "overview": {
+        "title": "Umumiy ma'lumot",
+        "purpose": "Kampaniya parametrlari va narx tarkibi: qaysi slotlar, qancha ko'rsatish kafolatlangan va jami qancha to'lanadi.",
+        "actions": [
+          "Muddat, kunlik limit va chastota cheklovini tekshirish",
+          "Har bir slot bo'yicha ko'rsatish va narxni ko'rish",
+          "Rad etilgan bo'lsa, moderator izohini o'qish"
+        ]
+      },
+      "creatives": {
+        "title": "Kreativlar nima?",
+        "purpose": "Kreativ — foydalanuvchi ko'radigan reklamaning o'zi: brend nomi, sarlavha, matn, tugma va havola, kerak bo'lsa rasm. Kreativsiz kampaniya moderatsiyaga yuborilmaydi.",
+        "actions": [
+          "Karta yoki rasmli kreativ qo'shish",
+          "Logo va rasm yuklash — o'lcham slot talabiga mos bo'lishi kerak",
+          "Kreativni vaqtincha o'chirish yoki tahrirlash",
+          "O'ngdagi preview orqali qanday ko'rinishini tekshirish"
+        ],
+        "note": "Bir nechta kreativ qo'shsangiz, ular navbatma-navbat ko'rsatiladi va qaysi biri yaxshiroq ishlashini statistikada solishtirasiz."
+      },
+      "stats": {
+        "title": "Statistika nimani ko'rsatadi?",
+        "purpose": "Kampaniya natijalari kunlar, slotlar va kreativlar kesimida.",
+        "actions": [
+          "Ko'rsatishlar — reklama ekranga chiqqan marta",
+          "Ko'rishlar — reklama kamida 1 soniya ko'rinib turgan marta",
+          "Bosishlar va CTR — reklamaga bosganlar ulushi",
+          "Noyob tomoshabinlar soni"
+        ],
+        "note": "Ma'lumotlar bir necha daqiqa kechikish bilan yangilanadi."
+      },
+      "campaignOrders": {
+        "title": "Kampaniya to'lovlari",
+        "purpose": "Faqat shu kampaniya uchun yaratilgan to'lovlar va ularning holati.",
+        "actions": [
+          "To'lov o'tganini tekshirish",
+          "Tranzaksiya raqamini ko'rish"
+        ]
+      }
+    }
   }
 }

@@ -16,6 +16,7 @@ import { CampaignStatusBadge } from "@/components/dashboard/ads/campaign-status-
 import { CreativeManager } from "@/components/dashboard/ads/creative-manager";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import { LoadErrorState } from "@/components/dashboard/page-states";
+import { SectionInfo } from "@/components/dashboard/section-info";
 import { TransactionStatusBadge } from "@/components/dashboard/transaction-status-badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -125,7 +126,7 @@ export function CampaignSheet({
             defaultValue="overview"
             className="flex min-h-0 flex-1 flex-col gap-4"
           >
-            <div className="-mx-4 overflow-x-auto px-4 pb-px [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="overflow-x-auto px-4 pb-px [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <TabsList
                 variant="line"
                 className="w-max min-w-full justify-start gap-5 rounded-none border-b border-border p-0"
@@ -150,16 +151,20 @@ export function CampaignSheet({
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-6">
-              <TabsContent value="overview">
+              <TabsContent value="overview" className="space-y-5">
+                <SectionInfo id="sheet-overview" content={p.info.sections.overview} />
                 <Overview campaign={campaign} />
               </TabsContent>
-              <TabsContent value="creatives">
+              <TabsContent value="creatives" className="space-y-5">
+                <SectionInfo id="sheet-creatives" content={p.info.sections.creatives} />
                 <CreativeManager campaign={campaign} onChanged={refresh} />
               </TabsContent>
-              <TabsContent value="stats">
+              <TabsContent value="stats" className="space-y-5">
+                <SectionInfo id="sheet-stats" content={p.info.sections.stats} />
                 <CampaignStats campaign={campaign} />
               </TabsContent>
-              <TabsContent value="orders">
+              <TabsContent value="orders" className="space-y-5">
+                <SectionInfo id="sheet-orders" content={p.info.sections.campaignOrders} />
                 <Orders campaignId={campaign.id} />
               </TabsContent>
             </div>

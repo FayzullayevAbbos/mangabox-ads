@@ -78,5 +78,103 @@
     "loginLink": "Log in",
     "noAccount": "No account yet?",
     "link": "Sign up"
+  },
+  "info": {
+    "show": "Show",
+    "hide": "Hide",
+    "canDo": "What you can do here",
+    "sections": {
+      "campaigns": {
+        "title": "What is the Campaigns section for?",
+        "purpose": "All your ad campaigns in one place. A campaign is an order that defines where on MangaBox your ad appears, for how long and with what share.",
+        "actions": [
+          "Create a new campaign and see its price upfront",
+          "Filter by status: draft, review, live and more",
+          "Submit a campaign for review, or pay once it is approved",
+          "Pause and resume a live campaign",
+          "Open \"Details\" for creatives, stats and payments"
+        ],
+        "note": "Flow: Draft → Review → Approved → Payment → Live → Finished. A campaign can only be edited while it is a draft or rejected."
+      },
+      "orders": {
+        "title": "What is the Payments section for?",
+        "purpose": "The history of every payment made for your campaigns. Each record belongs to one campaign.",
+        "actions": [
+          "See which campaign was paid, when and how much",
+          "Track payment status: pending, paid, cancelled, refunded",
+          "Find the amount and provider for accounting"
+        ],
+        "note": "New payments start from the campaign itself — the \"Pay\" button appears once the campaign passes review."
+      },
+      "rateCard": {
+        "title": "What is the Rate card for?",
+        "purpose": "Ad placements (slots) on MangaBox, their prices and daily audience. Estimate your budget here before creating a campaign.",
+        "actions": [
+          "See where each slot appears and its CPM",
+          "Compare daily impressions",
+          "Use the calculator: pick slot, share and days to get a price"
+        ],
+        "note": "Share is the portion of all impressions in a slot given to your ad. For example, 25% means one in four impressions."
+      },
+      "settings": {
+        "title": "What is the Settings section for?",
+        "purpose": "Your company details and account security. Moderators and payment documents use this information.",
+        "actions": [
+          "Update brand, legal name, tax ID and email",
+          "Change your password"
+        ],
+        "note": "Changing the password signs out all other devices. Your phone number is your login and cannot be changed here."
+      },
+      "form": {
+        "title": "How does the campaign form work?",
+        "purpose": "Choose where, from when and for how many days your ad runs. The price is calculated from the rate card automatically — no need to enter an amount.",
+        "actions": [
+          "Pick one or more slots and a share for each",
+          "Set the start date and duration (7–90 days)",
+          "Limit how many times a day one reader sees the ad",
+          "See the total price and estimated impressions below"
+        ],
+        "note": "Minimum order is 100,000 UZS. After saving, the campaign is a draft: add a creative and submit it for review."
+      },
+      "overview": {
+        "title": "Overview",
+        "purpose": "Campaign parameters and price breakdown: which slots, how many impressions are guaranteed and the total to pay.",
+        "actions": [
+          "Check duration, daily cap and frequency cap",
+          "See impressions and price per slot",
+          "Read the moderator's note if it was rejected"
+        ]
+      },
+      "creatives": {
+        "title": "What are creatives?",
+        "purpose": "A creative is the ad people actually see: brand name, title, text, button and link, plus an image if needed. A campaign without creatives cannot be submitted.",
+        "actions": [
+          "Add a card or image creative",
+          "Upload a logo and image — size must match the slot",
+          "Disable or edit a creative",
+          "Check how it looks in the preview"
+        ],
+        "note": "With several creatives, they rotate and you can compare which performs better in the stats."
+      },
+      "stats": {
+        "title": "What do the stats show?",
+        "purpose": "Campaign results by day, slot and creative.",
+        "actions": [
+          "Impressions — times the ad was rendered",
+          "Views — times the ad stayed visible for at least 1 second",
+          "Clicks and CTR — share of people who clicked",
+          "Unique viewers"
+        ],
+        "note": "Data updates with a delay of a few minutes."
+      },
+      "campaignOrders": {
+        "title": "Campaign payments",
+        "purpose": "Payments created for this campaign only, with their status.",
+        "actions": [
+          "Check that a payment went through",
+          "See the transaction ID"
+        ]
+      }
+    }
   }
 }

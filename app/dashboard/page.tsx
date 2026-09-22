@@ -11,6 +11,7 @@ import { CampaignSheet } from "@/components/dashboard/ads/campaign-sheet";
 import { CampaignsTab } from "@/components/dashboard/ads/campaigns-tab";
 import { RateCardProvider } from "@/components/dashboard/ads/rate-card-context";
 import { PageHeader } from "@/components/dashboard/page-header";
+import { SectionInfo } from "@/components/dashboard/section-info";
 import { Button } from "@/components/ui/button";
 import {
   getCampaigns,
@@ -104,6 +105,8 @@ function CampaignsPage() {
           </Button>
         }
       />
+
+      <SectionInfo id="campaigns" content={p.info.sections.campaigns} />
 
       {account?.status === "pending" && (
         <div className="flex items-start gap-3 rounded-lg bg-amber-500/10 px-4 py-3 text-sm text-amber-800 dark:text-amber-300">
