@@ -1,0 +1,78 @@
+{
+  "list": {
+    "title": "Mijozlar",
+    "description": "Sizdan xarid qilgan mijozlar va ularning daromaddagi ulushi.",
+    "searchPlaceholder": "Telefon yoki email bo'yicha qidirish"
+  },
+  "columns": {
+    "customer": "Mijoz",
+    "revenue": "Daromad",
+    "payments": "To'lovlar",
+    "lastPayment": "Oxirgi to'lov"
+  },
+  "empty": {
+    "noResultsTitle": "Mijoz topilmadi",
+    "noResultsDescription": "Boshqa telefon yoki emailni sinab ko'ring.",
+    "noCustomersTitle": "Hozircha mijozlar yo'q",
+    "noCustomersDescription": "To'lov amalga oshirilgach, mijozlaringiz shu yerda paydo bo'ladi."
+  },
+  "errors": {
+    "loadTitle": "Yuklab bo'lmadi",
+    "loadFailed": "Ma'lumotlarni yuklab bo'lmadi."
+  },
+  "detail": {
+    "subtitleTransactions": "Jami {count} ta tranzaksiya",
+    "stats": {
+      "totalRevenue": "Jami daromad",
+      "netRevenue": "Sof daromad",
+      "payments": "To'lovlar",
+      "sales": "Sotuvlar"
+    },
+    "subscriptions": {
+      "title": "Obunalar",
+      "empty": "Bu mijozda obunalar yo'q.",
+      "nextBilling": "Keyingi to'lov: {date}",
+      "periodEnd": "Davr tugaydi: {date}",
+      "actionsLabel": "Amallar",
+      "reactivate": "Qayta faollashtirish",
+      "changePlan": "Tarifni o'zgartirish"
+    },
+    "transactions": {
+      "title": "Tranzaksiyalar",
+      "empty": "Tranzaksiyalar yo'q.",
+      "columns": {
+        "date": "Sana",
+        "product": "Mahsulot",
+        "status": "Holat",
+        "amount": "Summa"
+      }
+    },
+    "additional": {
+      "title": "Qo'shimcha",
+      "totalCommission": "Jami komissiya",
+      "refunded": "Qaytarilgan",
+      "refundedValue": "{amount} · {count} ta qaytarish",
+      "firstPayment": "Birinchi to'lov",
+      "lastPayment": "Oxirgi to'lov"
+    },
+    "productFallback": "Mahsulot"
+  },
+  "cancelDialog": {
+    "title": "Obunani bekor qilish",
+    "descriptionSuffix": "obunasi bekor qilinadi. Boshqa to'lovlar yechib olinmaydi.",
+    "keep": "Yo'q, qoldiring",
+    "confirm": "Ha, bekor qilish"
+  },
+  "changePlanDialog": {
+    "title": "Tarifni o'zgartirish",
+    "description": "Yangi takroriy mahsulotni tanlang. O'zgarish darhol kuchga kiradi.",
+    "noOptions": "Boshqa faol obuna mahsulotlari mavjud emas.",
+    "selectProduct": "Mahsulotni tanlang",
+    "confirm": "O'zgartirish"
+  },
+  "toasts": {
+    "reactivated": "Obuna qayta faollashtirildi",
+    "canceled": "Obuna bekor qilindi",
+    "planChanged": "Tarif o'zgartirildi"
+  }
+}

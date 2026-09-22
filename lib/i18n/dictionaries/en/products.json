@@ -1,0 +1,106 @@
+{
+  "list": {
+    "title": "Products",
+    "description": "Manage the products and pricing you offer to customers.",
+    "addProduct": "Add product",
+    "loadError": "Failed to load products.",
+    "errorTitle": "Couldn't load products",
+    "empty": {
+      "title": "No products yet",
+      "description": "Create your first product to start accepting payments."
+    },
+    "columns": {
+      "product": "Product",
+      "type": "Type",
+      "price": "Price",
+      "sales": "Sales",
+      "revenue": "Revenue"
+    },
+    "badges": {
+      "archived": "Archived",
+      "subscription": "Subscription",
+      "oneTime": "One-time"
+    },
+    "rowActions": {
+      "label": "Product actions",
+      "copyId": "Copy ID",
+      "archive": "Archive"
+    },
+    "toasts": {
+      "archived": "Product archived.",
+      "archiveError": "Failed to archive product.",
+      "idCopied": "Product ID copied."
+    },
+    "intervals": {
+      "day": "day",
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "archiveDialog": {
+      "title": "Archive product?",
+      "description": "{name} will be archived and can no longer be sold. Existing customers won't be affected.",
+      "confirm": "Archive"
+    }
+  },
+  "form": {
+    "createTitle": "New product",
+    "editTitle": "Edit product",
+    "createDescription": "Add a new product to your catalog.",
+    "editDescription": "Update your product details.",
+    "validation": {
+      "nameMin": "Name must be at least 2 characters.",
+      "nameMax": "Name must be 200 characters or fewer.",
+      "descriptionMin": "Description must be at least 2 characters.",
+      "amountInvalid": "Enter a valid amount.",
+      "intervalCountRange": "The interval must be between 1 and 365.",
+      "trialDaysRange": "Trial period must be between 0 and 365 days."
+    },
+    "toasts": {
+      "created": "Product created.",
+      "updated": "Product updated.",
+      "saveError": "Failed to save product."
+    },
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "e.g. Premium subscription"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Briefly describe your product"
+      },
+      "type": {
+        "label": "Pricing type",
+        "lockedHint": "The pricing type can't be changed after a product is created."
+      },
+      "amount": {
+        "label": "Price",
+        "placeholder": "0",
+        "currencySuffix": "soum"
+      },
+      "interval": {
+        "label": "Billing interval"
+      },
+      "trial": {
+        "label": "Trial days"
+      }
+    },
+    "pricing": {
+      "oneTime": {
+        "title": "One-time",
+        "subtitle": "A single payment"
+      },
+      "recurring": {
+        "title": "Recurring",
+        "subtitle": "Charged on a schedule"
+      }
+    },
+    "intervals": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
+    }
+  }
+}

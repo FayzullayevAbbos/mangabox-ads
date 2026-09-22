@@ -1,0 +1,150 @@
+{
+  "page": {
+    "title": "Tranzaksiyalar",
+    "description": "Pro obuna sotuvlari va homiylik to'lovlari."
+  },
+  "tabs": {
+    "payments": "To'lovlar",
+    "pro": "Obunalar",
+    "sponsor": "Homiylik"
+  },
+  "payments": {
+    "columns": {
+      "user": "Foydalanuvchi",
+      "plan": "Tarif",
+      "provider": "Provayder",
+      "status": "Holat",
+      "created": "Yaratilgan",
+      "paid": "To'langan",
+      "amount": "Summa"
+    },
+    "detail": {
+      "title": "To'lov tafsilotlari",
+      "description": "To'lov buyurtmasi haqida to'liq ma'lumot.",
+      "amount": "Summa",
+      "user": "Foydalanuvchi",
+      "telegramId": "Telegram ID",
+      "plan": "Tarif",
+      "days": "Muddat",
+      "basePrice": "Tarif narxi",
+      "discount": "Chegirma",
+      "provider": "Provayder",
+      "status": "Holat",
+      "providerRef": "Buyurtma raqami",
+      "transId": "Tranzaksiya raqami",
+      "createdAt": "Yaratilgan",
+      "paidAt": "To'langan",
+      "premiumUntil": "Premium tugaydi",
+      "orderId": "Ichki ID"
+    }
+  },
+  "loadError": "Tranzaksiyalarni yuklab bo'lmadi.",
+  "filters": {
+    "button": "Filtrlar",
+    "title": "Filtrlar",
+    "description": "Ro'yxatni davr va tarif bo'yicha toraytiring.",
+    "apply": "Qo'llash",
+    "clear": "Tozalash",
+    "removeFilter": "Filtrni olib tashlash",
+    "sortLabel": "Saralash",
+    "period": "Davr",
+    "plan": "Tarif",
+    "allPlans": "Barcha tariflar",
+    "from": "Dan",
+    "to": "Gacha",
+    "periods": {
+      "d7": "So'nggi 7 kun",
+      "d30": "So'nggi 30 kun",
+      "d90": "So'nggi 90 kun",
+      "d365": "So'nggi 1 yil"
+    },
+    "status": "Holat",
+    "allStatuses": "Barcha holatlar",
+    "provider": "Provayder",
+    "allProviders": "Barcha provayderlar",
+    "paymentsDescription": "To'lovlarni holat, provayder va davr bo'yicha toraytiring.",
+    "refresh": "Yangilash"
+  },
+  "sort": {
+    "dateDesc": "Avval yangilari",
+    "dateAsc": "Avval eskilari",
+    "amountDesc": "Summa: kamayish",
+    "amountAsc": "Summa: o'sish"
+  },
+  "pro": {
+    "columns": {
+      "user": "Foydalanuvchi",
+      "plan": "Tarif",
+      "type": "Turi",
+      "date": "Sana",
+      "expires": "Tugash sanasi",
+      "amount": "Summa",
+      "provider": "Provayder"
+    },
+    "type": {
+      "paid": "To'lov",
+      "granted": "Admin bergan"
+    },
+    "detail": {
+      "title": "Obuna tafsilotlari",
+      "description": "Sotuv haqida to'liq ma'lumot.",
+      "amount": "Summa",
+      "user": "Foydalanuvchi",
+      "telegramId": "Telegram ID",
+      "plan": "Tarif",
+      "days": "Muddat",
+      "daysValue": "{days} kun",
+      "discount": "Chegirma",
+      "type": "Turi",
+      "createdAt": "Berilgan",
+      "expiresAt": "Tugaydi",
+      "provider": "Provayder",
+      "providerRef": "Provayder raqami"
+    }
+  },
+  "sponsor": {
+    "anonymous": "Anonim",
+    "emptyTitle": "Buyurtma yo'q",
+    "emptyDescription": "Tanlangan holat ({status}) bo'yicha buyurtmalar topilmadi.",
+    "columns": {
+      "sponsor": "Homiy",
+      "manga": "Manga",
+      "provider": "Provayder",
+      "status": "Holat",
+      "date": "Yaratilgan",
+      "paidAt": "To'langan",
+      "amount": "Summa"
+    },
+    "detail": {
+      "title": "Homiylik buyurtmasi",
+      "description": "To'lov haqida to'liq ma'lumot.",
+      "amount": "Summa",
+      "sponsor": "Homiy",
+      "telegramId": "Telegram ID",
+      "manga": "Manga",
+      "chapters": "Boblar",
+      "provider": "Provayder",
+      "status": "Holat",
+      "providerRef": "Provayder raqami",
+      "createdAt": "Yaratilgan",
+      "paidAt": "To'langan",
+      "orderId": "Buyurtma ID"
+    }
+  },
+  "states": {
+    "errorTitle": "Yuklab bo'lmadi",
+    "emptyTitle": "Hozircha tranzaksiya yo'q",
+    "emptyDescription": "Birinchi sotuv shu yerda ko'rinadi.",
+    "emptyFilteredTitle": "Hech narsa topilmadi",
+    "emptyFilteredDescription": "Filtrlarni o'zgartirib ko'ring.",
+    "clearFilters": "Filtrlarni tozalash"
+  },
+  "pagination": {
+    "previous": "Oldingi",
+    "next": "Keyingi"
+  },
+  "summary": {
+    "count": "{count} ta yozuv",
+    "pageSuffix": " · {page}/{total}-sahifa"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "page": {
+    "title": "Транзакции",
+    "description": "Продажи Pro-подписок и спонсорские платежи."
+  },
+  "tabs": {
+    "payments": "Платежи",
+    "pro": "Подписки",
+    "sponsor": "Спонсорство"
+  },
+  "payments": {
+    "columns": {
+      "user": "Пользователь",
+      "plan": "Тариф",
+      "provider": "Провайдер",
+      "status": "Статус",
+      "created": "Создан",
+      "paid": "Оплачен",
+      "amount": "Сумма"
+    },
+    "detail": {
+      "title": "Детали платежа",
+      "description": "Полная информация о платёжном заказе.",
+      "amount": "Сумма",
+      "user": "Пользователь",
+      "telegramId": "Telegram ID",
+      "plan": "Тариф",
+      "days": "Срок",
+      "basePrice": "Цена тарифа",
+      "discount": "Скидка",
+      "provider": "Провайдер",
+      "status": "Статус",
+      "providerRef": "Номер заказа",
+      "transId": "Номер транзакции",
+      "createdAt": "Создан",
+      "paidAt": "Оплачен",
+      "premiumUntil": "Премиум до",
+      "orderId": "Внутренний ID"
+    }
+  },
+  "loadError": "Не удалось загрузить транзакции.",
+  "filters": {
+    "button": "Фильтры",
+    "title": "Фильтры",
+    "description": "Сузьте список по периоду и тарифу.",
+    "apply": "Применить",
+    "clear": "Сбросить",
+    "removeFilter": "Убрать фильтр",
+    "sortLabel": "Сортировка",
+    "period": "Период",
+    "plan": "Тариф",
+    "allPlans": "Все тарифы",
+    "from": "С",
+    "to": "По",
+    "periods": {
+      "d7": "Последние 7 дней",
+      "d30": "Последние 30 дней",
+      "d90": "Последние 90 дней",
+      "d365": "Последний год"
+    },
+    "status": "Статус",
+    "allStatuses": "Все статусы",
+    "provider": "Провайдер",
+    "allProviders": "Все провайдеры",
+    "paymentsDescription": "Сузьте платежи по статусу, провайдеру и периоду.",
+    "refresh": "Обновить"
+  },
+  "sort": {
+    "dateDesc": "Сначала новые",
+    "dateAsc": "Сначала старые",
+    "amountDesc": "Сумма: по убыванию",
+    "amountAsc": "Сумма: по возрастанию"
+  },
+  "pro": {
+    "columns": {
+      "user": "Пользователь",
+      "plan": "Тариф",
+      "type": "Тип",
+      "date": "Дата",
+      "expires": "Истекает",
+      "amount": "Сумма",
+      "provider": "Провайдер"
+    },
+    "type": {
+      "paid": "Оплата",
+      "granted": "Выдал админ"
+    },
+    "detail": {
+      "title": "Детали подписки",
+      "description": "Полная информация о продаже.",
+      "amount": "Сумма",
+      "user": "Пользователь",
+      "telegramId": "Telegram ID",
+      "plan": "Тариф",
+      "days": "Срок",
+      "daysValue": "{days} дней",
+      "discount": "Скидка",
+      "type": "Тип",
+      "createdAt": "Выдана",
+      "expiresAt": "Истекает",
+      "provider": "Провайдер",
+      "providerRef": "Номер провайдера"
+    }
+  },
+  "sponsor": {
+    "anonymous": "Аноним",
+    "emptyTitle": "Заказов нет",
+    "emptyDescription": "Заказы со статусом «{status}» не найдены.",
+    "columns": {
+      "sponsor": "Спонсор",
+      "manga": "Манга",
+      "provider": "Провайдер",
+      "status": "Статус",
+      "date": "Создан",
+      "paidAt": "Оплачен",
+      "amount": "Сумма"
+    },
+    "detail": {
+      "title": "Спонсорский заказ",
+      "description": "Полная информация о платеже.",
+      "amount": "Сумма",
+      "sponsor": "Спонсор",
+      "telegramId": "Telegram ID",
+      "manga": "Манга",
+      "chapters": "Главы",
+      "provider": "Провайдер",
+      "status": "Статус",
+      "providerRef": "Номер провайдера",
+      "createdAt": "Создан",
+      "paidAt": "Оплачен",
+      "orderId": "ID заказа"
+    }
+  },
+  "states": {
+    "errorTitle": "Не удалось загрузить",
+    "emptyTitle": "Транзакций пока нет",
+    "emptyDescription": "Первая продажа появится здесь.",
+    "emptyFilteredTitle": "Ничего не найдено",
+    "emptyFilteredDescription": "Попробуйте изменить фильтры.",
+    "clearFilters": "Сбросить фильтры"
+  },
+  "pagination": {
+    "previous": "Назад",
+    "next": "Вперёд"
+  },
+  "summary": {
+    "count": "{count} записей",
+    "pageSuffix": " · страница {page} из {total}"
+  }
+}

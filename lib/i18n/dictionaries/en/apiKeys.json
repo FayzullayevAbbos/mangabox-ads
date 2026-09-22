@@ -1,0 +1,68 @@
+{
+  "title": "API keys",
+  "description": "Secret keys for connecting to the MangaBox API. Keep them server-side and never share them with anyone.",
+  "newKey": "New key",
+  "errors": {
+    "loadFailed": "Couldn't load data.",
+    "loadTitle": "Failed to load",
+    "copyFailed": "Couldn't copy.",
+    "createFailed": "Something went wrong while creating the key."
+  },
+  "empty": {
+    "title": "No API keys yet",
+    "description": "Create your first key and connect your integration."
+  },
+  "table": {
+    "name": "Name",
+    "scopes": "Scopes",
+    "lastUsed": "Last used",
+    "expires": "Expires",
+    "never": "Never",
+    "neverExpires": "Never expires",
+    "expired": "Expired",
+    "actions": "Actions"
+  },
+  "toast": {
+    "deleted": "API key deleted",
+    "copied": "Key copied"
+  },
+  "deleteDialog": {
+    "title": "Delete this key?",
+    "description": "will be permanently deleted. This action cannot be undone, and any integrations using this key will stop working.",
+    "confirm": "Yes, delete"
+  },
+  "created": {
+    "title": "Save your key",
+    "description": "This key is shown only once. Copy it now and store it somewhere safe.",
+    "done": "Got it, I saved it"
+  },
+  "form": {
+    "title": "New API key",
+    "description": "Create a key for your integrations and choose the permissions it needs.",
+    "name": {
+      "label": "Name",
+      "hint": "An internal name to help you recognize the key later. For example: “Production server” or “Test environment”.",
+      "placeholder": "e.g. Production key",
+      "error": "Name must be 2–120 characters."
+    },
+    "scopes": {
+      "label": "Scopes",
+      "hint": "Defines which actions the key can perform. Grant only the permissions you need — it's safer that way.",
+      "error": "Select at least one scope."
+    },
+    "expiry": {
+      "label": "Expiry",
+      "hint": "The key is automatically revoked after the selected number of days. “Never expires” means no limit.",
+      "never": "Never expires",
+      "days": "{days} days"
+    },
+    "moreInfo": "More info",
+    "submit": "Create"
+  },
+  "scopes": {
+    "products:read": "Read products",
+    "products:write": "Manage products",
+    "transactions:read": "Read transactions",
+    "checkouts:write": "Create checkouts"
+  }
+}

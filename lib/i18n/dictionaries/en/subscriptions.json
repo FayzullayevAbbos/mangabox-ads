@@ -1,0 +1,54 @@
+{
+  "page": {
+    "title": "Subscriptions",
+    "description": "Your customers' recurring payments and their status."
+  },
+  "loadError": "Couldn't load the data. Please try again.",
+  "productFallback": "Product",
+  "toasts": {
+    "reactivated": "Subscription reactivated",
+    "canceled": "Subscription canceled",
+    "planChanged": "Plan changed"
+  },
+  "states": {
+    "errorTitle": "Failed to load",
+    "emptyTitle": "No subscriptions yet",
+    "emptyDescription": "Sell a recurring product and subscriptions will show up here."
+  },
+  "columns": {
+    "customer": "Customer",
+    "product": "Product",
+    "status": "Status",
+    "nextPayment": "Next payment",
+    "price": "Price"
+  },
+  "intervals": {
+    "day": "day",
+    "week": "week",
+    "month": "month",
+    "year": "year",
+    "dayPlural": "days",
+    "weekPlural": "weeks",
+    "monthPlural": "months",
+    "yearPlural": "years"
+  },
+  "actions": {
+    "menuLabel": "Actions",
+    "reactivate": "Reactivate",
+    "changePlan": "Change plan",
+    "cancel": "Cancel"
+  },
+  "cancelDialog": {
+    "title": "Cancel subscription",
+    "body": "subscription will be canceled. No further payments will be charged.",
+    "keep": "No, keep it",
+    "confirm": "Yes, cancel"
+  },
+  "changePlanDialog": {
+    "title": "Change plan",
+    "description": "Choose a new recurring product. The change takes effect immediately.",
+    "noOptions": "No other active subscription products available.",
+    "selectPlaceholder": "Select a product",
+    "confirm": "Change"
+  }
+}

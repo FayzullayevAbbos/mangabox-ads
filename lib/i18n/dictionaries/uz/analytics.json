@@ -1,0 +1,867 @@
+{
+  "users": {
+    "page": {
+      "title": "Foydalanuvchilar",
+      "description": "Auditoriya, faollik va o'qish odatlari."
+    },
+    "tabs": {
+      "all": "Foydalanuvchilar",
+      "atRisk": "Yo'qolib borayotganlar"
+    },
+    "grantPro": {
+      "trigger": "Yangi pro user",
+      "title": "Qo'lda pro berish",
+      "description": "Telegram ID yoki @username bo'yicha foydalanuvchini toping va muddatni tanlang.",
+      "searchPlaceholder": "123456789 yoki @rustam",
+      "search": "Qidirish",
+      "hint": "Foydalanuvchini topish uchun ID yoki username kiriting.",
+      "durationLabel": "Muddat",
+      "payment": {
+        "label": "To'lov",
+        "paid": "Pul olingan",
+        "gift": "Sovg'a",
+        "amountPlaceholder": "Summa (bo'sh qolsa — tarif narxi)"
+      },
+      "submit": "{days}lik pro berish",
+      "success": "Pro berildi — {days}lik, {until} gacha",
+      "notNotified": "Foydalanuvchiga xabar yuborilmadi (botni bloklagan bo'lishi mumkin).",
+      "duration": {
+        "week": "1 hafta",
+        "months": "{count} oy",
+        "days": "{count} kun"
+      },
+      "fields": {
+        "telegramId": "Telegram ID",
+        "premium": "Hozirgi tarif",
+        "premiumUntil": "Pro — {date} gacha",
+        "noPremium": "Pro emas",
+        "source": "Manba"
+      },
+      "errors": {
+        "notFound": "Foydalanuvchi topilmadi",
+        "generic": "Pro berishda xatolik"
+      }
+    },
+    "stats": {
+      "dau": "Bugun faol",
+      "total": "Jami",
+      "premium": "Pro"
+    },
+    "filters": {
+      "search": "Ism yoki username",
+      "role": "Rol",
+      "allRoles": "Barcha rollar",
+      "sort": "Saralash"
+    },
+    "roles": {
+      "free": "Bepul",
+      "premium": "Pro",
+      "admin": "Admin"
+    },
+    "sort": {
+      "lastActive": "Oxirgi faollik",
+      "totalReadChapters": "Ko'p o'qiganlar"
+    },
+    "columns": {
+      "user": "Foydalanuvchi",
+      "role": "Rol",
+      "chapters": "Boblar",
+      "source": "Manba",
+      "lastActive": "Oxirgi faollik"
+    },
+    "empty": {
+      "title": "Foydalanuvchi topilmadi",
+      "description": "Qidiruv yoki filtrni o'zgartirib ko'ring."
+    },
+    "atRisk": {
+      "title": "Yo'qolib borayotganlar",
+      "description": "Ilgari faol bo'lgan, endi kirmayotgan o'quvchilar.",
+      "days": "{days} kun faol emas",
+      "empty": "Hozircha bunday foydalanuvchi yo'q."
+    },
+    "retention": {
+      "title": "Qaytish (retention)",
+      "day": "{day}-kun",
+      "cohort": "kogorta: {size}"
+    }
+  },
+  "userDetail": {
+    "back": "Foydalanuvchilarga qaytish",
+    "stats": {
+      "chapters": "O'qilgan boblar",
+      "referrals": "Takliflar",
+      "maxWindow": "5 soatdagi eng ko'p",
+      "joined": "Qo'shilgan"
+    },
+    "profile": {
+      "title": "Profil",
+      "role": "Rol",
+      "premiumUntil": "Premium tugaydi",
+      "language": "Til",
+      "source": "Manba",
+      "platform": "Platforma",
+      "lastActive": "Oxirgi faollik",
+      "abuse": "Free limitni chetlab o'tmoqda"
+    },
+    "favorites": {
+      "title": "Sevimlilar",
+      "empty": "Sevimlilar yo'q"
+    },
+    "timeline": {
+      "title": "O'qish tarixi (14 kun)",
+      "chapters": "Boblar",
+      "empty": "Bu davrda o'qish yo'q."
+    },
+    "searches": {
+      "title": "So'nggi qidiruvlar",
+      "empty": "Qidiruv tarixi hali yig'ilmayapti."
+    },
+    "pro": {
+      "title": "Pro obuna tarixi",
+      "count": "{count} marta",
+      "empty": "Bu foydalanuvchi hali pro obuna olmagan.",
+      "error": "Pro tarixini yuklab bo'lmadi.",
+      "summary": {
+        "purchases": "Sotib olgan",
+        "grants": "Admin bergan",
+        "spent": "Jami to'lagan",
+        "first": "Birinchi marta"
+      },
+      "columns": {
+        "index": "№",
+        "date": "Olingan sana",
+        "plan": "Tarif",
+        "type": "Turi",
+        "provider": "Provayder",
+        "amount": "Summa",
+        "expires": "Tugash sanasi"
+      },
+      "type": {
+        "paid": "To'lov",
+        "granted": "Admin bergan"
+      },
+      "daysValue": "{days} kun",
+      "nth": "{n}-marta",
+      "active": "Faol"
+    },
+    "devices": {
+      "title": "Ilova qurilmalari",
+      "count": "{count} ta",
+      "empty": "Bu foydalanuvchi ilovadan kirmagan.",
+      "error": "Qurilmalarni yuklab bo'lmadi.",
+      "hint": "Yuklab olish faqat shu qurilmalarda ochiq. Shubhali qurilmani bekor qiling — undagi yuklab olish darhol to'xtaydi.",
+      "lastSeen": "Oxirgi faollik",
+      "never": "Hali ishlatilmagan",
+      "unknown": "Nomsiz qurilma",
+      "revoke": "Bekor qilish",
+      "revoking": "Bekor qilinmoqda…",
+      "revoked": "Qurilma bekor qilindi.",
+      "revokeFailed": "Bekor qilib bo'lmadi."
+    },
+    "notFound": {
+      "title": "Foydalanuvchi topilmadi",
+      "description": "Bunday telegram ID bilan foydalanuvchi yo'q."
+    }
+  },
+  "content": {
+    "page": {
+      "title": "Kontent",
+      "description": "Mangalar, o'qishlar va reytinglar."
+    },
+    "filters": {
+      "search": "Manga nomi",
+      "sort": "Saralash"
+    },
+    "sort": {
+      "reads": "Ko'p o'qilgan",
+      "rating": "Reyting",
+      "chapters": "Boblar soni",
+      "newest": "Yangi qo'shilgan",
+      "newComment": "Yangi izoh"
+    },
+    "columns": {
+      "manga": "Manga",
+      "chapters": "Boblar",
+      "reads": "O'qishlar",
+      "rating": "Reyting",
+      "comments": "Izohlar",
+      "status": "Holat"
+    },
+    "newComment": "Yangi izoh",
+    "empty": {
+      "title": "Manga topilmadi",
+      "description": "Qidiruvni o'zgartirib ko'ring."
+    }
+  },
+  "mangaDetail": {
+    "back": "Kontentga qaytish",
+    "stats": {
+      "reads": "O'qishlar",
+      "likes": "Yoqtirishlar",
+      "rating": "O'rtacha reyting",
+      "comments": "Izohlar"
+    },
+    "trend": {
+      "title": "O'qishlar dinamikasi",
+      "reads": "O'qishlar",
+      "empty": "Bu manga uchun o'qish yo'q."
+    },
+    "dropoff": {
+      "title": "Boblar bo'yicha tushish",
+      "readers": "O'quvchilar",
+      "empty": "Ma'lumot yo'q."
+    },
+    "tabs": {
+      "comments": "Izohlar",
+      "readers": "O'quvchilar",
+      "chapters": "Boblar"
+    },
+    "comments": {
+      "empty": "Izohlar yo'q",
+      "best": "Eng yaxshi"
+    },
+    "readers": {
+      "columns": {
+        "user": "Foydalanuvchi",
+        "chapters": "O'qigan boblar",
+        "lastRead": "Oxirgi o'qish"
+      },
+      "empty": "Hozircha o'quvchi yo'q."
+    },
+    "notFound": {
+      "title": "Manga topilmadi",
+      "description": "Bunday slug bilan manga yo'q."
+    }
+  },
+  "engagement": {
+    "page": {
+      "title": "Faollik",
+      "description": "Izohlar, reytinglar va yoqtirishlar."
+    },
+    "stats": {
+      "comments": "Izohlar",
+      "ratings": "Reytinglar",
+      "likes": "Yoqtirishlar"
+    },
+    "chart": {
+      "title": "Faollik dinamikasi",
+      "comments": "Izohlar",
+      "ratings": "Reytinglar",
+      "likes": "Yoqtirishlar",
+      "empty": "Bu davrda faollik yo'q."
+    },
+    "topCommented": {
+      "title": "Eng ko'p muhokama qilingan",
+      "count": "{count} izoh",
+      "empty": "Ma'lumot yo'q."
+    },
+    "recent": {
+      "title": "So'nggi izohlar",
+      "empty": "Izohlar yo'q.",
+      "best": "Eng yaxshi"
+    }
+  },
+  "search": {
+    "page": {
+      "title": "Qidiruv",
+      "description": "Foydalanuvchilar nimani qidirmoqda."
+    },
+    "stats": {
+      "total": "Jami qidiruvlar",
+      "unique": "Noyob so'rovlar",
+      "zero": "Natijasiz",
+      "zeroRate": "Natijasiz ulushi"
+    },
+    "top": {
+      "title": "Eng ko'p qidirilgan",
+      "columns": {
+        "query": "So'rov",
+        "count": "Soni",
+        "avg": "O'rtacha natija"
+      },
+      "empty": "Qidiruv ma'lumoti yo'q."
+    },
+    "zero": {
+      "title": "Natija bermagan so'rovlar",
+      "columns": {
+        "query": "So'rov",
+        "count": "Soni"
+      },
+      "empty": "Natijasiz qidiruv yo'q."
+    },
+    "note": "Hozircha faqat botdagi inline qidiruv yoziladi — sayt qidiruvi ulanmagan."
+  },
+  "acquisition": {
+    "page": {
+      "title": "Manba",
+      "description": "Foydalanuvchilar qayerdan kelmoqda."
+    },
+    "stats": {
+      "total": "Jami kelganlar",
+      "acquired": "Kelgan",
+      "read": "O'qishni boshlagan",
+      "paid": "To'lov qilgan"
+    },
+    "bySource": {
+      "title": "Manbalar",
+      "empty": "Ma'lumot yo'q."
+    },
+    "sources": {
+      "channel": "Kanal",
+      "referral": "Taklif",
+      "direct": "To'g'ridan-to'g'ri",
+      "web": "Sayt",
+      "inline": "Inline qidiruv",
+      "unknown": "Noma'lum"
+    },
+    "channels": {
+      "title": "Kanallar",
+      "columns": {
+        "channel": "Kanal",
+        "users": "Foydalanuvchi",
+        "pro": "Pro",
+        "paid": "Sotuvlar",
+        "revenue": "Daromad"
+      },
+      "empty": "Kanal ma'lumoti yo'q."
+    },
+    "referrals": {
+      "title": "Taklif reytingi",
+      "count": "{count} ta taklif",
+      "empty": "Takliflar yo'q."
+    },
+    "funnel": {
+      "title": "Voronka"
+    },
+    "links": {
+      "title": "Trafik linklari",
+      "description": "Instagram, sayt yoki istalgan joyga qo'yiladigan qisqa linklar — qaysi manba qancha odam keltirganini ko'rsatadi.",
+      "create": "Yangi link",
+      "empty": "Hali link yo'q — birinchisini yarating va Instagram'ga qo'ying.",
+      "columns": {
+        "label": "Nomi",
+        "url": "Qisqa link",
+        "clicks": "Bosishlar",
+        "starts": "Botga kirgan",
+        "activated": "O'qigan",
+        "revenue": "Daromad"
+      },
+      "dialog": {
+        "title": "Yangi manba-link",
+        "description": "Nom bering (masalan, \"Instagram bio\") — tayyor qisqa link olasiz. Odatiy holda link Telegram botga olib boradi va kelgan odam shu manbaga yozib qo'yiladi.",
+        "labelField": "Nomi",
+        "labelPlaceholder": "Masalan: Instagram bio",
+        "targetField": "Redirect manzili (ixtiyoriy)",
+        "targetPlaceholder": "https://… — bo'sh qoldirsangiz Telegram bot",
+        "targetHint": "Qo'lda manzil kiritsangiz (masalan, mobil app sahifasi) faqat bosishlar sanaladi — bot orqali atributsiya bo'lmaydi.",
+        "submit": "Yaratish",
+        "creating": "Yaratilmoqda…",
+        "readyTitle": "Link tayyor — nusxalab joylashtiring:",
+        "done": "Yopish",
+        "error": "Link yaratib bo'lmadi"
+      },
+      "targetBot": "Telegram bot",
+      "delete": {
+        "action": "O'chirish",
+        "confirm": "Aniqmi?",
+        "success": "Link o'chirildi",
+        "error": "Linkni o'chirib bo'lmadi"
+      }
+    }
+  },
+  "revenue": {
+    "page": {
+      "title": "Daromad",
+      "description": "Pro obunalar va to'lov provayderlari."
+    },
+    "stats": {
+      "total": "Davr daromadi",
+      "today": "Bugungi",
+      "orders": "Sotuvlar",
+      "payingUsers": "To'lovchilar",
+      "avg": "O'rtacha chek",
+      "discount": "Chegirmalar"
+    },
+    "chart": {
+      "title": "Daromad dinamikasi",
+      "revenue": "Daromad",
+      "empty": "Bu davrda daromad yo'q."
+    },
+    "byPlan": {
+      "title": "Tariflar bo'yicha",
+      "columns": {
+        "plan": "Tarif",
+        "orders": "Sotuvlar",
+        "revenue": "Daromad"
+      },
+      "empty": "Ma'lumot yo'q."
+    },
+    "byProvider": {
+      "title": "Provayderlar bo'yicha",
+      "columns": {
+        "provider": "Provayder",
+        "orders": "Sotuvlar",
+        "users": "To'lovchilar",
+        "share": "Ulush",
+        "revenue": "Daromad"
+      },
+      "empty": "Ma'lumot yo'q."
+    },
+    "trend": {
+      "up": "o'sish",
+      "down": "pasayish",
+      "vsPrev": "oldingi davrga nisbatan"
+    }
+  },
+  "expenses": {
+    "page": {
+      "title": "Chiqimlar",
+      "description": "Qo'lda kiritiladigan xarajatlar va sof foyda."
+    },
+    "actions": {
+      "add": "Chiqim qo'shish",
+      "edit": "Tahrirlash",
+      "delete": "O'chirish",
+      "deleteTitle": "Chiqimni o'chirish",
+      "deleteConfirm": "Bu chiqim o'chiriladi. Davom etasizmi?",
+      "cancel": "Bekor qilish",
+      "proceed": "Davom etish"
+    },
+    "period": {
+      "d7": "So'nggi 7 kun",
+      "d30": "So'nggi 30 kun",
+      "d90": "So'nggi 90 kun",
+      "d365": "So'nggi 1 yil",
+      "custom": "Tanlangan oraliq"
+    },
+    "stats": {
+      "total": "Jami chiqim",
+      "today": "Bugungi",
+      "count": "Yozuvlar soni",
+      "profit": "Sof foyda",
+      "profitHint": "kirim {revenue} − chiqim {expenses}",
+      "profitAllCategories": "hamma kategoriyalar bo'yicha",
+      "margin": "marja {value}%"
+    },
+    "trend": {
+      "up": "o'sish",
+      "down": "pasayish",
+      "vsPrev": "oldingi davrga nisbatan"
+    },
+    "chart": {
+      "title": "Kunlik chiqim",
+      "amount": "Chiqim",
+      "empty": "Bu davrda chiqim yo'q."
+    },
+    "byCategory": {
+      "title": "Kategoriyalar kesimi",
+      "empty": "Ma'lumot yo'q.",
+      "records": "{count} ta yozuv"
+    },
+    "table": {
+      "title": "Yozuvlar",
+      "allCategories": "Hamma kategoriyalar",
+      "columns": {
+        "date": "Sana",
+        "category": "Kategoriya",
+        "note": "Izoh",
+        "amount": "Summa",
+        "author": "Kim kiritdi"
+      },
+      "empty": "Bu davrda chiqim yo'q."
+    },
+    "form": {
+      "createTitle": "Yangi chiqim",
+      "editTitle": "Chiqimni tahrirlash",
+      "description": "Summa so'mda, sana — pul ketgan kun.",
+      "amount": "Summa",
+      "amountHint": "So'mda, faqat butun son.",
+      "amountRequired": "Summani kiriting (0 dan katta).",
+      "category": "Kategoriya",
+      "categoryPlaceholder": "Kategoriyani tanlang",
+      "categoryRequired": "Kategoriyani tanlang.",
+      "spentAt": "Sana",
+      "spentAtHint": "Pul ketgan kun — yozuv kiritilgan kun emas.",
+      "note": "Izoh (ixtiyoriy)",
+      "notePlaceholder": "Masalan: Hetzner sentyabr",
+      "create": "Qo'shish",
+      "save": "Saqlash",
+      "saving": "Saqlanmoqda…"
+    },
+    "toasts": {
+      "created": "Chiqim qo'shildi",
+      "updated": "Saqlandi",
+      "deleted": "O'chirildi",
+      "gone": "Bu chiqim allaqachon o'chirilgan — ro'yxat yangilandi."
+    }
+  },
+  "channelsAdmin": {
+    "page": {
+      "title": "Kanallar",
+      "description": "Bot ulangan Telegram kanallarini boshqarish."
+    },
+    "table": {
+      "channel": "Kanal",
+      "username": "Username",
+      "role": "Rol",
+      "tracking": "Tracking slug",
+      "intro": "Intro yuborilgan",
+      "empty": "Hech qanday kanal yo'q. Botni kanalga admin qilib qo'shing."
+    },
+    "roles": {
+      "primary": "Asosiy",
+      "unassigned": "Biriktirilmagan"
+    },
+    "actions": {
+      "makePrimary": "Asosiy qilish",
+      "makePrimaryDesc": "Bu kanal asosiy bo'ladi — yangi bob (sync) xabarlari unga ham yuboriladi. Bir nechta asosiy kanal bo'lishi mumkin.",
+      "removePrimary": "Asosiylikdan olish",
+      "removePrimaryDesc": "Kanal asosiylar ro'yxatidan chiqadi — sync xabarlari unga yuborilmaydi.",
+      "introTest": "Intro test",
+      "introTestDesc": "Kanalga intro (katalog) xabarini test sifatida yuboradi. Flag yangilanmaydi.",
+      "syncTest1": "Sync test (1 bob)",
+      "syncTest5": "Sync test (5 bob)",
+      "syncTestDesc": "Real sync'da yuboriladigan postlar shu kanalga yuboriladi. Bazaga tegmaydi.",
+      "resetIntro": "Intro flagini tozalash",
+      "resetIntroDesc": "Keyingi oddiy yuborishda bu kanalga intro qaytadan boradi.",
+      "editTracking": "Tracking slug",
+      "delete": "O'chirish",
+      "deleteDesc": "Kanal bazadan o'chiriladi (bot kanalda qoladi, panelda ko'rinmaydi)."
+    },
+    "tracking": {
+      "title": "Tracking slug",
+      "description": "Deep-link atributsiyasi uchun kanal slug'i (ch_<slug>). Bo'sh qoldirish — olib tashlash.",
+      "placeholder": "masalan: asosiy_kanal",
+      "save": "Saqlash"
+    },
+    "broadcast": {
+      "title": "Katalog broadcast",
+      "description": "Asosiy kanalga \"MangaBox katalogi\" tanishtiruv xabarini yuboradi — har manga uchun alohida kartochka post.",
+      "send": "Yuborish",
+      "sendDesc": "Faqat hali intro olmagan asosiy kanalga yuboradi, so'ng flag qo'yiladi.",
+      "force": "Force yuborish",
+      "forceDesc": "Flagga qaramay qaytadan yuboradi. Spam bo'lmasligi uchun ehtiyot bo'ling.",
+      "sentToast": "Yuborildi: {count} ta xabar"
+    },
+    "confirm": {
+      "title": "Tasdiqlang",
+      "cancel": "Bekor",
+      "proceed": "Davom etish"
+    },
+    "toasts": {
+      "primaryOn": "Asosiy qilindi",
+      "primaryOff": "Asosiylikdan olindi",
+      "introSent": "Intro yuborildi ({count} xabar)",
+      "syncSent": "Sync postlari yuborildi ({count} xabar, {chapters} bob)",
+      "syncEmpty": "Yuborilmadi: manga topilmadi",
+      "introReset": "Intro flag tozalandi",
+      "deleted": "Kanal o'chirildi",
+      "trackingSaved": "Tracking slug saqlandi"
+    }
+  },
+  "mangaEdit": {
+    "edit": "Tahrirlash",
+    "sheetTitle": "Manga tahrirlash",
+    "sheetDescription": "O'zgartirishlar R2 fayllariga tegmaydi va sync'da yo'qolmaydi — tahrirlar meta.yml ustiga qayta qo'llanadi.",
+    "fields": {
+      "title": "Asosiy sarlavha",
+      "titleUz": "Nom (UZ)",
+      "titleRu": "Nom (RU)",
+      "titleEn": "Nom (EN)",
+      "titleJa": "Nom (JA)",
+      "titleKo": "Nom (KO)",
+      "altTitles": "Muqobil nomlar (vergul bilan)",
+      "status": "Status (ongoing / completed)",
+      "year": "Yil",
+      "ageRating": "Yosh reytingi",
+      "tags": "Janrlar/teglar (vergul bilan)",
+      "authors": "Mualliflar (vergul bilan; \"Nom:rol\" mumkin)",
+      "summary": "Qisqa tavsif",
+      "description": "To'liq tavsif",
+      "readingMode": "Sahifalab o'qish (paged)",
+      "readingModeHint": "Yoqilsa frontda bitta-bitta rasm (next/prev) bilan o'qiladi, o'chiq — scroll."
+    },
+    "overriddenBadge": "{count} tahrir",
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda…",
+    "saved": "Saqlandi",
+    "noChanges": "O'zgartirish yo'q",
+    "reset": "Sync'ga qaytarish",
+    "resetDesc": "Barcha tahrirlar o'chiriladi — maydonlar keyingi sync'da meta.yml'dan tiklanadi.",
+    "resetDone": "Sync'ga qaytarildi",
+    "error": "Saqlashda xato"
+  },
+  "mangaChapters": {
+    "searchPlaceholder": "Bob raqami yoki nomi",
+    "count": "{count} ta bob",
+    "refresh": "Yangilash",
+    "empty": "Boblar yo'q",
+    "noMatches": "Mos bob topilmadi",
+    "columns": {
+      "chapter": "Bob",
+      "name": "Nomi",
+      "pages": "Sahifalar",
+      "views": "Ko'rishlar"
+    },
+    "deleteLabel": "{chapter} bobini o'chirish",
+    "dialog": {
+      "title": "Bobni o'chirish",
+      "description": "{chapter} bobi ({pages} sahifa) va unga tegishli izohlar, layklar, shikoyatlar va o'qishlar o'chiriladi. O'qish tarixida bu bob oxirgi bo'lgan bo'lsa, oldingi mavjud bobga siljitiladi.",
+      "confirm": "O'chirish",
+      "deleting": "O'chirilmoqda…"
+    },
+    "deleted": "{chapter} bobi bazadan o'chirildi",
+    "deletedWithStorage": "{chapter} bobi o'chirildi · R2: {objects} ta fayl",
+    "deleteError": "Bobni o'chirib bo'lmadi"
+  },
+  "mangaDelete": {
+    "trigger": "Mangani o'chirish",
+    "title": "Mangani butunlay o'chirish",
+    "description": "«{title}» va unga bog'liq barcha yozuvlar o'chiriladi. Bu amalni qaytarib bo'lmaydi.",
+    "preview": {
+      "title": "O'chiriladigan yozuvlar",
+      "empty": "Bog'liq yozuv yo'q — faqat manga hujjati o'chadi.",
+      "kept": "To'lov buyurtmalari va analitika tarixi (analyticsevents, daily_metrics, user_active_days) saqlanib qoladi."
+    },
+    "collections": {
+      "chapters": "Boblar",
+      "comments": "Izohlar",
+      "favorites": "Sevimlilar",
+      "ratings": "Reytinglar",
+      "read_history": "O'qish tarixi",
+      "mangareads": "O'qishlar",
+      "chapter_likes": "Bob layklari",
+      "page_reports": "Sahifa shikoyatlari",
+      "manga_similarity": "O'xshashlik indeksi",
+      "botchannels": "Biriktirilgan kanallar",
+      "published_manga": "Feeddagi yozuvlar"
+    },
+    "confirmLabel": "Tasdiqlash uchun slug'ni yozing: {slug}",
+    "submit": "Butunlay o'chirish",
+    "deleting": "O'chirilmoqda…",
+    "done": "{slug} bazadan o'chirildi",
+    "doneWithStorage": "{slug} o'chirildi · R2: {objects} ta fayl",
+    "channelsUnassigned": "{count} ta kanal bo'shatildi",
+    "error": "Mangani o'chirib bo'lmadi"
+  },
+  "purgeStorage": {
+    "label": "R2 fayllarni ham o'chirish",
+    "hintOn": "Rasm va PDF fayllar R2'dan butunlay o'chadi — tiklab bo'lmaydi.",
+    "hintOff": "Belgilanmasa faqat baza tozalanadi; keyingi R2 sync yozuvni qaytarib keladi."
+  },
+  "reports": {
+    "page": {
+      "title": "Shikoyatlar",
+      "description": "O'quvchilar buzuq sahifalar haqida yuborgan xabarlar — qaysi manga, qaysi bob va qaysi sahifa."
+    },
+    "filters": {
+      "open": "Ochiq",
+      "resolved": "Yopilgan",
+      "all": "Hammasi"
+    },
+    "columns": {
+      "manga": "Manga",
+      "pages": "Sahifalar",
+      "reports": "Xabarlar",
+      "last": "Oxirgi xabar"
+    },
+    "empty": {
+      "title": "Shikoyat yo'q",
+      "description": "Tanlangan holat bo'yicha hech qanday xabar topilmadi."
+    },
+    "status": {
+      "open": "Ochiq",
+      "resolved": "Hal qilingan"
+    },
+    "refresh": "Yangilash",
+    "detail": {
+      "back": "Shikoyatlar",
+      "summary": "{pages} ta sahifa · {reports} ta xabar",
+      "chapter": "Bob",
+      "unknownChapter": "Noma'lum bob",
+      "pageNumber": "{number}-sahifa",
+      "unknownPage": "Sahifa raqami yo'q",
+      "reportCount": "{count} ta xabar",
+      "noMessage": "Izoh yozilmagan",
+      "resolve": "Hal qilindi",
+      "resolving": "Yopilmoqda…",
+      "resolveDone": "{count} ta xabar yopildi",
+      "openImage": "Rasmni ochish",
+      "imageTitle": "Sahifa rasmi",
+      "copyKey": "Fayl kalitini nusxalash",
+      "empty": {
+        "title": "Bu manga bo'yicha xabar yo'q",
+        "description": "Tanlangan holat bo'yicha shikoyat topilmadi."
+      }
+    }
+  },
+  "bannersAdmin": {
+    "page": {
+      "title": "Bannerlar",
+      "description": "Mobil ilova bosh sahifasidagi reklama karuseli. Qo'lda kiritilgan bannerlar yetmasa, karusel yangi boblar va trending asosida avto-to'ldiriladi."
+    },
+    "table": {
+      "banner": "Banner",
+      "manga": "Manga",
+      "status": "Holat",
+      "schedule": "Jadval",
+      "empty": "Hozircha banner yo'q. Birinchisini qo'shing — unga qadar karusel avto-kartalardan yig'iladi."
+    },
+    "status": {
+      "active": "Faol",
+      "inactive": "O'chiq",
+      "scheduled": "Rejalashtirilgan",
+      "expired": "Muddati tugagan"
+    },
+    "mangaMissing": "Manga topilmadi",
+    "mangaMissingHint": "Bu bannerga biriktirilgan manga o'chirilgan — u mobil ilovada ko'rsatilmaydi.",
+    "actions": {
+      "add": "Banner qo'shish",
+      "edit": "Tahrirlash",
+      "delete": "O'chirish",
+      "deleteDesc": "Banner butunlay o'chiriladi. Karuseldagi o'rni bo'shab, kerak bo'lsa avto-karta bilan to'ldiriladi.",
+      "activate": "Yoqish",
+      "deactivate": "O'chirib qo'yish",
+      "moveUp": "Yuqoriga",
+      "moveDown": "Pastga"
+    },
+    "form": {
+      "createTitle": "Yangi banner",
+      "editTitle": "Bannerni tahrirlash",
+      "description": "Manga tanlansa, bo'sh qoldirilgan teg, havola va rasm mangadan avtomatik olinadi.",
+      "manga": "Manga (ixtiyoriy)",
+      "mangaPlaceholder": "Qidirish uchun yozing…",
+      "mangaNone": "Biriktirilmagan",
+      "title": "Sarlavha",
+      "subtitle": "Tagsatr",
+      "tag": "Teg",
+      "tagPlaceholder": "masalan: YANGILIK",
+      "tagHint": "Emoji taqiqlangan, avtomatik katta harfga o'tkaziladi.",
+      "cta": "Tugma matni",
+      "ctaPlaceholder": "masalan: O'qish",
+      "href": "Havola",
+      "hrefPlaceholder": "/manga/slug",
+      "hrefHint": "Faqat ilova ichidagi yo'l — / bilan boshlanadi.",
+      "image": "Rasm",
+      "imagePlaceholder": "https://…",
+      "upload": "Rasm yuklash",
+      "uploading": "Yuklanmoqda…",
+      "imageHint": "Yuklang (maks. 8 MB) yoki tayyor URL kiriting. Bo'sh qolsa manga muqovasi ishlatiladi.",
+      "active": "Faol",
+      "activeHint": "O'chiq banner mobil ilovaga chiqmaydi, lekin ro'yxatda saqlanadi.",
+      "startsAt": "Boshlanish vaqti",
+      "endsAt": "Tugash vaqti",
+      "scheduleHint": "Ikkalasi ham ixtiyoriy — belgilangan oraliqda banner o'zi yonib-o'chadi.",
+      "create": "Qo'shish",
+      "save": "Saqlash"
+    },
+    "toasts": {
+      "created": "Banner qo'shildi",
+      "updated": "Banner saqlandi",
+      "deleted": "Banner o'chirildi",
+      "reordered": "Tartib saqlandi",
+      "uploaded": "Rasm yuklandi"
+    },
+    "confirm": {
+      "title": "Tasdiqlaysizmi?",
+      "cancel": "Bekor qilish",
+      "proceed": "Davom etish"
+    }
+  },
+  "reelsAdmin": {
+    "page": {
+      "title": "Reels",
+      "description": "Ilova feedida ko'rsatiladigan qisqa vertikal treyler videolar. Har reel mangaga biriktiriladi — bosilganda o'sha manga ochiladi."
+    },
+    "table": {
+      "reel": "Reel",
+      "manga": "Manga",
+      "status": "Holat",
+      "size": "Hajm (720p / 480p)",
+      "views": "Ko'rishlar",
+      "empty": "Hozircha reel yo'q. Birinchisini yuklang — transkodlash fonda ishlaydi.",
+      "noCaption": "Izoh yo'q"
+    },
+    "status": {
+      "processing": "Tayyorlanmoqda",
+      "failed": "Xato",
+      "active": "Faol",
+      "inactive": "O'chiq"
+    },
+    "mangaMissingHint": "Bu reelga biriktirilgan manga o'chirilgan — reel feedga chiqmaydi.",
+    "actions": {
+      "add": "Reel yuklash",
+      "delete": "O'chirish",
+      "deleteDesc": "Reel va uning video fayllari butunlay o'chiriladi.",
+      "activate": "Yoqish",
+      "deactivate": "O'chirib qo'yish",
+      "moveUp": "Yuqoriga",
+      "moveDown": "Pastga",
+      "preview": "Ko'rib chiqish"
+    },
+    "form": {
+      "title": "Yangi reel",
+      "description": "Vertikal video yuklang (9:16, 90 s / 200 MB gacha). Server uni 720p/480p ga transkodlaydi, poster videoning o'zidan olinadi.",
+      "video": "Video",
+      "videoPick": "Video fayl tanlang…",
+      "videoHint": "Vertikal (9:16), 90 soniyagacha, maks. 200 MB.",
+      "manga": "Manga",
+      "mangaPlaceholder": "Qidirish uchun kamida 2 belgi yozing…",
+      "mangaClear": "Tozalash",
+      "caption": "Izoh (ixtiyoriy)",
+      "captionPlaceholder": "Qisqa teaser matni…",
+      "uploading": "Yuklanmoqda…",
+      "processingHint": "Yuklandi — transkodlash fonda davom etadi.",
+      "submit": "Yuklash"
+    },
+    "toasts": {
+      "uploaded": "Reel yuklandi — transkodlash fonda",
+      "updated": "Reel saqlandi",
+      "deleted": "Reel o'chirildi",
+      "reordered": "Tartib saqlandi"
+    },
+    "confirm": {
+      "cancel": "Bekor qilish",
+      "proceed": "Davom etish"
+    }
+  },
+  "appUpdates": {
+    "page": {
+      "title": "Yangilanishlar",
+      "description": "Mobil ilova har to'liq ochilishda versiyasini shu yerdagi bilan solishtiradi. Eski bo'lsa \"Yangilash / Keyinroq\" oynasi chiqadi, muddat o'tgach esa ilova yangilanmaguncha bloklanadi."
+    },
+    "notice": "Versiyani build do'konda tasdiqlanib chiqqandan KEYIN saqlang — aks holda foydalanuvchilar do'konda hali yo'q versiyaga yuboriladi.",
+    "platforms": {
+      "ios": "iOS (App Store)",
+      "android": "Android (Google Play)"
+    },
+    "state": {
+      "notSet": "Sozlanmagan",
+      "soft": "Faqat taklif",
+      "scheduled": "Majburiy: {date} dan",
+      "forced": "Bloklangan",
+      "forcedHint": "Muddat o'tgan: {version} dan eski ilovalar ochilmaydi."
+    },
+    "form": {
+      "latestVersion": "Oxirgi versiya",
+      "latestVersionHint": "Do'kondagi versiya, masalan 1.2.0 (app.json dagi version).",
+      "force": "Majburiy yangilash muddati",
+      "forceHint": "Shu vaqtdan keyin eski versiya ochilmaydi. O'chiq bo'lsa faqat taklif qilinadi.",
+      "forceAt": "Muddat",
+      "storeUrl": "Do'kon havolasi",
+      "message": "Foydalanuvchiga xabar (ixtiyoriy)",
+      "messagePlaceholder": "Masalan: To'lov tizimi yangilandi",
+      "save": "Saqlash",
+      "saving": "Saqlanmoqda…",
+      "updatedAt": "Oxirgi o'zgarish: {date}",
+      "forceAtRequired": "Muddatni kiriting yoki majburiy rejimni o'chiring",
+      "pastConfirm": "Muddat o'tgan vaqtga qo'yilgan — eski versiyadagi hamma foydalanuvchilar keyingi ochilishda darhol bloklanadi. Davom etilsinmi?",
+      "remove": "O'chirish",
+      "removeConfirm": "Yozuv o'chiriladi va ilovada yangilanish oynasi umuman chiqmaydi. Majburiy blok ham darhol to'xtaydi."
+    },
+    "toasts": {
+      "saved": "Saqlandi",
+      "removed": "O'chirildi"
+    }
+  }
+}

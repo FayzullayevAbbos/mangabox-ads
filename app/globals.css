@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: #FAFAFA;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #7c6cf0;
+  --primary-foreground: #ffffff;
+  --secondary: #EAEDF0;
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.905 0.182 98.111);
+  --chart-2: oklch(0.795 0.184 86.047);
+  --chart-3: oklch(0.681 0.162 75.834);
+  --chart-4: oklch(0.554 0.135 66.442);
+  --chart-5: oklch(0.476 0.114 61.907);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.541 0.281 293.009);
+  --sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/*
+ * Dark mode — Volar "navy-charcoal + violet accent" palette.
+ * Quyuq fon qatlamlari orasidagi farq juda nozik (2-4% yorug'lik), accent esa
+ * violet/purple. Qiymatlar shadcn tokenlariga map qilingan, shuning uchun
+ * barcha komponentlar (sidebar, card, popover, input, badge) konsistent bo'ladi.
+ */
+.dark {
+  --background: #1a1b23; /* bg-base */
+  --foreground: #f0f0f3; /* text-primary */
+  --card: #21222c; /* bg-surface — fondan bir oz ko'tarilgan */
+  --card-foreground: #f0f0f3;
+  --popover: #262833; /* bg-elevated — kartadan ham yuqori */
+  --popover-foreground: #f0f0f3;
+  --primary: #7c6cf0; /* btn-primary-bg */
+  --primary-foreground: #ffffff;
+  --secondary: #262935; /* btn-secondary-bg */
+  --secondary-foreground: #f0f0f3;
+  --muted: #16161f; /* bg-muted */
+  --muted-foreground: #8b8b9e; /* text-secondary */
+  --accent: #21222c; /* umumiy hover holati */
+  --accent-foreground: #f0f0f3;
+  --destructive: #e5484d; /* error / btn-danger */
+  --border: #282a34; /* border-default — nozik, fonga yaqin */
+  --input: #21242f; /* input background */
+  --ring: #7c6cf0; /* focus ring -> primary */
+  --chart-1: #7c6cf0; /* purple */
+  --chart-2: #4cc38a; /* green */
+  --chart-3: #f5a623; /* yellow */
+  --chart-4: #52a8ff; /* blue */
+  --chart-5: #e5484d; /* red */
+  --sidebar: #16171e; /* sidebar-bg */
+  --sidebar-foreground: #8b8b9e; /* sidebar-text */
+  --sidebar-primary: #7c6cf0;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #21222c; /* sidebar item hover / active */
+  --sidebar-accent-foreground: #f0f0f3;
+  --sidebar-border: #282a34; /* nozik, fonga yaqin */
+  --sidebar-ring: #7c6cf0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ── Landing page motion & texture ───────────────────────────────────── */
+
+@keyframes volar-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .volar-fade-up {
+    opacity: 0;
+    animation: volar-fade-up 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+/* Faint grid texture for the hero — drawn with the border token so it
+   adapts to light/dark and never competes with content. */
+.volar-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 25%, transparent 75%);
+}
+
+/* Smooth anchor scrolling that yields to reduced-motion preferences. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Skip layout + paint for off-screen landing sections. The intrinsic size
+   keeps the scrollbar and anchor offsets stable while a section is skipped,
+   so this is a pure scroll-perf win with no visible change. */
+.landing-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}

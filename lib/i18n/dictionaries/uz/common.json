@@ -1,0 +1,63 @@
+{
+  "appName": "MangaBox",
+  "language": "Til",
+  "theme": {
+    "label": "Mavzu",
+    "light": "Yorug'",
+    "dark": "Qorong'i",
+    "system": "Tizim"
+  },
+  "actions": {
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "continue": "Davom etish",
+    "confirm": "Tasdiqlash",
+    "delete": "O'chirish",
+    "edit": "Tahrirlash",
+    "create": "Yaratish",
+    "close": "Yopish",
+    "copy": "Nusxalash",
+    "copied": "Nusxalandi",
+    "search": "Qidirish",
+    "retry": "Qayta urinish",
+    "viewAll": "Hammasini ko'rish"
+  },
+  "status": {
+    "loading": "Yuklanmoqda…",
+    "verifying": "Tekshirilmoqda…",
+    "saving": "Saqlanmoqda…",
+    "sending": "Yuborilmoqda…"
+  },
+  "errors": {
+    "generic": "Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.",
+    "network": "Tarmoq xatosi. Iltimos, internet ulanishini tekshiring.",
+    "tooManyRequests": "So'rovlar juda ko'p. Iltimos, birozdan so'ng qaytadan urinib ko'ring."
+  },
+  "pagination": {
+    "previous": "Oldingi",
+    "next": "Keyingi",
+    "count": "{count} ta yozuv",
+    "pageSuffix": " · {page}/{total}-sahifa"
+  },
+  "states": {
+    "errorTitle": "Yuklab bo'lmadi",
+    "emptyTitle": "Ma'lumot yo'q",
+    "emptyDescription": "Bu bo'lim uchun hozircha ma'lumot yig'ilmagan."
+  },
+  "dateRange": {
+    "label": "Davr",
+    "from": "Dan",
+    "to": "Gacha",
+    "custom": "Boshqa oraliq",
+    "apply": "Qo'llash",
+    "clear": "Oraliqni tozalash",
+    "presets": {
+      "d7": "So'nggi 7 kun",
+      "d30": "So'nggi 30 kun",
+      "d90": "So'nggi 90 kun",
+      "d365": "So'nggi 1 yil"
+    }
+  }
+}

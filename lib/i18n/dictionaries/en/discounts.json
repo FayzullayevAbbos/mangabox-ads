@@ -1,0 +1,120 @@
+{
+  "list": {
+    "title": "Discounts",
+    "description": "Promo codes and rules that reduce the price at checkout.",
+    "addDiscount": "Add discount",
+    "columns": {
+      "name": "Name",
+      "code": "Code",
+      "value": "Value",
+      "period": "Active period",
+      "redeemed": "Redeemed"
+    },
+    "archivedBadge": "Archived",
+    "unlimitedPeriod": "Unlimited",
+    "rowActions": "Actions",
+    "edit": "Edit",
+    "archive": "Archive"
+  },
+  "empty": {
+    "title": "No discounts yet",
+    "description": "Create a promo code and offer it to your customers."
+  },
+  "errors": {
+    "loadTitle": "Failed to load",
+    "loadFailed": "Failed to load data."
+  },
+  "archiveDialog": {
+    "title": "Archive this discount?",
+    "description": "will be archived and will no longer work at checkout.",
+    "confirm": "Archive"
+  },
+  "toasts": {
+    "archived": "Discount archived",
+    "created": "Discount created",
+    "updated": "Discount updated",
+    "saveFailed": "Failed to save. Please try again."
+  },
+  "new": {
+    "title": "New discount",
+    "description": "Create a promo code or rule that reduces the price at checkout.",
+    "submit": "Create discount"
+  },
+  "edit": {
+    "title": "Edit discount",
+    "description": "Type, code, and value can't be changed — they're tied to past transactions.",
+    "readOnly": {
+      "type": "Type",
+      "value": "Value",
+      "code": "Code",
+      "redeemed": "Redeemed"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "Name",
+      "placeholder": "e.g. New Year discount"
+    },
+    "code": {
+      "label": "Code",
+      "hint": "The code customers enter at checkout. Leave empty to make it available only via link.",
+      "placeholder": "NEWYEAR2026 (optional)"
+    },
+    "type": {
+      "label": "Type",
+      "percentage": {
+        "title": "Percentage",
+        "subtitle": "A percentage is taken off the price"
+      },
+      "fixed": {
+        "title": "Fixed amount",
+        "subtitle": "A set amount is taken off"
+      }
+    },
+    "value": {
+      "percentageLabel": "Percentage amount",
+      "amountLabel": "Amount",
+      "percentSuffix": "%",
+      "currencySuffix": "UZS"
+    },
+    "duration": {
+      "label": "Subscription duration",
+      "once": {
+        "title": "Once",
+        "subtitle": "First payment only"
+      },
+      "forever": {
+        "title": "Forever",
+        "subtitle": "On every renewal"
+      }
+    },
+    "startsAt": {
+      "label": "Start date"
+    },
+    "endsAt": {
+      "label": "End date"
+    },
+    "maxRedemptions": {
+      "label": "Redemption limit",
+      "hintNew": "How many times the discount can be used. Empty = unlimited.",
+      "hintEdit": "Empty = unlimited.",
+      "placeholderNew": "Unlimited (optional)",
+      "placeholderEdit": "Unlimited"
+    },
+    "products": {
+      "label": "Products",
+      "hintNew": "Which products the discount applies to. Empty = all products.",
+      "hintEdit": "Empty = all products.",
+      "all": "All products",
+      "selected": "{count} products selected"
+    }
+  },
+  "validation": {
+    "nameMin": "At least 2 characters",
+    "codeLength": "Code must be 3–256 characters",
+    "valueRequired": "Enter a value",
+    "percentageRange": "Percentage must be between 1 and 100",
+    "maxRedemptionsMin": "Must be greater than 1",
+    "endsBeforeStart": "End date must be after the start date"
+  }
+}

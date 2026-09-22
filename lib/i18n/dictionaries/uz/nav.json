@@ -1,0 +1,28 @@
+{
+  "header": {
+    "metaTitle": "MangaBox Analitika — Boshqaruv paneli",
+    "dashboard": "Boshqaruv paneli"
+  },
+  "groups": {
+    "core": "Asosiy",
+    "acquisition": "Jalb qilish",
+    "money": "Moliya"
+  },
+  "items": {
+    "overview": "Umumiy ko'rinish",
+    "users": "Foydalanuvchilar",
+    "content": "Kontent",
+    "reports": "Shikoyatlar",
+    "engagement": "Faollik",
+    "acquisition": "Manba",
+    "search": "Qidiruv",
+    "revenue": "Daromad",
+    "expenses": "Chiqimlar",
+    "ads": "Reklama",
+    "transactions": "Tranzaksiyalar",
+    "channels": "Kanallar",
+    "banners": "Bannerlar",
+    "reels": "Reels",
+    "updates": "Yangilanishlar"
+  }
+}

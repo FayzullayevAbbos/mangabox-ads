@@ -1,0 +1,36 @@
+{
+  "userMenu": {
+    "accountLabel": "Account",
+    "settings": "Settings",
+    "apiKeys": "API keys",
+    "webhooks": "Webhooks",
+    "logout": "Sign out",
+    "logoutError": "Could not sign out. Please try again.",
+    "loadError": "Could not load your profile."
+  },
+  "transactionStatus": {
+    "created": "Created",
+    "pending": "Pending",
+    "paid": "Paid",
+    "cancelled": "Cancelled",
+    "failed": "Failed",
+    "expired": "Expired",
+    "refunded": "Refunded"
+  },
+  "subscriptionStatus": {
+    "incomplete": "Incomplete",
+    "trialing": "Trialing",
+    "active": "Active",
+    "past_due": "Past due",
+    "canceled": "Canceled"
+  },
+  "webhookStatus": {
+    "active": "Active",
+    "disabled": "Disabled"
+  },
+  "webhookDeliveryStatus": {
+    "pending": "Pending",
+    "delivered": "Delivered",
+    "failed": "Failed"
+  }
+}

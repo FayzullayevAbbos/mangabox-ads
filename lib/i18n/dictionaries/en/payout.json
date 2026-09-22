@@ -1,0 +1,79 @@
+{
+  "page": {
+    "title": "Payout",
+    "description": "Your balance and withdrawals.",
+    "loadErrorTitle": "Failed to load"
+  },
+  "status": {
+    "requested": "Requested",
+    "pending": "Processing",
+    "completed": "Completed",
+    "failed": "Failed",
+    "rejected": "Rejected"
+  },
+  "balance": {
+    "available": "Available to withdraw",
+    "totalEarned": "Total earned",
+    "reserved": "Reserved",
+    "held": "On hold",
+    "minimumPayout": "Minimum payout",
+    "request": "Request payout",
+    "noCardHint": "Add a card before withdrawing funds.",
+    "belowMinimumHint": "Minimum amount is {amount}.",
+    "blockedHint": "Payouts are temporarily on hold. Please contact support."
+  },
+  "card": {
+    "sectionTitle": "Card details",
+    "change": "Change card",
+    "addPrompt": "Add a card to withdraw funds.",
+    "add": "Add card"
+  },
+  "history": {
+    "title": "Payout history",
+    "empty": {
+      "title": "No payout requests yet",
+      "description": "You can request a payout once your balance is sufficient."
+    },
+    "columns": {
+      "date": "Date",
+      "card": "Card",
+      "status": "Status",
+      "amount": "Amount"
+    }
+  },
+  "request": {
+    "title": "Request payout",
+    "description": "Funds will be transferred to your saved card.",
+    "amountLabel": "Amount (UZS)",
+    "availableMinimum": "Available: {available} · Minimum: {minimum}",
+    "withdrawalAmount": "Withdrawal amount",
+    "fee": "Fee (1%)",
+    "netAmount": "You'll receive"
+  },
+  "validation": {
+    "invalidAmount": "Enter a valid amount",
+    "belowMinimum": "Minimum amount is {amount}",
+    "exceedsBalance": "Cannot exceed your balance ({amount})"
+  },
+  "toasts": {
+    "requestSubmitted": "Payout request submitted",
+    "requestError": "Failed to submit request",
+    "loadError": "Couldn't load data"
+  },
+  "cardSheet": {
+    "addTitle": "Add card",
+    "editTitle": "Change card",
+    "description": "Payouts will be transferred to this card.",
+    "cardNumberLabel": "Card number",
+    "cardHolderLabel": "Cardholder",
+    "securityNote": "Your information is stored securely and encrypted.",
+    "validation": {
+      "cardNumber": "Must be 16 digits",
+      "cardHolder": "Enter the cardholder name"
+    },
+    "toasts": {
+      "saved": "Card saved",
+      "error": "An error occurred while saving"
+    }
+  }
+}

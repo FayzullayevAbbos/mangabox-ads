@@ -1,0 +1,54 @@
+{
+  "page": {
+    "title": "Settings",
+    "description": "Your admin account and security."
+  },
+  "load": {
+    "errorTitle": "Couldn't load",
+    "errorFallback": "Couldn't load account data."
+  },
+  "profile": {
+    "heading": "Account",
+    "fields": {
+      "name": "Name",
+      "phone": "Phone",
+      "role": "Role"
+    },
+    "roleAdmin": "Administrator",
+    "readOnlyHint": "Admin accounts are managed on the backend — name and phone can't be changed here."
+  },
+  "security": {
+    "heading": "Security",
+    "passwordLabel": "Password",
+    "passwordHint": "Update your password regularly.",
+    "changeAction": "Change password"
+  },
+  "passwordSheet": {
+    "title": "Change password",
+    "description": "Confirm your current password, then set a new one.",
+    "fields": {
+      "currentPassword": {
+        "label": "Current password",
+        "placeholder": "Your current password"
+      },
+      "newPassword": {
+        "label": "New password",
+        "placeholder": "At least 8 characters"
+      },
+      "confirmPassword": {
+        "label": "Confirm new password",
+        "placeholder": "Re-enter the password"
+      }
+    },
+    "errors": {
+      "password": "Password must be 8–72 characters.",
+      "confirm": "Passwords do not match."
+    },
+    "toast": {
+      "changed": "Password changed"
+    }
+  },
+  "toasts": {
+    "saveError": "Something went wrong while saving."
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "list": {
+    "title": "Mahsulotlar",
+    "description": "Mijozlaringizga taklif qiladigan mahsulotlar va narxlarni boshqaring.",
+    "addProduct": "Mahsulot qo'shish",
+    "loadError": "Mahsulotlarni yuklab bo'lmadi.",
+    "errorTitle": "Mahsulotlarni yuklab bo'lmadi",
+    "empty": {
+      "title": "Hozircha mahsulotlar yo'q",
+      "description": "To'lovlarni qabul qilishni boshlash uchun birinchi mahsulotingizni yarating."
+    },
+    "columns": {
+      "product": "Mahsulot",
+      "type": "Turi",
+      "price": "Narxi",
+      "sales": "Sotuvlar",
+      "revenue": "Tushum"
+    },
+    "badges": {
+      "archived": "Arxivlangan",
+      "subscription": "Obuna",
+      "oneTime": "Bir martalik"
+    },
+    "rowActions": {
+      "label": "Mahsulot amallari",
+      "copyId": "ID nusxalash",
+      "archive": "Arxivlash"
+    },
+    "toasts": {
+      "archived": "Mahsulot arxivlandi.",
+      "archiveError": "Mahsulotni arxivlab bo'lmadi.",
+      "idCopied": "Mahsulot ID nusxalandi."
+    },
+    "intervals": {
+      "day": "kun",
+      "week": "hafta",
+      "month": "oy",
+      "year": "yil"
+    },
+    "archiveDialog": {
+      "title": "Mahsulot arxivlansinmi?",
+      "description": "{name} arxivlanadi va boshqa sotib bo'lmaydi. Mavjud mijozlarga ta'sir qilmaydi.",
+      "confirm": "Arxivlash"
+    }
+  },
+  "form": {
+    "createTitle": "Yangi mahsulot",
+    "editTitle": "Mahsulotni tahrirlash",
+    "createDescription": "Katalogingizga yangi mahsulot qo'shing.",
+    "editDescription": "Mahsulot tafsilotlarini yangilang.",
+    "validation": {
+      "nameMin": "Nom kamida 2 ta belgidan iborat bo'lishi kerak.",
+      "nameMax": "Nom 200 ta belgidan oshmasligi kerak.",
+      "descriptionMin": "Tavsif kamida 2 ta belgidan iborat bo'lishi kerak.",
+      "amountInvalid": "To'g'ri summani kiriting.",
+      "intervalCountRange": "Interval 1 dan 365 gacha bo'lishi kerak.",
+      "trialDaysRange": "Sinov muddati 0 dan 365 kungacha bo'lishi kerak."
+    },
+    "toasts": {
+      "created": "Mahsulot yaratildi.",
+      "updated": "Mahsulot yangilandi.",
+      "saveError": "Mahsulotni saqlab bo'lmadi."
+    },
+    "fields": {
+      "name": {
+        "label": "Nom",
+        "placeholder": "masalan, Premium obuna"
+      },
+      "description": {
+        "label": "Tavsif",
+        "placeholder": "Mahsulotingizni qisqacha tavsiflang"
+      },
+      "type": {
+        "label": "Narx turi",
+        "lockedHint": "Mahsulot yaratilgandan keyin narx turini o'zgartirib bo'lmaydi."
+      },
+      "amount": {
+        "label": "Narxi",
+        "placeholder": "0",
+        "currencySuffix": "so'm"
+      },
+      "interval": {
+        "label": "Hisob-kitob intervali"
+      },
+      "trial": {
+        "label": "Sinov kunlari"
+      }
+    },
+    "pricing": {
+      "oneTime": {
+        "title": "Bir martalik",
+        "subtitle": "Bir martalik to'lov"
+      },
+      "recurring": {
+        "title": "Takroriy",
+        "subtitle": "Jadval bo'yicha hisoblanadi"
+      }
+    },
+    "intervals": {
+      "day": "Kun",
+      "week": "Hafta",
+      "month": "Oy",
+      "year": "Yil"
+    }
+  }
+}

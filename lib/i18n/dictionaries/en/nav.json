@@ -1,0 +1,28 @@
+{
+  "header": {
+    "metaTitle": "MangaBox Analytics — Dashboard",
+    "dashboard": "Dashboard"
+  },
+  "groups": {
+    "core": "Core",
+    "acquisition": "Acquisition",
+    "money": "Money"
+  },
+  "items": {
+    "overview": "Overview",
+    "users": "Users",
+    "content": "Content",
+    "reports": "Reports",
+    "engagement": "Engagement",
+    "acquisition": "Sources",
+    "search": "Search",
+    "revenue": "Revenue",
+    "expenses": "Expenses",
+    "ads": "Ads",
+    "transactions": "Transactions",
+    "channels": "Channels",
+    "banners": "Banners",
+    "reels": "Reels",
+    "updates": "Updates"
+  }
+}

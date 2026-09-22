@@ -1,0 +1,33 @@
+{
+  "header": {
+    "title": "Plans",
+    "description": "Choose the plan that best fits your business."
+  },
+  "loadError": "Failed to load plans.",
+  "errorTitle": "Couldn't load plans",
+  "price": {
+    "free": "Free",
+    "perMonth": "{amount}/mo"
+  },
+  "toasts": {
+    "changed": "Your plan has been changed."
+  },
+  "card": {
+    "currentBadge": "Current",
+    "commissionSuffix": "per transaction",
+    "monthlyPayment": "Monthly fee",
+    "fixedFee": "Fixed fee",
+    "fixedFeeAmount": "{amount} per transaction",
+    "selected": "Current plan",
+    "select": "Select plan"
+  },
+  "changeDialog": {
+    "title": "Change plan?",
+    "newPlan": "New plan",
+    "commission": "Commission",
+    "currentRate": "(currently {rate})",
+    "monthlyPayment": "Monthly fee",
+    "immediateNote": "Your new plan takes effect immediately.",
+    "confirm": "Change plan"
+  }
+}

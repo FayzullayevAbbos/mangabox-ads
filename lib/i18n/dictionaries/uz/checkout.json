@@ -1,0 +1,101 @@
+{
+  "page": {
+    "title": "To'lov",
+    "description": "Mijozlaringiz uchun to'lov havolasini yarating va uni Telegram, email yoki veb orqali ulashing.",
+    "loadErrorTitle": "Yuklab bo'lmadi"
+  },
+  "errors": {
+    "loadFailed": "Ma'lumotlarni yuklab bo'lmadi"
+  },
+  "form": {
+    "title": "To'lov yaratish",
+    "subtitle": "Havola olish uchun mahsulot va mijoz ma'lumotlarini kiriting.",
+    "product": {
+      "label": "Mahsulot",
+      "placeholder": "Mahsulotni tanlang",
+      "emptyPlaceholder": "Avval mahsulot yarating"
+    },
+    "phone": {
+      "label": "Mijoz telefoni",
+      "placeholder": "+998 90 123 45 67",
+      "hint": "Obuna mahsulotlari uchun talab qilinadi."
+    },
+    "email": {
+      "label": "Mijoz emaili",
+      "placeholder": "user@example.com (ixtiyoriy)"
+    },
+    "discount": {
+      "label": "Chegirma kodi",
+      "placeholder": "SUMMER2026 (ixtiyoriy)"
+    },
+    "submit": {
+      "subscription": "Obunani boshlash",
+      "oneTime": "To'lov havolasini olish"
+    },
+    "validation": {
+      "product": "Mahsulotni tanlang",
+      "phoneRequired": "Obunalar uchun telefon talab qilinadi",
+      "phoneFormat": "+998 formatida kiriting",
+      "email": "Email noto'g'ri"
+    },
+    "toasts": {
+      "linkReady": "To'lov havolasi tayyor",
+      "codeSent": "Tasdiqlash kodi kartaga yuborildi",
+      "createError": "To'lovni yaratib bo'lmadi"
+    }
+  },
+  "placeholder": {
+    "subscriptionTitle": "Obunangiz shu yerdan boshlanadi",
+    "linkTitle": "Havolangiz shu yerda paydo bo'ladi",
+    "subscriptionDescription": "Telefon raqamini kiriting — mijozga tasdiqlash kodi yuboriladi.",
+    "linkDescription": "To'lov havolasini olish uchun shaklni to'ldiring."
+  },
+  "result": {
+    "title": "To'lov tayyor",
+    "description": "Bu havolani mijozingizga yuboring — ular Payme yoki Click orqali to'lashlari mumkin.",
+    "product": "Mahsulot",
+    "originalPrice": "Asl narx",
+    "discount": "Chegirma",
+    "amount": "Summa",
+    "provider": "Provayder",
+    "linkLabel": "To'lov havolasi",
+    "copyAria": "Havolani nusxalash",
+    "paymentStatusLabel": "To'lov holati:",
+    "checkStatus": "To'lov holatini tekshirish",
+    "newCheckout": "Yangi to'lov yaratish",
+    "statuses": {
+      "created": "Yaratildi — hali to'lanmagan",
+      "pending": "Kutilmoqda",
+      "paid": "To'landi ✓",
+      "cancelled": "Bekor qilindi",
+      "refunded": "Qaytarildi"
+    },
+    "toasts": {
+      "linkCopied": "Havola nusxalandi",
+      "copyFailed": "Nusxalab bo'lmadi",
+      "checkFailed": "Holatni tekshirib bo'lmadi"
+    }
+  },
+  "confirm": {
+    "title": "Tasdiqlash kodi",
+    "description": "Quyidagiga bog'langan kartaga yuborilgan SMS kodini kiriting",
+    "product": "Mahsulot",
+    "discount": "Chegirma",
+    "firstPayment": "Birinchi to'lov",
+    "smsLabel": "SMS kodi",
+    "submit": "Obunani tasdiqlash",
+    "toasts": {
+      "enterCode": "Tasdiqlash kodini kiriting",
+      "activated": "Obuna faollashtirildi",
+      "error": "Tasdiqlash amalga oshmadi"
+    }
+  },
+  "success": {
+    "title": "Obuna faol",
+    "description": "Mijozning obunasi muvaffaqiyatli boshlandi. Keyingi to'lovlar avtomatik yechib olinadi.",
+    "product": "Mahsulot",
+    "status": "Holat",
+    "amount": "Summa",
+    "newCheckout": "Yangi to'lov yaratish"
+  }
+}

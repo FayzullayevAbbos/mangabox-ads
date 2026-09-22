@@ -1,0 +1,96 @@
+{
+  "title": "Webhooks",
+  "description": "Get real-time notifications to your own server when events happen.",
+  "newEndpoint": "New endpoint",
+  "allEvents": "All",
+  "eventsCount": "{count} events",
+  "errors": {
+    "loadFailed": "Couldn't load data.",
+    "loadTitle": "Failed to load",
+    "notFound": "Endpoint not found",
+    "copyFailed": "Couldn't copy.",
+    "saveFailed": "Something went wrong while saving."
+  },
+  "empty": {
+    "title": "No webhook endpoints yet",
+    "description": "Add an endpoint and stay informed about payment and subscription events."
+  },
+  "table": {
+    "url": "URL",
+    "events": "Events",
+    "status": "Status",
+    "errors": "Errors",
+    "actions": "Actions"
+  },
+  "actions": {
+    "enable": "Activate",
+    "disable": "Disable"
+  },
+  "toast": {
+    "activated": "Endpoint activated",
+    "disabled": "Endpoint disabled",
+    "updated": "Endpoint updated",
+    "testSent": "Test event sent",
+    "secretCopied": "Signing secret copied"
+  },
+  "detail": {
+    "back": "Webhooks",
+    "sendTest": "Send test",
+    "status": "Status",
+    "events": "Events",
+    "consecutiveFailures": "Consecutive failures",
+    "secretTitle": "Signing secret",
+    "secretDescription": "Use this secret to verify the signature of incoming webhook requests. Keep it confidential.",
+    "deliveriesTitle": "Delivery history",
+    "deliveriesEmptyTitle": "No deliveries yet",
+    "deliveriesEmptyDescription": "They'll appear here when an event occurs or when you send a test.",
+    "deliveryTable": {
+      "event": "Event",
+      "status": "Status",
+      "attempts": "Attempts",
+      "response": "Response",
+      "date": "Date"
+    }
+  },
+  "form": {
+    "titleEdit": "Edit endpoint",
+    "titleCreate": "New webhook endpoint",
+    "description": "When events occur, MangaBox sends an HTTPS request to the URL you specify.",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://api.mysite.com/webhook",
+    "eventsLabel": "Events",
+    "eventsHint": "Empty = all",
+    "submitEdit": "Save",
+    "submitCreate": "Create",
+    "errors": {
+      "urlRequired": "Enter a URL.",
+      "urlHttps": "The URL must start with https://.",
+      "urlInvalid": "Enter a valid URL."
+    }
+  },
+  "secretDialog": {
+    "title": "Endpoint created",
+    "secretLabel": "Signing secret",
+    "description": "Use it to verify the signature of webhook requests. You can view this secret again from the endpoint page at any time.",
+    "done": "Got it",
+    "copy": "Copy"
+  },
+  "secretField": {
+    "show": "Show",
+    "hide": "Hide",
+    "copy": "Copy"
+  },
+  "events": {
+    "payment.succeeded": "Payment succeeded",
+    "payment.failed": "Payment failed",
+    "payment.refunded": "Payment refunded",
+    "subscription.created": "New subscription",
+    "subscription.trial_started": "Trial started",
+    "subscription.renewed": "Subscription renewed",
+    "subscription.payment_failed": "Subscription payment failed",
+    "subscription.canceled": "Subscription canceled",
+    "subscription.uncanceled": "Subscription reactivated",
+    "subscription.updated": "Subscription updated",
+    "payout.completed": "Payout completed"
+  }
+}

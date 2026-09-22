@@ -1,0 +1,36 @@
+{
+  "userMenu": {
+    "accountLabel": "Hisob",
+    "settings": "Sozlamalar",
+    "apiKeys": "API kalitlari",
+    "webhooks": "Webhook'lar",
+    "logout": "Chiqish",
+    "logoutError": "Chiqib bo'lmadi. Iltimos, qaytadan urinib ko'ring.",
+    "loadError": "Profilingizni yuklab bo'lmadi."
+  },
+  "transactionStatus": {
+    "created": "Yaratilgan",
+    "pending": "Kutilmoqda",
+    "paid": "To'langan",
+    "cancelled": "Bekor qilingan",
+    "failed": "Muvaffaqiyatsiz",
+    "expired": "Muddati o'tgan",
+    "refunded": "Qaytarilgan"
+  },
+  "subscriptionStatus": {
+    "incomplete": "Tugallanmagan",
+    "trialing": "Sinov muddatida",
+    "active": "Faol",
+    "past_due": "Muddati o'tgan",
+    "canceled": "Bekor qilingan"
+  },
+  "webhookStatus": {
+    "active": "Faol",
+    "disabled": "O'chirilgan"
+  },
+  "webhookDeliveryStatus": {
+    "pending": "Kutilmoqda",
+    "delivered": "Yetkazilgan",
+    "failed": "Muvaffaqiyatsiz"
+  }
+}

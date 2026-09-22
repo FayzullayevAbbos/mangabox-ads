@@ -1,0 +1,96 @@
+{
+  "title": "Webhook'lar",
+  "description": "Hodisalar yuz berganda o'z serveringizga real vaqt rejimida bildirishnomalar oling.",
+  "newEndpoint": "Yangi endpoint",
+  "allEvents": "Barchasi",
+  "eventsCount": "{count} ta hodisa",
+  "errors": {
+    "loadFailed": "Ma'lumotlarni yuklab bo'lmadi.",
+    "loadTitle": "Yuklab bo'lmadi",
+    "notFound": "Endpoint topilmadi",
+    "copyFailed": "Nusxa ko'chirib bo'lmadi.",
+    "saveFailed": "Saqlashda nimadir xato ketdi."
+  },
+  "empty": {
+    "title": "Hali webhook endpoint'lari yo'q",
+    "description": "Endpoint qo'shing va to'lov hamda obuna hodisalaridan xabardor bo'lib turing."
+  },
+  "table": {
+    "url": "URL",
+    "events": "Hodisalar",
+    "status": "Holati",
+    "errors": "Xatolar",
+    "actions": "Amallar"
+  },
+  "actions": {
+    "enable": "Faollashtirish",
+    "disable": "O'chirish"
+  },
+  "toast": {
+    "activated": "Endpoint faollashtirildi",
+    "disabled": "Endpoint o'chirildi",
+    "updated": "Endpoint yangilandi",
+    "testSent": "Sinov hodisasi yuborildi",
+    "secretCopied": "Imzolash maxfiy kaliti nusxalandi"
+  },
+  "detail": {
+    "back": "Webhook'lar",
+    "sendTest": "Sinov yuborish",
+    "status": "Holati",
+    "events": "Hodisalar",
+    "consecutiveFailures": "Ketma-ket muvaffaqiyatsizliklar",
+    "secretTitle": "Imzolash maxfiy kaliti",
+    "secretDescription": "Kiruvchi webhook so'rovlari imzosini tekshirish uchun ushbu maxfiy kalitdan foydalaning. Uni maxfiy saqlang.",
+    "deliveriesTitle": "Yetkazib berish tarixi",
+    "deliveriesEmptyTitle": "Hali yetkazishlar yo'q",
+    "deliveriesEmptyDescription": "Hodisa yuz berganda yoki sinov yuborganingizda ular shu yerda paydo bo'ladi.",
+    "deliveryTable": {
+      "event": "Hodisa",
+      "status": "Holati",
+      "attempts": "Urinishlar",
+      "response": "Javob",
+      "date": "Sana"
+    }
+  },
+  "form": {
+    "titleEdit": "Endpoint'ni tahrirlash",
+    "titleCreate": "Yangi webhook endpoint",
+    "description": "Hodisalar yuz berganda MangaBox siz ko'rsatgan URL'ga HTTPS so'rovi yuboradi.",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://api.mysite.com/webhook",
+    "eventsLabel": "Hodisalar",
+    "eventsHint": "Bo'sh = barchasi",
+    "submitEdit": "Saqlash",
+    "submitCreate": "Yaratish",
+    "errors": {
+      "urlRequired": "URL kiriting.",
+      "urlHttps": "URL https:// bilan boshlanishi kerak.",
+      "urlInvalid": "Yaroqli URL kiriting."
+    }
+  },
+  "secretDialog": {
+    "title": "Endpoint yaratildi",
+    "secretLabel": "Imzolash maxfiy kaliti",
+    "description": "Webhook so'rovlari imzosini tekshirish uchun undan foydalaning. Bu maxfiy kalitni istalgan vaqtda endpoint sahifasidan qayta ko'rishingiz mumkin.",
+    "done": "Tushunarli",
+    "copy": "Nusxalash"
+  },
+  "secretField": {
+    "show": "Ko'rsatish",
+    "hide": "Yashirish",
+    "copy": "Nusxalash"
+  },
+  "events": {
+    "payment.succeeded": "To'lov muvaffaqiyatli o'tdi",
+    "payment.failed": "To'lov amalga oshmadi",
+    "payment.refunded": "To'lov qaytarildi",
+    "subscription.created": "Yangi obuna",
+    "subscription.trial_started": "Sinov muddati boshlandi",
+    "subscription.renewed": "Obuna yangilandi",
+    "subscription.payment_failed": "Obuna to'lovi amalga oshmadi",
+    "subscription.canceled": "Obuna bekor qilindi",
+    "subscription.uncanceled": "Obuna qayta faollashtirildi",
+    "subscription.updated": "Obuna yangilandi",
+    "payout.completed": "To'lov o'tkazmasi yakunlandi"
+  }
+}

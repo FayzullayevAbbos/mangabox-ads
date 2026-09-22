@@ -1,0 +1,54 @@
+{
+  "page": {
+    "title": "Obunalar",
+    "description": "Mijozlaringizning takroriy to'lovlari va ularning holati."
+  },
+  "loadError": "Ma'lumotlarni yuklab bo'lmadi. Iltimos, qayta urinib ko'ring.",
+  "productFallback": "Mahsulot",
+  "toasts": {
+    "reactivated": "Obuna qayta faollashtirildi",
+    "canceled": "Obuna bekor qilindi",
+    "planChanged": "Tarif o'zgartirildi"
+  },
+  "states": {
+    "errorTitle": "Yuklab bo'lmadi",
+    "emptyTitle": "Hozircha obunalar yo'q",
+    "emptyDescription": "Takroriy mahsulot soting va obunalar shu yerda ko'rinadi."
+  },
+  "columns": {
+    "customer": "Mijoz",
+    "product": "Mahsulot",
+    "status": "Holat",
+    "nextPayment": "Keyingi to'lov",
+    "price": "Narxi"
+  },
+  "intervals": {
+    "day": "kun",
+    "week": "hafta",
+    "month": "oy",
+    "year": "yil",
+    "dayPlural": "kun",
+    "weekPlural": "hafta",
+    "monthPlural": "oy",
+    "yearPlural": "yil"
+  },
+  "actions": {
+    "menuLabel": "Amallar",
+    "reactivate": "Qayta faollashtirish",
+    "changePlan": "Tarifni o'zgartirish",
+    "cancel": "Bekor qilish"
+  },
+  "cancelDialog": {
+    "title": "Obunani bekor qilish",
+    "body": "obuna bekor qilinadi. Keyingi to'lovlar olinmaydi.",
+    "keep": "Yo'q, qoldirilsin",
+    "confirm": "Ha, bekor qilinsin"
+  },
+  "changePlanDialog": {
+    "title": "Tarifni o'zgartirish",
+    "description": "Yangi takroriy mahsulotni tanlang. O'zgarish darhol kuchga kiradi.",
+    "noOptions": "Boshqa faol obuna mahsulotlari mavjud emas.",
+    "selectPlaceholder": "Mahsulotni tanlang",
+    "confirm": "O'zgartirish"
+  }
+}

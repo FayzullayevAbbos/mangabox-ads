@@ -1,0 +1,263 @@
+{
+  "page": {
+    "title": "Reklama",
+    "description": "Moderatsiya, kampaniyalar, reklama beruvchilar va narxnoma."
+  },
+  "tabs": {
+    "moderation": "Moderatsiya",
+    "campaigns": "Kampaniyalar",
+    "advertisers": "Reklama beruvchilar",
+    "rateCard": "Narxnoma"
+  },
+  "status": {
+    "all": "Hammasi",
+    "draft": "Qoralama",
+    "review": "Tekshiruvda",
+    "rejected": "Rad etilgan",
+    "approved": "Tasdiqlangan",
+    "scheduled": "Rejalashtirilgan",
+    "active": "Efirda",
+    "paused": "To'xtatilgan",
+    "finished": "Tugagan"
+  },
+  "finishReason": {
+    "window": "Muddat tugadi",
+    "goal": "Ko'rsatish soni yig'ildi",
+    "manual": "Admin to'xtatdi"
+  },
+  "moderation": {
+    "empty": "Moderatsiya navbati bo'sh",
+    "emptyHint": "Hamma kampaniya ko'rib chiqilgan.",
+    "slots": "Slotlar",
+    "period": "Muddat",
+    "amount": "Summa",
+    "goal": "Ko'rsatish",
+    "creatives": "Kreativlar",
+    "noCreatives": "Kreativ qo'shilmagan — tasdiqlashdan oldin tekshiring.",
+    "openLink": "Havolani ochish"
+  },
+  "reject": {
+    "title": "Kampaniyani rad etish",
+    "notice": "Sabab mijozga Telegram orqali yuboriladi — ichki qayd emas, mijozga tushunarli qilib yozing.",
+    "label": "Sabab",
+    "placeholder": "Masalan: kreativ matni do'kon qoidalariga mos emas",
+    "submit": "Rad etish",
+    "required": "Sababni yozing."
+  },
+  "campaigns": {
+    "columns": {
+      "advertiser": "Brend",
+      "name": "Kampaniya",
+      "slots": "Slotlar",
+      "period": "Muddat",
+      "amount": "Summa",
+      "status": "Holat"
+    },
+    "empty": "Kampaniya topilmadi.",
+    "filteredBy": "Filtr: {name}",
+    "clearFilter": "Filtrni olib tashlash"
+  },
+  "actions": {
+    "details": "Batafsil",
+    "edit": "Tahrirlash",
+    "approve": "Tasdiqlash",
+    "reject": "Rad etish",
+    "pause": "To'xtatish",
+    "resume": "Davom ettirish",
+    "finish": "Tugatish",
+    "create": "Kampaniya qo'shish",
+    "cancel": "Bekor qilish",
+    "proceed": "Davom etish",
+    "close": "Yopish"
+  },
+  "finish": {
+    "title": "Kampaniyani tugatish",
+    "confirm": "Kampaniya tugatiladi va qaytarib bo'lmaydi — efirga qayta chiqmaydi. Davom etasizmi?"
+  },
+  "sheet": {
+    "tabs": {
+      "overview": "Umumiy",
+      "creatives": "Kreativlar",
+      "stats": "Statistika",
+      "orders": "To'lovlar"
+    },
+    "overview": {
+      "advertiser": "Brend",
+      "period": "Muddat",
+      "days": "{days} kun",
+      "slots": "Slotlar",
+      "share": "Ulush",
+      "impressions": "Ko'rsatish",
+      "price": "Narx",
+      "subtotal": "Oraliq summa",
+      "discount": "Chegirma",
+      "total": "Jami",
+      "dailyCap": "Kunlik shift",
+      "frequencyCap": "Takrorlash chegarasi",
+      "createdBy": "Kim yaratdi",
+      "byAdmin": "Admin",
+      "byAdvertiser": "Reklama beruvchi",
+      "rejectReason": "Rad etish sababi",
+      "finishReason": "Tugash sababi",
+      "paidAt": "To'langan",
+      "notPaid": "To'lov kutilmoqda",
+      "goal": "Ko'rsatish rejasi"
+    },
+    "creatives": {
+      "add": "Kreativ qo'shish",
+      "empty": "Bu kampaniyada kreativ yo'q.",
+      "type": "Turi",
+      "typeCard": "Karta (ilova chizadi)",
+      "typeImage": "Rasm",
+      "slot": "Slot",
+      "anySlot": "Hamma slot",
+      "brandName": "Brend nomi",
+      "title": "Sarlavha",
+      "body": "Matn",
+      "cta": "Tugma matni",
+      "accent": "Asosiy rang",
+      "href": "Havola",
+      "active": "Efirda",
+      "activeHint": "O'chirilsa kreativ vaqtincha ko'rsatilmaydi.",
+      "inactive": "O'chirilgan",
+      "image": "Rasm",
+      "logo": "Logotip",
+      "upload": "Yuklash",
+      "uploading": "Yuklanmoqda…",
+      "remove": "O'chirish",
+      "removeTitle": "Kreativni o'chirish",
+      "removeConfirm": "Kreativ o'chiriladi. Davom etasizmi?",
+      "imageHint": "Kamida {min} px, nisbat {ratio}.",
+      "imageTooSmall": "Rasm kichik: kamida {min} px kerak (yuklangani {actual}).",
+      "imageWrongRatio": "Nisbat mos emas: {ratio} kerak (yuklangani {actual}).",
+      "cardOnlySlot": "Bu slotda faqat karta kreativi bor — rasm yuklanmaydi.",
+      "createTitle": "Yangi kreativ",
+      "editTitle": "Kreativni tahrirlash",
+      "save": "Saqlash",
+      "create": "Qo'shish",
+      "saving": "Saqlanmoqda…",
+      "stats": "{impressions} ko'rsatish · {clicks} klik",
+      "hrefInvalid": "Havola https:// bilan boshlanishi kerak.",
+      "accentInvalid": "Rang #RRGGBB ko'rinishida bo'lsin (masalan #1E88E5).",
+      "brandRequired": "Brend nomini kiriting.",
+      "slotRequired": "Rasmli kreativ uchun slotni tanlang.",
+      "lockedHint": "Kreativlarni faqat moderatsiyagacha o'zgartirish mumkin. Efirdagi kreativni vaqtincha o'chirib qo'yish mumkin.",
+      "noImageSlots": "Bu kampaniyada rasmli slot yo'q — faqat karta kreativi.",
+      "cardSlotHint": "Karta kreativi kampaniyaning hamma slotlarida ishlaydi."
+    },
+    "stats": {
+      "impressions": "Ko'rsatishlar",
+      "views": "Ko'rilgan",
+      "clicks": "Kliklar",
+      "unique": "Noyob tomoshabin",
+      "ctr": "CTR",
+      "progress": "Bajarildi",
+      "chartTitle": "Kunlik dinamika",
+      "empty": "Hali statistika yo'q.",
+      "bySlot": "Slotlar bo'yicha",
+      "byCreative": "Kreativlar bo'yicha",
+      "hint": "Ko'rsatish — chizildi, ko'rilgan — ekranda 1 soniyadan ortiq turdi."
+    },
+    "orders": {
+      "columns": {
+        "date": "Sana",
+        "provider": "Provayder",
+        "amount": "Summa",
+        "status": "Holat",
+        "transId": "Tranzaksiya"
+      },
+      "empty": "To'lov yozuvi yo'q.",
+      "readOnly": "To'lovni mijoz kabinetdan amalga oshiradi — admin yarata olmaydi."
+    }
+  },
+  "advertisers": {
+    "columns": {
+      "name": "Brend",
+      "phone": "Telefon",
+      "legal": "Yuridik nom / INN",
+      "status": "Holat",
+      "lastLogin": "Oxirgi kirish"
+    },
+    "empty": "Reklama beruvchi topilmadi.",
+    "noTelegram": "Telegram bog'lanmagan — tasdiq/rad xabari yetib bormaydi.",
+    "viewCampaigns": "Kampaniyalari",
+    "autoActivate": "Hisobni qo'lda tasdiqlash shart emas — birinchi kampaniyasi tasdiqlangach avtomatik faollashadi.",
+    "block": "Bloklash",
+    "blockTitle": "Hisobni bloklash",
+    "blockConfirm": "Bloklangan hisob portalga kira olmaydi. Davom etasizmi?",
+    "activate": "Faollashtirish",
+    "note": "Admin qaydi (ixtiyoriy)",
+    "notePlaceholder": "Ichki qayd — mijozga ko'rinmaydi",
+    "never": "Hech qachon",
+    "statuses": {
+      "all": "Hammasi",
+      "pending": "Kutilmoqda",
+      "active": "Faol",
+      "blocked": "Bloklangan"
+    }
+  },
+  "rateCard": {
+    "title": "Slotlar va narxlar",
+    "columns": {
+      "slot": "Slot",
+      "cpm": "CPM",
+      "daily": "Kunlik inventar",
+      "types": "Kreativ turlari",
+      "image": "Rasm o'lchami"
+    },
+    "noImage": "—",
+    "cardOnly": "Faqat karta",
+    "calculator": {
+      "title": "Kalkulyator",
+      "hint": "Mijoz bilan gaplashayotganda narx aytish uchun.",
+      "slot": "Slot",
+      "share": "Inventar ulushi",
+      "shareHint": "Slotning kunlik inventaridan {share}% — kuniga taxminan {count} ko'rsatish.",
+      "days": "Kun",
+      "discount": "Chegirma",
+      "impressions": "Ko'rsatish",
+      "subtotal": "Oraliq summa",
+      "discountSom": "Chegirma",
+      "total": "Jami"
+    }
+  },
+  "form": {
+    "createTitle": "Yangi kampaniya",
+    "editTitle": "Kampaniyani tahrirlash",
+    "description": "Narx narxnomadan hisoblanadi — summa qo'lda kiritilmaydi.",
+    "advertiser": "Reklama beruvchi",
+    "advertiserPlaceholder": "Brendni tanlang",
+    "advertiserRequired": "Reklama beruvchini tanlang.",
+    "name": "Kampaniya nomi",
+    "nameRequired": "Kampaniya nomini kiriting.",
+    "slots": "Slotlar",
+    "addSlot": "Slot qo'shish",
+    "removeSlot": "Slotni olib tashlash",
+    "slotTaken": "Bu slot allaqachon qo'shilgan.",
+    "startDay": "Boshlanish sanasi",
+    "days": "Kun soni",
+    "discount": "Chegirma, %",
+    "discountHint": "0–50%, faqat adminda.",
+    "frequencyCap": "Takrorlash chegarasi",
+    "frequencyCapHint": "Bitta foydalanuvchiga kuniga necha marta (1–10).",
+    "quoteTitle": "Narx",
+    "quoteLoading": "Hisoblanmoqda…",
+    "minOrder": "Eng kam buyurtma 100 000 so'm.",
+    "create": "Yaratish",
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda…"
+  },
+  "toasts": {
+    "approved": "Kampaniya tasdiqlandi",
+    "rejected": "Kampaniya rad etildi",
+    "paused": "To'xtatildi",
+    "resumed": "Davom ettirildi",
+    "finished": "Tugatildi",
+    "created": "Kampaniya yaratildi",
+    "updated": "Saqlandi",
+    "creativeSaved": "Kreativ saqlandi",
+    "creativeDeleted": "Kreativ o'chirildi",
+    "uploaded": "Yuklandi",
+    "advertiserUpdated": "Holat o'zgartirildi"
+  }
+}

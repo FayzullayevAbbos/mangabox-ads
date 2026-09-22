@@ -1,0 +1,263 @@
+{
+  "page": {
+    "title": "Ads",
+    "description": "Moderation, campaigns, advertisers and the rate card."
+  },
+  "tabs": {
+    "moderation": "Moderation",
+    "campaigns": "Campaigns",
+    "advertisers": "Advertisers",
+    "rateCard": "Rate card"
+  },
+  "status": {
+    "all": "All",
+    "draft": "Draft",
+    "review": "In review",
+    "rejected": "Rejected",
+    "approved": "Approved",
+    "scheduled": "Scheduled",
+    "active": "Live",
+    "paused": "Paused",
+    "finished": "Finished"
+  },
+  "finishReason": {
+    "window": "Period ended",
+    "goal": "Impression goal reached",
+    "manual": "Stopped by admin"
+  },
+  "moderation": {
+    "empty": "Moderation queue is empty",
+    "emptyHint": "Every campaign has been reviewed.",
+    "slots": "Slots",
+    "period": "Period",
+    "amount": "Amount",
+    "goal": "Impressions",
+    "creatives": "Creatives",
+    "noCreatives": "No creatives added — check before approving.",
+    "openLink": "Open link"
+  },
+  "reject": {
+    "title": "Reject campaign",
+    "notice": "The reason is sent to the client over Telegram — write it for them, not as an internal note.",
+    "label": "Reason",
+    "placeholder": "e.g. creative text does not meet store policy",
+    "submit": "Reject",
+    "required": "Enter a reason."
+  },
+  "campaigns": {
+    "columns": {
+      "advertiser": "Brand",
+      "name": "Campaign",
+      "slots": "Slots",
+      "period": "Period",
+      "amount": "Amount",
+      "status": "Status"
+    },
+    "empty": "No campaigns found.",
+    "filteredBy": "Filter: {name}",
+    "clearFilter": "Clear filter"
+  },
+  "actions": {
+    "details": "Details",
+    "edit": "Edit",
+    "approve": "Approve",
+    "reject": "Reject",
+    "pause": "Pause",
+    "resume": "Resume",
+    "finish": "Finish",
+    "create": "Add campaign",
+    "cancel": "Cancel",
+    "proceed": "Continue",
+    "close": "Close"
+  },
+  "finish": {
+    "title": "Finish campaign",
+    "confirm": "The campaign will be finished and cannot be reopened. Continue?"
+  },
+  "sheet": {
+    "tabs": {
+      "overview": "Overview",
+      "creatives": "Creatives",
+      "stats": "Stats",
+      "orders": "Payments"
+    },
+    "overview": {
+      "advertiser": "Brand",
+      "period": "Period",
+      "days": "{days} days",
+      "slots": "Slots",
+      "share": "Share",
+      "impressions": "Impressions",
+      "price": "Price",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "total": "Total",
+      "dailyCap": "Daily cap",
+      "frequencyCap": "Frequency cap",
+      "createdBy": "Created by",
+      "byAdmin": "Admin",
+      "byAdvertiser": "Advertiser",
+      "rejectReason": "Rejection reason",
+      "finishReason": "Finish reason",
+      "paidAt": "Paid",
+      "notPaid": "Awaiting payment",
+      "goal": "Impression goal"
+    },
+    "creatives": {
+      "add": "Add creative",
+      "empty": "This campaign has no creatives.",
+      "type": "Type",
+      "typeCard": "Card (rendered by the app)",
+      "typeImage": "Image",
+      "slot": "Slot",
+      "anySlot": "All slots",
+      "brandName": "Brand name",
+      "title": "Title",
+      "body": "Body",
+      "cta": "Button text",
+      "accent": "Accent color",
+      "href": "Link",
+      "active": "Live",
+      "activeHint": "Turn off to temporarily stop showing this creative.",
+      "inactive": "Disabled",
+      "image": "Image",
+      "logo": "Logo",
+      "upload": "Upload",
+      "uploading": "Uploading…",
+      "remove": "Delete",
+      "removeTitle": "Delete creative",
+      "removeConfirm": "The creative will be deleted. Continue?",
+      "imageHint": "At least {min} px, ratio {ratio}.",
+      "imageTooSmall": "Image too small: at least {min} px required (uploaded {actual}).",
+      "imageWrongRatio": "Wrong ratio: {ratio} required (uploaded {actual}).",
+      "cardOnlySlot": "This slot only supports card creatives — no image upload.",
+      "createTitle": "New creative",
+      "editTitle": "Edit creative",
+      "save": "Save",
+      "create": "Add",
+      "saving": "Saving…",
+      "stats": "{impressions} impressions · {clicks} clicks",
+      "hrefInvalid": "The link must start with https://.",
+      "accentInvalid": "Use #RRGGBB format (e.g. #1E88E5).",
+      "brandRequired": "Enter a brand name.",
+      "slotRequired": "Select a slot for the image creative.",
+      "lockedHint": "Creatives can only be changed before moderation. A live creative can still be switched off.",
+      "noImageSlots": "This campaign has no image slots — card creatives only.",
+      "cardSlotHint": "A card creative runs in every slot of the campaign."
+    },
+    "stats": {
+      "impressions": "Impressions",
+      "views": "Viewed",
+      "clicks": "Clicks",
+      "unique": "Unique viewers",
+      "ctr": "CTR",
+      "progress": "Delivered",
+      "chartTitle": "Daily breakdown",
+      "empty": "No stats yet.",
+      "bySlot": "By slot",
+      "byCreative": "By creative",
+      "hint": "Impression — rendered; viewed — on screen for over a second."
+    },
+    "orders": {
+      "columns": {
+        "date": "Date",
+        "provider": "Provider",
+        "amount": "Amount",
+        "status": "Status",
+        "transId": "Transaction"
+      },
+      "empty": "No payment records.",
+      "readOnly": "The client pays from their portal — admins cannot create payments."
+    }
+  },
+  "advertisers": {
+    "columns": {
+      "name": "Brand",
+      "phone": "Phone",
+      "legal": "Legal name / TIN",
+      "status": "Status",
+      "lastLogin": "Last login"
+    },
+    "empty": "No advertisers found.",
+    "noTelegram": "No Telegram linked — approval/rejection messages will not arrive.",
+    "viewCampaigns": "Campaigns",
+    "autoActivate": "No manual approval needed — the account activates automatically once its first campaign is approved.",
+    "block": "Block",
+    "blockTitle": "Block account",
+    "blockConfirm": "A blocked account cannot sign in to the portal. Continue?",
+    "activate": "Activate",
+    "note": "Admin note (optional)",
+    "notePlaceholder": "Internal note — not shown to the client",
+    "never": "Never",
+    "statuses": {
+      "all": "All",
+      "pending": "Pending",
+      "active": "Active",
+      "blocked": "Blocked"
+    }
+  },
+  "rateCard": {
+    "title": "Slots and prices",
+    "columns": {
+      "slot": "Slot",
+      "cpm": "CPM",
+      "daily": "Daily inventory",
+      "types": "Creative types",
+      "image": "Image size"
+    },
+    "noImage": "—",
+    "cardOnly": "Card only",
+    "calculator": {
+      "title": "Calculator",
+      "hint": "For quoting a price while talking to a client.",
+      "slot": "Slot",
+      "share": "Inventory share",
+      "shareHint": "{share}% of the slot's daily inventory — about {count} impressions a day.",
+      "days": "Days",
+      "discount": "Discount",
+      "impressions": "Impressions",
+      "subtotal": "Subtotal",
+      "discountSom": "Discount",
+      "total": "Total"
+    }
+  },
+  "form": {
+    "createTitle": "New campaign",
+    "editTitle": "Edit campaign",
+    "description": "The price comes from the rate card — no manual amount.",
+    "advertiser": "Advertiser",
+    "advertiserPlaceholder": "Select a brand",
+    "advertiserRequired": "Select an advertiser.",
+    "name": "Campaign name",
+    "nameRequired": "Enter a campaign name.",
+    "slots": "Slots",
+    "addSlot": "Add slot",
+    "removeSlot": "Remove slot",
+    "slotTaken": "This slot is already added.",
+    "startDay": "Start date",
+    "days": "Days",
+    "discount": "Discount, %",
+    "discountHint": "0–50%, admin only.",
+    "frequencyCap": "Frequency cap",
+    "frequencyCapHint": "Times per user per day (1–10).",
+    "quoteTitle": "Price",
+    "quoteLoading": "Calculating…",
+    "minOrder": "Minimum order is 100 000 so'm.",
+    "create": "Create",
+    "save": "Save",
+    "saving": "Saving…"
+  },
+  "toasts": {
+    "approved": "Campaign approved",
+    "rejected": "Campaign rejected",
+    "paused": "Paused",
+    "resumed": "Resumed",
+    "finished": "Finished",
+    "created": "Campaign created",
+    "updated": "Saved",
+    "creativeSaved": "Creative saved",
+    "creativeDeleted": "Creative deleted",
+    "uploaded": "Uploaded",
+    "advertiserUpdated": "Status changed"
+  }
+}

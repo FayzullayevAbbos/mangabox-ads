@@ -1,0 +1,63 @@
+{
+  "appName": "MangaBox",
+  "language": "Language",
+  "theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "continue": "Continue",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "close": "Close",
+    "copy": "Copy",
+    "copied": "Copied",
+    "search": "Search",
+    "retry": "Try again",
+    "viewAll": "View all"
+  },
+  "status": {
+    "loading": "Loading…",
+    "verifying": "Verifying…",
+    "saving": "Saving…",
+    "sending": "Sending…"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Please check your internet connection.",
+    "tooManyRequests": "Too many requests. Please try again shortly."
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "count": "{count} records",
+    "pageSuffix": " · page {page} of {total}"
+  },
+  "states": {
+    "errorTitle": "Couldn't load",
+    "emptyTitle": "No data",
+    "emptyDescription": "Nothing has been collected for this section yet."
+  },
+  "dateRange": {
+    "label": "Period",
+    "from": "From",
+    "to": "To",
+    "custom": "Custom range",
+    "apply": "Apply",
+    "clear": "Clear range",
+    "presets": {
+      "d7": "Last 7 days",
+      "d30": "Last 30 days",
+      "d90": "Last 90 days",
+      "d365": "Last year"
+    }
+  }
+}

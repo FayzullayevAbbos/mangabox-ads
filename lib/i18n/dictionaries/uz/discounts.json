@@ -1,0 +1,120 @@
+{
+  "list": {
+    "title": "Chegirmalar",
+    "description": "To'lov paytida narxni kamaytiradigan promo-kodlar va qoidalar.",
+    "addDiscount": "Chegirma qo'shish",
+    "columns": {
+      "name": "Nomi",
+      "code": "Kod",
+      "value": "Qiymati",
+      "period": "Faol davr",
+      "redeemed": "Ishlatilgan"
+    },
+    "archivedBadge": "Arxivlangan",
+    "unlimitedPeriod": "Cheksiz",
+    "rowActions": "Amallar",
+    "edit": "Tahrirlash",
+    "archive": "Arxivlash"
+  },
+  "empty": {
+    "title": "Hozircha chegirmalar yo'q",
+    "description": "Promo-kod yarating va uni mijozlaringizga taklif qiling."
+  },
+  "errors": {
+    "loadTitle": "Yuklab bo'lmadi",
+    "loadFailed": "Ma'lumotlarni yuklab bo'lmadi."
+  },
+  "archiveDialog": {
+    "title": "Bu chegirma arxivlansinmi?",
+    "description": "arxivlanadi va endi to'lov paytida ishlamaydi.",
+    "confirm": "Arxivlash"
+  },
+  "toasts": {
+    "archived": "Chegirma arxivlandi",
+    "created": "Chegirma yaratildi",
+    "updated": "Chegirma yangilandi",
+    "saveFailed": "Saqlab bo'lmadi. Qaytadan urinib ko'ring."
+  },
+  "new": {
+    "title": "Yangi chegirma",
+    "description": "To'lov paytida narxni kamaytiradigan promo-kod yoki qoida yarating.",
+    "submit": "Chegirma yaratish"
+  },
+  "edit": {
+    "title": "Chegirmani tahrirlash",
+    "description": "Tur, kod va qiymatni o'zgartirib bo'lmaydi — ular o'tgan tranzaksiyalarga bog'langan.",
+    "readOnly": {
+      "type": "Tur",
+      "value": "Qiymati",
+      "code": "Kod",
+      "redeemed": "Ishlatilgan"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "Nomi",
+      "placeholder": "masalan, Yangi yil chegirmasi"
+    },
+    "code": {
+      "label": "Kod",
+      "hint": "Mijozlar to'lov paytida kiritadigan kod. Faqat havola orqali mavjud bo'lishi uchun bo'sh qoldiring.",
+      "placeholder": "NEWYEAR2026 (ixtiyoriy)"
+    },
+    "type": {
+      "label": "Tur",
+      "percentage": {
+        "title": "Foiz",
+        "subtitle": "Narxdan foiz ayiriladi"
+      },
+      "fixed": {
+        "title": "Belgilangan summa",
+        "subtitle": "Belgilangan summa ayiriladi"
+      }
+    },
+    "value": {
+      "percentageLabel": "Foiz miqdori",
+      "amountLabel": "Summa",
+      "percentSuffix": "%",
+      "currencySuffix": "UZS"
+    },
+    "duration": {
+      "label": "Obuna davomiyligi",
+      "once": {
+        "title": "Bir marta",
+        "subtitle": "Faqat birinchi to'lovda"
+      },
+      "forever": {
+        "title": "Doimiy",
+        "subtitle": "Har bir yangilanishda"
+      }
+    },
+    "startsAt": {
+      "label": "Boshlanish sanasi"
+    },
+    "endsAt": {
+      "label": "Tugash sanasi"
+    },
+    "maxRedemptions": {
+      "label": "Ishlatish chegarasi",
+      "hintNew": "Chegirma necha marta ishlatilishi mumkin. Bo'sh = cheksiz.",
+      "hintEdit": "Bo'sh = cheksiz.",
+      "placeholderNew": "Cheksiz (ixtiyoriy)",
+      "placeholderEdit": "Cheksiz"
+    },
+    "products": {
+      "label": "Mahsulotlar",
+      "hintNew": "Chegirma qaysi mahsulotlarga tatbiq etiladi. Bo'sh = barcha mahsulotlar.",
+      "hintEdit": "Bo'sh = barcha mahsulotlar.",
+      "all": "Barcha mahsulotlar",
+      "selected": "{count} ta mahsulot tanlandi"
+    }
+  },
+  "validation": {
+    "nameMin": "Kamida 2 ta belgi",
+    "codeLength": "Kod 3–256 ta belgidan iborat bo'lishi kerak",
+    "valueRequired": "Qiymat kiriting",
+    "percentageRange": "Foiz 1 dan 100 gacha bo'lishi kerak",
+    "maxRedemptionsMin": "1 dan katta bo'lishi kerak",
+    "endsBeforeStart": "Tugash sanasi boshlanish sanasidan keyin bo'lishi kerak"
+  }
+}

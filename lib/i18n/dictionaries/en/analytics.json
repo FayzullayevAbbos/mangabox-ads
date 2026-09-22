@@ -1,0 +1,867 @@
+{
+  "users": {
+    "page": {
+      "title": "Users",
+      "description": "Audience, activity and reading habits."
+    },
+    "tabs": {
+      "all": "Users",
+      "atRisk": "At risk"
+    },
+    "grantPro": {
+      "trigger": "New pro user",
+      "title": "Grant pro manually",
+      "description": "Find the user by Telegram ID or @username and pick a duration.",
+      "searchPlaceholder": "123456789 or @rustam",
+      "search": "Search",
+      "hint": "Enter an ID or username to find the user.",
+      "durationLabel": "Duration",
+      "payment": {
+        "label": "Payment",
+        "paid": "Paid",
+        "gift": "Gift",
+        "amountPlaceholder": "Amount (empty = plan price)"
+      },
+      "submit": "Grant {days} of pro",
+      "success": "Pro granted — {days}, until {until}",
+      "notNotified": "The user was not notified (they may have blocked the bot).",
+      "duration": {
+        "week": "1 week",
+        "months": "{count} months",
+        "days": "{count} days"
+      },
+      "fields": {
+        "telegramId": "Telegram ID",
+        "premium": "Current plan",
+        "premiumUntil": "Pro — until {date}",
+        "noPremium": "Not pro",
+        "source": "Source"
+      },
+      "errors": {
+        "notFound": "User not found",
+        "generic": "Failed to grant pro"
+      }
+    },
+    "stats": {
+      "dau": "Active today",
+      "total": "Total",
+      "premium": "Pro"
+    },
+    "filters": {
+      "search": "Name or username",
+      "role": "Role",
+      "allRoles": "All roles",
+      "sort": "Sort"
+    },
+    "roles": {
+      "free": "Free",
+      "premium": "Pro",
+      "admin": "Admin"
+    },
+    "sort": {
+      "lastActive": "Last active",
+      "totalReadChapters": "Most chapters read"
+    },
+    "columns": {
+      "user": "User",
+      "role": "Role",
+      "chapters": "Chapters",
+      "source": "Source",
+      "lastActive": "Last active"
+    },
+    "empty": {
+      "title": "No users found",
+      "description": "Try changing the search or filter."
+    },
+    "atRisk": {
+      "title": "At risk",
+      "description": "Readers who were active but stopped coming back.",
+      "days": "inactive {days} days",
+      "empty": "No at-risk users right now."
+    },
+    "retention": {
+      "title": "Retention",
+      "day": "Day {day}",
+      "cohort": "cohort: {size}"
+    }
+  },
+  "userDetail": {
+    "back": "Back to users",
+    "stats": {
+      "chapters": "Chapters read",
+      "referrals": "Referrals",
+      "maxWindow": "Peak per 5h",
+      "joined": "Joined"
+    },
+    "profile": {
+      "title": "Profile",
+      "role": "Role",
+      "premiumUntil": "Premium until",
+      "language": "Language",
+      "source": "Source",
+      "platform": "Platform",
+      "lastActive": "Last active",
+      "abuse": "Bypassing the free limit"
+    },
+    "favorites": {
+      "title": "Favorites",
+      "empty": "No favorites"
+    },
+    "timeline": {
+      "title": "Reading history (14 days)",
+      "chapters": "Chapters",
+      "empty": "No reading in this period."
+    },
+    "searches": {
+      "title": "Recent searches",
+      "empty": "Search history is not collected yet."
+    },
+    "pro": {
+      "title": "Pro subscription history",
+      "count": "{count}×",
+      "empty": "This user has never subscribed to Pro.",
+      "error": "Could not load the Pro history.",
+      "summary": {
+        "purchases": "Purchases",
+        "grants": "Admin grants",
+        "spent": "Total paid",
+        "first": "First time"
+      },
+      "columns": {
+        "index": "#",
+        "date": "Purchased",
+        "plan": "Plan",
+        "type": "Type",
+        "provider": "Provider",
+        "amount": "Amount",
+        "expires": "Expires"
+      },
+      "type": {
+        "paid": "Paid",
+        "granted": "Admin grant"
+      },
+      "daysValue": "{days} days",
+      "nth": "#{n}",
+      "active": "Active"
+    },
+    "devices": {
+      "title": "App devices",
+      "count": "{count}",
+      "empty": "This user has not signed in from the app.",
+      "error": "Could not load devices.",
+      "hint": "Downloads work only on these devices. Revoke a suspicious device — downloading there stops immediately.",
+      "lastSeen": "Last seen",
+      "never": "Never used",
+      "unknown": "Unnamed device",
+      "revoke": "Revoke",
+      "revoking": "Revoking…",
+      "revoked": "Device revoked.",
+      "revokeFailed": "Could not revoke."
+    },
+    "notFound": {
+      "title": "User not found",
+      "description": "No user with this telegram ID."
+    }
+  },
+  "content": {
+    "page": {
+      "title": "Content",
+      "description": "Manga, reads and ratings."
+    },
+    "filters": {
+      "search": "Manga title",
+      "sort": "Sort"
+    },
+    "sort": {
+      "reads": "Most read",
+      "rating": "Rating",
+      "chapters": "Chapter count",
+      "newest": "Recently added",
+      "newComment": "New comment"
+    },
+    "columns": {
+      "manga": "Manga",
+      "chapters": "Chapters",
+      "reads": "Reads",
+      "rating": "Rating",
+      "comments": "Comments",
+      "status": "Status"
+    },
+    "newComment": "New comment",
+    "empty": {
+      "title": "No manga found",
+      "description": "Try changing the search."
+    }
+  },
+  "mangaDetail": {
+    "back": "Back to content",
+    "stats": {
+      "reads": "Reads",
+      "likes": "Likes",
+      "rating": "Average rating",
+      "comments": "Comments"
+    },
+    "trend": {
+      "title": "Reads over time",
+      "reads": "Reads",
+      "empty": "No reads for this manga."
+    },
+    "dropoff": {
+      "title": "Chapter drop-off",
+      "readers": "Readers",
+      "empty": "No data."
+    },
+    "tabs": {
+      "comments": "Comments",
+      "readers": "Readers",
+      "chapters": "Chapters"
+    },
+    "comments": {
+      "empty": "No comments",
+      "best": "Best"
+    },
+    "readers": {
+      "columns": {
+        "user": "User",
+        "chapters": "Chapters read",
+        "lastRead": "Last read"
+      },
+      "empty": "No readers yet."
+    },
+    "notFound": {
+      "title": "Manga not found",
+      "description": "No manga with this slug."
+    }
+  },
+  "engagement": {
+    "page": {
+      "title": "Engagement",
+      "description": "Comments, ratings and likes."
+    },
+    "stats": {
+      "comments": "Comments",
+      "ratings": "Ratings",
+      "likes": "Likes"
+    },
+    "chart": {
+      "title": "Engagement over time",
+      "comments": "Comments",
+      "ratings": "Ratings",
+      "likes": "Likes",
+      "empty": "No engagement in this period."
+    },
+    "topCommented": {
+      "title": "Most discussed",
+      "count": "{count} comments",
+      "empty": "No data."
+    },
+    "recent": {
+      "title": "Recent comments",
+      "empty": "No comments.",
+      "best": "Best"
+    }
+  },
+  "search": {
+    "page": {
+      "title": "Search",
+      "description": "What users are looking for."
+    },
+    "stats": {
+      "total": "Total searches",
+      "unique": "Unique queries",
+      "zero": "Zero results",
+      "zeroRate": "Zero-result rate"
+    },
+    "top": {
+      "title": "Top queries",
+      "columns": {
+        "query": "Query",
+        "count": "Count",
+        "avg": "Avg results"
+      },
+      "empty": "No search data."
+    },
+    "zero": {
+      "title": "Queries with no results",
+      "columns": {
+        "query": "Query",
+        "count": "Count"
+      },
+      "empty": "No zero-result queries."
+    },
+    "note": "Only the bot's inline search is recorded so far — website search is not wired up."
+  },
+  "acquisition": {
+    "page": {
+      "title": "Sources",
+      "description": "Where users come from."
+    },
+    "stats": {
+      "total": "Total acquired",
+      "acquired": "Acquired",
+      "read": "Started reading",
+      "paid": "Paid"
+    },
+    "bySource": {
+      "title": "Sources",
+      "empty": "No data."
+    },
+    "sources": {
+      "channel": "Channel",
+      "referral": "Referral",
+      "direct": "Direct",
+      "web": "Website",
+      "inline": "Inline search",
+      "unknown": "Unknown"
+    },
+    "channels": {
+      "title": "Channels",
+      "columns": {
+        "channel": "Channel",
+        "users": "Users",
+        "pro": "Pro",
+        "paid": "Sales",
+        "revenue": "Revenue"
+      },
+      "empty": "No channel data."
+    },
+    "referrals": {
+      "title": "Referral leaderboard",
+      "count": "{count} referrals",
+      "empty": "No referrals."
+    },
+    "funnel": {
+      "title": "Funnel"
+    },
+    "links": {
+      "title": "Traffic links",
+      "description": "Short links for Instagram, your website, or anywhere else — see which source brings how many people.",
+      "create": "New link",
+      "empty": "No links yet — create the first one and place it on Instagram.",
+      "columns": {
+        "label": "Name",
+        "url": "Short link",
+        "clicks": "Clicks",
+        "starts": "Opened bot",
+        "activated": "Read",
+        "revenue": "Revenue"
+      },
+      "dialog": {
+        "title": "New source link",
+        "description": "Give it a name (e.g. \"Instagram bio\") to get a ready short link. By default the link opens the Telegram bot and attributes the visitor to this source.",
+        "labelField": "Name",
+        "labelPlaceholder": "e.g. Instagram bio",
+        "targetField": "Redirect URL (optional)",
+        "targetPlaceholder": "https://… — leave empty for the Telegram bot",
+        "targetHint": "With a custom URL (e.g. your mobile app page) only clicks are counted — no bot attribution.",
+        "submit": "Create",
+        "creating": "Creating…",
+        "readyTitle": "Link is ready — copy and place it:",
+        "done": "Close",
+        "error": "Could not create the link"
+      },
+      "targetBot": "Telegram bot",
+      "delete": {
+        "action": "Delete",
+        "confirm": "Sure?",
+        "success": "Link deleted",
+        "error": "Could not delete the link"
+      }
+    }
+  },
+  "revenue": {
+    "page": {
+      "title": "Revenue",
+      "description": "Pro subscriptions and payment providers."
+    },
+    "stats": {
+      "total": "Period revenue",
+      "today": "Today",
+      "orders": "Sales",
+      "payingUsers": "Paying users",
+      "avg": "Average order",
+      "discount": "Discounts"
+    },
+    "chart": {
+      "title": "Revenue over time",
+      "revenue": "Revenue",
+      "empty": "No revenue in this period."
+    },
+    "byPlan": {
+      "title": "By plan",
+      "columns": {
+        "plan": "Plan",
+        "orders": "Sales",
+        "revenue": "Revenue"
+      },
+      "empty": "No data."
+    },
+    "byProvider": {
+      "title": "By provider",
+      "columns": {
+        "provider": "Provider",
+        "orders": "Sales",
+        "users": "Paying users",
+        "share": "Share",
+        "revenue": "Revenue"
+      },
+      "empty": "No data."
+    },
+    "trend": {
+      "up": "up",
+      "down": "down",
+      "vsPrev": "vs previous period"
+    }
+  },
+  "expenses": {
+    "page": {
+      "title": "Expenses",
+      "description": "Manually recorded costs and net profit."
+    },
+    "actions": {
+      "add": "Add expense",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteTitle": "Delete expense",
+      "deleteConfirm": "This expense will be deleted. Continue?",
+      "cancel": "Cancel",
+      "proceed": "Continue"
+    },
+    "period": {
+      "d7": "Last 7 days",
+      "d30": "Last 30 days",
+      "d90": "Last 90 days",
+      "d365": "Last year",
+      "custom": "Custom range"
+    },
+    "stats": {
+      "total": "Total expenses",
+      "today": "Today",
+      "count": "Records",
+      "profit": "Net profit",
+      "profitHint": "revenue {revenue} − expenses {expenses}",
+      "profitAllCategories": "across all categories",
+      "margin": "margin {value}%"
+    },
+    "trend": {
+      "up": "increase",
+      "down": "decrease",
+      "vsPrev": "vs previous period"
+    },
+    "chart": {
+      "title": "Daily expenses",
+      "amount": "Expenses",
+      "empty": "No expenses in this period."
+    },
+    "byCategory": {
+      "title": "By category",
+      "empty": "No data.",
+      "records": "{count} records"
+    },
+    "table": {
+      "title": "Records",
+      "allCategories": "All categories",
+      "columns": {
+        "date": "Date",
+        "category": "Category",
+        "note": "Note",
+        "amount": "Amount",
+        "author": "Added by"
+      },
+      "empty": "No expenses in this period."
+    },
+    "form": {
+      "createTitle": "New expense",
+      "editTitle": "Edit expense",
+      "description": "Amount in so'm, date is when the money was spent.",
+      "amount": "Amount",
+      "amountHint": "In so'm, whole numbers only.",
+      "amountRequired": "Enter an amount greater than 0.",
+      "category": "Category",
+      "categoryPlaceholder": "Select a category",
+      "categoryRequired": "Select a category.",
+      "spentAt": "Date",
+      "spentAtHint": "The day the money was spent, not the day it was recorded.",
+      "note": "Note (optional)",
+      "notePlaceholder": "e.g. Hetzner September",
+      "create": "Add",
+      "save": "Save",
+      "saving": "Saving…"
+    },
+    "toasts": {
+      "created": "Expense added",
+      "updated": "Saved",
+      "deleted": "Deleted",
+      "gone": "This expense was already deleted — the list has been refreshed."
+    }
+  },
+  "channelsAdmin": {
+    "page": {
+      "title": "Channels",
+      "description": "Manage Telegram channels the bot is connected to."
+    },
+    "table": {
+      "channel": "Channel",
+      "username": "Username",
+      "role": "Role",
+      "tracking": "Tracking slug",
+      "intro": "Intro sent",
+      "empty": "No channels yet. Add the bot to a channel as an admin."
+    },
+    "roles": {
+      "primary": "Primary",
+      "unassigned": "Unassigned"
+    },
+    "actions": {
+      "makePrimary": "Make primary",
+      "makePrimaryDesc": "New chapter (sync) posts will also go to this channel. Multiple primary channels are allowed.",
+      "removePrimary": "Remove primary",
+      "removePrimaryDesc": "The channel leaves the primary list — sync posts stop going to it.",
+      "introTest": "Intro test",
+      "introTestDesc": "Sends the intro (catalog) message to this channel as a test. The flag is not updated.",
+      "syncTest1": "Sync test (1 chapter)",
+      "syncTest5": "Sync test (5 chapters)",
+      "syncTestDesc": "Sends the same posts a real sync would. Nothing changes in the database.",
+      "resetIntro": "Reset intro flag",
+      "resetIntroDesc": "The next normal broadcast will send the intro to this channel again.",
+      "editTracking": "Tracking slug",
+      "delete": "Delete",
+      "deleteDesc": "Removes the channel from the database (the bot stays in the channel but it disappears from the panel)."
+    },
+    "tracking": {
+      "title": "Tracking slug",
+      "description": "Channel slug for deep-link attribution (ch_<slug>). Leave empty to remove.",
+      "placeholder": "e.g. main_channel",
+      "save": "Save"
+    },
+    "broadcast": {
+      "title": "Catalog broadcast",
+      "description": "Sends the \"MangaBox catalog\" intro to the primary channel — one card post per manga.",
+      "send": "Send",
+      "sendDesc": "Only to primary channels that have not received the intro yet; sets the flag afterwards.",
+      "force": "Force send",
+      "forceDesc": "Sends again regardless of the flag. Careful not to spam.",
+      "sentToast": "Sent: {count} messages"
+    },
+    "confirm": {
+      "title": "Confirm",
+      "cancel": "Cancel",
+      "proceed": "Proceed"
+    },
+    "toasts": {
+      "primaryOn": "Set as primary",
+      "primaryOff": "Primary removed",
+      "introSent": "Intro sent ({count} messages)",
+      "syncSent": "Sync posts sent ({count} messages, {chapters} chapters)",
+      "syncEmpty": "Nothing sent: no manga found",
+      "introReset": "Intro flag cleared",
+      "deleted": "Channel deleted",
+      "trackingSaved": "Tracking slug saved"
+    }
+  },
+  "mangaEdit": {
+    "edit": "Edit",
+    "sheetTitle": "Edit manga",
+    "sheetDescription": "Changes never touch R2 files and survive sync — overrides are re-applied on top of meta.yml.",
+    "fields": {
+      "title": "Main title",
+      "titleUz": "Title (UZ)",
+      "titleRu": "Title (RU)",
+      "titleEn": "Title (EN)",
+      "titleJa": "Title (JA)",
+      "titleKo": "Title (KO)",
+      "altTitles": "Alt titles (comma separated)",
+      "status": "Status (ongoing / completed)",
+      "year": "Year",
+      "ageRating": "Age rating",
+      "tags": "Genres/tags (comma separated)",
+      "authors": "Authors (comma separated; \"Name:role\" allowed)",
+      "summary": "Summary",
+      "description": "Description",
+      "readingMode": "Paged reading mode",
+      "readingModeHint": "When on, the reader shows one page at a time (next/prev); off — scroll."
+    },
+    "overriddenBadge": "{count} overrides",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "noChanges": "No changes",
+    "reset": "Reset to sync",
+    "resetDesc": "All overrides are removed — fields restore from meta.yml on the next sync.",
+    "resetDone": "Reset to sync",
+    "error": "Failed to save"
+  },
+  "mangaChapters": {
+    "searchPlaceholder": "Chapter number or name",
+    "count": "{count} chapters",
+    "refresh": "Refresh",
+    "empty": "No chapters",
+    "noMatches": "No matching chapters",
+    "columns": {
+      "chapter": "Chapter",
+      "name": "Name",
+      "pages": "Pages",
+      "views": "Views"
+    },
+    "deleteLabel": "Delete chapter {chapter}",
+    "dialog": {
+      "title": "Delete chapter",
+      "description": "Chapter {chapter} ({pages} pages) and its comments, likes, reports and reads will be deleted. If it was the last chapter in someone's reading history, it moves to the previous available chapter.",
+      "confirm": "Delete",
+      "deleting": "Deleting…"
+    },
+    "deleted": "Chapter {chapter} deleted from the database",
+    "deletedWithStorage": "Chapter {chapter} deleted · R2: {objects} files",
+    "deleteError": "Could not delete the chapter"
+  },
+  "mangaDelete": {
+    "trigger": "Delete manga",
+    "title": "Delete manga completely",
+    "description": "“{title}” and every related record will be deleted. This cannot be undone.",
+    "preview": {
+      "title": "What will be deleted",
+      "empty": "No related records — only the manga document is removed.",
+      "kept": "Payment orders and analytics history (analyticsevents, daily_metrics, user_active_days) are kept."
+    },
+    "collections": {
+      "chapters": "Chapters",
+      "comments": "Comments",
+      "favorites": "Favorites",
+      "ratings": "Ratings",
+      "read_history": "Reading history",
+      "mangareads": "Reads",
+      "chapter_likes": "Chapter likes",
+      "page_reports": "Page reports",
+      "manga_similarity": "Similarity index",
+      "botchannels": "Linked channels",
+      "published_manga": "Feed entries"
+    },
+    "confirmLabel": "Type the slug to confirm: {slug}",
+    "submit": "Delete permanently",
+    "deleting": "Deleting…",
+    "done": "{slug} deleted from the database",
+    "doneWithStorage": "{slug} deleted · R2: {objects} files",
+    "channelsUnassigned": "{count} channels unassigned",
+    "error": "Could not delete the manga"
+  },
+  "purgeStorage": {
+    "label": "Also delete R2 files",
+    "hintOn": "Images and PDFs are permanently removed from R2.",
+    "hintOff": "Without this only the database is cleared; the next R2 sync brings the record back."
+  },
+  "reports": {
+    "page": {
+      "title": "Reports",
+      "description": "Broken-page reports sent by readers — which manga, which chapter and which page."
+    },
+    "filters": {
+      "open": "Open",
+      "resolved": "Resolved",
+      "all": "All"
+    },
+    "columns": {
+      "manga": "Manga",
+      "pages": "Pages",
+      "reports": "Reports",
+      "last": "Last report"
+    },
+    "empty": {
+      "title": "No reports",
+      "description": "Nothing matches the selected status."
+    },
+    "status": {
+      "open": "Open",
+      "resolved": "Resolved"
+    },
+    "refresh": "Refresh",
+    "detail": {
+      "back": "Reports",
+      "summary": "{pages} pages · {reports} reports",
+      "chapter": "Chapter",
+      "unknownChapter": "Unknown chapter",
+      "pageNumber": "Page {number}",
+      "unknownPage": "No page number",
+      "reportCount": "{count} reports",
+      "noMessage": "No comment",
+      "resolve": "Mark resolved",
+      "resolving": "Resolving…",
+      "resolveDone": "{count} reports closed",
+      "openImage": "Open image",
+      "imageTitle": "Page image",
+      "copyKey": "Copy file key",
+      "empty": {
+        "title": "No reports for this manga",
+        "description": "Nothing matches the selected status."
+      }
+    }
+  },
+  "bannersAdmin": {
+    "page": {
+      "title": "Banners",
+      "description": "The promo carousel on the mobile app home screen. When manual banners run short, the carousel auto-fills from new chapters and trending titles."
+    },
+    "table": {
+      "banner": "Banner",
+      "manga": "Manga",
+      "status": "Status",
+      "schedule": "Schedule",
+      "empty": "No banners yet. Add the first one — until then the carousel is built from auto cards."
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Off",
+      "scheduled": "Scheduled",
+      "expired": "Expired"
+    },
+    "mangaMissing": "Manga not found",
+    "mangaMissingHint": "The manga linked to this banner was deleted — it will not be shown in the mobile app.",
+    "actions": {
+      "add": "Add banner",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteDesc": "The banner will be deleted permanently. Its slot is freed and auto-filled if needed.",
+      "activate": "Turn on",
+      "deactivate": "Turn off",
+      "moveUp": "Move up",
+      "moveDown": "Move down"
+    },
+    "form": {
+      "createTitle": "New banner",
+      "editTitle": "Edit banner",
+      "description": "When a manga is selected, an empty tag, link and image are filled in from the manga automatically.",
+      "manga": "Manga (optional)",
+      "mangaPlaceholder": "Type to search…",
+      "mangaNone": "Not linked",
+      "title": "Title",
+      "subtitle": "Subtitle",
+      "tag": "Tag",
+      "tagPlaceholder": "e.g. NEW",
+      "tagHint": "No emoji, converted to uppercase automatically.",
+      "cta": "Button label",
+      "ctaPlaceholder": "e.g. Read",
+      "href": "Link",
+      "hrefPlaceholder": "/manga/slug",
+      "hrefHint": "In-app path only — must start with /.",
+      "image": "Image",
+      "imagePlaceholder": "https://…",
+      "upload": "Upload image",
+      "uploading": "Uploading…",
+      "imageHint": "Upload (max 8 MB) or paste a URL. If empty, the manga cover is used.",
+      "active": "Active",
+      "activeHint": "An inactive banner is hidden from the mobile app but kept in the list.",
+      "startsAt": "Starts at",
+      "endsAt": "Ends at",
+      "scheduleHint": "Both optional — within the range the banner turns itself on and off.",
+      "create": "Create",
+      "save": "Save"
+    },
+    "toasts": {
+      "created": "Banner created",
+      "updated": "Banner saved",
+      "deleted": "Banner deleted",
+      "reordered": "Order saved",
+      "uploaded": "Image uploaded"
+    },
+    "confirm": {
+      "title": "Are you sure?",
+      "cancel": "Cancel",
+      "proceed": "Proceed"
+    }
+  },
+  "reelsAdmin": {
+    "page": {
+      "title": "Reels",
+      "description": "Short vertical trailer videos shown in the app feed. Each reel is attached to a manga — tapping it opens that manga."
+    },
+    "table": {
+      "reel": "Reel",
+      "manga": "Manga",
+      "status": "Status",
+      "size": "Size (720p / 480p)",
+      "views": "Views",
+      "empty": "No reels yet. Upload the first one — transcoding runs in the background.",
+      "noCaption": "No caption"
+    },
+    "status": {
+      "processing": "Processing",
+      "failed": "Failed",
+      "active": "Active",
+      "inactive": "Paused"
+    },
+    "mangaMissingHint": "The manga attached to this reel was deleted — the reel is hidden from the feed.",
+    "actions": {
+      "add": "Upload reel",
+      "delete": "Delete",
+      "deleteDesc": "The reel and its video files will be removed permanently.",
+      "activate": "Activate",
+      "deactivate": "Pause",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "preview": "Preview"
+    },
+    "form": {
+      "title": "New reel",
+      "description": "Upload a vertical video (9:16, up to 90s / 200 MB). The server transcodes it to 720p/480p and takes the poster from the video itself.",
+      "video": "Video",
+      "videoPick": "Choose a video file…",
+      "videoHint": "Vertical (9:16), up to 90 seconds, max 200 MB.",
+      "manga": "Manga",
+      "mangaPlaceholder": "Type at least 2 characters to search…",
+      "mangaClear": "Clear",
+      "caption": "Caption (optional)",
+      "captionPlaceholder": "Short teaser text…",
+      "uploading": "Uploading…",
+      "processingHint": "Uploaded — transcoding runs in the background.",
+      "submit": "Upload"
+    },
+    "toasts": {
+      "uploaded": "Reel uploaded — transcoding in the background",
+      "updated": "Reel saved",
+      "deleted": "Reel deleted",
+      "reordered": "Order saved"
+    },
+    "confirm": {
+      "cancel": "Cancel",
+      "proceed": "Proceed"
+    }
+  },
+  "appUpdates": {
+    "page": {
+      "title": "Updates",
+      "description": "The mobile app compares its version with this one on every cold start. Older builds see an \"Update / Later\" dialog; after the deadline the app is blocked until updated."
+    },
+    "notice": "Save the version only AFTER the build is approved and live in the store — otherwise users are sent to a version that doesn't exist yet.",
+    "platforms": {
+      "ios": "iOS (App Store)",
+      "android": "Android (Google Play)"
+    },
+    "state": {
+      "notSet": "Not configured",
+      "soft": "Suggestion only",
+      "scheduled": "Required from {date}",
+      "forced": "Blocking",
+      "forcedHint": "Deadline passed: apps older than {version} won't open."
+    },
+    "form": {
+      "latestVersion": "Latest version",
+      "latestVersionHint": "Store version, e.g. 1.2.0 (version in app.json).",
+      "force": "Mandatory update deadline",
+      "forceHint": "After this time older versions won't open. When off, the update is only suggested.",
+      "forceAt": "Deadline",
+      "storeUrl": "Store link",
+      "message": "Message to users (optional)",
+      "messagePlaceholder": "E.g. Payments were updated",
+      "save": "Save",
+      "saving": "Saving…",
+      "updatedAt": "Last changed: {date}",
+      "forceAtRequired": "Enter a deadline or turn off mandatory mode",
+      "pastConfirm": "The deadline is in the past — every user on an older version will be blocked on next launch. Continue?",
+      "remove": "Remove",
+      "removeConfirm": "The record is deleted and the app stops showing the update dialog. Any mandatory block is lifted immediately."
+    },
+    "toasts": {
+      "saved": "Saved",
+      "removed": "Removed"
+    }
+  }
+}

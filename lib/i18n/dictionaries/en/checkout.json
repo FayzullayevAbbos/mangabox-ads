@@ -1,0 +1,101 @@
+{
+  "page": {
+    "title": "Checkout",
+    "description": "Create a payment link for your customers and share it via Telegram, email, or the web.",
+    "loadErrorTitle": "Failed to load"
+  },
+  "errors": {
+    "loadFailed": "Couldn't load data"
+  },
+  "form": {
+    "title": "Create checkout",
+    "subtitle": "Enter the product and customer details to get a link.",
+    "product": {
+      "label": "Product",
+      "placeholder": "Select a product",
+      "emptyPlaceholder": "Create a product first"
+    },
+    "phone": {
+      "label": "Customer phone",
+      "placeholder": "+998 90 123 45 67",
+      "hint": "Required for subscription products."
+    },
+    "email": {
+      "label": "Customer email",
+      "placeholder": "user@example.com (optional)"
+    },
+    "discount": {
+      "label": "Discount code",
+      "placeholder": "SUMMER2026 (optional)"
+    },
+    "submit": {
+      "subscription": "Start subscription",
+      "oneTime": "Get checkout link"
+    },
+    "validation": {
+      "product": "Select a product",
+      "phoneRequired": "Phone is required for subscriptions",
+      "phoneFormat": "Enter in +998 format",
+      "email": "Invalid email"
+    },
+    "toasts": {
+      "linkReady": "Checkout link is ready",
+      "codeSent": "Confirmation code sent to the card",
+      "createError": "Failed to create checkout"
+    }
+  },
+  "placeholder": {
+    "subscriptionTitle": "Your subscription starts here",
+    "linkTitle": "Your link appears here",
+    "subscriptionDescription": "Enter a phone number — a confirmation code will be sent to the customer.",
+    "linkDescription": "Fill out the form to get a checkout link."
+  },
+  "result": {
+    "title": "Checkout ready",
+    "description": "Send this link to your customer — they can pay via Payme or Click.",
+    "product": "Product",
+    "originalPrice": "Original price",
+    "discount": "Discount",
+    "amount": "Amount",
+    "provider": "Provider",
+    "linkLabel": "Checkout link",
+    "copyAria": "Copy link",
+    "paymentStatusLabel": "Payment status:",
+    "checkStatus": "Check payment status",
+    "newCheckout": "Create a new checkout",
+    "statuses": {
+      "created": "Created — not yet paid",
+      "pending": "Pending",
+      "paid": "Paid ✓",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded"
+    },
+    "toasts": {
+      "linkCopied": "Link copied",
+      "copyFailed": "Couldn't copy",
+      "checkFailed": "Couldn't check status"
+    }
+  },
+  "confirm": {
+    "title": "Confirmation code",
+    "description": "Enter the SMS code sent to the card linked to",
+    "product": "Product",
+    "discount": "Discount",
+    "firstPayment": "First payment",
+    "smsLabel": "SMS code",
+    "submit": "Confirm subscription",
+    "toasts": {
+      "enterCode": "Enter the confirmation code",
+      "activated": "Subscription activated",
+      "error": "Confirmation failed"
+    }
+  },
+  "success": {
+    "title": "Subscription active",
+    "description": "The customer's subscription has started successfully. Future payments will be charged automatically.",
+    "product": "Product",
+    "status": "Status",
+    "amount": "Amount",
+    "newCheckout": "Create a new checkout"
+  }
+}

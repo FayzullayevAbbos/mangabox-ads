@@ -1,0 +1,68 @@
+{
+  "title": "API kalitlari",
+  "description": "MangaBox API'ga ulanish uchun maxfiy kalitlar. Ularni faqat server tomonida saqlang va hech kim bilan baham ko'rmang.",
+  "newKey": "Yangi kalit",
+  "errors": {
+    "loadFailed": "Ma'lumotlarni yuklab bo'lmadi.",
+    "loadTitle": "Yuklab bo'lmadi",
+    "copyFailed": "Nusxa ko'chirib bo'lmadi.",
+    "createFailed": "Kalit yaratishda nimadir xato ketdi."
+  },
+  "empty": {
+    "title": "Hali API kalitlari yo'q",
+    "description": "Birinchi kalitingizni yarating va integratsiyangizni ulang."
+  },
+  "table": {
+    "name": "Nomi",
+    "scopes": "Ruxsatlar",
+    "lastUsed": "Oxirgi foydalanilgan",
+    "expires": "Amal qilish muddati",
+    "never": "Hech qachon",
+    "neverExpires": "Muddatsiz",
+    "expired": "Muddati tugagan",
+    "actions": "Amallar"
+  },
+  "toast": {
+    "deleted": "API kalit o'chirildi",
+    "copied": "Kalit nusxalandi"
+  },
+  "deleteDialog": {
+    "title": "Ushbu kalit o'chirilsinmi?",
+    "description": "butunlay o'chiriladi. Bu amalni bekor qilib bo'lmaydi va ushbu kalitdan foydalanayotgan har qanday integratsiya ishlamay qoladi.",
+    "confirm": "Ha, o'chirish"
+  },
+  "created": {
+    "title": "Kalitingizni saqlang",
+    "description": "Bu kalit faqat shu yerda ko'rsatiladi. Hozir nusxalab, xavfsiz joyda saqlang.",
+    "done": "Tushunarli, saqladim"
+  },
+  "form": {
+    "title": "Yangi API kalit",
+    "description": "Integratsiyalaringiz uchun kalit yarating va unga kerakli ruxsatlarni tanlang.",
+    "name": {
+      "label": "Nomi",
+      "hint": "Kalitni keyinroq tanib olishingizga yordam beradigan ichki nom. Masalan: “Production serveri” yoki “Test muhiti”.",
+      "placeholder": "masalan, Production kaliti",
+      "error": "Nom 2–120 ta belgidan iborat bo'lishi kerak."
+    },
+    "scopes": {
+      "label": "Ruxsatlar",
+      "hint": "Kalit qaysi amallarni bajara olishini belgilaydi. Faqat kerakli ruxsatlarni bering — bu xavfsizroq.",
+      "error": "Kamida bitta ruxsatni tanlang."
+    },
+    "expiry": {
+      "label": "Amal qilish muddati",
+      "hint": "Kalit tanlangan kunlar soni o'tgach avtomatik bekor qilinadi. “Muddatsiz” cheklov yo'qligini bildiradi.",
+      "never": "Muddatsiz",
+      "days": "{days} kun"
+    },
+    "moreInfo": "Batafsil",
+    "submit": "Yaratish"
+  },
+  "scopes": {
+    "products:read": "Mahsulotlarni o'qish",
+    "products:write": "Mahsulotlarni boshqarish",
+    "transactions:read": "Tranzaksiyalarni o'qish",
+    "checkouts:write": "To'lov sahifalarini yaratish"
+  }
+}

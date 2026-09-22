@@ -1,0 +1,78 @@
+{
+  "list": {
+    "title": "Customers",
+    "description": "Customers who have purchased from you and their share of revenue.",
+    "searchPlaceholder": "Search by phone or email"
+  },
+  "columns": {
+    "customer": "Customer",
+    "revenue": "Revenue",
+    "payments": "Payments",
+    "lastPayment": "Last payment"
+  },
+  "empty": {
+    "noResultsTitle": "No customers found",
+    "noResultsDescription": "Try a different phone or email.",
+    "noCustomersTitle": "No customers yet",
+    "noCustomersDescription": "Once a payment is made, your customers will appear here."
+  },
+  "errors": {
+    "loadTitle": "Failed to load",
+    "loadFailed": "Couldn't load data."
+  },
+  "detail": {
+    "subtitleTransactions": "{count} total transactions",
+    "stats": {
+      "totalRevenue": "Total revenue",
+      "netRevenue": "Net revenue",
+      "payments": "Payments",
+      "sales": "Sales"
+    },
+    "subscriptions": {
+      "title": "Subscriptions",
+      "empty": "This customer has no subscriptions.",
+      "nextBilling": "Next payment: {date}",
+      "periodEnd": "Period ends: {date}",
+      "actionsLabel": "Actions",
+      "reactivate": "Reactivate",
+      "changePlan": "Change plan"
+    },
+    "transactions": {
+      "title": "Transactions",
+      "empty": "No transactions.",
+      "columns": {
+        "date": "Date",
+        "product": "Product",
+        "status": "Status",
+        "amount": "Amount"
+      }
+    },
+    "additional": {
+      "title": "Additional",
+      "totalCommission": "Total commission",
+      "refunded": "Refunded",
+      "refundedValue": "{amount} · {count} refunds",
+      "firstPayment": "First payment",
+      "lastPayment": "Last payment"
+    },
+    "productFallback": "Product"
+  },
+  "cancelDialog": {
+    "title": "Cancel subscription",
+    "descriptionSuffix": "subscription will be canceled. No further payments will be charged.",
+    "keep": "No, keep it",
+    "confirm": "Yes, cancel"
+  },
+  "changePlanDialog": {
+    "title": "Change plan",
+    "description": "Select a new recurring product. The change takes effect immediately.",
+    "noOptions": "No other active subscription products available.",
+    "selectProduct": "Select a product",
+    "confirm": "Change"
+  },
+  "toasts": {
+    "reactivated": "Subscription reactivated",
+    "canceled": "Subscription canceled",
+    "planChanged": "Plan changed"
+  }
+}

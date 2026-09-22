@@ -1,0 +1,54 @@
+{
+  "page": {
+    "title": "Sozlamalar",
+    "description": "Admin hisobingiz va xavfsizlik."
+  },
+  "load": {
+    "errorTitle": "Yuklab bo'lmadi",
+    "errorFallback": "Hisob ma'lumotlarini yuklab bo'lmadi."
+  },
+  "profile": {
+    "heading": "Hisob",
+    "fields": {
+      "name": "Ism",
+      "phone": "Telefon",
+      "role": "Rol"
+    },
+    "roleAdmin": "Administrator",
+    "readOnlyHint": "Admin hisoblari backend tomonidan boshqariladi — ism va telefonni bu yerdan o'zgartirib bo'lmaydi."
+  },
+  "security": {
+    "heading": "Xavfsizlik",
+    "passwordLabel": "Parol",
+    "passwordHint": "Parolni muntazam yangilab turing.",
+    "changeAction": "Parolni o'zgartirish"
+  },
+  "passwordSheet": {
+    "title": "Parolni o'zgartirish",
+    "description": "Joriy parolni tasdiqlab, yangisini kiriting.",
+    "fields": {
+      "currentPassword": {
+        "label": "Joriy parol",
+        "placeholder": "Hozirgi parolingiz"
+      },
+      "newPassword": {
+        "label": "Yangi parol",
+        "placeholder": "Kamida 8 ta belgi"
+      },
+      "confirmPassword": {
+        "label": "Yangi parolni tasdiqlang",
+        "placeholder": "Parolni qayta kiriting"
+      }
+    },
+    "errors": {
+      "password": "Parol 8–72 ta belgidan iborat bo'lishi kerak.",
+      "confirm": "Parollar mos kelmaydi."
+    },
+    "toast": {
+      "changed": "Parol o'zgartirildi"
+    }
+  },
+  "toasts": {
+    "saveError": "Saqlashda nimadir xato ketdi."
+  }
+}

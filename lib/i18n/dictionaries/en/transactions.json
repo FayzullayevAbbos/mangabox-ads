@@ -1,0 +1,150 @@
+{
+  "page": {
+    "title": "Transactions",
+    "description": "Pro subscription sales and sponsorship payments."
+  },
+  "tabs": {
+    "payments": "Payments",
+    "pro": "Subscriptions",
+    "sponsor": "Sponsorship"
+  },
+  "payments": {
+    "columns": {
+      "user": "User",
+      "plan": "Plan",
+      "provider": "Provider",
+      "status": "Status",
+      "created": "Created",
+      "paid": "Paid",
+      "amount": "Amount"
+    },
+    "detail": {
+      "title": "Payment details",
+      "description": "Full details of the payment order.",
+      "amount": "Amount",
+      "user": "User",
+      "telegramId": "Telegram ID",
+      "plan": "Plan",
+      "days": "Duration",
+      "basePrice": "Plan price",
+      "discount": "Discount",
+      "provider": "Provider",
+      "status": "Status",
+      "providerRef": "Order reference",
+      "transId": "Transaction ID",
+      "createdAt": "Created",
+      "paidAt": "Paid",
+      "premiumUntil": "Premium until",
+      "orderId": "Internal ID"
+    }
+  },
+  "loadError": "Couldn't load transactions.",
+  "filters": {
+    "button": "Filters",
+    "title": "Filters",
+    "description": "Narrow the list by period and plan.",
+    "apply": "Apply",
+    "clear": "Clear",
+    "removeFilter": "Remove filter",
+    "sortLabel": "Sort",
+    "period": "Period",
+    "plan": "Plan",
+    "allPlans": "All plans",
+    "from": "From",
+    "to": "To",
+    "periods": {
+      "d7": "Last 7 days",
+      "d30": "Last 30 days",
+      "d90": "Last 90 days",
+      "d365": "Last year"
+    },
+    "status": "Status",
+    "allStatuses": "All statuses",
+    "provider": "Provider",
+    "allProviders": "All providers",
+    "paymentsDescription": "Narrow payments by status, provider and period.",
+    "refresh": "Refresh"
+  },
+  "sort": {
+    "dateDesc": "Newest first",
+    "dateAsc": "Oldest first",
+    "amountDesc": "Amount: high to low",
+    "amountAsc": "Amount: low to high"
+  },
+  "pro": {
+    "columns": {
+      "user": "User",
+      "plan": "Plan",
+      "type": "Type",
+      "date": "Date",
+      "expires": "Expires",
+      "amount": "Amount",
+      "provider": "Provider"
+    },
+    "type": {
+      "paid": "Payment",
+      "granted": "Admin grant"
+    },
+    "detail": {
+      "title": "Subscription details",
+      "description": "Full details of the sale.",
+      "amount": "Amount",
+      "user": "User",
+      "telegramId": "Telegram ID",
+      "plan": "Plan",
+      "days": "Duration",
+      "daysValue": "{days} days",
+      "discount": "Discount",
+      "type": "Type",
+      "createdAt": "Granted",
+      "expiresAt": "Expires",
+      "provider": "Provider",
+      "providerRef": "Provider reference"
+    }
+  },
+  "sponsor": {
+    "anonymous": "Anonymous",
+    "emptyTitle": "No orders",
+    "emptyDescription": "No orders found with status \"{status}\".",
+    "columns": {
+      "sponsor": "Sponsor",
+      "manga": "Manga",
+      "provider": "Provider",
+      "status": "Status",
+      "date": "Created",
+      "paidAt": "Paid",
+      "amount": "Amount"
+    },
+    "detail": {
+      "title": "Sponsorship order",
+      "description": "Full details of the payment.",
+      "amount": "Amount",
+      "sponsor": "Sponsor",
+      "telegramId": "Telegram ID",
+      "manga": "Manga",
+      "chapters": "Chapters",
+      "provider": "Provider",
+      "status": "Status",
+      "providerRef": "Provider reference",
+      "createdAt": "Created",
+      "paidAt": "Paid",
+      "orderId": "Order ID"
+    }
+  },
+  "states": {
+    "errorTitle": "Couldn't load",
+    "emptyTitle": "No transactions yet",
+    "emptyDescription": "The first sale will appear here.",
+    "emptyFilteredTitle": "Nothing found",
+    "emptyFilteredDescription": "Try changing the filters.",
+    "clearFilters": "Clear filters"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "summary": {
+    "count": "{count} records",
+    "pageSuffix": " · page {page} of {total}"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "Checkout",
+    "description": "Secure card payment powered by MangaBox."
+  },
+  "header": {
+    "secure": "Secure payment"
+  },
+  "summary": {
+    "payTo": "Pay {merchant}",
+    "intervals": {
+      "one_time": "One-time payment",
+      "monthly": "Billed monthly",
+      "yearly": "Billed yearly"
+    },
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total due",
+    "dueToday": "Due today",
+    "thenMonthly": "Then {amount} / month",
+    "thenYearly": "Then {amount} / year",
+    "trialNote": "{days}-day free trial. Cancel anytime before it ends.",
+    "guarantee": "You can cancel or request a refund at any time."
+  },
+  "form": {
+    "title": "Payment details",
+    "subtitle": "Pay with your Uzcard or Humo card. Your data is encrypted.",
+    "cardNumber": "Card number",
+    "cardNumberPlaceholder": "0000 0000 0000 0000",
+    "expiry": "Expiry",
+    "expiryPlaceholder": "MM/YY",
+    "cvc": "CVC",
+    "cvcPlaceholder": "123",
+    "cardHolder": "Cardholder name",
+    "cardHolderPlaceholder": "FIRSTNAME LASTNAME",
+    "phone": "Phone number",
+    "phonePlaceholder": "+998 90 123 45 67",
+    "phoneHint": "A confirmation code will be sent to this number.",
+    "pay": "Pay {amount}",
+    "processing": "Processing",
+    "validation": {
+      "cardNumber": "Enter a valid card number",
+      "expiry": "Enter a valid expiry date",
+      "cvc": "Enter the 3-digit CVC",
+      "cardHolder": "Enter the cardholder name",
+      "phone": "Enter the phone number in +998 format"
+    },
+    "error": "We couldn't process your card. Check the details and try again."
+  },
+  "sms": {
+    "title": "Confirm payment",
+    "description": "Enter the code we sent to the card's phone number",
+    "label": "SMS code",
+    "confirm": "Confirm payment",
+    "resend": "Resend code",
+    "resendIn": "Resend in {timer}",
+    "back": "Back",
+    "verifying": "Verifying",
+    "invalid": "Invalid code, try again"
+  },
+  "success": {
+    "title": "Payment successful",
+    "subscriptionTitle": "Subscription active",
+    "description": "Your payment was received. A receipt has been sent to your email.",
+    "subscriptionDescription": "Your subscription is now active. Future payments are charged automatically.",
+    "amountPaid": "Amount paid",
+    "reference": "Reference",
+    "nextCharge": "Next charge",
+    "done": "Done",
+    "receipt": {
+      "title": "Payment receipt",
+      "download": "Download receipt",
+      "merchant": "Merchant",
+      "product": "Product",
+      "date": "Date",
+      "method": "Payment method",
+      "card": "Card •••• {last4}",
+      "status": "Status",
+      "paid": "Paid",
+      "scan": "Scan to verify"
+    }
+  },
+  "trust": {
+    "encrypted": "Card data is encrypted and never stored on our servers.",
+    "poweredBy": "Payments secured by MangaBox"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "userMenu": {
+    "accountLabel": "Аккаунт",
+    "settings": "Настройки",
+    "apiKeys": "API-ключи",
+    "webhooks": "Вебхуки",
+    "logout": "Выйти",
+    "logoutError": "Не удалось выйти. Попробуйте ещё раз.",
+    "loadError": "Не удалось загрузить профиль."
+  },
+  "transactionStatus": {
+    "created": "Создана",
+    "pending": "В ожидании",
+    "paid": "Оплачена",
+    "cancelled": "Отменена",
+    "failed": "Не удалась",
+    "expired": "Истёк",
+    "refunded": "Возвращена"
+  },
+  "subscriptionStatus": {
+    "incomplete": "Не завершена",
+    "trialing": "Пробный период",
+    "active": "Активна",
+    "past_due": "Просрочена",
+    "canceled": "Отменена"
+  },
+  "webhookStatus": {
+    "active": "Активен",
+    "disabled": "Отключён"
+  },
+  "webhookDeliveryStatus": {
+    "pending": "В ожидании",
+    "delivered": "Доставлено",
+    "failed": "Не удалось"
+  }
+}

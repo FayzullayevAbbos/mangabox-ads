@@ -1,0 +1,28 @@
+{
+  "header": {
+    "metaTitle": "MangaBox Аналитика — Панель управления",
+    "dashboard": "Панель управления"
+  },
+  "groups": {
+    "core": "Основное",
+    "acquisition": "Привлечение",
+    "money": "Деньги"
+  },
+  "items": {
+    "overview": "Обзор",
+    "users": "Пользователи",
+    "content": "Контент",
+    "reports": "Жалобы",
+    "engagement": "Активность",
+    "acquisition": "Источники",
+    "search": "Поиск",
+    "revenue": "Доход",
+    "expenses": "Расходы",
+    "ads": "Реклама",
+    "transactions": "Транзакции",
+    "channels": "Каналы",
+    "banners": "Баннеры",
+    "reels": "Reels",
+    "updates": "Обновления"
+  }
+}

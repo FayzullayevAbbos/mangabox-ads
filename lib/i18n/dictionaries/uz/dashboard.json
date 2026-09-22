@@ -1,0 +1,78 @@
+{
+  "home": {
+    "errorTitle": "Analitikani yuklab bo'lmadi",
+    "loadError": "Analitika ma'lumotlarini yuklab bo'lmadi."
+  },
+  "overview": {
+    "todayRevenue": "Bugungi daromad",
+    "totalRevenue": "Umumiy daromad",
+    "activeUsers": "Faol foydalanuvchilar",
+    "proUsers": "Pro foydalanuvchilar"
+  },
+  "growth": {
+    "title": "Yangi foydalanuvchilar",
+    "seriesLabel": "Yangi",
+    "barView": "Ustunli diagramma",
+    "lineView": "Chiziqli diagramma",
+    "chartViewAria": "Diagramma turi",
+    "empty": "Bu davrda yangi foydalanuvchi yo'q.",
+    "periods": {
+      "7d": "So'nggi 7 kun",
+      "30d": "So'nggi 30 kun",
+      "90d": "So'nggi 90 kun"
+    }
+  },
+  "recentUsers": {
+    "title": "So'nggi foydalanuvchilar",
+    "emptyTitle": "Hozircha yangi foydalanuvchi yo'q",
+    "emptyDescription": "Botga qo'shilgan yangi foydalanuvchilar shu yerda ko'rinadi.",
+    "columns": {
+      "user": "Foydalanuvchi",
+      "source": "Manba",
+      "joined": "Qo'shilgan"
+    }
+  },
+  "sources": {
+    "channel": "Kanal",
+    "referral": "Taklif",
+    "direct": "To'g'ridan-to'g'ri",
+    "web": "Sayt",
+    "inline": "Inline qidiruv",
+    "unknown": "Noma'lum"
+  },
+  "audience": {
+    "totalUsers": "Jami foydalanuvchilar",
+    "mangas": "Mangalar",
+    "chapters": "Boblar",
+    "soldToday": "Bugungi pro sotuvlari",
+    "sponsorToday": "Bugungi homiylik"
+  },
+  "trending": {
+    "title": "Trenddagi mangalar",
+    "emptyTitle": "Hozircha trend yo'q",
+    "emptyDescription": "Haftalik eng ko'p o'qilgan mangalar shu yerda ko'rinadi.",
+    "readers": "{count} noyob o'quvchi"
+  },
+  "customerRevenue": {
+    "title": "Tushum",
+    "revenueLabel": "Tushum",
+    "period7d": "So'nggi 7 kun",
+    "period30d": "So'nggi 30 kun",
+    "period12m": "So'nggi 12 oy",
+    "months": [
+      "Yan",
+      "Fev",
+      "Mar",
+      "Apr",
+      "May",
+      "Iyn",
+      "Iyl",
+      "Avg",
+      "Sen",
+      "Okt",
+      "Noy",
+      "Dek"
+    ],
+    "empty": "Bu davr uchun hozircha tushum yo'q."
+  }
+}

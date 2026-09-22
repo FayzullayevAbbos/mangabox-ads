@@ -1,0 +1,79 @@
+{
+  "page": {
+    "title": "Yechib olish",
+    "description": "Balansingiz va yechib olishlaringiz.",
+    "loadErrorTitle": "Yuklab bo'lmadi"
+  },
+  "status": {
+    "requested": "So'ralgan",
+    "pending": "Ishlanmoqda",
+    "completed": "Bajarildi",
+    "failed": "Muvaffaqiyatsiz",
+    "rejected": "Rad etilgan"
+  },
+  "balance": {
+    "available": "Yechib olish uchun mavjud",
+    "totalEarned": "Jami ishlab topilgan",
+    "reserved": "Band qilingan",
+    "held": "Muzlatilgan (hold)",
+    "minimumPayout": "Minimal yechib olish",
+    "request": "Yechib olishni so'rash",
+    "noCardHint": "Mablag'ni yechishdan oldin karta qo'shing.",
+    "belowMinimumHint": "Minimal summa {amount}.",
+    "blockedHint": "Yechib olish vaqtincha to'xtatilgan. Iltimos, qo'llab-quvvatlash xizmatiga murojaat qiling."
+  },
+  "card": {
+    "sectionTitle": "Karta ma'lumotlari",
+    "change": "Kartani o'zgartirish",
+    "addPrompt": "Mablag'ni yechib olish uchun karta qo'shing.",
+    "add": "Karta qo'shish"
+  },
+  "history": {
+    "title": "Yechib olishlar tarixi",
+    "empty": {
+      "title": "Hozircha yechib olish so'rovlari yo'q",
+      "description": "Balansingiz yetarli bo'lgach, yechib olishni so'rashingiz mumkin."
+    },
+    "columns": {
+      "date": "Sana",
+      "card": "Karta",
+      "status": "Holat",
+      "amount": "Summa"
+    }
+  },
+  "request": {
+    "title": "Yechib olishni so'rash",
+    "description": "Mablag' saqlangan kartangizga o'tkaziladi.",
+    "amountLabel": "Summa (UZS)",
+    "availableMinimum": "Mavjud: {available} · Minimal: {minimum}",
+    "withdrawalAmount": "Yechib olish summasi",
+    "fee": "Komissiya (1%)",
+    "netAmount": "Siz olasiz"
+  },
+  "validation": {
+    "invalidAmount": "To'g'ri summa kiriting",
+    "belowMinimum": "Minimal summa {amount}",
+    "exceedsBalance": "Balansingizdan oshib keta olmaydi ({amount})"
+  },
+  "toasts": {
+    "requestSubmitted": "Yechib olish so'rovi yuborildi",
+    "requestError": "So'rovni yuborib bo'lmadi",
+    "loadError": "Ma'lumotlarni yuklab bo'lmadi"
+  },
+  "cardSheet": {
+    "addTitle": "Karta qo'shish",
+    "editTitle": "Kartani o'zgartirish",
+    "description": "Yechib olishlar shu kartaga o'tkaziladi.",
+    "cardNumberLabel": "Karta raqami",
+    "cardHolderLabel": "Karta egasi",
+    "securityNote": "Ma'lumotlaringiz xavfsiz va shifrlangan holda saqlanadi.",
+    "validation": {
+      "cardNumber": "16 ta raqam bo'lishi kerak",
+      "cardHolder": "Karta egasining ismini kiriting"
+    },
+    "toasts": {
+      "saved": "Karta saqlandi",
+      "error": "Saqlashda xatolik yuz berdi"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "header": {
+    "title": "Tariflar",
+    "description": "Biznesingizga eng mos keladigan tarifni tanlang."
+  },
+  "loadError": "Tariflarni yuklab bo'lmadi.",
+  "errorTitle": "Tariflarni yuklab bo'lmadi",
+  "price": {
+    "free": "Bepul",
+    "perMonth": "{amount}/oy"
+  },
+  "toasts": {
+    "changed": "Tarifingiz o'zgartirildi."
+  },
+  "card": {
+    "currentBadge": "Joriy",
+    "commissionSuffix": "har bir tranzaksiya uchun",
+    "monthlyPayment": "Oylik to'lov",
+    "fixedFee": "Belgilangan to'lov",
+    "fixedFeeAmount": "{amount} har bir tranzaksiya uchun",
+    "selected": "Joriy tarif",
+    "select": "Tarifni tanlash"
+  },
+  "changeDialog": {
+    "title": "Tarif o'zgartirilsinmi?",
+    "newPlan": "Yangi tarif",
+    "commission": "Komissiya",
+    "currentRate": "(hozir {rate})",
+    "monthlyPayment": "Oylik to'lov",
+    "immediateNote": "Yangi tarifingiz darhol kuchga kiradi.",
+    "confirm": "Tarifni o'zgartirish"
+  }
+}

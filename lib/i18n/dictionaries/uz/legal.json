@@ -1,0 +1,27 @@
+{
+  "brandAria": "MangaBox Analitika — bosh sahifa",
+  "login": "Kirish",
+  "tagline": "MangaBox bot va sayti uchun analitika paneli.",
+  "copyright": "© {year} MangaBox. Barcha huquqlar himoyalangan.",
+  "footerHeading": "Huquqiy",
+  "backToHome": "Bosh sahifaga qaytish",
+  "nav": {
+    "offer": "Publik oferta",
+    "refund": "Qaytarish siyosati",
+    "privacy": "Maxfiylik siyosati",
+    "terms": "Foydalanish shartlari",
+    "contacts": "Kontaktlar"
+  },
+  "contacts": {
+    "title": "Kontaktlar",
+    "intro": "To'lovlar, qaytarish yoki hisobingiz bo'yicha har qanday savol bilan bog'laning.",
+    "labels": {
+      "legalName": "Yuridik shaxs",
+      "registration": "Davlat ro'yxati raqami",
+      "address": "Manzil",
+      "phone": "Telefon",
+      "email": "E-pochta",
+      "hours": "Ish vaqti"
+    }
+  }
+}

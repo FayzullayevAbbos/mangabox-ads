@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "To'lov",
+    "description": "MangaBox orqali xavfsiz karta to'lovi."
+  },
+  "header": {
+    "secure": "Xavfsiz to'lov"
+  },
+  "summary": {
+    "payTo": "{merchant} uchun to'lov",
+    "intervals": {
+      "one_time": "Bir martalik to'lov",
+      "monthly": "Har oy yechiladi",
+      "yearly": "Har yili yechiladi"
+    },
+    "subtotal": "Oraliq summa",
+    "discount": "Chegirma",
+    "total": "Jami to'lov",
+    "dueToday": "Bugun to'lanadi",
+    "thenMonthly": "Keyin {amount} / oy",
+    "thenYearly": "Keyin {amount} / yil",
+    "trialNote": "{days} kun bepul sinov. Tugashidan oldin istalgan vaqtda bekor qiling.",
+    "guarantee": "Istalgan vaqtda bekor qilishingiz yoki qaytarib olishingiz mumkin."
+  },
+  "form": {
+    "title": "To'lov ma'lumotlari",
+    "subtitle": "Uzcard yoki Humo kartangiz bilan to'lang. Ma'lumotlaringiz shifrlanadi.",
+    "cardNumber": "Karta raqami",
+    "cardNumberPlaceholder": "0000 0000 0000 0000",
+    "expiry": "Amal qilish muddati",
+    "expiryPlaceholder": "OO/YY",
+    "cvc": "CVC",
+    "cvcPlaceholder": "123",
+    "cardHolder": "Karta egasi",
+    "cardHolderPlaceholder": "ISM FAMILIYA",
+    "phone": "Telefon raqami",
+    "phonePlaceholder": "+998 90 123 45 67",
+    "phoneHint": "Bu raqamga tasdiqlash kodi yuboriladi.",
+    "pay": "{amount} to'lash",
+    "processing": "Amalga oshirilmoqda",
+    "validation": {
+      "cardNumber": "Karta raqamini to'g'ri kiriting",
+      "expiry": "Amal qilish muddatini to'g'ri kiriting",
+      "cvc": "3 xonali CVC kodni kiriting",
+      "cardHolder": "Karta egasining ismini kiriting",
+      "phone": "Telefon raqamini +998 formatida kiriting"
+    },
+    "error": "Kartangizni amalga oshira olmadik. Ma'lumotlarni tekshirib, qayta urinib ko'ring."
+  },
+  "sms": {
+    "title": "To'lovni tasdiqlang",
+    "description": "Karta telefon raqamiga yuborilgan kodni kiriting",
+    "label": "SMS kodi",
+    "confirm": "To'lovni tasdiqlash",
+    "resend": "Kodni qayta yuborish",
+    "resendIn": "Qayta yuborish {timer}",
+    "back": "Ortga",
+    "verifying": "Tekshirilmoqda",
+    "invalid": "Kod noto'g'ri, qayta urinib ko'ring"
+  },
+  "success": {
+    "title": "To'lov muvaffaqiyatli",
+    "subscriptionTitle": "Obuna faol",
+    "description": "To'lovingiz qabul qilindi. Chek emailingizga yuborildi.",
+    "subscriptionDescription": "Obunangiz endi faol. Keyingi to'lovlar avtomatik yechiladi.",
+    "amountPaid": "To'langan summa",
+    "reference": "Havola raqami",
+    "nextCharge": "Keyingi to'lov",
+    "done": "Tayyor",
+    "receipt": {
+      "title": "To'lov cheki",
+      "download": "Chekni yuklab olish",
+      "merchant": "Sotuvchi",
+      "product": "Mahsulot",
+      "date": "Sana",
+      "method": "To'lov usuli",
+      "card": "Karta •••• {last4}",
+      "status": "Holat",
+      "paid": "To'landi",
+      "scan": "Tekshirish uchun skanerlang"
+    }
+  },
+  "trust": {
+    "encrypted": "Karta ma'lumotlari shifrlanadi va serverlarimizda saqlanmaydi.",
+    "poweredBy": "To'lovlar MangaBox tomonidan himoyalangan"
+  }
+}

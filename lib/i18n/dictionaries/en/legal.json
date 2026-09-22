@@ -1,0 +1,27 @@
+{
+  "brandAria": "MangaBox Analytics — home",
+  "login": "Sign in",
+  "tagline": "Analytics panel for the MangaBox bot and website.",
+  "copyright": "© {year} MangaBox. All rights reserved.",
+  "footerHeading": "Legal",
+  "backToHome": "Back to home",
+  "nav": {
+    "offer": "Public offer",
+    "refund": "Refund policy",
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "contacts": "Contacts"
+  },
+  "contacts": {
+    "title": "Contacts",
+    "intro": "Reach out with any question about payments, refunds, or your account.",
+    "labels": {
+      "legalName": "Legal entity",
+      "registration": "Registration no.",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Working hours"
+    }
+  }
+}

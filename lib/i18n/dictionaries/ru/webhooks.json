@@ -1,0 +1,96 @@
+{
+  "title": "Webhook",
+  "description": "Получайте уведомления на ваш сервер в реальном времени, когда происходят события.",
+  "newEndpoint": "Новый адрес",
+  "allEvents": "Все",
+  "eventsCount": "{count} событий",
+  "errors": {
+    "loadFailed": "Не удалось загрузить данные.",
+    "loadTitle": "Ошибка загрузки",
+    "notFound": "Адрес не найден",
+    "copyFailed": "Не удалось скопировать.",
+    "saveFailed": "При сохранении произошла ошибка."
+  },
+  "empty": {
+    "title": "Пока нет адресов webhook",
+    "description": "Добавьте адрес и будьте в курсе событий об оплатах и подписках."
+  },
+  "table": {
+    "url": "URL",
+    "events": "События",
+    "status": "Статус",
+    "errors": "Ошибки",
+    "actions": "Действия"
+  },
+  "actions": {
+    "enable": "Активировать",
+    "disable": "Отключить"
+  },
+  "toast": {
+    "activated": "Адрес активирован",
+    "disabled": "Адрес отключён",
+    "updated": "Адрес обновлён",
+    "testSent": "Тестовое событие отправлено",
+    "secretCopied": "Секрет для подписи скопирован"
+  },
+  "detail": {
+    "back": "Webhook",
+    "sendTest": "Отправить тест",
+    "status": "Статус",
+    "events": "События",
+    "consecutiveFailures": "Сбои подряд",
+    "secretTitle": "Секрет для подписи",
+    "secretDescription": "Используйте этот секрет для проверки подписи входящих запросов webhook. Храните его в тайне.",
+    "deliveriesTitle": "История доставок",
+    "deliveriesEmptyTitle": "Пока нет доставок",
+    "deliveriesEmptyDescription": "Они появятся здесь, когда произойдёт событие или когда вы отправите тест.",
+    "deliveryTable": {
+      "event": "Событие",
+      "status": "Статус",
+      "attempts": "Попытки",
+      "response": "Ответ",
+      "date": "Дата"
+    }
+  },
+  "form": {
+    "titleEdit": "Изменить адрес",
+    "titleCreate": "Новый адрес webhook",
+    "description": "При возникновении событий MangaBox отправляет HTTPS-запрос на указанный вами URL.",
+    "urlLabel": "URL",
+    "urlPlaceholder": "https://api.mysite.com/webhook",
+    "eventsLabel": "События",
+    "eventsHint": "Пусто = все",
+    "submitEdit": "Сохранить",
+    "submitCreate": "Создать",
+    "errors": {
+      "urlRequired": "Введите URL.",
+      "urlHttps": "URL должен начинаться с https://.",
+      "urlInvalid": "Введите корректный URL."
+    }
+  },
+  "secretDialog": {
+    "title": "Адрес создан",
+    "secretLabel": "Секрет для подписи",
+    "description": "Используйте его для проверки подписи запросов webhook. Вы можете снова просмотреть этот секрет на странице адреса в любое время.",
+    "done": "Понятно",
+    "copy": "Копировать"
+  },
+  "secretField": {
+    "show": "Показать",
+    "hide": "Скрыть",
+    "copy": "Копировать"
+  },
+  "events": {
+    "payment.succeeded": "Оплата прошла успешно",
+    "payment.failed": "Оплата не прошла",
+    "payment.refunded": "Оплата возвращена",
+    "subscription.created": "Новая подписка",
+    "subscription.trial_started": "Пробный период начат",
+    "subscription.renewed": "Подписка продлена",
+    "subscription.payment_failed": "Оплата подписки не прошла",
+    "subscription.canceled": "Подписка отменена",
+    "subscription.uncanceled": "Подписка возобновлена",
+    "subscription.updated": "Подписка обновлена",
+    "payout.completed": "Выплата завершена"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "header": {
+    "title": "Тарифы",
+    "description": "Выберите тариф, который лучше всего подходит вашему бизнесу."
+  },
+  "loadError": "Не удалось загрузить тарифы.",
+  "errorTitle": "Не удалось загрузить тарифы",
+  "price": {
+    "free": "Бесплатно",
+    "perMonth": "{amount}/мес"
+  },
+  "toasts": {
+    "changed": "Ваш тариф изменён."
+  },
+  "card": {
+    "currentBadge": "Текущий",
+    "commissionSuffix": "за транзакцию",
+    "monthlyPayment": "Ежемесячная плата",
+    "fixedFee": "Фиксированная комиссия",
+    "fixedFeeAmount": "{amount} за транзакцию",
+    "selected": "Текущий тариф",
+    "select": "Выбрать тариф"
+  },
+  "changeDialog": {
+    "title": "Изменить тариф?",
+    "newPlan": "Новый тариф",
+    "commission": "Комиссия",
+    "currentRate": "(сейчас {rate})",
+    "monthlyPayment": "Ежемесячная плата",
+    "immediateNote": "Новый тариф вступает в силу немедленно.",
+    "confirm": "Изменить тариф"
+  }
+}

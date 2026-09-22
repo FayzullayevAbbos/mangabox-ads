@@ -1,0 +1,78 @@
+{
+  "home": {
+    "errorTitle": "Couldn't load analytics",
+    "loadError": "Couldn't load analytics data."
+  },
+  "overview": {
+    "todayRevenue": "Revenue today",
+    "totalRevenue": "Total revenue",
+    "activeUsers": "Active users",
+    "proUsers": "Pro users"
+  },
+  "growth": {
+    "title": "New users",
+    "seriesLabel": "New",
+    "barView": "Bar chart",
+    "lineView": "Line chart",
+    "chartViewAria": "Chart type",
+    "empty": "No new users in this period.",
+    "periods": {
+      "7d": "Last 7 days",
+      "30d": "Last 30 days",
+      "90d": "Last 90 days"
+    }
+  },
+  "recentUsers": {
+    "title": "Recent users",
+    "emptyTitle": "No new users yet",
+    "emptyDescription": "New users who join the bot will appear here.",
+    "columns": {
+      "user": "User",
+      "source": "Source",
+      "joined": "Joined"
+    }
+  },
+  "sources": {
+    "channel": "Channel",
+    "referral": "Referral",
+    "direct": "Direct",
+    "web": "Website",
+    "inline": "Inline search",
+    "unknown": "Unknown"
+  },
+  "audience": {
+    "totalUsers": "Total users",
+    "mangas": "Manga",
+    "chapters": "Chapters",
+    "soldToday": "Pro sales today",
+    "sponsorToday": "Sponsorship today"
+  },
+  "trending": {
+    "title": "Trending manga",
+    "emptyTitle": "Nothing trending yet",
+    "emptyDescription": "The most-read manga of the week will appear here.",
+    "readers": "{count} unique readers"
+  },
+  "customerRevenue": {
+    "title": "Revenue",
+    "revenueLabel": "Revenue",
+    "period7d": "Last 7 days",
+    "period30d": "Last 30 days",
+    "period12m": "Last 12 months",
+    "months": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "empty": "No revenue for this period yet."
+  }
+}

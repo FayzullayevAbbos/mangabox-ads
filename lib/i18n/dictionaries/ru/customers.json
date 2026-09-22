@@ -1,0 +1,78 @@
+{
+  "list": {
+    "title": "Клиенты",
+    "description": "Клиенты, которые совершили у вас покупки, и их доля в выручке.",
+    "searchPlaceholder": "Поиск по телефону или email"
+  },
+  "columns": {
+    "customer": "Клиент",
+    "revenue": "Выручка",
+    "payments": "Платежи",
+    "lastPayment": "Последний платёж"
+  },
+  "empty": {
+    "noResultsTitle": "Клиенты не найдены",
+    "noResultsDescription": "Попробуйте другой телефон или email.",
+    "noCustomersTitle": "Пока нет клиентов",
+    "noCustomersDescription": "Как только будет совершён платёж, здесь появятся ваши клиенты."
+  },
+  "errors": {
+    "loadTitle": "Не удалось загрузить",
+    "loadFailed": "Не удалось загрузить данные."
+  },
+  "detail": {
+    "subtitleTransactions": "Всего транзакций: {count}",
+    "stats": {
+      "totalRevenue": "Общая выручка",
+      "netRevenue": "Чистая выручка",
+      "payments": "Платежи",
+      "sales": "Продажи"
+    },
+    "subscriptions": {
+      "title": "Подписки",
+      "empty": "У этого клиента нет подписок.",
+      "nextBilling": "Следующий платёж: {date}",
+      "periodEnd": "Период заканчивается: {date}",
+      "actionsLabel": "Действия",
+      "reactivate": "Возобновить",
+      "changePlan": "Сменить план"
+    },
+    "transactions": {
+      "title": "Транзакции",
+      "empty": "Нет транзакций.",
+      "columns": {
+        "date": "Дата",
+        "product": "Продукт",
+        "status": "Статус",
+        "amount": "Сумма"
+      }
+    },
+    "additional": {
+      "title": "Дополнительно",
+      "totalCommission": "Общая комиссия",
+      "refunded": "Возвращено",
+      "refundedValue": "{amount} · возвратов: {count}",
+      "firstPayment": "Первый платёж",
+      "lastPayment": "Последний платёж"
+    },
+    "productFallback": "Продукт"
+  },
+  "cancelDialog": {
+    "title": "Отмена подписки",
+    "descriptionSuffix": "подписка будет отменена. Дальнейшие платежи списываться не будут.",
+    "keep": "Нет, оставить",
+    "confirm": "Да, отменить"
+  },
+  "changePlanDialog": {
+    "title": "Смена плана",
+    "description": "Выберите новый продукт с регулярными платежами. Изменение вступает в силу немедленно.",
+    "noOptions": "Других активных продуктов с подпиской нет.",
+    "selectProduct": "Выберите продукт",
+    "confirm": "Сменить"
+  },
+  "toasts": {
+    "reactivated": "Подписка возобновлена",
+    "canceled": "Подписка отменена",
+    "planChanged": "План изменён"
+  }
+}
