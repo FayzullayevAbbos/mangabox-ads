@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, type FormEvent } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { RiEyeLine, RiEyeOffLine } from "@remixicon/react";
@@ -14,13 +15,14 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { PhoneInput } from "@/components/auth/phone-input";
-import { adminLogin, AuthError } from "@/lib/api/admin-auth";
+import { portalLogin, AuthError } from "@/lib/api/portal-auth";
 import { useT } from "@/lib/i18n/provider";
 
 export default function LoginPage() {
   const router = useRouter();
   const t = useT("auth");
   const c = useT("common");
+  const p = useT("portal");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -37,9 +39,8 @@ export default function LoginPage() {
 
       setLoading(true);
       try {
-        await adminLogin(phone, password);
+        await portalLogin(phone, password);
         toast.success(t.login.toasts.success);
-        // router.push o'tishni kutmaydi — spinnerni yangi route mount bo'lguncha qoldiramiz.
         router.push("/dashboard");
         router.refresh();
       } catch (err) {
@@ -131,6 +132,13 @@ export default function LoginPage() {
           )}
         </Button>
       </form>
+
+      <p className="text-center text-sm text-muted-foreground">
+        {p.register.noAccount}{" "}
+        <Link href="/auth/register" className="font-medium text-primary hover:underline">
+          {p.register.link}
+        </Link>
+      </p>
     </div>
   );
 }

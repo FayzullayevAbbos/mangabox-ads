@@ -21,33 +21,21 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { useSidebar } from "@/components/ui/sidebar";
-import {
-  adminLogout,
-  getAdminAccount,
-  type AdminAccount,
-} from "@/lib/api/admin-auth";
+import type { Advertiser } from "@/lib/api/ads";
+import { getAdvertiser, portalLogout } from "@/lib/api/portal-auth";
 import { useT } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
-
-/**
- * Sidebar pastidagi hisob menyusi. Tashkilot almashtirgich o'rnini bosadi:
- * panel bitta MangaBox loyihasiga tegishli, shuning uchun bu yerda faqat
- * foydalanuvchi va uning sozlamalari (sozlamalar, API kalitlari, webhook'lar)
- * hamda chiqish turadi.
- */
 
 type State =
   | { status: "loading" }
   | { status: "error" }
-  | { status: "ready"; user: AdminAccount };
+  | { status: "ready"; user: Advertiser };
 
-function userInitial(user: AdminAccount): string {
+function userInitial(user: Advertiser): string {
   const source = user.name?.trim() || user.phone;
   return source.charAt(0).toUpperCase() || "?";
 }
 
-// API kalitlari va webhook'lar eski to'lov platformasidan qolgan — MangaBox
-// backendida bunday endpointlar yo'q, shuning uchun menyuda ko'rsatilmaydi.
 const NAV_ITEMS = [
   { key: "settings", href: "/dashboard/settings", icon: RiSettings3Line },
 ] as const;
@@ -61,9 +49,11 @@ export function UserMenu({ collapsed }: { collapsed: boolean }) {
 
   React.useEffect(() => {
     let cancelled = false;
-    getAdminAccount()
+    getAdvertiser()
       .then((user) => {
-        if (!cancelled) setState({ status: "ready", user });
+        if (!cancelled) {
+          setState(user ? { status: "ready", user } : { status: "error" });
+        }
       })
       .catch(() => {
         if (!cancelled) setState({ status: "error" });
@@ -76,7 +66,7 @@ export function UserMenu({ collapsed }: { collapsed: boolean }) {
   async function handleLogout() {
     setLoggingOut(true);
     try {
-      await adminLogout();
+      await portalLogout();
       setOpenMobile(false);
       router.replace("/auth/login");
       router.refresh();

@@ -24,6 +24,7 @@ import apiKeys from "./apiKeys.json";
 import webhooks from "./webhooks.json";
 import analytics from "./analytics.json";
 import ads from "./ads.json";
+import portal from "./portal.json";
 import settings from "./settings.json";
 import legal from "./legal.json";
 
@@ -47,6 +48,7 @@ export const en = {
   webhooks,
   analytics,
   ads,
+  portal,
   settings,
   legal,
 } as const;

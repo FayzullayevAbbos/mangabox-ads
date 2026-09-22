@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "group": "Reklama kabineti",
+    "campaigns": "Kampaniyalar",
+    "orders": "To'lovlar",
+    "rateCard": "Narxnoma",
+    "settings": "Sozlamalar"
+  },
+  "home": {
+    "title": "Kampaniyalarim",
+    "description": "Reklama kampaniyalarini yarating, moderatsiyaga yuboring va natijasini kuzating.",
+    "pendingAccount": "Hisobingiz hali tasdiqlanmagan. Kampaniya yaratib, moderatsiyaga yuborishingiz mumkin — tasdiqlangach to'lov ochiladi.",
+    "stats": {
+      "live": "Efirdagi kampaniyalar",
+      "impressions": "Ko'rsatishlar",
+      "clicks": "Bosishlar · CTR",
+      "spent": "To'langan"
+    }
+  },
+  "campaigns": {
+    "emptyTitle": "Hali kampaniya yo'q",
+    "emptyDescription": "Birinchi kampaniyani yarating: slot, muddat va ulushni tanlang — narx darhol hisoblanadi."
+  },
+  "actions": {
+    "submit": "Moderatsiyaga yuborish",
+    "pay": "To'lash"
+  },
+  "toasts": {
+    "submitted": "Kampaniya moderatsiyaga yuborildi"
+  },
+  "nextAction": {
+    "submit": "Kreativ qo'shib, moderatsiyaga yuboring",
+    "wait": "Moderatsiya kutilmoqda",
+    "fix": "Rad etildi — tuzatib qayta yuboring",
+    "pay": "Tasdiqlandi — to'lovni amalga oshiring",
+    "none": " "
+  },
+  "pay": {
+    "title": "To'lov usulini tanlang",
+    "hint": "To'lov sahifasiga yo'naltirilasiz. To'lov tasdiqlangach kampaniya avtomatik efirga chiqadi."
+  },
+  "orders": {
+    "title": "To'lovlar",
+    "description": "Kampaniyalar bo'yicha barcha to'lovlar tarixi.",
+    "campaign": "Kampaniya",
+    "emptyDescription": "Kampaniya tasdiqlangach, to'lovlar shu yerda ko'rinadi."
+  },
+  "rateCard": {
+    "title": "Narxnoma",
+    "description": "Slotlar, kunlik ko'rsatishlar va narx kalkulyatori."
+  },
+  "settings": {
+    "title": "Sozlamalar",
+    "description": "Kompaniya ma'lumotlari va xavfsizlik.",
+    "profile": "Profil",
+    "phone": "Telefon",
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda…",
+    "saved": "Saqlandi",
+    "password": "Parol",
+    "currentPassword": "Joriy parol",
+    "newPassword": "Yangi parol",
+    "changePassword": "Parolni almashtirish",
+    "passwordChanged": "Parol almashtirildi"
+  },
+  "register": {
+    "title": "Reklama beruvchi sifatida ro'yxatdan o'ting",
+    "subtitle": "MangaBox auditoriyasiga reklama joylashtirish uchun kabinet oching.",
+    "name": "Brend yoki kompaniya nomi",
+    "legalName": "Yuridik nomi",
+    "inn": "STIR (INN)",
+    "email": "Email",
+    "optional": "(ixtiyoriy)",
+    "passwordHint": "Parol kamida {count} belgidan iborat bo'lsin.",
+    "submit": "Ro'yxatdan o'tish",
+    "success": "Kabinet ochildi",
+    "haveAccount": "Hisobingiz bormi?",
+    "loginLink": "Kirish",
+    "noAccount": "Hisobingiz yo'qmi?",
+    "link": "Ro'yxatdan o'tish"
+  }
+}

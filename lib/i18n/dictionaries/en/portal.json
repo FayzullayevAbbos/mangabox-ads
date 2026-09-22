@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "group": "Ads account",
+    "campaigns": "Campaigns",
+    "orders": "Payments",
+    "rateCard": "Rate card",
+    "settings": "Settings"
+  },
+  "home": {
+    "title": "My campaigns",
+    "description": "Create ad campaigns, submit them for review and track results.",
+    "pendingAccount": "Your account is not verified yet. You can create a campaign and submit it for review — payment opens once it is approved.",
+    "stats": {
+      "live": "Live campaigns",
+      "impressions": "Impressions",
+      "clicks": "Clicks · CTR",
+      "spent": "Paid"
+    }
+  },
+  "campaigns": {
+    "emptyTitle": "No campaigns yet",
+    "emptyDescription": "Create your first campaign: pick slots, duration and share — the price is calculated instantly."
+  },
+  "actions": {
+    "submit": "Submit for review",
+    "pay": "Pay"
+  },
+  "toasts": {
+    "submitted": "Campaign submitted for review"
+  },
+  "nextAction": {
+    "submit": "Add a creative and submit for review",
+    "wait": "Waiting for review",
+    "fix": "Rejected — fix and resubmit",
+    "pay": "Approved — complete the payment",
+    "none": " "
+  },
+  "pay": {
+    "title": "Choose a payment method",
+    "hint": "You will be redirected to the payment page. The campaign goes live automatically once payment is confirmed."
+  },
+  "orders": {
+    "title": "Payments",
+    "description": "Payment history for all your campaigns.",
+    "campaign": "Campaign",
+    "emptyDescription": "Payments appear here once a campaign is approved."
+  },
+  "rateCard": {
+    "title": "Rate card",
+    "description": "Slots, daily impressions and a price calculator."
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Company details and security.",
+    "profile": "Profile",
+    "phone": "Phone",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "password": "Password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "changePassword": "Change password",
+    "passwordChanged": "Password changed"
+  },
+  "register": {
+    "title": "Sign up as an advertiser",
+    "subtitle": "Open an account to advertise to the MangaBox audience.",
+    "name": "Brand or company name",
+    "legalName": "Legal name",
+    "inn": "Tax ID (INN)",
+    "email": "Email",
+    "optional": "(optional)",
+    "passwordHint": "Password must be at least {count} characters.",
+    "submit": "Sign up",
+    "success": "Account created",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "noAccount": "No account yet?",
+    "link": "Sign up"
+  }
+}

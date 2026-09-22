@@ -3,21 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  RiAdvertisementLine,
+  RiBillLine,
   RiMegaphoneLine,
-  RiBookOpenLine,
-  RiBroadcastLine,
-  RiChat3Line,
-  RiExchangeDollarLine,
-  RiFlag2Line,
-  RiGroupLine,
-  RiLayoutGridLine,
-  RiMoneyDollarCircleLine,
-  RiRefreshLine,
-  RiSearch2Line,
-  RiShareForwardBoxLine,
-  RiVideoLine,
-  RiWalletLine,
+  RiPriceTag3Line,
+  RiSettings3Line,
 } from "@remixicon/react";
 import type { ComponentType } from "react";
 
@@ -47,7 +36,7 @@ type NavItem = {
 type NavGroup = { label: string; items: NavItem[] };
 
 export function AppSidebar() {
-  const t = useT("nav");
+  const t = useT("portal");
   const pathname = usePathname();
   const { state, isMobile, setOpenMobile } = useSidebar();
   // `state` faqat desktop holatini bildiradi. Mobilda sidebar Sheet sifatida
@@ -55,13 +44,14 @@ export function AppSidebar() {
   // kerak.
   const collapsed = !isMobile && state === "collapsed";
 
-  // API kalitlari va webhook'lar asosiy navigatsiyada emas — ular hisob
-  // menyusidagi (sidebar pastida) sozlamalar bo'limida.
   const navGroups: NavGroup[] = [
     {
-      label: t.groups.core,
+      label: t.nav.group,
       items: [
-        { title: t.items.overview, href: "/dashboard", icon: RiLayoutGridLine },
+        { title: t.nav.campaigns, href: "/dashboard", icon: RiMegaphoneLine },
+        { title: t.nav.orders, href: "/dashboard/orders", icon: RiBillLine },
+        { title: t.nav.rateCard, href: "/dashboard/rate-card", icon: RiPriceTag3Line },
+        { title: t.nav.settings, href: "/dashboard/settings", icon: RiSettings3Line },
       ],
     },
   ];

@@ -1,27 +1,13 @@
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 
-import { ADMIN_TOKEN_COOKIE } from "@/lib/auth-cookie";
-
-/**
- * `bot-mangabox` backendiga server tomonidagi proksi.
- *
- * Admin API (`/api/admin/*`) `Authorization: Bearer <token>` talab qiladi
- * (`AdminPanelGuard`). Token brauzerga tushmasligi uchun u `httpOnly`
- * cookie'da saqlanadi (login paytida yoziladi) va faqat shu yerda — serverda —
- * so'rovga qo'shiladi. Lokal ishlash uchun `MANGABOX_ADMIN_TOKEN` muhit
- * o'zgaruvchisi ham qabul qilinadi.
- *
- * Proksi ataylab faqat `api/admin/*` yo'llariga ruxsat beradi: aks holda
- * admin tokeni bilan backendning istalgan endpointiga so'rov yuborish
- * mumkin bo'lib qolardi.
- */
+import { PORTAL_TOKEN_COOKIE } from "@/lib/auth-cookie";
 
 const API_URL = (
   process.env.MANGABOX_API_URL ?? "http://localhost:3111"
 ).replace(/\/$/, "");
 
-const ALLOWED_PREFIX = "api/admin/";
+const ALLOWED_PREFIX = "api/ads/portal/";
 
 function jsonError(status: number, message: string): Response {
   return Response.json({ message }, { status });
@@ -38,16 +24,12 @@ async function forward(
   }
 
   const cookieStore = await cookies();
-  const token =
-    cookieStore.get(ADMIN_TOKEN_COOKIE)?.value ??
-    process.env.MANGABOX_ADMIN_TOKEN;
+  const token = cookieStore.get(PORTAL_TOKEN_COOKIE)?.value;
 
   if (!token) {
-    return jsonError(401, "Admin tokeni yo'q — qaytadan kiring.");
+    return jsonError(401, "Sessiya topilmadi — qaytadan kiring.");
   }
 
-  // Bayt sifatida o'qiladi va Content-Type asliday uzatiladi — JSON bilan
-  // birga multipart yuklashlar (banner rasmi) ham buzilmay o'tishi uchun.
   const hasBody = method === "POST" || method === "PUT" || method === "PATCH";
   const body = hasBody ? await request.arrayBuffer() : undefined;
   const contentType = request.headers.get("content-type");
