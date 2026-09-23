@@ -17,7 +17,7 @@ function Checkbox({
         "peer size-5 shrink-0 rounded-[6px] border border-input bg-background shadow-xs transition-colors outline-none",
         "focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:border-ring",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        "data-[state=checked]:border-[#0162FF] data-[state=checked]:bg-[#0162FF] data-[state=checked]:text-white",
+        "data-[state=checked]:border-active data-[state=checked]:bg-active data-[state=checked]:text-active-foreground",
         "aria-invalid:border-destructive aria-invalid:ring-destructive/20",
         className
       )}

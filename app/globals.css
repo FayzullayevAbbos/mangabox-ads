@@ -26,6 +26,9 @@
   --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
+  --color-field: var(--field);
+  --color-active: var(--active);
+  --color-active-foreground: var(--active-foreground);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
@@ -68,6 +71,12 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+  --field: #FAFAFA;
+  --active: #0162FF;
+  --active-foreground: #ffffff;
+  --toast-error-bg: #FEF2F2;
+  --toast-error-text: #B91C1C;
+  --toast-error-border: #FECACA;
   --chart-1: oklch(0.905 0.182 98.111);
   --chart-2: oklch(0.795 0.184 86.047);
   --chart-3: oklch(0.681 0.162 75.834);
@@ -84,44 +93,44 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-/*
- * Dark mode — Volar "navy-charcoal + violet accent" palette.
- * Quyuq fon qatlamlari orasidagi farq juda nozik (2-4% yorug'lik), accent esa
- * violet/purple. Qiymatlar shadcn tokenlariga map qilingan, shuning uchun
- * barcha komponentlar (sidebar, card, popover, input, badge) konsistent bo'ladi.
- */
 .dark {
-  --background: #1a1b23; /* bg-base */
-  --foreground: #f0f0f3; /* text-primary */
-  --card: #21222c; /* bg-surface — fondan bir oz ko'tarilgan */
-  --card-foreground: #f0f0f3;
-  --popover: #262833; /* bg-elevated — kartadan ham yuqori */
-  --popover-foreground: #f0f0f3;
-  --primary: #7c6cf0; /* btn-primary-bg */
-  --primary-foreground: #ffffff;
-  --secondary: #262935; /* btn-secondary-bg */
-  --secondary-foreground: #f0f0f3;
-  --muted: #16161f; /* bg-muted */
-  --muted-foreground: #8b8b9e; /* text-secondary */
-  --accent: #21222c; /* umumiy hover holati */
-  --accent-foreground: #f0f0f3;
-  --destructive: #e5484d; /* error / btn-danger */
-  --border: #282a34; /* border-default — nozik, fonga yaqin */
-  --input: #21242f; /* input background */
-  --ring: #7c6cf0; /* focus ring -> primary */
-  --chart-1: #7c6cf0; /* purple */
-  --chart-2: #4cc38a; /* green */
-  --chart-3: #f5a623; /* yellow */
-  --chart-4: #52a8ff; /* blue */
-  --chart-5: #e5484d; /* red */
-  --sidebar: #16171e; /* sidebar-bg */
-  --sidebar-foreground: #8b8b9e; /* sidebar-text */
-  --sidebar-primary: #7c6cf0;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #21222c; /* sidebar item hover / active */
-  --sidebar-accent-foreground: #f0f0f3;
-  --sidebar-border: #282a34; /* nozik, fonga yaqin */
-  --sidebar-ring: #7c6cf0;
+  --background: oklch(0.195 0.008 275);
+  --foreground: oklch(0.955 0.004 275);
+  --card: oklch(0.228 0.009 275);
+  --card-foreground: oklch(0.955 0.004 275);
+  --popover: oklch(0.255 0.01 275);
+  --popover-foreground: oklch(0.955 0.004 275);
+  --primary: oklch(0.74 0.135 285);
+  --primary-foreground: oklch(0.2 0.04 285);
+  --secondary: oklch(0.285 0.011 275);
+  --secondary-foreground: oklch(0.955 0.004 275);
+  --muted: oklch(0.262 0.01 275);
+  --muted-foreground: oklch(0.715 0.014 275);
+  --accent: oklch(0.285 0.011 275);
+  --accent-foreground: oklch(0.955 0.004 275);
+  --destructive: oklch(0.68 0.18 22);
+  --border: oklch(0.3 0.01 275);
+  --input: oklch(0.47 0.012 275);
+  --field: oklch(0.165 0.008 275);
+  --active: oklch(0.74 0.135 285);
+  --active-foreground: oklch(0.2 0.04 285);
+  --ring: oklch(0.74 0.135 285);
+  --toast-error-bg: oklch(0.26 0.055 22);
+  --toast-error-text: oklch(0.86 0.07 22);
+  --toast-error-border: oklch(0.38 0.09 22);
+  --chart-1: oklch(0.74 0.135 285);
+  --chart-2: oklch(0.76 0.13 160);
+  --chart-3: oklch(0.8 0.13 80);
+  --chart-4: oklch(0.72 0.12 240);
+  --chart-5: oklch(0.7 0.16 22);
+  --sidebar: oklch(0.172 0.008 275);
+  --sidebar-foreground: oklch(0.73 0.013 275);
+  --sidebar-primary: oklch(0.74 0.135 285);
+  --sidebar-primary-foreground: oklch(0.2 0.04 285);
+  --sidebar-accent: oklch(0.245 0.01 275);
+  --sidebar-accent-foreground: oklch(0.955 0.004 275);
+  --sidebar-border: oklch(0.26 0.009 275);
+  --sidebar-ring: oklch(0.74 0.135 285);
 }
 
 @layer base {

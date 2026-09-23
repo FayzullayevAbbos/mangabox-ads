@@ -142,7 +142,7 @@ export function CampaignSheet({
                   <TabsTrigger
                     key={value}
                     value={value}
-                    className="flex-none rounded-none px-0 py-3 text-sm font-medium text-muted-foreground after:!bottom-[-1px] after:!h-0.5 after:!bg-[#0162FF] data-active:!text-[#0162FF]"
+                    className="flex-none rounded-none px-0 py-3 text-sm font-medium text-muted-foreground after:!bottom-[-1px] after:!h-0.5 after:!bg-active data-active:!text-active"
                   >
                     {label}
                   </TabsTrigger>

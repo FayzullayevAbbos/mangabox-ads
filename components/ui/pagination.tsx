@@ -51,7 +51,7 @@ function PaginationLink({
       size={size}
       className={cn(
         isActive &&
-          "bg-[#E3DEDF] hover:bg-[#E3DEDF] focus:bg-[#E3DEDF] border-[#E3DEDF]",
+          "bg-[#E3DEDF] hover:bg-[#E3DEDF] focus:bg-[#E3DEDF] border-[#E3DEDF] dark:bg-secondary dark:hover:bg-secondary dark:focus:bg-secondary dark:border-input",
         className
       )}
     >
