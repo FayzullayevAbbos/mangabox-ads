@@ -8,22 +8,26 @@ import { RiArrowLeftLine, RiErrorWarningLine } from "@remixicon/react";
 import {
   actionsFor,
   useCampaignActions,
+  useContinueLabel,
+  usePayLabel,
 } from "@/components/dashboard/ads/campaign-actions";
-import {
-  CampaignFormSheet,
-  type CampaignFormTarget,
-} from "@/components/dashboard/ads/campaign-form-sheet";
+import { CampaignJourney } from "@/components/dashboard/ads/campaign-journey";
 import { periodRange } from "@/components/dashboard/ads/campaign-format";
 import { CampaignOrders } from "@/components/dashboard/ads/campaign-orders";
 import { CampaignOverview } from "@/components/dashboard/ads/campaign-overview";
 import { CampaignStats } from "@/components/dashboard/ads/campaign-stats";
 import { CampaignStatusBadge } from "@/components/dashboard/ads/campaign-status-badge";
 import { CreativeManager } from "@/components/dashboard/ads/creative-manager";
+import { setupHref } from "@/components/dashboard/ads/wizard/wizard-links";
 import { LoadErrorState } from "@/components/dashboard/page-states";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getCampaign, type AdCampaign } from "@/lib/api/ads";
+import {
+  getCampaign,
+  isAwaitingPaymentCheck,
+  type AdCampaign,
+} from "@/lib/api/ads";
 import { formatCount, formatDate, formatSomAmount } from "@/lib/format";
 import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
@@ -44,7 +48,6 @@ function isTab(value: string | null): value is Tab {
 export function CampaignDetail({ campaignId }: { campaignId: string }) {
   const p = useT("portal");
   const [state, setState] = React.useState<State>({ status: "loading" });
-  const [formTarget, setFormTarget] = React.useState<CampaignFormTarget>(null);
 
   const load = React.useCallback(
     (quiet = false) => {
@@ -66,6 +69,11 @@ export function CampaignDetail({ campaignId }: { campaignId: string }) {
   }, [load]);
 
   const reload = React.useCallback(() => void load(true), [load]);
+
+  const preview = React.useCallback(
+    (campaign: AdCampaign) => setState({ status: "ready", campaign }),
+    [],
+  );
 
   const applyChange = React.useCallback(
     (campaign: AdCampaign) => {
@@ -96,18 +104,9 @@ export function CampaignDetail({ campaignId }: { campaignId: string }) {
           campaign={state.campaign}
           onChanged={reload}
           onActionDone={applyChange}
-          onEdit={() => setFormTarget(state.campaign)}
+          onPreview={preview}
         />
       )}
-
-      <CampaignFormSheet
-        target={formTarget}
-        onClose={() => setFormTarget(null)}
-        onSaved={() => {
-          setFormTarget(null);
-          reload();
-        }}
-      />
     </div>
   );
 }
@@ -116,19 +115,24 @@ function Loaded({
   campaign,
   onChanged,
   onActionDone,
-  onEdit,
+  onPreview,
 }: {
   campaign: AdCampaign;
   onChanged: () => void;
   onActionDone: (campaign: AdCampaign) => void;
-  onEdit: () => void;
+  onPreview: (campaign: AdCampaign) => void;
 }) {
   const t = useT("ads");
   const p = useT("portal");
-  const actions = useCampaignActions(onActionDone);
+  const actions = useCampaignActions({ onDone: onActionDone, onPreview });
   const allowed = actionsFor(campaign);
   const busy = actions.isBusy(campaign.id);
-  const hint = p.nextAction[campaign.nextAction].trim();
+  const payLabel = usePayLabel();
+  const continueLabel = useContinueLabel();
+  const awaitingCheck = isAwaitingPaymentCheck(campaign);
+  const hint = (
+    awaitingCheck ? p.nextAction.verifying : p.nextAction[campaign.nextAction]
+  ).trim();
 
   return (
     <>
@@ -155,9 +159,9 @@ function Loaded({
 
         {allowed.some((a) => a !== "details") && (
           <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
-            {allowed.includes("edit") && (
-              <Button variant="outline" className="flex-1 sm:flex-none" onClick={onEdit}>
-                {t.actions.edit}
+            {allowed.includes("continue") && (
+              <Button asChild className="flex-1 sm:flex-none">
+                <Link href={setupHref(campaign.id)}>{continueLabel(campaign)}</Link>
               </Button>
             )}
             {allowed.includes("pause") && (
@@ -179,22 +183,14 @@ function Loaded({
                 {t.actions.resume}
               </Button>
             )}
-            {allowed.includes("submit") && (
-              <Button
-                className="flex-1 sm:flex-none"
-                disabled={busy}
-                onClick={() => actions.submit(campaign)}
-              >
-                {p.actions.submit}
-              </Button>
-            )}
             {allowed.includes("pay") && (
               <Button
+                variant={awaitingCheck ? "outline" : "default"}
                 className="flex-1 sm:flex-none"
                 disabled={busy}
                 onClick={() => actions.askPay(campaign)}
               >
-                {p.actions.pay}
+                {payLabel(campaign)}
               </Button>
             )}
           </div>
@@ -210,6 +206,8 @@ function Loaded({
           </div>
         </div>
       )}
+
+      <CampaignJourney campaign={campaign} />
 
       <SummaryStrip campaign={campaign} />
 

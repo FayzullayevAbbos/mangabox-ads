@@ -8,6 +8,7 @@ import {
   LoadErrorState,
   TableSkeleton,
 } from "@/components/dashboard/page-states";
+import { useProviderLabel } from "@/components/dashboard/ads/payment-provider";
 import { TransactionStatusBadge } from "@/components/dashboard/transaction-status-badge";
 import { getCampaignOrders, type AdOrder } from "@/lib/api/ads";
 import { formatDateTime, formatSomAmount } from "@/lib/format";
@@ -20,6 +21,7 @@ type State =
 
 export function CampaignOrders({ campaignId }: { campaignId: string }) {
   const t = useT("ads");
+  const providerLabel = useProviderLabel();
   const cols = t.sheet.orders.columns;
   const [state, setState] = React.useState<State>({ status: "loading" });
 
@@ -67,7 +69,7 @@ export function CampaignOrders({ campaignId }: { campaignId: string }) {
                 {order.createdAt ? formatDateTime(order.createdAt) : "—"}
               </td>
               <td className="px-3 py-3.5 text-sm">
-                <span className="capitalize">{order.provider}</span>
+                <span>{providerLabel(order.provider)}</span>
                 {order.transId && (
                   <span className="mt-0.5 block font-mono text-xs text-muted-foreground">
                     {order.transId}

@@ -1,7 +1,8 @@
 {
   "header": {
     "metaTitle": "MangaBox Ads — Advertiser account",
-    "dashboard": "Ads account"
+    "dashboard": "Ads account",
+    "toggleSidebar": "Collapse or expand sidebar (Ctrl+B)"
   },
   "groups": {
     "core": "Core",

@@ -4,6 +4,7 @@ import * as React from "react";
 import { RiBillLine } from "@remixicon/react";
 
 import { Panel } from "@/components/dashboard/ads/panel";
+import { useProviderLabel } from "@/components/dashboard/ads/payment-provider";
 import { PageHeader } from "@/components/dashboard/page-header";
 import {
   EmptyResult,
@@ -31,6 +32,7 @@ type State =
 export default function OrdersPage() {
   const t = useT("ads");
   const p = useT("portal");
+  const providerLabel = useProviderLabel();
   const cols = t.sheet.orders.columns;
   const [state, setState] = React.useState<State>({ status: "loading" });
 
@@ -106,8 +108,8 @@ export default function OrdersPage() {
                   <TableCell className="max-w-[18rem] truncate font-medium">
                     {state.names.get(order.campaignId) ?? "—"}
                   </TableCell>
-                  <TableCell className="text-sm capitalize">
-                    {order.provider}
+                  <TableCell className="text-sm">
+                    {providerLabel(order.provider)}
                   </TableCell>
                   <TableCell className="text-right font-mono tabular-nums">
                     {formatSomAmount(order.amount)}

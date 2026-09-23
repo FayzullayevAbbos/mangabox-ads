@@ -1,57 +1,89 @@
 {
   "nav": {
     "group": "Ads account",
-    "campaigns": "Campaigns",
+    "campaigns": "Ads",
     "orders": "Payments",
     "rateCard": "Rate card",
     "settings": "Settings"
   },
   "home": {
-    "title": "My campaigns",
-    "description": "Create ad campaigns, submit them for review and track results.",
-    "pendingAccount": "Your account is not verified yet. You can create a campaign and submit it for review — payment opens once it is approved.",
+    "title": "Ads",
+    "description": "Create ads, submit them for review and track results.",
+    "pendingAccount": "Your account is not verified yet. You can create an ad and submit it for review — payment opens once it is approved.",
     "stats": {
-      "live": "Live campaigns",
+      "live": "Live ads",
       "impressions": "Impressions",
       "clicks": "Clicks · CTR",
       "spent": "Paid"
     }
   },
   "campaigns": {
-    "emptyTitle": "No campaigns yet",
-    "emptyDescription": "Create your first campaign: pick slots, duration and share — the price is calculated instantly."
+    "emptyTitle": "No ads yet",
+    "emptyDescription": "Create your first ad in 4 steps: placement, schedule, banner — then submit it for review."
   },
   "campaignPage": {
-    "back": "Campaigns",
+    "back": "Ads",
     "parameters": "Parameters",
     "pricing": "Price breakdown",
     "delivery": "Delivered",
     "created": "Created {date}",
-    "notFound": "Campaign not found or deleted."
+    "notFound": "Ad not found or deleted."
   },
   "actions": {
     "submit": "Submit for review",
-    "pay": "Pay"
+    "pay": "Pay",
+    "payDetails": "Payment details",
+    "continue": "Continue setup",
+    "fix": "Fix"
   },
   "toasts": {
-    "submitted": "Campaign submitted for review"
+    "submitted": "Ad submitted for review",
+    "paymentClaimed": "Message sent — the ad goes live once the payment is confirmed"
   },
   "nextAction": {
-    "submit": "Add a creative and submit for review",
+    "submit": "Not ready yet — finish the setup and submit for review",
     "wait": "Waiting for review",
     "fix": "Rejected — fix and resubmit",
     "pay": "Approved — complete the payment",
-    "none": " "
+    "none": " ",
+    "verifying": "Payment is being verified — the ad goes live once confirmed"
   },
   "pay": {
-    "title": "Choose a payment method",
-    "hint": "You will be redirected to the payment page. The campaign goes live automatically once payment is confirmed."
+    "title": "Pay for ad",
+    "amount": "Amount due",
+    "campaignId": "Ad ID",
+    "step1Title": "Transfer the amount to the card",
+    "step1Text": "Use any banking app, Payme or Click to transfer exactly this amount.",
+    "cardNumber": "Card number",
+    "cardHolder": "Cardholder",
+    "copy": "Copy",
+    "copied": "Copied",
+    "step2Title": "Send the receipt on Telegram",
+    "step2Text": "Send a screenshot of the receipt — ad details are added to the message automatically.",
+    "openTelegram": "Message on Telegram",
+    "step3Title": "Press “I've paid”",
+    "step3Text": "An admin checks the transfer and confirms it. The ad then goes live automatically on its start day.",
+    "claim": "I've paid",
+    "claiming": "Sending…",
+    "claimedTitle": "Your payment is being verified",
+    "claimedText": "The ad goes live automatically once the transfer is confirmed. If you haven't sent the receipt yet, message us on Telegram.",
+    "unavailable": "Payment details aren't configured yet. Please contact us on Telegram.",
+    "telegramMessage": "Hello! I've paid {amount} for the \"{name}\" ad.\nAd ID: {id}\nReceipt attached.",
+    "onlineTitle": "Or pay online",
+    "close": "Close",
+    "cardProvider": "Card transfer",
+    "hint": "You will be redirected to the payment page. The ad goes live automatically once payment is confirmed.",
+    "contactTitle": "Message us on Telegram",
+    "contactText": "An admin will send you the payment details. The ad name, amount and ID are added to the message automatically.",
+    "receiptTitle": "Pay and send the receipt",
+    "receiptText": "Transfer exactly this amount and send a screenshot of the receipt to the same chat.",
+    "contactMessage": "Hello! I'd like to pay {amount} for the \"{name}\" ad.\nAd ID: {id}\nPlease send me the payment details."
   },
   "orders": {
     "title": "Payments",
-    "description": "Payment history for all your campaigns.",
-    "campaign": "Campaign",
-    "emptyDescription": "Payments appear here once a campaign is approved."
+    "description": "Payment history for all your ads.",
+    "campaign": "Ad",
+    "emptyDescription": "Payments appear here once an ad is approved."
   },
   "rateCard": {
     "title": "Rate card",
@@ -86,5 +118,107 @@
     "loginLink": "Log in",
     "noAccount": "No account yet?",
     "link": "Sign up"
+  },
+  "journey": {
+    "title": "How an ad goes live",
+    "create": {
+      "title": "Create",
+      "text": "Placement, dates and banner"
+    },
+    "review": {
+      "title": "Moderation",
+      "text": "The banner is checked against the rules"
+    },
+    "pay": {
+      "title": "Payment",
+      "text": "Card transfer, confirmed by an admin"
+    },
+    "live": {
+      "title": "Live",
+      "text": "Automatically on the start day"
+    }
+  },
+  "wizard": {
+    "newTitle": "New ad",
+    "editTitle": "Ad setup",
+    "back": "Ads",
+    "stepOf": "Step {current} of {total}",
+    "steps": {
+      "place": "Placement",
+      "plan": "Volume & dates",
+      "creative": "Banner",
+      "review": "Submit"
+    },
+    "nav": {
+      "back": "Back",
+      "next": "Next",
+      "saving": "Saving…"
+    },
+    "place": {
+      "title": "Where should your ad appear?",
+      "text": "Pick one or more placements. You'll set volume and price in the next step.",
+      "required": "Pick at least one placement."
+    },
+    "plan": {
+      "title": "How much and when?",
+      "text": "Choose a share for each placement, a start date and a duration. The price updates instantly.",
+      "nameHint": "Only for you. Leave empty to use “{name}”",
+      "advanced": "More settings"
+    },
+    "creative": {
+      "title": "Prepare your banner",
+      "text": "The text readers see, the link that opens on tap, and images. The preview on the right shows it in the app.",
+      "textSection": "Text and link",
+      "brandPlaceholder": "e.g. Anime Store",
+      "titlePlaceholder": "e.g. New figures 20% off",
+      "bodyPlaceholder": "A sentence or two: what you offer and why now.",
+      "ctaPlaceholder": "Learn more",
+      "hrefHint": "This page opens when someone taps the ad.",
+      "hrefRequired": "Enter a link.",
+      "logo": "Logo",
+      "logoHint": "Square image, optional.",
+      "chooseFile": "Choose image",
+      "replace": "Replace",
+      "remove": "Remove",
+      "posters": "Posters",
+      "postersText": "A poster is optional, but images get more attention. Without one, a text banner is shown there.",
+      "posterSpec": "At least {min} px, ratio {ratio}",
+      "preview": "In-app preview",
+      "previewBrand": "Your brand",
+      "previewTitle": "Your headline goes here"
+    },
+    "review": {
+      "title": "Review and submit",
+      "text": "If everything looks right, submit it. A submitted ad can't be changed.",
+      "summary": "Ad",
+      "ad": "Banner",
+      "change": "Change",
+      "slots": "Placements",
+      "period": "Period",
+      "impressions": "Impressions",
+      "total": "Total",
+      "checklist": "Before you submit",
+      "checks": {
+        "place": "Placement and dates chosen",
+        "creative": "Banner text and link ready",
+        "date": "Start date hasn't passed"
+      },
+      "next": "What happens next",
+      "nextSteps": [
+        "A moderator checks your banner against the rules.",
+        "Once approved, payment opens — a card transfer.",
+        "After the payment is confirmed, the ad goes live on its start day automatically."
+      ],
+      "submit": "Submit for review",
+      "submitting": "Submitting…",
+      "saveDraft": "Keep as draft",
+      "draftSaved": "Draft saved — continue it from the list"
+    },
+    "rejected": "Moderator's note",
+    "locked": {
+      "title": "This ad has been submitted",
+      "text": "A submitted ad can't be changed. Track its status on the ad page.",
+      "open": "Open ad"
+    }
   }
 }

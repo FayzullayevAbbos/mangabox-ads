@@ -1,7 +1,8 @@
 {
   "header": {
     "metaTitle": "MangaBox Ads — Reklama kabineti",
-    "dashboard": "Reklama kabineti"
+    "dashboard": "Reklama kabineti",
+    "toggleSidebar": "Yon panelni yig'ish yoki ochish (Ctrl+B)"
   },
   "groups": {
     "core": "Asosiy",

@@ -1,57 +1,89 @@
 {
   "nav": {
     "group": "Reklama kabineti",
-    "campaigns": "Kampaniyalar",
+    "campaigns": "Reklamalar",
     "orders": "To'lovlar",
     "rateCard": "Narxnoma",
     "settings": "Sozlamalar"
   },
   "home": {
-    "title": "Kampaniyalarim",
-    "description": "Reklama kampaniyalarini yarating, moderatsiyaga yuboring va natijasini kuzating.",
-    "pendingAccount": "Hisobingiz hali tasdiqlanmagan. Kampaniya yaratib, moderatsiyaga yuborishingiz mumkin — tasdiqlangach to'lov ochiladi.",
+    "title": "Reklamalar",
+    "description": "Reklama yarating, moderatsiyaga yuboring va natijasini kuzating.",
+    "pendingAccount": "Hisobingiz hali tasdiqlanmagan. Reklama yaratib, moderatsiyaga yuborishingiz mumkin — tasdiqlangach to'lov ochiladi.",
     "stats": {
-      "live": "Efirdagi kampaniyalar",
+      "live": "Efirdagi reklamalar",
       "impressions": "Ko'rsatishlar",
       "clicks": "Bosishlar · CTR",
       "spent": "To'langan"
     }
   },
   "campaigns": {
-    "emptyTitle": "Hali kampaniya yo'q",
-    "emptyDescription": "Birinchi kampaniyani yarating: slot, muddat va ulushni tanlang — narx darhol hisoblanadi."
+    "emptyTitle": "Hali reklama yo'q",
+    "emptyDescription": "Birinchi reklamangizni 4 qadamda yarating: joy, muddat, banner — keyin moderatsiyaga yuborasiz."
   },
   "campaignPage": {
-    "back": "Kampaniyalar",
+    "back": "Reklamalar",
     "parameters": "Parametrlar",
     "pricing": "Narx hisobi",
     "delivery": "Yetkazildi",
     "created": "Yaratilgan: {date}",
-    "notFound": "Kampaniya topilmadi yoki o'chirilgan."
+    "notFound": "Reklama topilmadi yoki o'chirilgan."
   },
   "actions": {
     "submit": "Moderatsiyaga yuborish",
-    "pay": "To'lash"
+    "pay": "To'lash",
+    "payDetails": "To'lov ma'lumotlari",
+    "continue": "Sozlashni davom ettirish",
+    "fix": "Tuzatish"
   },
   "toasts": {
-    "submitted": "Kampaniya moderatsiyaga yuborildi"
+    "submitted": "Reklama moderatsiyaga yuborildi",
+    "paymentClaimed": "Xabar yuborildi — tushum tasdiqlangach reklama efirga chiqadi"
   },
   "nextAction": {
-    "submit": "Kreativ qo'shib, moderatsiyaga yuboring",
+    "submit": "Hali tayyor emas — sozlashni tugatib, moderatsiyaga yuboring",
     "wait": "Moderatsiya kutilmoqda",
     "fix": "Rad etildi — tuzatib qayta yuboring",
     "pay": "Tasdiqlandi — to'lovni amalga oshiring",
-    "none": " "
+    "none": " ",
+    "verifying": "To'lov tekshirilmoqda — tasdiqlangach efirga chiqadi"
   },
   "pay": {
-    "title": "To'lov usulini tanlang",
-    "hint": "To'lov sahifasiga yo'naltirilasiz. To'lov tasdiqlangach kampaniya avtomatik efirga chiqadi."
+    "title": "Reklama uchun to'lov",
+    "amount": "To'lov summasi",
+    "campaignId": "Reklama ID",
+    "step1Title": "Summani kartaga o'tkazing",
+    "step1Text": "Istalgan bank ilovasi, Payme yoki Click orqali aynan shu summani o'tkazing.",
+    "cardNumber": "Karta raqami",
+    "cardHolder": "Karta egasi",
+    "copy": "Nusxa olish",
+    "copied": "Nusxa olindi",
+    "step2Title": "Chekni Telegram'da yuboring",
+    "step2Text": "To'lov chekining skrinshotini yuboring — reklama ma'lumotlari xabarga avtomatik qo'shiladi.",
+    "openTelegram": "Telegram'da yozish",
+    "step3Title": "«To'ladim» tugmasini bosing",
+    "step3Text": "Admin tushumni tekshirib tasdiqlaydi. Shundan so'ng reklama boshlanish kunida avtomatik efirga chiqadi.",
+    "claim": "To'ladim",
+    "claiming": "Yuborilmoqda…",
+    "claimedTitle": "To'lovingiz tekshirilmoqda",
+    "claimedText": "Tushum tasdiqlangach reklama avtomatik efirga chiqadi. Chekni hali yubormagan bo'lsangiz, Telegram'da yozing.",
+    "unavailable": "To'lov rekvizitlari hali sozlanmagan. Iltimos, biz bilan Telegram orqali bog'laning.",
+    "telegramMessage": "Assalomu alaykum! \"{name}\" reklamasi uchun {amount} to'ladim.\nReklama ID: {id}\nChekni ilova qilyapman.",
+    "onlineTitle": "Yoki onlayn to'lang",
+    "close": "Yopish",
+    "cardProvider": "Karta o'tkazmasi",
+    "hint": "To'lov sahifasiga yo'naltirilasiz. To'lov tasdiqlangach reklama avtomatik efirga chiqadi.",
+    "contactTitle": "Telegram'da biz bilan bog'laning",
+    "contactText": "Admin sizga to'lov rekvizitlarini yuboradi. Reklama nomi, summa va ID xabarga avtomatik qo'shiladi.",
+    "receiptTitle": "To'lang va chekni yuboring",
+    "receiptText": "Aynan shu summani o'tkazing va chek skrinshotini o'sha chatga yuboring.",
+    "contactMessage": "Assalomu alaykum! \"{name}\" reklamasi uchun {amount} to'lamoqchiman.\nReklama ID: {id}\nTo'lov rekvizitlarini yuborsangiz."
   },
   "orders": {
     "title": "To'lovlar",
-    "description": "Kampaniyalar bo'yicha barcha to'lovlar tarixi.",
-    "campaign": "Kampaniya",
-    "emptyDescription": "Kampaniya tasdiqlangach, to'lovlar shu yerda ko'rinadi."
+    "description": "Reklamalar bo'yicha barcha to'lovlar tarixi.",
+    "campaign": "Reklama",
+    "emptyDescription": "Reklama tasdiqlangach, to'lovlar shu yerda ko'rinadi."
   },
   "rateCard": {
     "title": "Narxnoma",
@@ -86,5 +118,107 @@
     "loginLink": "Kirish",
     "noAccount": "Hisobingiz yo'qmi?",
     "link": "Ro'yxatdan o'tish"
+  },
+  "journey": {
+    "title": "Reklama qanday efirga chiqadi",
+    "create": {
+      "title": "Yaratish",
+      "text": "Joy, muddat va banner"
+    },
+    "review": {
+      "title": "Moderatsiya",
+      "text": "Banner qoidalarga mosligi tekshiriladi"
+    },
+    "pay": {
+      "title": "To'lov",
+      "text": "Kartaga o'tkazma, admin tasdiqlaydi"
+    },
+    "live": {
+      "title": "Efir",
+      "text": "Boshlanish kunida avtomatik"
+    }
+  },
+  "wizard": {
+    "newTitle": "Yangi reklama",
+    "editTitle": "Reklamani sozlash",
+    "back": "Reklamalar",
+    "stepOf": "{current}/{total}-qadam",
+    "steps": {
+      "place": "Joy",
+      "plan": "Hajm va muddat",
+      "creative": "Banner",
+      "review": "Yuborish"
+    },
+    "nav": {
+      "back": "Orqaga",
+      "next": "Keyingi",
+      "saving": "Saqlanmoqda…"
+    },
+    "place": {
+      "title": "Reklamangiz qayerda ko'rinsin?",
+      "text": "Bir yoki bir nechta joyni tanlang. Narx va hajmni keyingi qadamda belgilaysiz.",
+      "required": "Kamida bitta joyni tanlang."
+    },
+    "plan": {
+      "title": "Qancha va qachon?",
+      "text": "Har bir joy uchun ulushni, boshlanish sanasi va muddatni tanlang. Narx darhol hisoblanadi.",
+      "nameHint": "Faqat o'zingiz uchun. Bo'sh qoldirsangiz: «{name}»",
+      "advanced": "Qo'shimcha sozlamalar"
+    },
+    "creative": {
+      "title": "Banneringizni tayyorlang",
+      "text": "O'quvchi ko'radigan matn, bosilganda ochiladigan havola va rasmlar. O'ng tomonda ilovadagi ko'rinishi.",
+      "textSection": "Matn va havola",
+      "brandPlaceholder": "Masalan: Anime Store",
+      "titlePlaceholder": "Masalan: Yangi figurkalar 20% chegirmada",
+      "bodyPlaceholder": "Bir-ikki gap: nima taklif qilasiz va nega hozir.",
+      "ctaPlaceholder": "Batafsil",
+      "hrefHint": "Reklama bosilganda shu sahifa ochiladi.",
+      "hrefRequired": "Havolani kiriting.",
+      "logo": "Logotip",
+      "logoHint": "Kvadrat rasm, ixtiyoriy.",
+      "chooseFile": "Rasm tanlash",
+      "replace": "Almashtirish",
+      "remove": "Olib tashlash",
+      "posters": "Posterlar",
+      "postersText": "Poster ixtiyoriy, lekin rasm ko'proq e'tibor tortadi. Poster bo'lmasa o'sha joyda matnli banner ko'rinadi.",
+      "posterSpec": "Kamida {min} px, nisbat {ratio}",
+      "preview": "Ilovadagi ko'rinishi",
+      "previewBrand": "Brendingiz",
+      "previewTitle": "Sarlavha shu yerda ko'rinadi"
+    },
+    "review": {
+      "title": "Tekshirib, moderatsiyaga yuboring",
+      "text": "Hammasi to'g'ri bo'lsa yuboring. Yuborilgandan keyin reklamani o'zgartirib bo'lmaydi.",
+      "summary": "Reklama",
+      "ad": "Banner",
+      "change": "O'zgartirish",
+      "slots": "Joylar",
+      "period": "Muddat",
+      "impressions": "Ko'rsatish",
+      "total": "Jami",
+      "checklist": "Yuborishdan oldin",
+      "checks": {
+        "place": "Joy va muddat tanlangan",
+        "creative": "Banner matni va havolasi tayyor",
+        "date": "Boshlanish sanasi hali o'tmagan"
+      },
+      "next": "Keyin nima bo'ladi",
+      "nextSteps": [
+        "Moderator banneringizni qoidalarga mosligini tekshiradi.",
+        "Tasdiqlansa, to'lov ochiladi — kartaga o'tkazma.",
+        "To'lov tasdiqlangach reklama boshlanish kunida o'zi efirga chiqadi."
+      ],
+      "submit": "Moderatsiyaga yuborish",
+      "submitting": "Yuborilmoqda…",
+      "saveDraft": "Qoralamada qoldirish",
+      "draftSaved": "Qoralama saqlandi — ro'yxatdan davom ettirasiz"
+    },
+    "rejected": "Moderator izohi",
+    "locked": {
+      "title": "Bu reklama moderatsiyaga yuborilgan",
+      "text": "Yuborilgan reklama o'zgartirilmaydi. Holatini reklama sahifasida kuzating.",
+      "open": "Reklamani ochish"
+    }
   }
 }

@@ -54,6 +54,9 @@ export const CREATIVE_LIMITS = {
   href: 500,
 } as const;
 
+export const HREF_RE = /^https:\/\/\S+$/i;
+export const HEX_RE = /^#[0-9a-f]{6}$/i;
+
 export const CAMPAIGN_NAME_LIMIT = 80;
 
 export const IMAGE_RATIO_TOLERANCE = 0.1;
@@ -125,6 +128,7 @@ export interface AdCampaign {
   rejectReason: string | null;
   finishReason: AdFinishReason | null;
   paidAt: string | null;
+  paymentClaimedAt: string | null;
   orderId: string | null;
   createdBy: "advertiser" | "admin";
   createdAt: string | null;
@@ -223,6 +227,41 @@ export interface CheckoutSession {
   instructions: string;
   amount: number;
   currency: string;
+}
+
+export interface CardPaymentDetails {
+  cardNumber: string;
+  cardHolder: string;
+  bank: string;
+  telegram: string;
+}
+
+export interface PaymentMethods {
+  card: CardPaymentDetails | null;
+  online: boolean;
+}
+
+export async function getPaymentMethods() {
+  const { data } = await portalRequest<{ data: PaymentMethods }>(
+    "/payment-methods",
+  );
+  return data;
+}
+
+export async function claimCardPayment(id: string) {
+  const { data } = await portalRequest<{ data: AdCampaign }>(
+    `/campaigns/${id}/payment-claim`,
+    "POST",
+  );
+  return data;
+}
+
+export function isAwaitingPaymentCheck(campaign: AdCampaign): boolean {
+  return (
+    campaign.status === "approved" &&
+    !campaign.paidAt &&
+    !!campaign.paymentClaimedAt
+  );
 }
 
 export async function getRateCard() {

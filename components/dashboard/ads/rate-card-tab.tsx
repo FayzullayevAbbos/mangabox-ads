@@ -3,20 +3,18 @@
 import * as React from "react";
 import { RiArrowRightLine, RiCheckLine } from "@remixicon/react";
 
-import type { CampaignDraft } from "@/components/dashboard/ads/campaign-form-sheet";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import { NumberField, QuoteLine } from "@/components/dashboard/ads/quote-parts";
 import { SlotPreview } from "@/components/dashboard/ads/slot-preview";
+import { useQuote } from "@/components/dashboard/ads/use-quote";
+import type { RateCardPick } from "@/components/dashboard/ads/wizard/wizard-model";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-  getCampaignQuote,
   MAX_CAMPAIGN_DAYS,
   MAX_SHARE_PERCENT,
   MIN_CAMPAIGN_DAYS,
-  MIN_ORDER_SOM,
   MIN_SHARE_PERCENT,
-  type AdQuote,
   type AdSlot,
   type AdSlotSpec,
 } from "@/lib/api/ads";
@@ -28,7 +26,7 @@ import { cn } from "@/lib/utils";
 export function RateCardTab({
   onStart,
 }: {
-  onStart: (draft: CampaignDraft) => void;
+  onStart: (pick: RateCardPick) => void;
 }) {
   const t = useT("ads");
   const { specs } = useRateCard();
@@ -104,7 +102,7 @@ export function RateCardTab({
   );
 }
 
-function PlaceCard({
+export function PlaceCard({
   spec,
   maxDaily,
   selected,
@@ -116,6 +114,7 @@ function PlaceCard({
   onChoose: () => void;
 }) {
   const t = useT("ads");
+  const { labelOf } = useRateCard();
   const moment = t.rateCard.moment[spec.id];
 
   return (
@@ -139,7 +138,7 @@ function PlaceCard({
       <div className="flex min-w-0 flex-1 flex-col gap-3">
         <div>
           <h2 className="font-heading text-base font-semibold tracking-tight">
-            {spec.label}
+            {labelOf(spec.id)}
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">{moment}</p>
         </div>
@@ -233,37 +232,16 @@ function PricePanel({
   days: number;
   onShare: (value: number) => void;
   onDays: (value: number) => void;
-  onStart: (draft: CampaignDraft) => void;
+  onStart: (pick: RateCardPick) => void;
 }) {
   const t = useT("ads");
+  const { labelOf } = useRateCard();
   const c = t.rateCard.calculator;
-  const [quote, setQuote] = React.useState<AdQuote | null>(null);
-  const [loading, setLoading] = React.useState(false);
-  const slot = spec?.id;
-
-  React.useEffect(() => {
-    if (!slot) return;
-    let cancelled = false;
-    setLoading(true);
-    const timer = setTimeout(() => {
-      getCampaignQuote([{ slot, sharePercent: share }], days)
-        .then((result) => {
-          if (!cancelled) setQuote(result);
-        })
-        .catch(() => {
-          if (!cancelled) setQuote(null);
-        })
-        .finally(() => {
-          if (!cancelled) setLoading(false);
-        });
-    }, 250);
-    return () => {
-      cancelled = true;
-      clearTimeout(timer);
-    };
-  }, [slot, share, days]);
-
-  const belowMinimum = quote !== null && quote.totalSom < MIN_ORDER_SOM;
+  const lines = React.useMemo(
+    () => (spec ? [{ slot: spec.id, sharePercent: share }] : []),
+    [spec, share],
+  );
+  const { quote, loading, belowMinimum } = useQuote(lines, days, 250);
 
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-card">
@@ -275,7 +253,7 @@ function PricePanel({
         )}
         <div className="min-w-0">
           <h2 className="font-heading text-base font-semibold tracking-tight">
-            {spec ? spec.label : c.title}
+            {spec ? labelOf(spec.id) : c.title}
           </h2>
           {spec && (
             <p className="mt-1 text-sm text-muted-foreground">

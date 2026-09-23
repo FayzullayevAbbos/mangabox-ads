@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  RiEditLine,
   RiEyeLine,
   RiMegaphoneLine,
   RiMore2Fill,
@@ -11,6 +10,8 @@ import Link from "next/link";
 import {
   actionsFor,
   useCampaignActions,
+  useContinueLabel,
+  usePayLabel,
 } from "@/components/dashboard/ads/campaign-actions";
 import {
   periodRange,
@@ -19,6 +20,7 @@ import {
 import { CampaignStatusBadge } from "@/components/dashboard/ads/campaign-status-badge";
 import { Panel } from "@/components/dashboard/ads/panel";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
+import { setupHref } from "@/components/dashboard/ads/wizard/wizard-links";
 import {
   EmptyResult,
   LoadErrorState,
@@ -41,6 +43,7 @@ import {
 } from "@/components/ui/table";
 import {
   AD_CAMPAIGN_STATUSES,
+  isAwaitingPaymentCheck,
   type AdCampaign,
   type AdCampaignStatus,
 } from "@/lib/api/ads";
@@ -60,7 +63,6 @@ type RowProps = {
   campaign: AdCampaign;
   actions: Actions;
   onOpen: (campaign: AdCampaign) => void;
-  onEdit: (campaign: AdCampaign) => void;
 };
 
 export function CampaignsTab({
@@ -70,8 +72,8 @@ export function CampaignsTab({
   onCreate,
   onReload,
   onOpen,
-  onEdit,
   onChanged,
+  onPreview,
 }: {
   state: State;
   statusFilter: AdCampaignStatus | "all";
@@ -79,12 +81,12 @@ export function CampaignsTab({
   onCreate: () => void;
   onReload: () => void;
   onOpen: (campaign: AdCampaign) => void;
-  onEdit: (campaign: AdCampaign) => void;
   onChanged: (campaign: AdCampaign) => void;
+  onPreview: (campaign: AdCampaign) => void;
 }) {
   const t = useT("ads");
   const p = useT("portal");
-  const actions = useCampaignActions(onChanged);
+  const actions = useCampaignActions({ onDone: onChanged, onPreview });
   const rows =
     state.status === "ready"
       ? statusFilter === "all"
@@ -176,7 +178,6 @@ export function CampaignsTab({
                     campaign={campaign}
                     actions={actions}
                     onOpen={onOpen}
-                    onEdit={onEdit}
                   />
                 ))}
               </TableBody>
@@ -190,7 +191,6 @@ export function CampaignsTab({
                 campaign={campaign}
                 actions={actions}
                 onOpen={onOpen}
-                onEdit={onEdit}
               />
             ))}
           </ul>
@@ -202,7 +202,7 @@ export function CampaignsTab({
   );
 }
 
-function CampaignTableRow({ campaign, actions, onOpen, onEdit }: RowProps) {
+function CampaignTableRow({ campaign, actions, onOpen }: RowProps) {
   return (
     <TableRow
       className="group cursor-pointer border-border transition-colors hover:bg-muted/40"
@@ -221,13 +221,13 @@ function CampaignTableRow({ campaign, actions, onOpen, onEdit }: RowProps) {
         <StatusBlock campaign={campaign} />
       </TableCell>
       <TableCell className="py-4 pr-5" onClick={(e) => e.stopPropagation()}>
-        <RowActions campaign={campaign} actions={actions} onEdit={onEdit} />
+        <RowActions campaign={campaign} actions={actions} />
       </TableCell>
     </TableRow>
   );
 }
 
-function CampaignCard({ campaign, actions, onOpen, onEdit }: RowProps) {
+function CampaignCard({ campaign, actions, onOpen }: RowProps) {
   return (
     <li
       className="cursor-pointer px-4 py-4 transition-colors hover:bg-muted/40 sm:px-5"
@@ -252,7 +252,6 @@ function CampaignCard({ campaign, actions, onOpen, onEdit }: RowProps) {
         <RowActions
           campaign={campaign}
           actions={actions}
-          onEdit={onEdit}
           className="w-full sm:w-auto"
         />
       </div>
@@ -343,39 +342,47 @@ function StatusBlock({ campaign }: { campaign: AdCampaign }) {
   );
 }
 
-const PRIMARY_ORDER = ["submit", "pay", "resume", "pause"] as const;
+const PRIMARY_ORDER = ["continue", "pay", "resume", "pause"] as const;
 
 function RowActions({
   campaign,
   actions,
-  onEdit,
   className,
 }: Omit<RowProps, "onOpen"> & { className?: string }) {
   const t = useT("ads");
-  const p = useT("portal");
   const allowed = actionsFor(campaign);
   const primary = PRIMARY_ORDER.find((key) => allowed.includes(key));
   const busy = actions.isBusy(campaign.id);
+  const payLabel = usePayLabel();
+  const continueLabel = useContinueLabel();
+  const secondary =
+    primary === "pause" ||
+    (primary === "pay" && isAwaitingPaymentCheck(campaign));
 
-  const primaryButton = primary && (
-    <Button
-      size="sm"
-      variant={primary === "pause" ? "outline" : "default"}
-      disabled={busy}
-      className="flex-1 sm:flex-none"
-      onClick={() => {
-        if (primary === "submit") actions.submit(campaign);
-        else if (primary === "pay") actions.askPay(campaign);
-        else if (primary === "resume") actions.resume(campaign);
-        else actions.pause(campaign);
-      }}
-    >
-      {primary === "submit" && p.actions.submit}
-      {primary === "pay" && p.actions.pay}
-      {primary === "resume" && t.actions.resume}
-      {primary === "pause" && t.actions.pause}
-    </Button>
-  );
+  const primaryButton =
+    primary === "continue" ? (
+      <Button asChild size="sm" className="flex-1 sm:flex-none">
+        <Link href={setupHref(campaign.id)}>{continueLabel(campaign)}</Link>
+      </Button>
+    ) : (
+      primary && (
+        <Button
+          size="sm"
+          variant={secondary ? "outline" : "default"}
+          disabled={busy}
+          className="flex-1 sm:flex-none"
+          onClick={() => {
+            if (primary === "pay") actions.askPay(campaign);
+            else if (primary === "resume") actions.resume(campaign);
+            else actions.pause(campaign);
+          }}
+        >
+          {primary === "pay" && payLabel(campaign)}
+          {primary === "resume" && t.actions.resume}
+          {primary === "pause" && t.actions.pause}
+        </Button>
+      )
+    );
 
   return (
     <div className={cn("flex items-center justify-end gap-1.5", className)}>
@@ -398,15 +405,6 @@ function RowActions({
               {t.actions.details}
             </Link>
           </DropdownMenuItem>
-          {allowed.includes("edit") && (
-            <DropdownMenuItem
-              className="gap-2"
-              onSelect={() => onEdit(campaign)}
-            >
-              <RiEditLine className="size-4" />
-              {t.actions.edit}
-            </DropdownMenuItem>
-          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

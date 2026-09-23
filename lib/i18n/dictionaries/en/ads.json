@@ -1,11 +1,11 @@
 {
   "page": {
     "title": "Ads",
-    "description": "Moderation, campaigns, advertisers and the rate card."
+    "description": "Moderation, ads, advertisers and the rate card."
   },
   "tabs": {
     "moderation": "Moderation",
-    "campaigns": "Campaigns",
+    "campaigns": "Ads",
     "advertisers": "Advertisers",
     "rateCard": "Rate card"
   },
@@ -27,33 +27,33 @@
   },
   "moderation": {
     "empty": "Moderation queue is empty",
-    "emptyHint": "Every campaign has been reviewed.",
+    "emptyHint": "Every ad has been reviewed.",
     "slots": "Slots",
     "period": "Period",
     "amount": "Amount",
     "goal": "Impressions",
-    "creatives": "Creatives",
-    "noCreatives": "No creatives added — check before approving.",
+    "creatives": "Banners",
+    "noCreatives": "No banners added — check before approving.",
     "openLink": "Open link"
   },
   "reject": {
-    "title": "Reject campaign",
+    "title": "Reject ad",
     "notice": "The reason is sent to the client over Telegram — write it for them, not as an internal note.",
     "label": "Reason",
-    "placeholder": "e.g. creative text does not meet store policy",
+    "placeholder": "e.g. banner text does not meet store policy",
     "submit": "Reject",
     "required": "Enter a reason."
   },
   "campaigns": {
     "columns": {
       "advertiser": "Brand",
-      "name": "Campaign",
-      "slots": "Slots",
+      "name": "Ad",
+      "slots": "Placements",
       "period": "Period",
       "amount": "Amount",
       "status": "Status"
     },
-    "empty": "No campaigns found.",
+    "empty": "No ads found.",
     "filteredBy": "Filter: {name}",
     "clearFilter": "Clear filter"
   },
@@ -65,20 +65,28 @@
     "pause": "Pause",
     "resume": "Resume",
     "finish": "Finish",
-    "create": "Add campaign",
+    "create": "Create ad",
     "cancel": "Cancel",
     "proceed": "Continue",
     "close": "Close",
     "more": "More actions"
   },
+  "pause": {
+    "title": "Pause ad",
+    "confirm": "The ad will be taken off air temporarily — impressions will stop. You can resume it any time. Do you really want to pause it?"
+  },
+  "resume": {
+    "title": "Resume ad",
+    "confirm": "The ad will go back on air and impressions will continue. Do you really want to resume it?"
+  },
   "finish": {
-    "title": "Finish campaign",
-    "confirm": "The campaign will be finished and cannot be reopened. Continue?"
+    "title": "Finish ad",
+    "confirm": "The ad will be finished and cannot go live again. Continue?"
   },
   "sheet": {
     "tabs": {
       "overview": "Overview",
-      "creatives": "Creatives",
+      "creatives": "Banners",
       "stats": "Stats",
       "orders": "Payments"
     },
@@ -86,7 +94,7 @@
       "advertiser": "Brand",
       "period": "Period",
       "days": "{days} days",
-      "slots": "Slots",
+      "slots": "Placements",
       "share": "Share",
       "impressions": "Impressions",
       "price": "Price",
@@ -105,13 +113,13 @@
       "goal": "Impression goal"
     },
     "creatives": {
-      "add": "Add creative",
-      "empty": "This campaign has no creatives.",
+      "add": "Add banner",
+      "empty": "This ad has no banners.",
       "type": "Type",
-      "typeCard": "Card (rendered by the app)",
-      "typeImage": "Image",
-      "slot": "Slot",
-      "anySlot": "All slots",
+      "typeCard": "Text banner",
+      "typeImage": "Poster",
+      "slot": "Placement",
+      "anySlot": "All placements",
       "brandName": "Brand name",
       "title": "Title",
       "body": "Body",
@@ -119,21 +127,21 @@
       "accent": "Accent color",
       "href": "Link",
       "active": "Live",
-      "activeHint": "Turn off to temporarily stop showing this creative.",
+      "activeHint": "Turn off to temporarily stop showing this banner.",
       "inactive": "Disabled",
       "image": "Image",
       "logo": "Logo",
       "upload": "Upload",
       "uploading": "Uploading…",
       "remove": "Delete",
-      "removeTitle": "Delete creative",
-      "removeConfirm": "The creative will be deleted. Continue?",
+      "removeTitle": "Delete banner",
+      "removeConfirm": "The banner will be deleted. Continue?",
       "imageHint": "At least {min} px, ratio {ratio}.",
       "imageTooSmall": "Image too small: at least {min} px required (uploaded {actual}).",
       "imageWrongRatio": "Wrong ratio: {ratio} required (uploaded {actual}).",
-      "cardOnlySlot": "This slot only supports card creatives — no image upload.",
-      "createTitle": "New creative",
-      "editTitle": "Edit creative",
+      "cardOnlySlot": "This placement shows text banners only — no image upload.",
+      "createTitle": "New banner",
+      "editTitle": "Edit banner",
       "save": "Save",
       "create": "Add",
       "saving": "Saving…",
@@ -141,10 +149,10 @@
       "hrefInvalid": "The link must start with https://.",
       "accentInvalid": "Use #RRGGBB format (e.g. #1E88E5).",
       "brandRequired": "Enter a brand name.",
-      "slotRequired": "Select a slot for the image creative.",
-      "lockedHint": "Creatives can only be changed before moderation. A live creative can still be switched off.",
-      "noImageSlots": "This campaign has no image slots — card creatives only.",
-      "cardSlotHint": "A card creative runs in every slot of the campaign."
+      "slotRequired": "Select a placement for the poster.",
+      "lockedHint": "Banners can only be changed before moderation. A live banner can still be switched off.",
+      "noImageSlots": "This ad has no poster placements — text banner only.",
+      "cardSlotHint": "A text banner shows in every placement of the ad."
     },
     "stats": {
       "impressions": "Impressions",
@@ -155,8 +163,8 @@
       "progress": "Delivered",
       "chartTitle": "Daily breakdown",
       "empty": "No stats yet.",
-      "bySlot": "By slot",
-      "byCreative": "By creative",
+      "bySlot": "By placement",
+      "byCreative": "By banner",
       "hint": "Impression — rendered; viewed — on screen for over a second."
     },
     "orders": {
@@ -181,8 +189,8 @@
     },
     "empty": "No advertisers found.",
     "noTelegram": "No Telegram linked — approval/rejection messages will not arrive.",
-    "viewCampaigns": "Campaigns",
-    "autoActivate": "No manual approval needed — the account activates automatically once its first campaign is approved.",
+    "viewCampaigns": "Ads",
+    "autoActivate": "No manual approval needed — the account activates automatically once its first ad is approved.",
     "block": "Block",
     "blockTitle": "Block account",
     "blockConfirm": "A blocked account cannot sign in to the portal. Continue?",
@@ -211,16 +219,16 @@
     "cpm": "CPM {amount}",
     "currency": "so'm",
     "formats": {
-      "card": "Card",
-      "image": "Image"
+      "card": "Text banner",
+      "image": "Poster"
     },
-    "cardOnly": "Card only",
+    "cardOnly": "Text banner only",
     "choose": "Choose",
     "selected": "Chosen",
     "calculator": {
       "title": "Work out the price",
-      "share": "Inventory share",
-      "shareHint": "{share}% of the slot's daily inventory — about {count} impressions a day.",
+      "share": "Share of impressions",
+      "shareHint": "{share}% of this placement's daily impressions — about {count} a day.",
       "days": "Length",
       "daysUnit": "{days} days",
       "reach": "{count} impressions · {days} days",
@@ -229,29 +237,29 @@
       "subtotal": "Subtotal",
       "discountSom": "Discount",
       "total": "Total",
-      "start": "Start this campaign",
+      "start": "Advertise here",
       "minOrderFix": "Raise the share or the length."
     }
   },
   "form": {
-    "createTitle": "New campaign",
-    "editTitle": "Edit campaign",
+    "createTitle": "New ad",
+    "editTitle": "Edit ad",
     "description": "The price comes from the rate card — no manual amount.",
     "advertiser": "Advertiser",
     "advertiserPlaceholder": "Select a brand",
     "advertiserRequired": "Select an advertiser.",
-    "name": "Campaign name",
-    "nameRequired": "Enter a campaign name.",
-    "slots": "Slots",
-    "addSlot": "Add slot",
-    "removeSlot": "Remove slot",
-    "slotTaken": "This slot is already added.",
+    "name": "Ad name",
+    "nameRequired": "Enter an ad name.",
+    "slots": "Placements",
+    "addSlot": "Add placement",
+    "removeSlot": "Remove placement",
+    "slotTaken": "This placement is already added.",
     "startDay": "Start date",
     "days": "Days",
     "discount": "Discount, %",
     "discountHint": "0–50%, admin only.",
-    "frequencyCap": "Frequency cap",
-    "frequencyCapHint": "Times per user per day (1–10).",
+    "frequencyCap": "Times per person per day",
+    "frequencyCapHint": "Doesn't change the price — you pay for the number of impressions. This only spreads them out: lower means more different people see the ad, higher means each person sees it more often.",
     "quoteTitle": "Price",
     "quoteLoading": "Calculating…",
     "minOrder": "Minimum order is 100 000 so'm.",
@@ -260,16 +268,22 @@
     "saving": "Saving…"
   },
   "toasts": {
-    "approved": "Campaign approved",
-    "rejected": "Campaign rejected",
+    "approved": "Ad approved",
+    "rejected": "Ad rejected",
     "paused": "Paused",
     "resumed": "Resumed",
     "finished": "Finished",
-    "created": "Campaign created",
+    "created": "Ad created",
     "updated": "Saved",
-    "creativeSaved": "Creative saved",
-    "creativeDeleted": "Creative deleted",
+    "creativeSaved": "Banner saved",
+    "creativeDeleted": "Banner deleted",
     "uploaded": "Uploaded",
     "advertiserUpdated": "Status changed"
+  },
+  "slotNames": {
+    "reader_end": "Chapter end",
+    "home_carousel": "Home carousel",
+    "manga_detail": "Manga page",
+    "catalog_grid": "Catalog grid"
   }
 }

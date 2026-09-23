@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Outfit, Spectral } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,17 +9,10 @@ import { I18nProvider } from "@/lib/i18n/provider";
 import { getServerDictionary } from "@/lib/i18n/server";
 import { siteUrl } from "@/lib/site";
 
-const outfit = Outfit({subsets:['latin'],variable:'--font-sans'});
-
-const spectral = Spectral({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  variable: "--font-serif",
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -89,7 +82,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", outfit.variable, spectral.variable)}
+      className={cn("h-full", "antialiased", "font-sans", inter.variable, geistMono.variable)}
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider>

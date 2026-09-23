@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { AppSidebar } from "@/components/dashboard/app-sidebar";
 import {
   SidebarInset,
@@ -22,12 +23,18 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { dict } = await getServerDictionary();
+  const [{ dict }, cookieStore] = await Promise.all([
+    getServerDictionary(),
+    cookies(),
+  ]);
+  const sidebarOpen = cookieStore.get("sidebar_state")?.value !== "false";
   return (
     <SidebarProvider
+      defaultOpen={sidebarOpen}
       style={
         {
           "--sidebar-width": "17rem",
+          "--sidebar-width-icon": "3.5rem",
         } as React.CSSProperties
       }
     >
@@ -37,7 +44,11 @@ export default async function DashboardLayout({
             tegishda yetib boradi. Desktopda inset karta yumaloq burchakli,
             shuning uchun u yerda header oddiy oqimda qoladi. */}
         <header className="sticky top-0 z-20 flex h-14 shrink-0 items-center gap-2 border-b border-border bg-canvas/85 px-3 backdrop-blur-sm sm:gap-3 sm:px-4 md:static dark:bg-background/85">
-          <SidebarTrigger className="-ms-1 size-10 shrink-0 md:hidden" />
+          <SidebarTrigger
+            className="-ms-1 size-10 shrink-0 md:hidden"
+            aria-label={dict.nav.header.toggleSidebar}
+            title={dict.nav.header.toggleSidebar}
+          />
           {/* Mobilda bu statik yorliq o'rin egallaydi, ammo ma'lumot bermaydi —
               har bir sahifa ostida o'z PageHeader sarlavhasi bor. */}
           <span className="hidden truncate text-sm font-medium text-muted-foreground sm:inline">

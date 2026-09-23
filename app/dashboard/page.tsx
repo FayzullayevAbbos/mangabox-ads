@@ -1,15 +1,13 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RiAddLine, RiTimeLine } from "@remixicon/react";
 
-import {
-  CampaignFormSheet,
-  type CampaignFormTarget,
-} from "@/components/dashboard/ads/campaign-form-sheet";
 import { CampaignsTab } from "@/components/dashboard/ads/campaigns-tab";
 import { RateCardProvider } from "@/components/dashboard/ads/rate-card-context";
+import { newCampaignHref } from "@/components/dashboard/ads/wizard/wizard-links";
 import { PageHeader } from "@/components/dashboard/page-header";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,7 +47,6 @@ function CampaignsPage() {
     AdCampaignStatus | "all"
   >("all");
   const router = useRouter();
-  const [formTarget, setFormTarget] = React.useState<CampaignFormTarget>(null);
 
   const load = React.useCallback((quiet = false) => {
     if (!quiet) setCampaigns({ status: "loading" });
@@ -70,7 +67,7 @@ function CampaignsPage() {
       .catch(() => setAccount(null));
   }, [load]);
 
-  const applyChange = (updated: AdCampaign) => {
+  const replaceRow = (updated: AdCampaign) =>
     setCampaigns((prev) =>
       prev.status === "ready"
         ? {
@@ -79,6 +76,9 @@ function CampaignsPage() {
           }
         : prev,
     );
+
+  const applyChange = (updated: AdCampaign) => {
+    replaceRow(updated);
     void load(true);
   };
 
@@ -105,12 +105,11 @@ function CampaignsPage() {
         title={p.home.title}
         description={p.home.description}
         action={
-          <Button
-            className="w-full sm:w-auto"
-            onClick={() => setFormTarget("new")}
-          >
-            <RiAddLine className="size-4" />
-            {t.actions.create}
+          <Button asChild className="w-full sm:w-auto">
+            <Link href={newCampaignHref()}>
+              <RiAddLine className="size-4" />
+              {t.actions.create}
+            </Link>
           </Button>
         }
       />
@@ -146,20 +145,11 @@ function CampaignsPage() {
         state={campaigns}
         statusFilter={statusFilter}
         onStatusFilter={setStatusFilter}
-        onCreate={() => setFormTarget("new")}
+        onCreate={() => router.push(newCampaignHref())}
         onReload={() => void load()}
         onOpen={(campaign) => router.push(`/dashboard/campaigns/${campaign.id}`)}
-        onEdit={(campaign) => setFormTarget(campaign)}
         onChanged={applyChange}
-      />
-
-      <CampaignFormSheet
-        target={formTarget}
-        onClose={() => setFormTarget(null)}
-        onSaved={() => {
-          setFormTarget(null);
-          void load(true);
-        }}
+        onPreview={replaceRow}
       />
     </div>
   );

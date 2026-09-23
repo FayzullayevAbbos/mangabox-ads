@@ -1,7 +1,8 @@
 {
   "header": {
     "metaTitle": "MangaBox Ads — Кабинет рекламодателя",
-    "dashboard": "Рекламный кабинет"
+    "dashboard": "Рекламный кабинет",
+    "toggleSidebar": "Свернуть или развернуть боковую панель (Ctrl+B)"
   },
   "groups": {
     "core": "Основное",

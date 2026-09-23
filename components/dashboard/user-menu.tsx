@@ -78,7 +78,12 @@ export function UserMenu({ collapsed }: { collapsed: boolean }) {
 
   if (state.status === "loading") {
     return (
-      <div className="flex items-center gap-3 rounded-lg border bg-secondary px-2 py-2">
+      <div
+        className={cn(
+          "flex items-center gap-3 rounded-lg border bg-secondary px-2 py-2",
+          collapsed && "size-10 justify-center border-0 bg-transparent p-0",
+        )}
+      >
         <Skeleton className="size-9 shrink-0 rounded-full" />
         {!collapsed && (
           <div className="min-w-0 flex-1 space-y-1.5">
@@ -99,7 +104,7 @@ export function UserMenu({ collapsed }: { collapsed: boolean }) {
       <DropdownMenuTrigger
         className={cn(
           "flex w-full items-center gap-3 rounded-lg border bg-secondary px-2 py-2 text-left text-secondary-foreground shadow-xs transition-colors outline-none hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-ring",
-          collapsed && "justify-center px-0",
+          collapsed && "size-10 justify-center border-0 bg-transparent p-0 shadow-none hover:bg-sidebar-accent",
         )}
       >
         <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground shadow-sm">

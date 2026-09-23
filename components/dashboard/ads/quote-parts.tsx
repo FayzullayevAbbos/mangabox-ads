@@ -123,7 +123,7 @@ export function NumberField({
               onChange(Math.min(max, Math.max(min, Math.round(next))));
             }
           }}
-          className="h-10 w-20 shrink-0 text-center font-mono text-[0.9375rem] tabular-nums md:text-[0.9375rem]"
+          className="h-10 w-20 shrink-0 [appearance:textfield] text-center font-mono text-[0.9375rem] tabular-nums md:text-[0.9375rem] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         />
       </div>
       {(minLabel || maxLabel) && (

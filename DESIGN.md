@@ -18,27 +18,27 @@ colors:
   destructive: "oklch(0.577 0.245 27.325)"
 typography:
   display:
-    fontFamily: "Outfit, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "1.875rem"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "-0.025em"
   headline:
-    fontFamily: "Outfit, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 600
     letterSpacing: "-0.025em"
   title:
-    fontFamily: "Outfit, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 600
   body:
-    fontFamily: "Outfit, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "0.9375rem"
     fontWeight: 400
     lineHeight: 1.6
   label:
-    fontFamily: "Outfit, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "0.75rem"
     fontWeight: 400
   mono:
@@ -159,12 +159,11 @@ Binafsha-kulrang palitra. Neytrallar hech qachon sof kulrang emas — hammasida 
 
 ## Typography
 
-**Sans (hamma joyda):** Outfit — sarlavha ham, matn ham. `--font-sans` va `--font-heading` bitta oilaga ishora qiladi.
+**Sans (hamma joyda):** Inter (lotin + kirill) — sarlavha ham, matn ham. `--font-sans` va `--font-heading` bitta oilaga ishora qiladi.
 **Mono:** Geist Mono — summa, ko'rsatish soni, ID, o'lcham, foiz.
 
-**Character:** Outfit geometrik va biroz yumaloq — rasmiy emas, lekin jiddiy. Bitta oila sarlavhadan matngacha ishlatilgani uchun iyerarxiya **o'lcham va og'irlik** bilan quriladi, shrift almashtirish bilan emas. Geist Mono esa faqat raqam uchun: u yerda har bir belgi bir xil kenglikda turishi shart, chunki sonlar ustma-ust taqqoslanadi.
+**Character:** Inter ekran uchun chizilgan — kichik o'lchamda ham aniq o'qiladi, o'zbek lotini va rus kirilida bir xil ko'rinadi. Bitta oila sarlavhadan matngacha ishlatilgani uchun iyerarxiya **o'lcham va og'irlik** bilan quriladi, shrift almashtirish bilan emas. Geist Mono esa faqat raqam uchun: u yerda har bir belgi bir xil kenglikda turishi shart, chunki sonlar ustma-ust taqqoslanadi.
 
-`Spectral` (`--font-serif`) yuklanadi, lekin hech qayerda ishlatilmaydi — yangi ekranda unga tayanmang.
 
 ### Hierarchy
 - **Display** (600, `1.5rem` → `1.875rem` sm'dan, tracking-tight): sahifa sarlavhasi. Bitta ekranda bitta.
@@ -292,7 +291,7 @@ Narxnomadagi yopishib turuvchi ustun: tanlangan joy sxemasi va nomi → ikkita s
 - **Don't** panel ichiga chegarali ikkinchi panel qo'ymang.
 - **Don't** sof kulrang (`oklch(l 0 0)`) yoki Tailwind'ning `gray-*` shkalasini ishlatmang — status ranglaridan tashqari hamma neytral tokendan keladi.
 - **Don't** bitta ekranda ikkita binafsha asosiy element qo'ymang.
-- **Don't** yangi shrift oilasi qo'shmang; `Spectral` ham yuklangan bo'lsa-da, ishlatilmaydi.
+- **Don't** yangi shrift oilasi qo'shmang; Inter va Geist Mono yetarli.
 - **Don't** `--active` ni yangi joyda ishlatmang: u yorug'da ko'k, qorong'ida binafsha. Tanlov rangi kerak bo'lsa `primary` oling.
 - **Don't** raqamlar devori bilan cheklanmang — ko'rsatkich yonida u nimadan kelib chiqqani (davr, qamrov, ulush) turishi kerak.
 - **Don't** modal oynani birinchi yechim sifatida tanlamang: avval panel ichida ochish, sheet yoki alohida sahifani ko'rib chiqing.

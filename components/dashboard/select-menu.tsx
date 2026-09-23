@@ -1,18 +1,15 @@
 "use client";
 
-import { RiExpandUpDownLine } from "@remixicon/react";
-
-import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useT } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
-/** Filtrlar uchun sodda tanlov menyusi (select o'rniga dropdown). */
 export function SelectMenu({
   label,
   value,
@@ -29,32 +26,18 @@ export function SelectMenu({
   className?: string;
 }) {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn(
-            "justify-between font-normal",
-            fullWidth && "w-full",
-            className,
-          )}
-        >
-          <span className="min-w-0 flex-1 truncate text-left">{label}</span>
-          <RiExpandUpDownLine className="size-4 shrink-0 text-muted-foreground" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="max-h-72 overflow-y-auto">
+    <Select value={value} onValueChange={onSelect}>
+      <SelectTrigger className={cn(fullWidth && "w-full", className)}>
+        <SelectValue placeholder={label} />
+      </SelectTrigger>
+      <SelectContent className="max-h-72">
         {options.map((o) => (
-          <DropdownMenuCheckboxItem
-            key={o.value}
-            checked={value === o.value}
-            onCheckedChange={() => onSelect(o.value)}
-          >
-            <span className="truncate">{o.label}</span>
-          </DropdownMenuCheckboxItem>
+          <SelectItem key={o.value} value={o.value}>
+            {o.label}
+          </SelectItem>
         ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </SelectContent>
+    </Select>
   );
 }
 

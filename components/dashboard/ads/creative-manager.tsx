@@ -5,6 +5,8 @@ import { RiAddLine, RiImageLine, RiUploadCloud2Line } from "@remixicon/react";
 import { toast } from "sonner";
 
 import { CreativePreview } from "@/components/dashboard/ads/creative-preview";
+import { ratioLabel, readImageSize } from "@/components/dashboard/ads/image-file";
+import { CharCounter, TextField } from "@/components/dashboard/ads/text-field";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import { SelectMenu } from "@/components/dashboard/select-menu";
 import { Button } from "@/components/ui/button";
@@ -25,6 +27,8 @@ import {
   createCreative,
   CREATIVE_LIMITS,
   deleteCreative,
+  HEX_RE,
+  HREF_RE,
   PortalApiError,
   updateCreative,
   uploadCreativeImage,
@@ -37,10 +41,7 @@ import {
 } from "@/lib/api/ads";
 import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
-import { cn } from "@/lib/utils";
 
-const HREF_RE = /^https:\/\/\S+$/i;
-const HEX_RE = /^#[0-9a-f]{6}$/i;
 
 /** Kreativ matni faqat moderatsiyagacha o'zgaradi; `active` esa har doim. */
 function isEditable(campaign: AdCampaign): boolean {
@@ -520,14 +521,14 @@ function CreativeDialog({
             </div>
           )}
 
-          <Field
+          <TextField
             label={t.sheet.creatives.brandName}
             value={form.brandName}
             limit={CREATIVE_LIMITS.brandName}
             onChange={(v) => set("brandName", v)}
             error={errorFor("brandName")}
           />
-          <Field
+          <TextField
             label={t.sheet.creatives.title}
             value={form.title}
             limit={CREATIVE_LIMITS.title}
@@ -538,7 +539,7 @@ function CreativeDialog({
           <div className="space-y-2">
             <div className="flex items-baseline justify-between">
               <Label>{t.sheet.creatives.body}</Label>
-              <Counter value={form.body} limit={CREATIVE_LIMITS.body} />
+              <CharCounter value={form.body} limit={CREATIVE_LIMITS.body} />
             </div>
             <Textarea
               rows={2}
@@ -551,7 +552,7 @@ function CreativeDialog({
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field
+            <TextField
               label={t.sheet.creatives.cta}
               value={form.ctaText}
               limit={CREATIVE_LIMITS.ctaText}
@@ -581,7 +582,7 @@ function CreativeDialog({
             </div>
           </div>
 
-          <Field
+          <TextField
             label={t.sheet.creatives.href}
             value={form.href}
             limit={CREATIVE_LIMITS.href}
@@ -612,81 +613,4 @@ function CreativeDialog({
       </DialogContent>
     </Dialog>
   );
-}
-
-function Field({
-  label,
-  value,
-  limit,
-  onChange,
-  error,
-  mono,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  limit: number;
-  onChange: (value: string) => void;
-  error?: React.ReactNode;
-  mono?: boolean;
-  placeholder?: string;
-}) {
-  return (
-    <div className="space-y-2">
-      <div className="flex items-baseline justify-between">
-        <Label>{label}</Label>
-        <Counter value={value} limit={limit} />
-      </div>
-      <Input
-        maxLength={limit}
-        placeholder={placeholder}
-        className={cn(
-          "h-10 text-[0.9375rem] md:text-[0.9375rem]",
-          mono && "font-mono",
-        )}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-      {error}
-    </div>
-  );
-}
-
-function Counter({ value, limit }: { value: string; limit: number }) {
-  return (
-    <span
-      className={cn(
-        "font-mono text-[0.6875rem] text-muted-foreground",
-        value.length >= limit && "text-destructive",
-      )}
-    >
-      {value.length}/{limit}
-    </span>
-  );
-}
-
-function ratioLabel(ratio: number): string {
-  if (Math.abs(ratio - 16 / 9) < 0.01) return "16:9";
-  if (Math.abs(ratio - 2 / 3) < 0.01) return "2:3";
-  if (Math.abs(ratio - 1) < 0.01) return "1:1";
-  return ratio.toFixed(2);
-}
-
-/** Rasm o'lchamini yuklashdan oldin o'qiydi; o'qib bo'lmasa server hal qiladi. */
-function readImageSize(
-  file: File,
-): Promise<{ width: number; height: number } | null> {
-  return new Promise((resolve) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => {
-      URL.revokeObjectURL(url);
-      resolve({ width: img.naturalWidth, height: img.naturalHeight });
-    };
-    img.onerror = () => {
-      URL.revokeObjectURL(url);
-      resolve(null);
-    };
-    img.src = url;
-  });
 }
