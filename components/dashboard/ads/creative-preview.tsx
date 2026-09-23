@@ -30,7 +30,7 @@ export function CreativePreview({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 rounded-lg bg-muted/40 p-3.5",
+        "flex flex-col gap-3 rounded-xl border border-border bg-card p-4",
         !creative.active && "opacity-60",
         className,
       )}
@@ -44,7 +44,7 @@ export function CreativePreview({
             className="h-16 w-24 shrink-0 rounded-md object-cover"
           />
         ) : (
-          <div className="flex h-16 w-24 shrink-0 items-center justify-center rounded-md bg-background text-muted-foreground">
+          <div className="flex h-16 w-24 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
             <RiImageLine className="size-5" />
           </div>
         )}

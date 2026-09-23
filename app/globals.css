@@ -26,6 +26,7 @@
   --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
+  --color-canvas: var(--canvas);
   --color-field: var(--field);
   --color-active: var(--active);
   --color-active-foreground: var(--active-foreground);
@@ -56,7 +57,10 @@
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
-  --card: #FAFAFA;
+  /* Sirt pog'onasi: canvas (sahifa) < card (panel). Ikkalasi bir xil bo'lsa
+     kartalar faqat chegara bilan ko'rinadi — shuning uchun canvas quyiroq. */
+  --canvas: oklch(0.964 0.005 286);
+  --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -64,15 +68,15 @@
   --primary-foreground: #ffffff;
   --secondary: #EAEDF0;
   --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --muted: oklch(0.969 0.004 286);
+  --muted-foreground: oklch(0.556 0.008 286);
+  --accent: oklch(0.969 0.004 286);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --field: #FAFAFA;
+  --border: oklch(0.919 0.005 286);
+  --input: oklch(0.919 0.005 286);
+  --ring: oklch(0.708 0.008 286);
+  --field: oklch(0.977 0.004 286);
   --active: #0162FF;
   --active-foreground: #ffffff;
   --success: oklch(0.6 0.15 160);
@@ -85,18 +89,19 @@
   --chart-4: oklch(0.554 0.135 66.442);
   --chart-5: oklch(0.476 0.114 61.907);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
+  --sidebar: oklch(0.987 0.003 286);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.541 0.281 293.009);
   --sidebar-primary-foreground: oklch(0.969 0.016 293.756);
-  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent: oklch(0.969 0.004 286);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-border: oklch(0.919 0.005 286);
+  --sidebar-ring: oklch(0.708 0.008 286);
 }
 
 .dark {
   --background: oklch(0.235 0.016 278);
+  --canvas: oklch(0.235 0.016 278);
   --foreground: oklch(0.965 0.005 278);
   --card: oklch(0.268 0.017 278);
   --card-foreground: oklch(0.965 0.005 278);

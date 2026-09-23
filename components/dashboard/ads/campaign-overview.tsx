@@ -1,5 +1,6 @@
 "use client";
 
+import { Panel } from "@/components/dashboard/ads/panel";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import type { AdCampaign } from "@/lib/api/ads";
 import { formatCount, formatDateTime, formatSomAmount } from "@/lib/format";
@@ -54,7 +55,7 @@ function SlotsPanel({ campaign }: { campaign: AdCampaign }) {
       <div className="overflow-x-auto">
         <table className="w-full min-w-[28rem] text-sm">
           <thead>
-            <tr className="border-b border-border text-left text-muted-foreground">
+            <tr className="border-b border-border bg-muted/50 text-left text-muted-foreground">
               <th className="px-5 py-2.5 font-medium">{o.slots}</th>
               <th className="px-3 py-2.5 text-right font-medium">{o.share}</th>
               <th className="px-3 py-2.5 text-right font-medium">
@@ -117,27 +118,6 @@ function PricePanel({ campaign }: { campaign: AdCampaign }) {
         </span>
       </div>
     </Panel>
-  );
-}
-
-function Panel({
-  title,
-  className,
-  children,
-}: {
-  title: string;
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section
-      className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
-    >
-      <h2 className="border-b border-border px-5 py-3 text-sm font-semibold">
-        {title}
-      </h2>
-      {children}
-    </section>
   );
 }
 

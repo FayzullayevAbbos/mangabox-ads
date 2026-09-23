@@ -3,13 +3,13 @@
 import * as React from "react";
 import { RiBillLine } from "@remixicon/react";
 
+import { Panel } from "@/components/dashboard/ads/panel";
 import { PageHeader } from "@/components/dashboard/page-header";
 import {
   EmptyResult,
   LoadErrorState,
   TableSkeleton,
 } from "@/components/dashboard/page-states";
-import { TABLE_BLEED } from "@/components/dashboard/table-bleed";
 import { TransactionStatusBadge } from "@/components/dashboard/transaction-status-badge";
 import {
   Table,
@@ -60,64 +60,67 @@ export default function OrdersPage() {
     <div className="mx-auto w-full max-w-[1500px] space-y-8">
       <PageHeader title={p.orders.title} description={p.orders.description} />
 
-      {state.status === "loading" && <TableSkeleton rows={5} />}
-      {state.status === "error" && (
-        <LoadErrorState message={state.message} onRetry={load} />
-      )}
-      {state.status === "ready" && state.rows.length === 0 && (
-        <EmptyResult
-          icon={RiBillLine}
-          title={t.sheet.orders.empty}
-          description={p.orders.emptyDescription}
-        />
-      )}
-      {state.status === "ready" && state.rows.length > 0 && (
-        <Table
-          containerClassName={TABLE_BLEED}
-          className="min-w-[48rem] text-[0.9375rem]"
-        >
-          <TableHeader>
-            <TableRow className="border-border hover:bg-transparent">
-              <TableHead className="h-11 px-0 text-sm font-semibold text-foreground">
-                {cols.date}
-              </TableHead>
-              <TableHead className="h-11 text-sm font-semibold text-foreground">
-                {p.orders.campaign}
-              </TableHead>
-              <TableHead className="h-11 text-sm font-semibold text-foreground">
-                {cols.provider}
-              </TableHead>
-              <TableHead className="h-11 text-right text-sm font-semibold text-foreground">
-                {cols.amount}
-              </TableHead>
-              <TableHead className="h-11 text-sm font-semibold text-foreground">
-                {cols.status}
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {state.rows.map((order) => (
-              <TableRow key={order.id} className="border-border">
-                <TableCell className="h-14 px-0 text-sm whitespace-nowrap text-muted-foreground">
-                  {order.createdAt ? formatDateTime(order.createdAt) : "—"}
-                </TableCell>
-                <TableCell className="max-w-[18rem] truncate font-medium">
-                  {state.names.get(order.campaignId) ?? "—"}
-                </TableCell>
-                <TableCell className="text-sm capitalize">
-                  {order.provider}
-                </TableCell>
-                <TableCell className="text-right font-mono tabular-nums">
-                  {formatSomAmount(order.amount)}
-                </TableCell>
-                <TableCell>
-                  <TransactionStatusBadge status={order.status} />
-                </TableCell>
+      <Panel>
+        {state.status === "loading" && (
+          <div className="px-5">
+            <TableSkeleton rows={5} />
+          </div>
+        )}
+        {state.status === "error" && (
+          <LoadErrorState message={state.message} onRetry={load} />
+        )}
+        {state.status === "ready" && state.rows.length === 0 && (
+          <EmptyResult
+            icon={RiBillLine}
+            title={t.sheet.orders.empty}
+            description={p.orders.emptyDescription}
+          />
+        )}
+        {state.status === "ready" && state.rows.length > 0 && (
+          <Table className="min-w-[48rem] text-[0.9375rem]">
+            <TableHeader>
+              <TableRow className="border-border hover:bg-transparent">
+                <TableHead className="h-11 pl-5 text-sm font-semibold text-foreground">
+                  {cols.date}
+                </TableHead>
+                <TableHead className="h-11 text-sm font-semibold text-foreground">
+                  {p.orders.campaign}
+                </TableHead>
+                <TableHead className="h-11 text-sm font-semibold text-foreground">
+                  {cols.provider}
+                </TableHead>
+                <TableHead className="h-11 text-right text-sm font-semibold text-foreground">
+                  {cols.amount}
+                </TableHead>
+                <TableHead className="h-11 pr-5 text-sm font-semibold text-foreground">
+                  {cols.status}
+                </TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
+            </TableHeader>
+            <TableBody>
+              {state.rows.map((order) => (
+                <TableRow key={order.id} className="border-border">
+                  <TableCell className="h-14 pl-5 text-sm whitespace-nowrap text-muted-foreground">
+                    {order.createdAt ? formatDateTime(order.createdAt) : "—"}
+                  </TableCell>
+                  <TableCell className="max-w-[18rem] truncate font-medium">
+                    {state.names.get(order.campaignId) ?? "—"}
+                  </TableCell>
+                  <TableCell className="text-sm capitalize">
+                    {order.provider}
+                  </TableCell>
+                  <TableCell className="text-right font-mono tabular-nums">
+                    {formatSomAmount(order.amount)}
+                  </TableCell>
+                  <TableCell className="pr-5">
+                    <TransactionStatusBadge status={order.status} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </Panel>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import * as React from "react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { RiBarChart2Line } from "@remixicon/react";
 
+import { Panel } from "@/components/dashboard/ads/panel";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import {
   EmptyResult,
@@ -104,9 +105,8 @@ export function CampaignStats({ campaign }: { campaign: AdCampaign }) {
 
       <p className="text-xs text-muted-foreground">{t.sheet.stats.hint}</p>
 
-      <section>
-        <h3 className="text-sm font-medium">{t.sheet.stats.chartTitle}</h3>
-        <div className="mt-3">
+      <Panel title={t.sheet.stats.chartTitle} bodyClassName="px-5 py-4">
+        <div>
           {days.every((d) => d.impressions === 0) ? (
             <EmptyResult
               icon={RiBarChart2Line}
@@ -150,9 +150,9 @@ export function CampaignStats({ campaign }: { campaign: AdCampaign }) {
             </ChartContainer>
           )}
         </div>
-      </section>
+      </Panel>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid items-start gap-4 lg:grid-cols-2">
         <ShareList
           title={t.sheet.stats.bySlot}
           buckets={slots}
@@ -183,7 +183,7 @@ function Tile({
   className?: string;
 }) {
   return (
-    <div className={`bg-background px-4 py-3 ${className ?? ""}`}>
+    <div className={`bg-card px-4 py-3 ${className ?? ""}`}>
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="mt-1 font-mono text-lg font-semibold tabular-nums">
         {value}
@@ -207,12 +207,11 @@ function ShareList({
 }) {
   const t = useT("ads");
   return (
-    <section>
-      <h3 className="text-sm font-medium">{title}</h3>
+    <Panel title={title} bodyClassName="px-5 py-4">
       {buckets.length === 0 ? (
-        <p className="mt-2 text-sm text-muted-foreground">{empty}</p>
+        <p className="text-sm text-muted-foreground">{empty}</p>
       ) : (
-        <ul className="mt-3 space-y-3">
+        <ul className="space-y-3">
           {buckets.map((bucket) => {
             const share = total
               ? Math.round((bucket.impressions / total) * 100)
@@ -243,6 +242,6 @@ function ShareList({
           })}
         </ul>
       )}
-    </section>
+    </Panel>
   );
 }

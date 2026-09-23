@@ -32,11 +32,11 @@ export default async function DashboardLayout({
       }
     >
       <AppSidebar />
-      <SidebarInset className="bg-[#FAFAFA] dark:bg-transparent">
+      <SidebarInset className="bg-canvas dark:bg-transparent">
         {/* Mobilda sticky — navigatsiya tugmasi sahifaning istalgan joyidan bir
             tegishda yetib boradi. Desktopda inset karta yumaloq burchakli,
             shuning uchun u yerda header oddiy oqimda qoladi. */}
-        <header className="sticky top-0 z-20 flex h-14 shrink-0 items-center gap-2 border-b border-border bg-[#FAFAFA]/85 px-3 backdrop-blur-sm sm:gap-3 sm:px-4 md:static dark:bg-background/85">
+        <header className="sticky top-0 z-20 flex h-14 shrink-0 items-center gap-2 border-b border-border bg-canvas/85 px-3 backdrop-blur-sm sm:gap-3 sm:px-4 md:static dark:bg-background/85">
           <SidebarTrigger className="-ms-1 size-10 shrink-0 md:hidden" />
           {/* Mobilda bu statik yorliq o'rin egallaydi, ammo ma'lumot bermaydi —
               har bir sahifa ostida o'z PageHeader sarlavhasi bor. */}

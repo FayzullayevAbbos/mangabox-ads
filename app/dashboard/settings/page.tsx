@@ -3,6 +3,7 @@
 import * as React from "react";
 import { toast } from "sonner";
 
+import { Panel } from "@/components/dashboard/ads/panel";
 import { PageHeader } from "@/components/dashboard/page-header";
 import { LoadErrorState } from "@/components/dashboard/page-states";
 import { Button } from "@/components/ui/button";
@@ -53,18 +54,20 @@ export default function SettingsPage() {
   }, [load]);
 
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-10">
+    <div className="mx-auto w-full max-w-3xl space-y-6">
       <PageHeader title={p.settings.title} description={p.settings.description} />
 
       {state.status === "loading" && (
-        <div className="space-y-4">
+        <Panel bodyClassName="space-y-4 px-5 py-5">
           <Skeleton className="h-10 w-full" />
           <Skeleton className="h-10 w-full" />
           <Skeleton className="h-10 w-2/3" />
-        </div>
+        </Panel>
       )}
       {state.status === "error" && (
-        <LoadErrorState message={state.message} onRetry={load} />
+        <Panel>
+          <LoadErrorState message={state.message} onRetry={load} />
+        </Panel>
       )}
       {state.status === "ready" && (
         <>
@@ -89,15 +92,12 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="space-y-5 border-t border-border pt-8 first:border-t-0 first:pt-0">
-      <div>
-        <h2 className="text-lg font-semibold">{title}</h2>
-        {description && (
-          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-        )}
-      </div>
+    <Panel title={title} bodyClassName="space-y-5 px-5 py-5">
+      {description && (
+        <p className="-mt-1 text-sm text-muted-foreground">{description}</p>
+      )}
       {children}
-    </section>
+    </Panel>
   );
 }
 

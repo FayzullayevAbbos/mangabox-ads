@@ -17,6 +17,7 @@ import {
   slotsLabel,
 } from "@/components/dashboard/ads/campaign-format";
 import { CampaignStatusBadge } from "@/components/dashboard/ads/campaign-status-badge";
+import { Panel } from "@/components/dashboard/ads/panel";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import {
   EmptyResult,
@@ -115,61 +116,74 @@ export function CampaignsTab({
         </div>
       </div>
 
-      {state.status === "loading" && <TableSkeleton rows={6} />}
+      {state.status === "loading" && (
+        <Panel bodyClassName="px-5">
+          <TableSkeleton rows={6} />
+        </Panel>
+      )}
 
       {state.status === "error" && (
-        <LoadErrorState message={state.message} onRetry={onReload} />
+        <Panel>
+          <LoadErrorState message={state.message} onRetry={onReload} />
+        </Panel>
       )}
 
       {state.status === "ready" && rows.length === 0 && (
-        <EmptyResult
-          icon={RiMegaphoneLine}
-          title={state.rows.length === 0 ? p.campaigns.emptyTitle : t.campaigns.empty}
-          description={state.rows.length === 0 ? p.campaigns.emptyDescription : " "}
-          action={
-            state.rows.length === 0 ? (
-              <Button onClick={onCreate}>{t.actions.create}</Button>
-            ) : undefined
-          }
-        />
+        <Panel>
+          <EmptyResult
+            icon={RiMegaphoneLine}
+            title={
+              state.rows.length === 0
+                ? p.campaigns.emptyTitle
+                : t.campaigns.empty
+            }
+            description={
+              state.rows.length === 0 ? p.campaigns.emptyDescription : " "
+            }
+            action={
+              state.rows.length === 0 ? (
+                <Button onClick={onCreate}>{t.actions.create}</Button>
+              ) : undefined
+            }
+          />
+        </Panel>
       )}
 
       {state.status === "ready" && rows.length > 0 && (
         <>
-          <Table
-            containerClassName="hidden xl:block"
-            className="table-fixed text-[0.9375rem]"
-          >
-            <colgroup>
-              <col />
-              <col className="w-[11.5rem]" />
-              <col className="w-[9rem]" />
-              <col className="w-[11.5rem]" />
-              <col className="w-[14.5rem]" />
-            </colgroup>
-            <TableHeader>
-              <TableRow className="border-border hover:bg-transparent">
-                <Th className="pl-3">{cols.name}</Th>
-                <Th>{cols.period}</Th>
-                <Th className="text-right">{cols.amount}</Th>
-                <Th className="pl-6">{cols.status}</Th>
-                <TableHead className="h-11" />
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((campaign) => (
-                <CampaignTableRow
-                  key={campaign.id}
-                  campaign={campaign}
-                  actions={actions}
-                  onOpen={onOpen}
-                  onEdit={onEdit}
-                />
-              ))}
-            </TableBody>
-          </Table>
+          <Panel className="hidden xl:block">
+            <Table className="table-fixed text-[0.9375rem]">
+              <colgroup>
+                <col />
+                <col className="w-[11.5rem]" />
+                <col className="w-[9rem]" />
+                <col className="w-[11.5rem]" />
+                <col className="w-[14.5rem]" />
+              </colgroup>
+              <TableHeader>
+                <TableRow className="border-border hover:bg-transparent">
+                  <Th className="pl-5">{cols.name}</Th>
+                  <Th>{cols.period}</Th>
+                  <Th className="text-right">{cols.amount}</Th>
+                  <Th className="pl-6">{cols.status}</Th>
+                  <TableHead className="h-11" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {rows.map((campaign) => (
+                  <CampaignTableRow
+                    key={campaign.id}
+                    campaign={campaign}
+                    actions={actions}
+                    onOpen={onOpen}
+                    onEdit={onEdit}
+                  />
+                ))}
+              </TableBody>
+            </Table>
+          </Panel>
 
-          <ul className="-mx-4 divide-y divide-border border-y border-border sm:mx-0 sm:rounded-xl sm:border xl:hidden">
+          <ul className="-mx-4 divide-y divide-border border-y border-border bg-card sm:mx-0 sm:rounded-xl sm:border xl:hidden">
             {rows.map((campaign) => (
               <CampaignCard
                 key={campaign.id}
@@ -194,7 +208,7 @@ function CampaignTableRow({ campaign, actions, onOpen, onEdit }: RowProps) {
       className="group cursor-pointer border-border transition-colors hover:bg-muted/40"
       onClick={() => onOpen(campaign)}
     >
-      <TableCell className="py-4 pl-3">
+      <TableCell className="py-4 pl-5">
         <NameBlock campaign={campaign} />
       </TableCell>
       <TableCell className="py-4">
@@ -206,12 +220,8 @@ function CampaignTableRow({ campaign, actions, onOpen, onEdit }: RowProps) {
       <TableCell className="py-4 pl-6">
         <StatusBlock campaign={campaign} />
       </TableCell>
-      <TableCell className="py-4 pr-3" onClick={(e) => e.stopPropagation()}>
-        <RowActions
-          campaign={campaign}
-          actions={actions}
-          onEdit={onEdit}
-        />
+      <TableCell className="py-4 pr-5" onClick={(e) => e.stopPropagation()}>
+        <RowActions campaign={campaign} actions={actions} onEdit={onEdit} />
       </TableCell>
     </TableRow>
   );
