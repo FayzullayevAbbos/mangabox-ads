@@ -4,7 +4,6 @@ import * as React from "react";
 import { RiBillLine } from "@remixicon/react";
 
 import { PageHeader } from "@/components/dashboard/page-header";
-import { SectionInfo } from "@/components/dashboard/section-info";
 import {
   EmptyResult,
   LoadErrorState,
@@ -60,7 +59,6 @@ export default function OrdersPage() {
   return (
     <div className="mx-auto w-full max-w-[1500px] space-y-8">
       <PageHeader title={p.orders.title} description={p.orders.description} />
-      <SectionInfo id="orders" content={p.info.sections.orders} />
 
       {state.status === "loading" && <TableSkeleton rows={5} />}
       {state.status === "error" && (

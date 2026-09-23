@@ -10,7 +10,6 @@ import {
   QuoteSummary,
 } from "@/components/dashboard/ads/rate-card-tab";
 import { SelectMenu } from "@/components/dashboard/select-menu";
-import { SectionInfo } from "@/components/dashboard/section-info";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -123,7 +122,6 @@ function CampaignForm({
   onSaved: () => void;
 }) {
   const t = useT("ads");
-  const p = useT("portal");
   const { specs, labelOf } = useRateCard();
   const isNew = target === "new";
 
@@ -268,7 +266,6 @@ function CampaignForm({
 
   return (
     <div className="space-y-5 px-4 pb-6">
-      <SectionInfo id="campaign-form" content={p.info.sections.form} />
       <div className="space-y-2">
         <div className="flex items-baseline justify-between">
           <Label htmlFor="campaign-name">{t.form.name}</Label>

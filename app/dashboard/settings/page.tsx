@@ -4,7 +4,6 @@ import * as React from "react";
 import { toast } from "sonner";
 
 import { PageHeader } from "@/components/dashboard/page-header";
-import { SectionInfo } from "@/components/dashboard/section-info";
 import { LoadErrorState } from "@/components/dashboard/page-states";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -56,7 +55,6 @@ export default function SettingsPage() {
   return (
     <div className="mx-auto w-full max-w-3xl space-y-10">
       <PageHeader title={p.settings.title} description={p.settings.description} />
-      <SectionInfo id="settings" content={p.info.sections.settings} />
 
       {state.status === "loading" && (
         <div className="space-y-4">

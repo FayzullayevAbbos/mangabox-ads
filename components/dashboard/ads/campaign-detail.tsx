@@ -20,7 +20,6 @@ import { CampaignStats } from "@/components/dashboard/ads/campaign-stats";
 import { CampaignStatusBadge } from "@/components/dashboard/ads/campaign-status-badge";
 import { CreativeManager } from "@/components/dashboard/ads/creative-manager";
 import { LoadErrorState } from "@/components/dashboard/page-states";
-import { SectionInfo } from "@/components/dashboard/section-info";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -354,19 +353,15 @@ function DetailTabs({
       </div>
 
       <TabsContent value="overview" className="space-y-6">
-        <SectionInfo id="sheet-overview" content={p.info.sections.overview} />
         <CampaignOverview campaign={campaign} />
       </TabsContent>
       <TabsContent value="creatives" className="space-y-6">
-        <SectionInfo id="sheet-creatives" content={p.info.sections.creatives} />
         <CreativeManager campaign={campaign} onChanged={onChanged} />
       </TabsContent>
       <TabsContent value="stats" className="space-y-6">
-        <SectionInfo id="sheet-stats" content={p.info.sections.stats} />
         <CampaignStats campaign={campaign} />
       </TabsContent>
       <TabsContent value="orders" className="space-y-6">
-        <SectionInfo id="sheet-orders" content={p.info.sections.campaignOrders} />
         <CampaignOrders campaignId={campaign.id} />
       </TabsContent>
     </Tabs>
