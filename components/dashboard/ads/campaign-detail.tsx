@@ -67,6 +67,14 @@ export function CampaignDetail({ campaignId }: { campaignId: string }) {
 
   const reload = React.useCallback(() => void load(true), [load]);
 
+  const applyChange = React.useCallback(
+    (campaign: AdCampaign) => {
+      setState({ status: "ready", campaign });
+      reload();
+    },
+    [reload],
+  );
+
   return (
     <div className="mx-auto w-full max-w-[1500px] space-y-6">
       <Link
@@ -87,6 +95,7 @@ export function CampaignDetail({ campaignId }: { campaignId: string }) {
         <Loaded
           campaign={state.campaign}
           onChanged={reload}
+          onActionDone={applyChange}
           onEdit={() => setFormTarget(state.campaign)}
         />
       )}
@@ -106,15 +115,17 @@ export function CampaignDetail({ campaignId }: { campaignId: string }) {
 function Loaded({
   campaign,
   onChanged,
+  onActionDone,
   onEdit,
 }: {
   campaign: AdCampaign;
   onChanged: () => void;
+  onActionDone: (campaign: AdCampaign) => void;
   onEdit: () => void;
 }) {
   const t = useT("ads");
   const p = useT("portal");
-  const actions = useCampaignActions(() => onChanged());
+  const actions = useCampaignActions(onActionDone);
   const allowed = actionsFor(campaign);
   const busy = actions.isBusy(campaign.id);
   const hint = p.nextAction[campaign.nextAction].trim();
@@ -306,7 +317,6 @@ function DetailTabs({
   onChanged: () => void;
 }) {
   const t = useT("ads");
-  const p = useT("portal");
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();

@@ -80,11 +80,11 @@ export function CampaignsTab({
   onReload: () => void;
   onOpen: (campaign: AdCampaign) => void;
   onEdit: (campaign: AdCampaign) => void;
-  onChanged: () => void;
+  onChanged: (campaign: AdCampaign) => void;
 }) {
   const t = useT("ads");
   const p = useT("portal");
-  const actions = useCampaignActions(() => onChanged());
+  const actions = useCampaignActions(onChanged);
   const rows =
     state.status === "ready"
       ? statusFilter === "all"

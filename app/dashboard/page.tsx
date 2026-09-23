@@ -51,8 +51,8 @@ function CampaignsPage() {
   const router = useRouter();
   const [formTarget, setFormTarget] = React.useState<CampaignFormTarget>(null);
 
-  const load = React.useCallback(() => {
-    setCampaigns({ status: "loading" });
+  const load = React.useCallback((quiet = false) => {
+    if (!quiet) setCampaigns({ status: "loading" });
     return getCampaigns()
       .then((rows) => setCampaigns({ status: "ready", rows }))
       .catch((err: unknown) =>
@@ -69,6 +69,18 @@ function CampaignsPage() {
       .then(setAccount)
       .catch(() => setAccount(null));
   }, [load]);
+
+  const applyChange = (updated: AdCampaign) => {
+    setCampaigns((prev) =>
+      prev.status === "ready"
+        ? {
+            status: "ready",
+            rows: prev.rows.map((row) => (row.id === updated.id ? updated : row)),
+          }
+        : prev,
+    );
+    void load(true);
+  };
 
   const rows = campaigns.status === "ready" ? campaigns.rows : [];
   const totals = rows.reduce(
@@ -135,10 +147,10 @@ function CampaignsPage() {
         statusFilter={statusFilter}
         onStatusFilter={setStatusFilter}
         onCreate={() => setFormTarget("new")}
-        onReload={load}
+        onReload={() => void load()}
         onOpen={(campaign) => router.push(`/dashboard/campaigns/${campaign.id}`)}
         onEdit={(campaign) => setFormTarget(campaign)}
-        onChanged={load}
+        onChanged={applyChange}
       />
 
       <CampaignFormSheet
@@ -146,7 +158,7 @@ function CampaignsPage() {
         onClose={() => setFormTarget(null)}
         onSaved={() => {
           setFormTarget(null);
-          void load();
+          void load(true);
         }}
       />
     </div>
