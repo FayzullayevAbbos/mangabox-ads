@@ -33,6 +33,7 @@ import {
   type AdCampaign,
   type AdCampaignStatus,
 } from "@/lib/api/ads";
+import { formatCount } from "@/lib/format";
 import { useT } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
@@ -70,6 +71,7 @@ export function CampaignsTab({
         ? state.rows
         : state.rows.filter((c) => c.status === statusFilter)
       : [];
+  const counts = countByStatus(state.status === "ready" ? state.rows : []);
 
   return (
     <div className="space-y-6">
@@ -77,6 +79,7 @@ export function CampaignsTab({
         <div className="flex w-max min-w-full items-center gap-2">
           <Chip
             label={t.status.all}
+            count={counts.all}
             active={statusFilter === "all"}
             onClick={() => onStatusFilter("all")}
           />
@@ -84,6 +87,7 @@ export function CampaignsTab({
             <Chip
               key={status}
               label={t.status[status]}
+              count={counts[status]}
               active={statusFilter === status}
               onClick={() => onStatusFilter(status)}
             />
@@ -129,11 +133,19 @@ export function CampaignsTab({
             {rows.map((campaign) => {
               const allowed = actionsFor(campaign);
               return (
-                <TableRow key={campaign.id} className="border-border">
-                  <TableCell className="h-14 max-w-[16rem] px-0 font-medium">
-                    <span className="block truncate" title={campaign.name}>
+                <TableRow
+                  key={campaign.id}
+                  className="group cursor-pointer border-border transition-colors hover:bg-muted/40"
+                  onClick={() => onOpen(campaign)}
+                >
+                  <TableCell className="h-14 max-w-[16rem] px-0 py-3 font-medium">
+                    <span
+                      className="block truncate transition-colors group-hover:text-primary"
+                      title={campaign.name}
+                    >
                       {campaign.name}
                     </span>
+                    <DeliveryProgress campaign={campaign} />
                   </TableCell>
                   <TableCell className="max-w-[18rem] text-sm text-muted-foreground">
                     <span
@@ -152,7 +164,10 @@ export function CampaignsTab({
                   <TableCell>
                     <CampaignStatusBadge status={campaign.status} />
                   </TableCell>
-                  <TableCell className="w-56 px-0 text-right">
+                  <TableCell
+                    className="w-56 px-0 text-right"
+                    onClick={(event) => event.stopPropagation()}
+                  >
                     <div className="flex flex-wrap items-center justify-end gap-1.5">
                       {allowed.includes("submit") && (
                         <Button
@@ -222,12 +237,59 @@ export function CampaignsTab({
   );
 }
 
+const DELIVERING: AdCampaignStatus[] = ["active", "paused", "finished"];
+
+function countByStatus(
+  rows: AdCampaign[],
+): Record<AdCampaignStatus | "all", number> {
+  const counts = Object.fromEntries(
+    AD_CAMPAIGN_STATUSES.map((status) => [status, 0]),
+  ) as Record<AdCampaignStatus | "all", number>;
+  counts.all = rows.length;
+  for (const row of rows) counts[row.status] += 1;
+  return counts;
+}
+
+function deliveredOf(campaign: AdCampaign): number {
+  return campaign.creatives.reduce((sum, c) => sum + c.impressions, 0);
+}
+
+function DeliveryProgress({ campaign }: { campaign: AdCampaign }) {
+  if (!DELIVERING.includes(campaign.status) || !campaign.impressionsGoal) {
+    return null;
+  }
+  const delivered = deliveredOf(campaign);
+  const percent = Math.min(
+    100,
+    Math.round((delivered / campaign.impressionsGoal) * 100),
+  );
+  const live = campaign.status === "active";
+  return (
+    <div className="mt-2 flex items-center gap-2.5">
+      <div className="h-1 w-28 shrink-0 overflow-hidden rounded-full bg-muted">
+        <div
+          className={cn(
+            "h-full rounded-full transition-[width] duration-700 ease-out",
+            live ? "bg-success" : "bg-muted-foreground/60",
+          )}
+          style={{ width: `${percent}%` }}
+        />
+      </div>
+      <span className="font-mono text-xs font-normal text-muted-foreground tabular-nums">
+        {percent}% · {formatCount(delivered)} / {formatCount(campaign.impressionsGoal)}
+      </span>
+    </div>
+  );
+}
+
 function Chip({
   label,
+  count,
   active,
   onClick,
 }: {
   label: string;
+  count: number;
   active: boolean;
   onClick: () => void;
 }) {
@@ -236,13 +298,22 @@ function Chip({
       type="button"
       onClick={onClick}
       className={cn(
-        "shrink-0 cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+        "inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
         active
           ? "bg-primary text-primary-foreground"
-          : "bg-muted text-muted-foreground hover:text-foreground",
+          : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground",
+        !active && count === 0 && "opacity-60",
       )}
     >
       {label}
+      <span
+        className={cn(
+          "min-w-5 rounded px-1 text-center font-mono text-xs tabular-nums",
+          active ? "bg-primary-foreground/15" : "bg-background/60",
+        )}
+      >
+        {count}
+      </span>
     </button>
   );
 }

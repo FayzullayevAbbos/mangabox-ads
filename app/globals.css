@@ -29,6 +29,7 @@
   --color-field: var(--field);
   --color-active: var(--active);
   --color-active-foreground: var(--active-foreground);
+  --color-success: var(--success);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
@@ -74,6 +75,7 @@
   --field: #FAFAFA;
   --active: #0162FF;
   --active-foreground: #ffffff;
+  --success: oklch(0.6 0.15 160);
   --toast-error-bg: #FEF2F2;
   --toast-error-text: #B91C1C;
   --toast-error-border: #FECACA;
@@ -94,43 +96,44 @@
 }
 
 .dark {
-  --background: oklch(0.195 0.008 275);
-  --foreground: oklch(0.955 0.004 275);
-  --card: oklch(0.228 0.009 275);
-  --card-foreground: oklch(0.955 0.004 275);
-  --popover: oklch(0.255 0.01 275);
-  --popover-foreground: oklch(0.955 0.004 275);
-  --primary: oklch(0.74 0.135 285);
-  --primary-foreground: oklch(0.2 0.04 285);
-  --secondary: oklch(0.285 0.011 275);
-  --secondary-foreground: oklch(0.955 0.004 275);
-  --muted: oklch(0.262 0.01 275);
-  --muted-foreground: oklch(0.715 0.014 275);
-  --accent: oklch(0.285 0.011 275);
-  --accent-foreground: oklch(0.955 0.004 275);
-  --destructive: oklch(0.68 0.18 22);
-  --border: oklch(0.3 0.01 275);
-  --input: oklch(0.47 0.012 275);
-  --field: oklch(0.165 0.008 275);
-  --active: oklch(0.74 0.135 285);
-  --active-foreground: oklch(0.2 0.04 285);
-  --ring: oklch(0.74 0.135 285);
-  --toast-error-bg: oklch(0.26 0.055 22);
-  --toast-error-text: oklch(0.86 0.07 22);
-  --toast-error-border: oklch(0.38 0.09 22);
-  --chart-1: oklch(0.74 0.135 285);
-  --chart-2: oklch(0.76 0.13 160);
-  --chart-3: oklch(0.8 0.13 80);
-  --chart-4: oklch(0.72 0.12 240);
-  --chart-5: oklch(0.7 0.16 22);
-  --sidebar: oklch(0.172 0.008 275);
-  --sidebar-foreground: oklch(0.73 0.013 275);
-  --sidebar-primary: oklch(0.74 0.135 285);
-  --sidebar-primary-foreground: oklch(0.2 0.04 285);
-  --sidebar-accent: oklch(0.245 0.01 275);
-  --sidebar-accent-foreground: oklch(0.955 0.004 275);
-  --sidebar-border: oklch(0.26 0.009 275);
-  --sidebar-ring: oklch(0.74 0.135 285);
+  --background: oklch(0.235 0.016 278);
+  --foreground: oklch(0.965 0.005 278);
+  --card: oklch(0.268 0.017 278);
+  --card-foreground: oklch(0.965 0.005 278);
+  --popover: oklch(0.295 0.018 278);
+  --popover-foreground: oklch(0.965 0.005 278);
+  --primary: oklch(0.76 0.14 285);
+  --primary-foreground: oklch(0.2 0.05 285);
+  --secondary: oklch(0.315 0.018 278);
+  --secondary-foreground: oklch(0.965 0.005 278);
+  --muted: oklch(0.3 0.017 278);
+  --muted-foreground: oklch(0.765 0.02 278);
+  --accent: oklch(0.315 0.018 278);
+  --accent-foreground: oklch(0.965 0.005 278);
+  --destructive: oklch(0.7 0.17 22);
+  --border: oklch(0.345 0.018 278);
+  --input: oklch(0.54 0.02 278);
+  --field: oklch(0.215 0.015 278);
+  --active: oklch(0.76 0.14 285);
+  --active-foreground: oklch(0.2 0.05 285);
+  --success: oklch(0.78 0.15 160);
+  --ring: oklch(0.76 0.14 285);
+  --toast-error-bg: oklch(0.3 0.06 22);
+  --toast-error-text: oklch(0.88 0.07 22);
+  --toast-error-border: oklch(0.42 0.1 22);
+  --chart-1: oklch(0.76 0.14 285);
+  --chart-2: oklch(0.78 0.14 160);
+  --chart-3: oklch(0.82 0.13 80);
+  --chart-4: oklch(0.74 0.12 240);
+  --chart-5: oklch(0.72 0.16 22);
+  --sidebar: oklch(0.212 0.015 278);
+  --sidebar-foreground: oklch(0.78 0.018 278);
+  --sidebar-primary: oklch(0.76 0.14 285);
+  --sidebar-primary-foreground: oklch(0.2 0.05 285);
+  --sidebar-accent: oklch(0.285 0.018 278);
+  --sidebar-accent-foreground: oklch(0.965 0.005 278);
+  --sidebar-border: oklch(0.3 0.016 278);
+  --sidebar-ring: oklch(0.76 0.14 285);
 }
 
 @layer base {
@@ -142,6 +145,38 @@
   }
   html {
     @apply font-sans;
+    scrollbar-color: var(--border) transparent;
+  }
+  ::selection {
+    background: color-mix(in oklch, var(--primary) 35%, transparent);
+  }
+  input,
+  textarea {
+    caret-color: var(--primary);
+  }
+  .dark body {
+    background-image: radial-gradient(
+      120% 60% at 50% -10%,
+      color-mix(in oklch, var(--primary) 7%, transparent),
+      transparent 70%
+    );
+    background-attachment: fixed;
+  }
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, currentColor 55%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .live-dot {
+    animation: live-pulse 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   }
 }
 

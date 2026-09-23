@@ -32,7 +32,7 @@ export default async function DashboardLayout({
       }
     >
       <AppSidebar />
-      <SidebarInset className="bg-[#FAFAFA] dark:bg-background">
+      <SidebarInset className="bg-[#FAFAFA] dark:bg-transparent">
         {/* Mobilda sticky — navigatsiya tugmasi sahifaning istalgan joyidan bir
             tegishda yetib boradi. Desktopda inset karta yumaloq burchakli,
             shuning uchun u yerda header oddiy oqimda qoladi. */}

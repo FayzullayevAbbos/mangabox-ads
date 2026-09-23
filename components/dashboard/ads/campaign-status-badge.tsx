@@ -65,7 +65,11 @@ export function CampaignStatusBadge({
         className,
       )}
     >
-      <meta.icon className="size-3.5" />
+      {status === "active" ? (
+        <span className="live-dot mx-1 size-1.5 rounded-full bg-current" />
+      ) : (
+        <meta.icon className="size-3.5" />
+      )}
       {t.status[status] ?? status}
     </span>
   );
