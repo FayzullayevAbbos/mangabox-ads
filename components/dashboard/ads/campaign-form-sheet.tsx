@@ -8,7 +8,7 @@ import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import {
   NumberField,
   QuoteSummary,
-} from "@/components/dashboard/ads/rate-card-tab";
+} from "@/components/dashboard/ads/quote-parts";
 import { SelectMenu } from "@/components/dashboard/select-menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,6 +29,7 @@ import {
   MAX_CAMPAIGN_DAYS,
   MAX_SHARE_PERCENT,
   MIN_CAMPAIGN_DAYS,
+  MIN_ORDER_SOM,
   MIN_SHARE_PERCENT,
   updateCampaign,
   type AdCampaign,
@@ -41,17 +42,23 @@ import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
-/** Eng kam buyurtma — server `MIN_CAMPAIGN_PRICE_SOM` bilan bir xil. */
-const MIN_ORDER_SOM = 100_000;
-
 export type CampaignFormTarget = AdCampaign | "new" | null;
+
+/** Narxnomada hisoblangan kampaniya — forma shu qiymatlar bilan ochiladi. */
+export type CampaignDraft = {
+  slot: AdSlot;
+  sharePercent: number;
+  days: number;
+};
 
 export function CampaignFormSheet({
   target,
+  draft,
   onClose,
   onSaved,
 }: {
   target: CampaignFormTarget;
+  draft?: CampaignDraft;
   onClose: () => void;
   onSaved: () => void;
 }) {
@@ -69,8 +76,9 @@ export function CampaignFormSheet({
         </SheetHeader>
         {target !== null && (
           <CampaignForm
-            key={isNew ? "new" : target.id}
+            key={isNew ? `new:${draft?.slot ?? ""}:${draft?.sharePercent ?? ""}:${draft?.days ?? ""}` : target.id}
             target={target}
+            draft={draft}
             onClose={onClose}
             onSaved={onSaved}
           />
@@ -88,15 +96,20 @@ type FormState = {
   frequencyCap: number;
 };
 
-function toForm(target: AdCampaign | "new", firstSlot: AdSlot | null): FormState {
+function toForm(
+  target: AdCampaign | "new",
+  firstSlot: AdSlot | null,
+  draft?: CampaignDraft,
+): FormState {
   if (target === "new") {
+    const slot = draft?.slot ?? firstSlot;
     return {
       name: "",
-      lines: firstSlot
-        ? [{ slot: firstSlot, sharePercent: MIN_SHARE_PERCENT }]
+      lines: slot
+        ? [{ slot, sharePercent: draft?.sharePercent ?? MIN_SHARE_PERCENT }]
         : [],
       startDay: todayKey(),
-      days: 30,
+      days: draft?.days ?? 30,
       frequencyCap: 3,
     };
   }
@@ -114,10 +127,12 @@ function toForm(target: AdCampaign | "new", firstSlot: AdSlot | null): FormState
 
 function CampaignForm({
   target,
+  draft,
   onClose,
   onSaved,
 }: {
   target: AdCampaign | "new";
+  draft?: CampaignDraft;
   onClose: () => void;
   onSaved: () => void;
 }) {
@@ -126,7 +141,7 @@ function CampaignForm({
   const isNew = target === "new";
 
   const [form, setForm] = React.useState<FormState>(() =>
-    toForm(target, specs[0]?.id ?? null),
+    toForm(target, specs[0]?.id ?? null, draft),
   );
   const [quote, setQuote] = React.useState<AdQuote | null>(null);
   const [quoting, setQuoting] = React.useState(false);

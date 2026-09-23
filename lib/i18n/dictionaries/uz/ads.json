@@ -198,28 +198,39 @@
     }
   },
   "rateCard": {
-    "title": "Slotlar va narxlar",
-    "columns": {
-      "slot": "Slot",
-      "cpm": "CPM",
-      "daily": "Kunlik inventar",
-      "types": "Kreativ turlari",
-      "image": "Rasm o'lchami"
+    "lead": "MangaBox kuniga {count} marta reklama ko'rsatadi. Quyidagi to'rt joydan qaysi biri sizga to'g'ri kelishini tanlang.",
+    "legend": "Binafsha blok — reklamangiz turadigan joy.",
+    "moment": {
+      "reader_end": "Bob endigina tugadi. O'quvchi to'xtaydi — ekranda faqat sizning reklamangiz.",
+      "home_carousel": "Ilovaning birinchi ekrani. Afishangiz hamma ochadigan seriallar qatorida turadi.",
+      "manga_detail": "Serialni tanlab, o'qishni boshlamoqchi bo'lgan o'quvchiga ko'rinadi.",
+      "catalog_grid": "Katalog o'rtasida — o'quvchi varaqlayotgan muqovalar orasida."
     },
-    "noImage": "—",
+    "perView": "Bir ko'rsatish",
+    "perDay": "Kuniga",
+    "cpm": "CPM {amount}",
+    "currency": "so'm",
+    "formats": {
+      "card": "Karta",
+      "image": "Rasm"
+    },
     "cardOnly": "Faqat karta",
+    "choose": "Tanlash",
+    "selected": "Tanlandi",
     "calculator": {
-      "title": "Kalkulyator",
-      "hint": "Mijoz bilan gaplashayotganda narx aytish uchun.",
-      "slot": "Slot",
+      "title": "Narxni hisoblang",
       "share": "Inventar ulushi",
       "shareHint": "Slotning kunlik inventaridan {share}% — kuniga taxminan {count} ko'rsatish.",
-      "days": "Kun",
-      "discount": "Chegirma",
+      "days": "Muddat",
+      "daysUnit": "{days} kun",
+      "reach": "{count} ko'rsatish · {days} kun",
+      "perDayCost": "Kuniga {amount} so'm",
       "impressions": "Ko'rsatish",
       "subtotal": "Oraliq summa",
       "discountSom": "Chegirma",
-      "total": "Jami"
+      "total": "Jami",
+      "start": "Shu kampaniyani boshlash",
+      "minOrderFix": "Ulushni yoki muddatni oshiring."
     }
   },
   "form": {

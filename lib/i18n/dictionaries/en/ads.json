@@ -198,28 +198,39 @@
     }
   },
   "rateCard": {
-    "title": "Slots and prices",
-    "columns": {
-      "slot": "Slot",
-      "cpm": "CPM",
-      "daily": "Daily inventory",
-      "types": "Creative types",
-      "image": "Image size"
+    "lead": "MangaBox shows {count} ads a day. Pick the place that suits you.",
+    "legend": "The purple block is where your ad sits.",
+    "moment": {
+      "reader_end": "The chapter has just ended. The reader stops — and your ad is the only thing on the screen.",
+      "home_carousel": "The first screen of the app. Your poster stands among the titles everyone opens.",
+      "manga_detail": "Seen by a reader who has picked a title and is about to start it.",
+      "catalog_grid": "In the middle of the catalogue, among the covers a reader is browsing."
     },
-    "noImage": "—",
+    "perView": "Per view",
+    "perDay": "Per day",
+    "cpm": "CPM {amount}",
+    "currency": "so'm",
+    "formats": {
+      "card": "Card",
+      "image": "Image"
+    },
     "cardOnly": "Card only",
+    "choose": "Choose",
+    "selected": "Chosen",
     "calculator": {
-      "title": "Calculator",
-      "hint": "For quoting a price while talking to a client.",
-      "slot": "Slot",
+      "title": "Work out the price",
       "share": "Inventory share",
       "shareHint": "{share}% of the slot's daily inventory — about {count} impressions a day.",
-      "days": "Days",
-      "discount": "Discount",
+      "days": "Length",
+      "daysUnit": "{days} days",
+      "reach": "{count} impressions · {days} days",
+      "perDayCost": "{amount} so'm a day",
       "impressions": "Impressions",
       "subtotal": "Subtotal",
       "discountSom": "Discount",
-      "total": "Total"
+      "total": "Total",
+      "start": "Start this campaign",
+      "minOrderFix": "Raise the share or the length."
     }
   },
   "form": {

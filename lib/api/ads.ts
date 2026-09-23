@@ -42,6 +42,9 @@ export const MAX_CAMPAIGN_DAYS = 90;
 export const MIN_SHARE_PERCENT = 25;
 export const MAX_SHARE_PERCENT = 100;
 
+/** Server `MIN_CAMPAIGN_PRICE_SOM` bilan bir xil. */
+export const MIN_ORDER_SOM = 100_000;
+
 export const CREATIVE_LIMITS = {
   brandName: 64,
   title: 128,
