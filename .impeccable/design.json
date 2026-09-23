@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-23T12:00:00+05:00",
+  "title": "Design System: MangaBox Ads",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Yumshoq Binafsha",
+        "canonical": "oklch(0.635 0.176 285)",
+        "tonalRamp": [
+          "oklch(0.150 0.176 285)",
+          "oklch(0.280 0.176 285)",
+          "oklch(0.400 0.176 285)",
+          "oklch(0.520 0.176 285)",
+          "oklch(0.640 0.176 285)",
+          "oklch(0.760 0.176 285)",
+          "oklch(0.870 0.176 285)",
+          "oklch(0.950 0.176 285)"
+        ]
+      },
+      "primary-foreground": {
+        "role": "on-primary",
+        "displayName": "Binafsha Ustidagi Oq",
+        "canonical": "oklch(1 0 0)"
+      },
+      "canvas": {
+        "role": "neutral-bg",
+        "displayName": "Sahifa Kulrangi",
+        "canonical": "oklch(0.964 0.005 286)",
+        "tonalRamp": [
+          "oklch(0.150 0.005 286)",
+          "oklch(0.280 0.005 286)",
+          "oklch(0.400 0.005 286)",
+          "oklch(0.520 0.005 286)",
+          "oklch(0.640 0.005 286)",
+          "oklch(0.760 0.005 286)",
+          "oklch(0.870 0.005 286)",
+          "oklch(0.950 0.005 286)"
+        ],
+        "darkValue": "oklch(0.235 0.016 278)"
+      },
+      "card": {
+        "role": "surface",
+        "displayName": "Oq Panel",
+        "canonical": "oklch(1 0 0)",
+        "darkValue": "oklch(0.268 0.017 278)"
+      },
+      "field": {
+        "role": "surface-sunken",
+        "displayName": "Botiq Maydon",
+        "canonical": "oklch(0.977 0.004 286)",
+        "darkValue": "oklch(0.215 0.015 278)"
+      },
+      "foreground": {
+        "role": "on-surface",
+        "displayName": "Asosiy Matn",
+        "canonical": "oklch(0.145 0 0)",
+        "darkValue": "oklch(0.965 0.005 278)"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Yumshoq Fon",
+        "canonical": "oklch(0.969 0.004 286)",
+        "darkValue": "oklch(0.3 0.017 278)"
+      },
+      "muted-foreground": {
+        "role": "on-surface-variant",
+        "displayName": "O'chgan Matn",
+        "canonical": "oklch(0.556 0.008 286)",
+        "darkValue": "oklch(0.765 0.02 278)"
+      },
+      "border": {
+        "role": "outline",
+        "displayName": "Ingichka Chiziq",
+        "canonical": "oklch(0.919 0.005 286)",
+        "darkValue": "oklch(0.345 0.018 278)"
+      },
+      "ring": {
+        "role": "focus",
+        "displayName": "Fokus Halqasi",
+        "canonical": "oklch(0.708 0.008 286)",
+        "darkValue": "oklch(0.76 0.14 285)"
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Sovuq Kulrang",
+        "canonical": "oklch(0.929 0.008 249)",
+        "darkValue": "oklch(0.315 0.018 278)"
+      },
+      "active": {
+        "role": "secondary",
+        "displayName": "Tanlov Ko'ki",
+        "canonical": "oklch(0.516 0.238 262)",
+        "darkValue": "oklch(0.76 0.14 285)",
+        "note": "Yorug'da ko'k, qorong'ida binafsha — mavzu bilan tusini o'zgartiradi. Yangi joyda ishlatilmasin."
+      },
+      "success": {
+        "role": "tertiary",
+        "displayName": "Muvaffaqiyat Yashili",
+        "canonical": "oklch(0.6 0.15 160)",
+        "tonalRamp": [
+          "oklch(0.150 0.15 160)",
+          "oklch(0.280 0.15 160)",
+          "oklch(0.400 0.15 160)",
+          "oklch(0.520 0.15 160)",
+          "oklch(0.640 0.15 160)",
+          "oklch(0.760 0.15 160)",
+          "oklch(0.870 0.15 160)",
+          "oklch(0.950 0.15 160)"
+        ],
+        "darkValue": "oklch(0.78 0.15 160)"
+      },
+      "destructive": {
+        "role": "error",
+        "displayName": "Xatolik Qizili",
+        "canonical": "oklch(0.577 0.245 27.325)",
+        "tonalRamp": [
+          "oklch(0.150 0.245 27.325)",
+          "oklch(0.280 0.245 27.325)",
+          "oklch(0.400 0.245 27.325)",
+          "oklch(0.520 0.245 27.325)",
+          "oklch(0.640 0.245 27.325)",
+          "oklch(0.760 0.245 27.325)",
+          "oklch(0.870 0.245 27.325)",
+          "oklch(0.950 0.245 27.325)"
+        ],
+        "darkValue": "oklch(0.7 0.17 22)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Sahifa sarlavhasi. Bitta ekranda bitta."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Karta sarlavhasi, ro'yxatdagi kampaniya nomi."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Panel sarlavhasi va jadval ustuni. Ataylab kichik."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Asosiy matn, jadval katagi, forma yorlig'i."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Ko'rsatkich yorlig'i, izoh, chip."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Pul, ko'rsatish soni, ID, piksel o'lchami. Har doim tabular-nums."
+      }
+    },
+    "shadows": [
+      {
+        "name": "floating",
+        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        "purpose": "Popover, dropdown, combobox — sirt ustida suzuvchi element."
+      },
+      {
+        "name": "sheet",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        "purpose": "O'ngdan chiquvchi sheet."
+      },
+      {
+        "name": "control-edge",
+        "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        "purpose": "Input, outline tugma, faol tab — sirtdan ajratuvchi nozik qirra."
+      },
+      {
+        "name": "hover-lift",
+        "value": "0 2px 8px rgba(0,0,0,0.06)",
+        "purpose": "Faqat bosiladigan kartada, faqat hover'da, faqat yorug' rejimda."
+      },
+      {
+        "name": "edge-ring",
+        "value": "inset 0 0 0 1px color-mix(in oklch, currentColor 10%, transparent)",
+        "purpose": "shadcn Card va popoverlarda soya o'rnini bosuvchi qirra chizig'i (ring-1 ring-foreground/10)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Sahifa va element kirishi; jonli nuqta pulsi."
+      },
+      {
+        "name": "state",
+        "value": "150ms ease",
+        "purpose": "Hover, focus, rang o'zgarishi."
+      },
+      {
+        "name": "surface",
+        "value": "200ms ease",
+        "purpose": "Chegara va soya o'zgarishi kartalarda."
+      },
+      {
+        "name": "bar",
+        "value": "300ms ease",
+        "purpose": "Progress va ulush chizig'ining kengligi."
+      },
+      {
+        "name": "count-up",
+        "value": "420ms, 1-(1-t)^3",
+        "purpose": "Jami summaning yangi qiymatga sanab borishi. prefers-reduced-motion da darhol."
+      },
+      {
+        "name": "live-pulse",
+        "value": "2s cubic-bezier(0.22, 1, 0.36, 1) infinite",
+        "purpose": "Efirdagi kampaniya nuqtasi."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ],
+    "browserSurfaces": [
+      {
+        "name": "selection",
+        "value": "background: color-mix(in oklch, var(--primary) 35%, transparent)"
+      },
+      {
+        "name": "caret",
+        "value": "caret-color: var(--primary)"
+      },
+      {
+        "name": "scrollbar",
+        "value": "scrollbar-color: var(--border) transparent"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ekrandagi yagona asosiy harakat.",
+      "html": "<button class=\"ds-btn-primary\">Shu kampaniyani boshlash</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:.375rem;height:2.25rem;padding:0 .625rem;border:1px solid transparent;border-radius:.5rem;background:var(--primary);color:var(--primary-foreground);font-family:var(--font-sans);font-size:.875rem;font-weight:500;cursor:pointer;transition:all .15s ease}.ds-btn-primary:hover{background:color-mix(in oklch,var(--primary) 80%,transparent)}.ds-btn-primary:active{transform:translateY(1px)}.ds-btn-primary:focus-visible{outline:none;border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklch,var(--ring) 50%,transparent)}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Ikkinchi darajali harakat — panel ustida oq fon va chegara bilan.",
+      "html": "<button class=\"ds-btn-outline\">Bekor qilish</button>",
+      "css": ".ds-btn-outline{display:inline-flex;align-items:center;gap:.375rem;height:2.25rem;padding:0 .625rem;border:1px solid var(--border);border-radius:.5rem;background:var(--background);color:var(--foreground);font-family:var(--font-sans);font-size:.875rem;font-weight:500;box-shadow:0 1px 2px 0 rgb(0 0 0/.05);cursor:pointer;transition:all .15s ease}.ds-btn-outline:hover{background:var(--muted)}.ds-btn-outline:active{transform:translateY(1px)}.ds-btn-outline:focus-visible{outline:none;border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklch,var(--ring) 50%,transparent)}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Toolbar va ikonka tugmasi. Foni shaffof — oq panelda dog' qoldirmaydi.",
+      "html": "<button class=\"ds-btn-ghost\" aria-label=\"Yopish\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg></button>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;justify-content:center;width:2.25rem;height:2.25rem;border:1px solid transparent;border-radius:.5rem;background:transparent;color:var(--foreground);cursor:pointer;transition:all .15s ease}.ds-btn-ghost:hover{background:var(--muted)}.ds-btn-ghost:focus-visible{outline:none;border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklch,var(--ring) 50%,transparent)}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Panel ichida botiq maydon. Canvasda ishlatilmaydi — u yerda botiqlik ko'rinmaydi.",
+      "html": "<input class=\"ds-input\" value=\"Test Reklama\" aria-label=\"Brend nomi\">",
+      "css": ".ds-input{width:100%;height:2.25rem;padding:.25rem .625rem;border:1px solid var(--input);border-radius:.5rem;background:var(--field);color:var(--foreground);font-family:var(--font-sans);font-size:.9375rem;box-shadow:0 1px 2px 0 rgb(0 0 0/.05);caret-color:var(--primary);transition:border-color .15s ease,box-shadow .15s ease}.ds-input::placeholder{color:var(--muted-foreground)}.ds-input:focus-visible{outline:none;border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklch,var(--ring) 50%,transparent)}"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Kabinetdagi har bir mazmun bloki shunda turadi. Soyasiz, chegara bilan.",
+      "html": "<section class=\"ds-panel\"><div class=\"ds-panel-head\"><h2>Narx</h2></div><div class=\"ds-panel-body\"><div class=\"ds-row\"><span>Oraliq summa</span><b>5 371 000</b></div><div class=\"ds-row\"><span>Chegirma 15%</span><b class=\"ds-pos\">−806 000</b></div></div></section>",
+      "css": ".ds-panel{overflow:hidden;border:1px solid var(--border);border-radius:.875rem;background:var(--card);color:var(--foreground);font-family:var(--font-sans)}.ds-panel-head{padding:.75rem 1.25rem;border-bottom:1px solid var(--border)}.ds-panel-head h2{margin:0;font-size:.875rem;font-weight:600}.ds-panel-body{padding:1rem 1.25rem;display:flex;flex-direction:column;gap:.75rem}.ds-row{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;font-size:.9375rem}.ds-row span{color:var(--muted-foreground)}.ds-row b{font-family:var(--font-mono);font-weight:400;font-variant-numeric:tabular-nums}.ds-pos{color:var(--success)}"
+    },
+    {
+      "name": "Data Table",
+      "kind": "custom",
+      "refersTo": "table-head",
+      "description": "Panel ichidagi jadval. Sarlavha qatori fon oladi, chekka ustunlar panel paddingiga tekislanadi.",
+      "html": "<table class=\"ds-table\"><thead><tr><th>Slot</th><th class=\"ds-num\">Ulush</th><th class=\"ds-num\">Narx</th></tr></thead><tbody><tr><td>Bob oxiri</td><td class=\"ds-num\">35%</td><td class=\"ds-num\">4 599 000</td></tr><tr><td>Bosh sahifa karuseli</td><td class=\"ds-num\">40%</td><td class=\"ds-num\">334 000</td></tr></tbody></table>",
+      "css": ".ds-table{width:100%;border-collapse:collapse;font-family:var(--font-sans);font-size:.9375rem;color:var(--foreground);background:var(--card)}.ds-table thead{background:color-mix(in oklch,var(--muted) 50%,transparent)}.ds-table th{height:2.75rem;padding:0 .5rem;text-align:left;font-size:.875rem;font-weight:600;color:var(--muted-foreground);border-bottom:1px solid var(--border)}.ds-table td{padding:.75rem .5rem;border-bottom:1px solid var(--border)}.ds-table tbody tr:last-child td{border-bottom:0}.ds-table tbody tr{transition:background .15s ease}.ds-table tbody tr:hover{background:color-mix(in oklch,var(--muted) 50%,transparent)}.ds-table th:first-child,.ds-table td:first-child{padding-left:1.25rem}.ds-table th:last-child,.ds-table td:last-child{padding-right:1.25rem}.ds-num{text-align:right;font-family:var(--font-mono);font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Kampaniya holati: ikonka + matn, rang /10 fonda. Sariq faqat e'tibor talab qiladigan holat uchun.",
+      "html": "<span class=\"ds-status ds-status-live\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M13 2 3 14h8l-1 8 10-12h-8z\"/></svg>Efirda</span> <span class=\"ds-status ds-status-draft\">Qoralama</span>",
+      "css": ".ds-status{display:inline-flex;align-items:center;gap:.25rem;padding:.125rem .5rem;border-radius:9999px;font-family:var(--font-sans);font-size:.75rem;font-weight:500}.ds-status-live{background:color-mix(in oklch,oklch(.696 .17 162) 10%,transparent);color:oklch(.508 .118 165)}.ds-status-draft{background:var(--muted);color:var(--muted-foreground)}"
+    },
+    {
+      "name": "Slot Preview",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Tizimning imzo komponenti: reklama ilovaning qaysi ekranida turishini chizadi. Binafsha blok — reklama joyi.",
+      "html": "<svg class=\"ds-slot\" viewBox=\"0 0 120 204\" width=\"96\"><rect x=\".5\" y=\".5\" width=\"119\" height=\"203\" rx=\"13.5\" class=\"ds-slot-frame\"/><rect x=\"48\" y=\"4\" width=\"24\" height=\"3\" rx=\"1.5\" class=\"ds-slot-line\"/><rect x=\"8\" y=\"10\" width=\"104\" height=\"30\" rx=\"3\" class=\"ds-slot-art\"/><rect x=\"8\" y=\"43\" width=\"50\" height=\"26\" rx=\"3\" class=\"ds-slot-art\"/><rect x=\"62\" y=\"43\" width=\"50\" height=\"26\" rx=\"3\" class=\"ds-slot-art\"/><rect x=\"8.5\" y=\"92.5\" width=\"103\" height=\"57.5\" rx=\"3\" class=\"ds-slot-ad\"/><rect x=\"8\" y=\"160\" width=\"104\" height=\"14\" rx=\"7\" class=\"ds-slot-btn\"/><rect x=\"8\" y=\"184\" width=\"66\" height=\"4\" rx=\"2\" class=\"ds-slot-soft\"/><rect x=\"8\" y=\"192\" width=\"44\" height=\"4\" rx=\"2\" class=\"ds-slot-soft\"/></svg>",
+      "css": ".ds-slot{height:auto}.ds-slot-frame{fill:var(--background);stroke:color-mix(in oklch,var(--muted-foreground) 25%,transparent);stroke-width:1}.ds-slot-art{fill:color-mix(in oklch,var(--muted-foreground) 12%,transparent)}.ds-slot-line{fill:color-mix(in oklch,var(--muted-foreground) 25%,transparent)}.ds-slot-soft{fill:color-mix(in oklch,var(--muted-foreground) 10%,transparent)}.ds-slot-btn{fill:color-mix(in oklch,var(--muted-foreground) 20%,transparent)}.ds-slot-ad{fill:color-mix(in oklch,var(--primary) 15%,transparent);stroke:color-mix(in oklch,var(--primary) 45%,transparent);stroke-width:1}"
+    },
+    {
+      "name": "Total Amount",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Natijaning eng katta elementi. Qiymat o'zgarganda sanab yetib boradi; ostida har doim kunlik ulush turadi.",
+      "html": "<div class=\"ds-total\"><p class=\"ds-total-reach\">234 653 ko'rsatish · 30 kun</p><p class=\"ds-total-sum\"><span>7 040 000</span><em>so'm</em></p><p class=\"ds-total-day\">Kuniga 234 667 so'm</p></div>",
+      "css": ".ds-total{font-family:var(--font-sans);color:var(--foreground)}.ds-total p{margin:0}.ds-total-reach{font-size:.875rem;color:var(--muted-foreground)}.ds-total-sum{margin-top:.5rem;display:flex;align-items:baseline;gap:.375rem}.ds-total-sum span{font-family:var(--font-mono);font-size:2rem;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}.ds-total-sum em{font-style:normal;font-size:.875rem;color:var(--muted-foreground)}.ds-total-day{margin-top:.5rem;font-size:.875rem;color:var(--muted-foreground)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Reklama joyi ko'rinib turadi",
+    "overview": "MangaBox Ads — brend pul sarflashdan oldin nimani sotib olayotganini ko'radigan kabinet. Bu bitta gap butun tizimni tutib turadi: narxnomada slot nomi emas, ilovaning qaysi ekranida reklama turishi chiziladi; kampaniya sahifasida raqam emas, o'sha raqam nimadan kelib chiqqani ko'rsatiladi; kreativ ro'yxatda matn emas, kreativning o'zi rasmi va tugmasi bilan chiziladi. Interfeys mijozga ishonch berish uchun emas, unga ko'rsatish uchun ishlaydi.\n\nShu sababli tizim tinch va zich emas. Kulrang canvas ustida oq panellar suzadi, har bir panel bitta savolga javob beradi, panellar orasida havo bor. Bitta binafsha aksent — u tanlovni, faol holatni va harakatni bildiradi, boshqa hech narsani. Sonlar mono shriftda va tabular, chunki ular taqqoslanadi.\n\nBu tizim rad etadi: an'anaviy reklama agentliklarining prays-list PDF'larini; kripto va ads-tech dashboardlarining neon va qora fonini; CRM'larning bo'sh jadvallarini; generik SaaS shablonlarining bir xil kartochka grid'larini.",
+    "keyCharacteristics": [
+      "Ko'rsatish, aytish emas: joy, format va natija chiziladi",
+      "Kulrang canvas → oq panel → botiq input: uchta sirt, uchtasi ham aniq",
+      "Yagona binafsha aksent, ekranning 10% dan kam qismida",
+      "Sonlar mono va tabular; jami summa har doim eng katta element",
+      "Yorug' va qorong'i — ikkalasi teng huquqli, biri ikkinchisining ko'chirmasi emas",
+      "O'zbek tili birinchi; shrift lotin va kirillda teng o'qiladi"
+    ],
+    "rules": [
+      {
+        "name": "Uch Sirt Qoidasi",
+        "body": "canvas < card < field — sahifa, panel, input. Bu uchtasi yorug'da ham, qorong'ida ham bir xil tartibda turadi. Agar yangi element qaysi sirtda turishini ayta olmasangiz, u panelga tushmagan.",
+        "section": "colors"
+      },
+      {
+        "name": "Yagona Aksent Qoidasi",
+        "body": "Binafsha ekran sirtining 10% dan ko'p qismini egallamaydi. Agar ekranda ikkita binafsha element bo'lsa, foydalanuvchi qaysi biri asosiy ekanini bilmaydi.",
+        "section": "colors"
+      },
+      {
+        "name": "Tusli Neytrallar Qoidasi",
+        "body": "Har bir neytral 286° dan 0.004–0.008 chroma oladi. Sof kulrang ishlatilmaydi — u sovuq va binafsha aksent bilan begona ko'rinadi.",
+        "section": "colors"
+      },
+      {
+        "name": "Raqam Mono Qoidasi",
+        "body": "Taqqoslanadigan har qanday son mono va tabular-nums. Proportsional shriftdagi ustma-ust sonlar qatorlari qalqiydi va bu ishonchni yo'qotadi.",
+        "section": "typography"
+      },
+      {
+        "name": "Bitta Oila Qoidasi",
+        "body": "Iyerarxiya o'lcham va og'irlik bilan yaratiladi. Yangi shrift oilasi qo'shish — tizimni buzish.",
+        "section": "typography"
+      },
+      {
+        "name": "Natija Ko'rinib Tursin Qoidasi",
+        "body": "Foydalanuvchi qiymat kiritadigan ekranda natija sticky ustunda turadi. Tor ekranda u mazmundan keyin tushadi va tanlov qilinganda o'sha yerga suriladi.",
+        "section": "layout"
+      },
+      {
+        "name": "Tekis-Sukutda Qoidasi",
+        "body": "Statik sirt soyasiz. Soya — holat javobi yoki suzuvchi element belgisi. Panel hech qachon soya olmaydi.",
+        "section": "elevation"
+      },
+      {
+        "name": "Kartada Karta Yo'q Qoidasi",
+        "body": "Panel ichiga ikkinchi chegarali panel qo'yilmaydi. Ichki guruh kerak bo'lsa — border-t ajratgich yoki bg-muted fon.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do har bir mazmun blokini Panel ga soling. Canvasda yalang'och turgan jadval yoki forma — tugallanmagan ekran.",
+      "Do input'ni panel ichida joylang: field foni faqat oq panelda botiq ko'rinadi.",
+      "Do taqqoslanadigan sonlarni mono va tabular-nums bilan yozing, pul summasini formatSomAmount orqali o'tkazing.",
+      "Do katta summani inson o'lchoviga aylantiring: jami yonida kunlik yoki birlik narxini bering.",
+      "Do xato xabarida muammoni va chiqish yo'lini ayting.",
+      "Do ikkala mavzuni ham tekshiring — canvas/card/field pog'onasi qorong'ida teskari lightness bilan quriladi.",
+      "Do interaktiv elementga ko'rinadigan focus halqasi bering.",
+      "Do harakat qo'shsangiz bittasini tanlang va uni ma'noga bog'lang, keyin prefers-reduced-motion ni hurmat qiling."
+    ],
+    "donts": [
+      "Don't bg-card ni boshqaruv foni sifatida ishlatmang (tugma, input, tab). U panel rangi.",
+      "Don't panel ichiga chegarali ikkinchi panel qo'ymang.",
+      "Don't sof kulrang yoki Tailwind'ning gray-* shkalasini ishlatmang.",
+      "Don't bitta ekranda ikkita binafsha asosiy element qo'ymang.",
+      "Don't yangi shrift oilasi qo'shmang; Spectral ham yuklangan bo'lsa-da, ishlatilmaydi.",
+      "Don't --active ni yangi joyda ishlatmang: u yorug'da ko'k, qorong'ida binafsha.",
+      "Don't raqamlar devori bilan cheklanmang — ko'rsatkich yonida u nimadan kelib chiqqani turishi kerak.",
+      "Don't modal oynani birinchi yechim sifatida tanlamang.",
+      "Don't gradient matn, shisha effekti yoki dekorativ blur ishlatmang."
+    ]
+  }
+}
