@@ -19,6 +19,14 @@ export function periodLabel(campaign: AdCampaign): string {
   return `${formatDate(campaign.startsAt)} → ${formatDate(campaign.endsAt)}`;
 }
 
+export function periodRange(campaign: AdCampaign): string {
+  const start = formatDate(campaign.startsAt);
+  const end = formatDate(campaign.endsAt);
+  const startYear = start.slice(start.lastIndexOf(" "));
+  const sameYear = end.endsWith(startYear);
+  return `${sameYear ? start.slice(0, -startYear.length) : start} – ${end}`;
+}
+
 /** Chegirma bo'lsa oraliq summa chizilgan holda yonida turadi. */
 export function CampaignAmount({
   campaign,

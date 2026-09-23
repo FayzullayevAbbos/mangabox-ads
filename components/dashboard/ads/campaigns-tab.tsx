@@ -1,14 +1,18 @@
 "use client";
 
-import { RiMegaphoneLine } from "@remixicon/react";
+import {
+  RiEditLine,
+  RiEyeLine,
+  RiMegaphoneLine,
+  RiMore2Fill,
+} from "@remixicon/react";
 
 import {
   actionsFor,
   useCampaignActions,
 } from "@/components/dashboard/ads/campaign-actions";
 import {
-  CampaignAmount,
-  periodLabel,
+  periodRange,
   slotsLabel,
 } from "@/components/dashboard/ads/campaign-format";
 import { CampaignStatusBadge } from "@/components/dashboard/ads/campaign-status-badge";
@@ -18,8 +22,13 @@ import {
   LoadErrorState,
   TableSkeleton,
 } from "@/components/dashboard/page-states";
-import { TABLE_BLEED } from "@/components/dashboard/table-bleed";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -33,7 +42,8 @@ import {
   type AdCampaign,
   type AdCampaignStatus,
 } from "@/lib/api/ads";
-import { formatCount } from "@/lib/format";
+import { formatCount, formatSomAmount } from "@/lib/format";
+import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
@@ -41,6 +51,15 @@ type State =
   | { status: "loading" }
   | { status: "error"; message: string }
   | { status: "ready"; rows: AdCampaign[] };
+
+type Actions = ReturnType<typeof useCampaignActions>;
+
+type RowProps = {
+  campaign: AdCampaign;
+  actions: Actions;
+  onOpen: (campaign: AdCampaign) => void;
+  onEdit: (campaign: AdCampaign) => void;
+};
 
 export function CampaignsTab({
   state,
@@ -62,7 +81,6 @@ export function CampaignsTab({
   onChanged: () => void;
 }) {
   const t = useT("ads");
-  const { labelOf } = useRateCard();
   const p = useT("portal");
   const actions = useCampaignActions(() => onChanged());
   const rows =
@@ -72,9 +90,10 @@ export function CampaignsTab({
         : state.rows.filter((c) => c.status === statusFilter)
       : [];
   const counts = countByStatus(state.status === "ready" ? state.rows : []);
+  const cols = t.campaigns.columns;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div className="-mx-4 overflow-x-auto px-4 pb-px [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
         <div className="flex w-max min-w-full items-center gap-2">
           <Chip
@@ -115,124 +134,271 @@ export function CampaignsTab({
       )}
 
       {state.status === "ready" && rows.length > 0 && (
-        <Table
-          containerClassName={TABLE_BLEED}
-          className="min-w-[56rem] text-[0.9375rem]"
-        >
-          <TableHeader>
-            <TableRow className="border-border hover:bg-transparent">
-              <Th first>{t.campaigns.columns.name}</Th>
-              <Th>{t.campaigns.columns.slots}</Th>
-              <Th>{t.campaigns.columns.period}</Th>
-              <Th align="right">{t.campaigns.columns.amount}</Th>
-              <Th>{t.campaigns.columns.status}</Th>
-              <TableHead className="h-11 w-56 px-0" />
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.map((campaign) => {
-              const allowed = actionsFor(campaign);
-              return (
-                <TableRow
+        <>
+          <Table
+            containerClassName="hidden xl:block"
+            className="table-fixed text-[0.9375rem]"
+          >
+            <colgroup>
+              <col />
+              <col className="w-[11.5rem]" />
+              <col className="w-[9rem]" />
+              <col className="w-[11.5rem]" />
+              <col className="w-[14.5rem]" />
+            </colgroup>
+            <TableHeader>
+              <TableRow className="border-border hover:bg-transparent">
+                <Th className="pl-3">{cols.name}</Th>
+                <Th>{cols.period}</Th>
+                <Th className="text-right">{cols.amount}</Th>
+                <Th className="pl-6">{cols.status}</Th>
+                <TableHead className="h-11" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rows.map((campaign) => (
+                <CampaignTableRow
                   key={campaign.id}
-                  className="group cursor-pointer border-border transition-colors hover:bg-muted/40"
-                  onClick={() => onOpen(campaign)}
-                >
-                  <TableCell className="h-14 max-w-[16rem] px-0 py-3 font-medium">
-                    <span
-                      className="block truncate transition-colors group-hover:text-primary"
-                      title={campaign.name}
-                    >
-                      {campaign.name}
-                    </span>
-                    <DeliveryProgress campaign={campaign} />
-                  </TableCell>
-                  <TableCell className="max-w-[18rem] text-sm text-muted-foreground">
-                    <span
-                      className="block truncate"
-                      title={slotsLabel(campaign, labelOf)}
-                    >
-                      {slotsLabel(campaign, labelOf)}
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-sm whitespace-nowrap text-muted-foreground">
-                    {periodLabel(campaign)}
-                  </TableCell>
-                  <TableCell className="text-right whitespace-nowrap">
-                    <CampaignAmount campaign={campaign} />
-                  </TableCell>
-                  <TableCell>
-                    <CampaignStatusBadge status={campaign.status} />
-                  </TableCell>
-                  <TableCell
-                    className="w-56 px-0 text-right"
-                    onClick={(event) => event.stopPropagation()}
-                  >
-                    <div className="flex flex-wrap items-center justify-end gap-1.5">
-                      {allowed.includes("submit") && (
-                        <Button
-                          size="sm"
-                          disabled={actions.isBusy(campaign.id)}
-                          onClick={() => actions.submit(campaign)}
-                        >
-                          {p.actions.submit}
-                        </Button>
-                      )}
-                      {allowed.includes("pay") && (
-                        <Button
-                          size="sm"
-                          disabled={actions.isBusy(campaign.id)}
-                          onClick={() => actions.askPay(campaign)}
-                        >
-                          {p.actions.pay}
-                        </Button>
-                      )}
-                      {allowed.includes("pause") && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          disabled={actions.isBusy(campaign.id)}
-                          onClick={() => actions.pause(campaign)}
-                        >
-                          {t.actions.pause}
-                        </Button>
-                      )}
-                      {allowed.includes("resume") && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          disabled={actions.isBusy(campaign.id)}
-                          onClick={() => actions.resume(campaign)}
-                        >
-                          {t.actions.resume}
-                        </Button>
-                      )}
-                      {allowed.includes("edit") && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => onEdit(campaign)}
-                        >
-                          {t.actions.edit}
-                        </Button>
-                      )}
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={() => onOpen(campaign)}
-                      >
-                        {t.actions.details}
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+                  campaign={campaign}
+                  actions={actions}
+                  onOpen={onOpen}
+                  onEdit={onEdit}
+                />
+              ))}
+            </TableBody>
+          </Table>
+
+          <ul className="-mx-4 divide-y divide-border border-y border-border sm:mx-0 sm:rounded-xl sm:border xl:hidden">
+            {rows.map((campaign) => (
+              <CampaignCard
+                key={campaign.id}
+                campaign={campaign}
+                actions={actions}
+                onOpen={onOpen}
+                onEdit={onEdit}
+              />
+            ))}
+          </ul>
+        </>
       )}
 
       {actions.dialogs}
+    </div>
+  );
+}
+
+function CampaignTableRow({ campaign, actions, onOpen, onEdit }: RowProps) {
+  return (
+    <TableRow
+      className="group cursor-pointer border-border transition-colors hover:bg-muted/40"
+      onClick={() => onOpen(campaign)}
+    >
+      <TableCell className="py-4 pl-3">
+        <NameBlock campaign={campaign} />
+      </TableCell>
+      <TableCell className="py-4">
+        <PeriodBlock campaign={campaign} />
+      </TableCell>
+      <TableCell className="py-4 text-right">
+        <AmountBlock campaign={campaign} />
+      </TableCell>
+      <TableCell className="py-4 pl-6">
+        <StatusBlock campaign={campaign} />
+      </TableCell>
+      <TableCell className="py-4 pr-3" onClick={(e) => e.stopPropagation()}>
+        <RowActions
+          campaign={campaign}
+          actions={actions}
+          onOpen={onOpen}
+          onEdit={onEdit}
+        />
+      </TableCell>
+    </TableRow>
+  );
+}
+
+function CampaignCard({ campaign, actions, onOpen, onEdit }: RowProps) {
+  return (
+    <li
+      className="cursor-pointer px-4 py-4 transition-colors hover:bg-muted/40 sm:px-5"
+      onClick={() => onOpen(campaign)}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <NameBlock campaign={campaign} className="flex-1" wrap />
+        <CampaignStatusBadge status={campaign.status} className="shrink-0" />
+      </div>
+
+      <div className="mt-3 flex items-end justify-between gap-4">
+        <PeriodBlock campaign={campaign} />
+        <AmountBlock campaign={campaign} className="text-right" />
+      </div>
+
+      <DeliveryProgress campaign={campaign} className="mt-3" wide />
+
+      <div
+        className="mt-3.5 flex justify-end"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <RowActions
+          campaign={campaign}
+          actions={actions}
+          onOpen={onOpen}
+          onEdit={onEdit}
+          className="w-full sm:w-auto"
+        />
+      </div>
+    </li>
+  );
+}
+
+function NameBlock({
+  campaign,
+  className,
+  wrap,
+}: {
+  campaign: AdCampaign;
+  className?: string;
+  wrap?: boolean;
+}) {
+  const { labelOf } = useRateCard();
+  const slots = slotsLabel(campaign, labelOf);
+  return (
+    <div className={cn("min-w-0", className)}>
+      <p
+        className={cn(
+          "font-medium transition-colors group-hover:text-primary",
+          wrap ? "line-clamp-2 text-pretty" : "truncate",
+        )}
+        title={campaign.name}
+      >
+        {campaign.name}
+      </p>
+      <p
+        className={cn(
+          "mt-1 text-sm text-muted-foreground",
+          wrap ? "line-clamp-2" : "truncate",
+        )}
+        title={slots}
+      >
+        {slots}
+      </p>
+    </div>
+  );
+}
+
+function PeriodBlock({ campaign }: { campaign: AdCampaign }) {
+  const t = useT("ads");
+  return (
+    <div className="min-w-0">
+      <p className="text-sm whitespace-nowrap">{periodRange(campaign)}</p>
+      <p className="mt-1 text-sm text-muted-foreground">
+        {interpolate(t.sheet.overview.days, { days: campaign.days })}
+      </p>
+    </div>
+  );
+}
+
+function AmountBlock({
+  campaign,
+  className,
+}: {
+  campaign: AdCampaign;
+  className?: string;
+}) {
+  const discounted = campaign.discountPercent > 0;
+  return (
+    <div className={cn("font-mono tabular-nums", className)}>
+      <p className="font-medium whitespace-nowrap">
+        {formatSomAmount(campaign.totalSom)}
+      </p>
+      {discounted && (
+        <p className="mt-1 text-xs whitespace-nowrap text-muted-foreground">
+          <span className="line-through">
+            {formatSomAmount(campaign.subtotalSom)}
+          </span>
+          <span className="ml-1.5 text-success">
+            −{campaign.discountPercent}%
+          </span>
+        </p>
+      )}
+    </div>
+  );
+}
+
+function StatusBlock({ campaign }: { campaign: AdCampaign }) {
+  return (
+    <div className="flex flex-col items-start gap-2">
+      <CampaignStatusBadge status={campaign.status} />
+      <DeliveryProgress campaign={campaign} />
+    </div>
+  );
+}
+
+const PRIMARY_ORDER = ["submit", "pay", "resume", "pause"] as const;
+
+function RowActions({
+  campaign,
+  actions,
+  onOpen,
+  onEdit,
+  className,
+}: RowProps & { className?: string }) {
+  const t = useT("ads");
+  const p = useT("portal");
+  const allowed = actionsFor(campaign);
+  const primary = PRIMARY_ORDER.find((key) => allowed.includes(key));
+  const busy = actions.isBusy(campaign.id);
+
+  const primaryButton = primary && (
+    <Button
+      size="sm"
+      variant={primary === "pause" ? "outline" : "default"}
+      disabled={busy}
+      className="flex-1 sm:flex-none"
+      onClick={() => {
+        if (primary === "submit") actions.submit(campaign);
+        else if (primary === "pay") actions.askPay(campaign);
+        else if (primary === "resume") actions.resume(campaign);
+        else actions.pause(campaign);
+      }}
+    >
+      {primary === "submit" && p.actions.submit}
+      {primary === "pay" && p.actions.pay}
+      {primary === "resume" && t.actions.resume}
+      {primary === "pause" && t.actions.pause}
+    </Button>
+  );
+
+  return (
+    <div className={cn("flex items-center justify-end gap-1.5", className)}>
+      {primaryButton}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            size="icon-sm"
+            variant="ghost"
+            aria-label={t.actions.more}
+            className="shrink-0 text-muted-foreground data-[state=open]:bg-muted data-[state=open]:text-foreground"
+          >
+            <RiMore2Fill className="size-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-auto min-w-44">
+          <DropdownMenuItem className="gap-2" onSelect={() => onOpen(campaign)}>
+            <RiEyeLine className="size-4" />
+            {t.actions.details}
+          </DropdownMenuItem>
+          {allowed.includes("edit") && (
+            <DropdownMenuItem
+              className="gap-2"
+              onSelect={() => onEdit(campaign)}
+            >
+              <RiEditLine className="size-4" />
+              {t.actions.edit}
+            </DropdownMenuItem>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }
@@ -254,7 +420,15 @@ function deliveredOf(campaign: AdCampaign): number {
   return campaign.creatives.reduce((sum, c) => sum + c.impressions, 0);
 }
 
-function DeliveryProgress({ campaign }: { campaign: AdCampaign }) {
+function DeliveryProgress({
+  campaign,
+  className,
+  wide,
+}: {
+  campaign: AdCampaign;
+  className?: string;
+  wide?: boolean;
+}) {
   if (!DELIVERING.includes(campaign.status) || !campaign.impressionsGoal) {
     return null;
   }
@@ -265,8 +439,11 @@ function DeliveryProgress({ campaign }: { campaign: AdCampaign }) {
   );
   const live = campaign.status === "active";
   return (
-    <div className="mt-2 flex items-center gap-2.5">
-      <div className="h-1 w-28 shrink-0 overflow-hidden rounded-full bg-muted">
+    <div
+      className={cn("w-full", !wide && "max-w-[10rem]", className)}
+      title={`${formatCount(delivered)} / ${formatCount(campaign.impressionsGoal)}`}
+    >
+      <div className="h-1 w-full overflow-hidden rounded-full bg-muted">
         <div
           className={cn(
             "h-full rounded-full transition-[width] duration-700 ease-out",
@@ -275,9 +452,12 @@ function DeliveryProgress({ campaign }: { campaign: AdCampaign }) {
           style={{ width: `${percent}%` }}
         />
       </div>
-      <span className="font-mono text-xs font-normal text-muted-foreground tabular-nums">
-        {percent}% · {formatCount(delivered)} / {formatCount(campaign.impressionsGoal)}
-      </span>
+      <p className="mt-1.5 flex justify-between gap-2 font-mono text-xs text-muted-foreground tabular-nums">
+        <span className="text-foreground">{percent}%</span>
+        <span>
+          {formatCount(delivered)} / {formatCount(campaign.impressionsGoal)}
+        </span>
+      </p>
     </div>
   );
 }
@@ -297,8 +477,9 @@ function Chip({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
-        "inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+        "inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
         active
           ? "bg-primary text-primary-foreground"
           : "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground",
@@ -320,20 +501,14 @@ function Chip({
 
 function Th({
   children,
-  align = "left",
-  first,
+  className,
 }: {
   children: React.ReactNode;
-  align?: "left" | "right";
-  first?: boolean;
+  className?: string;
 }) {
   return (
     <TableHead
-      className={cn(
-        "h-11 text-sm font-semibold text-foreground",
-        align === "right" && "text-right",
-        first && "px-0",
-      )}
+      className={cn("h-11 text-sm font-semibold text-foreground", className)}
     >
       {children}
     </TableHead>

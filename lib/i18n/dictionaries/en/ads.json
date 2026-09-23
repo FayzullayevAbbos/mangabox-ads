@@ -68,7 +68,8 @@
     "create": "Add campaign",
     "cancel": "Cancel",
     "proceed": "Continue",
-    "close": "Close"
+    "close": "Close",
+    "more": "More actions"
   },
   "finish": {
     "title": "Finish campaign",

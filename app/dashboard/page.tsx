@@ -124,7 +124,8 @@ function CampaignsPage() {
           />
           <Stat
             label={p.home.stats.clicks}
-            value={`${formatCount(totals.clicks)} · ${ctr}`}
+            value={formatCount(totals.clicks)}
+            hint={ctr}
           />
           <Stat
             label={p.home.stats.spent}
@@ -166,12 +167,23 @@ function CampaignsPage() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({
+  label,
+  value,
+  hint,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+}) {
   return (
-    <div className="bg-card px-5 py-4">
+    <div className="bg-card px-4 py-4 sm:px-5">
       <dt className="text-sm text-muted-foreground">{label}</dt>
-      <dd className="mt-1.5 font-mono text-xl font-semibold tabular-nums">
-        {value}
+      <dd className="mt-1.5 flex flex-wrap items-baseline gap-x-2 font-mono tabular-nums">
+        <span className="text-lg font-semibold sm:text-xl">{value}</span>
+        {hint && (
+          <span className="text-sm text-muted-foreground">{hint}</span>
+        )}
       </dd>
     </div>
   );
