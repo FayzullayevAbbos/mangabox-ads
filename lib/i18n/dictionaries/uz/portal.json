@@ -21,6 +21,14 @@
     "emptyTitle": "Hali kampaniya yo'q",
     "emptyDescription": "Birinchi kampaniyani yarating: slot, muddat va ulushni tanlang — narx darhol hisoblanadi."
   },
+  "campaignPage": {
+    "back": "Kampaniyalar",
+    "parameters": "Parametrlar",
+    "pricing": "Narx hisobi",
+    "delivery": "Yetkazildi",
+    "created": "Yaratilgan: {date}",
+    "notFound": "Kampaniya topilmadi yoki o'chirilgan."
+  },
   "actions": {
     "submit": "Moderatsiyaga yuborish",
     "pay": "To'lash"

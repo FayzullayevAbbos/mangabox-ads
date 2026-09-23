@@ -114,7 +114,7 @@ export function CreativeManager({
           {t.sheet.creatives.empty}
         </p>
       ) : (
-        <ul className="space-y-3">
+        <ul className="grid gap-3 xl:grid-cols-2">
           {campaign.creatives.map((creative) => (
             <li key={creative.id}>
               <CreativePreview

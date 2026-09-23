@@ -5,7 +5,10 @@ import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { RiBarChart2Line } from "@remixicon/react";
 
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
-import { EmptyResult, LoadErrorState } from "@/components/dashboard/page-states";
+import {
+  EmptyResult,
+  LoadErrorState,
+} from "@/components/dashboard/page-states";
 import {
   ChartContainer,
   ChartTooltip,
@@ -52,7 +55,6 @@ export function CampaignStats({ campaign }: { campaign: AdCampaign }) {
   if (state.status === "loading") {
     return (
       <div className="space-y-4">
-        <Skeleton className="h-2 w-full" />
         <div className="grid grid-cols-2 gap-3">
           {Array.from({ length: 4 }).map((_, i) => (
             <Skeleton key={i} className="h-16 w-full" />
@@ -68,9 +70,6 @@ export function CampaignStats({ campaign }: { campaign: AdCampaign }) {
   }
 
   const { totals, days, slots, creatives } = state.report;
-  const progress = campaign.impressionsGoal
-    ? Math.min(100, (totals.impressions / campaign.impressionsGoal) * 100)
-    : 0;
   const ctr = totals.impressions
     ? (totals.clicks / totals.impressions) * 100
     : 0;
@@ -87,30 +86,11 @@ export function CampaignStats({ campaign }: { campaign: AdCampaign }) {
 
   return (
     <div className="space-y-6">
-      <div>
-        <div className="flex items-baseline justify-between gap-3 text-sm">
-          <span className="font-medium">{t.sheet.stats.progress}</span>
-          <span className="font-mono tabular-nums">
-            {formatCount(totals.impressions)}
-            <span className="text-muted-foreground">
-              {" / "}
-              {formatCount(campaign.impressionsGoal)}
-            </span>
-            <span className="ml-2 text-muted-foreground">
-              {progress.toFixed(0)}%
-            </span>
-          </span>
-        </div>
-        <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-muted">
-          <div
-            className="h-full rounded-full bg-primary"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-px bg-border">
-        <Tile label={t.sheet.stats.impressions} value={formatCount(totals.impressions)} />
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-5">
+        <Tile
+          label={t.sheet.stats.impressions}
+          value={formatCount(totals.impressions)}
+        />
         <Tile label={t.sheet.stats.views} value={formatCount(totals.views)} />
         <Tile label={t.sheet.stats.clicks} value={formatCount(totals.clicks)} />
         <Tile label={t.sheet.stats.ctr} value={`${ctr.toFixed(2)}%`} />
@@ -118,7 +98,7 @@ export function CampaignStats({ campaign }: { campaign: AdCampaign }) {
         <Tile
           label={t.sheet.stats.unique}
           value={formatCount(totals.uniqueViewers)}
-          className="col-span-2"
+          className="col-span-2 lg:col-span-1"
         />
       </div>
 
@@ -136,7 +116,7 @@ export function CampaignStats({ campaign }: { campaign: AdCampaign }) {
           ) : (
             <ChartContainer
               config={chartConfig}
-              className="aspect-auto h-[200px] w-full"
+              className="aspect-auto h-[200px] w-full lg:h-[260px]"
             >
               <BarChart
                 data={days.map((d) => ({
@@ -172,21 +152,23 @@ export function CampaignStats({ campaign }: { campaign: AdCampaign }) {
         </div>
       </section>
 
-      <ShareList
-        title={t.sheet.stats.bySlot}
-        buckets={slots}
-        total={totals.impressions}
-        labelFor={(key) => labelOf(key as AdSlot)}
-        empty={t.sheet.stats.empty}
-      />
+      <div className="grid gap-8 lg:grid-cols-2">
+        <ShareList
+          title={t.sheet.stats.bySlot}
+          buckets={slots}
+          total={totals.impressions}
+          labelFor={(key) => labelOf(key as AdSlot)}
+          empty={t.sheet.stats.empty}
+        />
 
-      <ShareList
-        title={t.sheet.stats.byCreative}
-        buckets={creatives}
-        total={totals.impressions}
-        labelFor={creativeLabel}
-        empty={t.sheet.stats.empty}
-      />
+        <ShareList
+          title={t.sheet.stats.byCreative}
+          buckets={creatives}
+          total={totals.impressions}
+          labelFor={creativeLabel}
+          empty={t.sheet.stats.empty}
+        />
+      </div>
     </div>
   );
 }
@@ -253,7 +235,8 @@ function ShareList({
                   />
                 </div>
                 <p className="mt-1 font-mono text-xs text-muted-foreground tabular-nums">
-                  {formatCount(bucket.clicks)} {t.sheet.stats.clicks.toLowerCase()}
+                  {formatCount(bucket.clicks)}{" "}
+                  {t.sheet.stats.clicks.toLowerCase()}
                 </p>
               </li>
             );

@@ -21,6 +21,14 @@
     "emptyTitle": "No campaigns yet",
     "emptyDescription": "Create your first campaign: pick slots, duration and share — the price is calculated instantly."
   },
+  "campaignPage": {
+    "back": "Campaigns",
+    "parameters": "Parameters",
+    "pricing": "Price breakdown",
+    "delivery": "Delivered",
+    "created": "Created {date}",
+    "notFound": "Campaign not found or deleted."
+  },
   "actions": {
     "submit": "Submit for review",
     "pay": "Pay"

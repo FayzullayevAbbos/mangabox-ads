@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { RiAddLine, RiTimeLine } from "@remixicon/react";
 
 import {
   CampaignFormSheet,
   type CampaignFormTarget,
 } from "@/components/dashboard/ads/campaign-form-sheet";
-import { CampaignSheet } from "@/components/dashboard/ads/campaign-sheet";
 import { CampaignsTab } from "@/components/dashboard/ads/campaigns-tab";
 import { RateCardProvider } from "@/components/dashboard/ads/rate-card-context";
 import { PageHeader } from "@/components/dashboard/page-header";
@@ -49,9 +49,7 @@ function CampaignsPage() {
   const [statusFilter, setStatusFilter] = React.useState<
     AdCampaignStatus | "all"
   >("all");
-  const [openCampaignId, setOpenCampaignId] = React.useState<string | null>(
-    null,
-  );
+  const router = useRouter();
   const [formTarget, setFormTarget] = React.useState<CampaignFormTarget>(null);
 
   const load = React.useCallback(() => {
@@ -140,19 +138,9 @@ function CampaignsPage() {
         onStatusFilter={setStatusFilter}
         onCreate={() => setFormTarget("new")}
         onReload={load}
-        onOpen={(campaign) => setOpenCampaignId(campaign.id)}
+        onOpen={(campaign) => router.push(`/dashboard/campaigns/${campaign.id}`)}
         onEdit={(campaign) => setFormTarget(campaign)}
         onChanged={load}
-      />
-
-      <CampaignSheet
-        campaignId={openCampaignId}
-        onClose={() => setOpenCampaignId(null)}
-        onChanged={load}
-        onEdit={(campaign) => {
-          setOpenCampaignId(null);
-          setFormTarget(campaign);
-        }}
       />
 
       <CampaignFormSheet

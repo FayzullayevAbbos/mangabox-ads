@@ -6,6 +6,7 @@ import {
   RiMegaphoneLine,
   RiMore2Fill,
 } from "@remixicon/react";
+import Link from "next/link";
 
 import {
   actionsFor,
@@ -209,7 +210,6 @@ function CampaignTableRow({ campaign, actions, onOpen, onEdit }: RowProps) {
         <RowActions
           campaign={campaign}
           actions={actions}
-          onOpen={onOpen}
           onEdit={onEdit}
         />
       </TableCell>
@@ -242,7 +242,6 @@ function CampaignCard({ campaign, actions, onOpen, onEdit }: RowProps) {
         <RowActions
           campaign={campaign}
           actions={actions}
-          onOpen={onOpen}
           onEdit={onEdit}
           className="w-full sm:w-auto"
         />
@@ -339,10 +338,9 @@ const PRIMARY_ORDER = ["submit", "pay", "resume", "pause"] as const;
 function RowActions({
   campaign,
   actions,
-  onOpen,
   onEdit,
   className,
-}: RowProps & { className?: string }) {
+}: Omit<RowProps, "onOpen"> & { className?: string }) {
   const t = useT("ads");
   const p = useT("portal");
   const allowed = actionsFor(campaign);
@@ -384,9 +382,11 @@ function RowActions({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-auto min-w-44">
-          <DropdownMenuItem className="gap-2" onSelect={() => onOpen(campaign)}>
-            <RiEyeLine className="size-4" />
-            {t.actions.details}
+          <DropdownMenuItem asChild className="gap-2">
+            <Link href={`/dashboard/campaigns/${campaign.id}`}>
+              <RiEyeLine className="size-4" />
+              {t.actions.details}
+            </Link>
           </DropdownMenuItem>
           {allowed.includes("edit") && (
             <DropdownMenuItem

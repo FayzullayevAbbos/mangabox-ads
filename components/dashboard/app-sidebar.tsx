@@ -88,7 +88,8 @@ export function AppSidebar() {
               {group.items.map((item) => {
                 const isActive =
                   item.href === "/dashboard"
-                    ? pathname === item.href
+                    ? pathname === item.href ||
+                      pathname.startsWith("/dashboard/campaigns")
                     : pathname.startsWith(item.href);
                 return (
                   <SidebarMenuItem key={item.href}>
