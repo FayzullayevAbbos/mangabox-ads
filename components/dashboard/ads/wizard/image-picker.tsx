@@ -29,8 +29,10 @@ export function ImagePicker({
   spec,
   frameClassName,
   canRemove,
+  error,
   onPick,
   onRemove,
+  onError,
 }: {
   label: string;
   hint?: string;
@@ -38,8 +40,10 @@ export function ImagePicker({
   spec?: AdImageSpec | null;
   frameClassName?: string;
   canRemove: boolean;
+  error?: string;
   onPick: (file: File) => void;
   onRemove: () => void;
+  onError?: (message: string) => void;
 }) {
   const t = useT("ads");
   const w = useT("portal").wizard.creative;
@@ -51,7 +55,7 @@ export function ImagePicker({
       const check = size && checkImageAgainstSpec(size.width, size.height, spec);
       if (size && check && !check.ok) {
         const actual = `${size.width}×${size.height}`;
-        toast.error(
+        const message =
           check.reason === "size"
             ? interpolate(t.sheet.creatives.imageTooSmall, {
                 min: `${spec.minWidth}×${spec.minHeight}`,
@@ -60,8 +64,9 @@ export function ImagePicker({
             : interpolate(t.sheet.creatives.imageWrongRatio, {
                 ratio: ratioLabel(spec.ratio),
                 actual,
-              }),
-        );
+              });
+        if (onError) onError(message);
+        else toast.error(message);
         return;
       }
     }
@@ -77,6 +82,7 @@ export function ImagePicker({
         className={cn(
           "flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-dashed border-border bg-muted/40 text-muted-foreground transition-colors outline-none hover:border-primary/50 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring",
           src && "border-solid",
+          error && "border-destructive",
           frameClassName,
         )}
       >
@@ -110,6 +116,12 @@ export function ImagePicker({
           {src ? w.replace : w.chooseFile}
         </Button>
       </div>
+
+      {error && (
+        <p data-field-error className="basis-full text-xs text-destructive">
+          {error}
+        </p>
+      )}
 
       <input
         ref={inputRef}

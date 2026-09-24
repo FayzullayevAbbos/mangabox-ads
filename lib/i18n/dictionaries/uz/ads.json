@@ -73,7 +73,9 @@
   },
   "pause": {
     "title": "Reklamani to'xtatish",
-    "confirm": "Reklama efirdan vaqtincha olinadi — ko'rsatishlar to'xtaydi. Istalgan vaqtda davom ettirishingiz mumkin. Rostdan ham to'xtatmoqchimisiz?"
+    "confirm": "Reklama efirdan vaqtincha olinadi — ko'rsatishlar to'xtaydi. Istalgan vaqtda davom ettirishingiz mumkin.",
+    "timeWarningTitle": "Siz to'xtatgan vaqt saqlanmaydi",
+    "timeWarning": "Muddat to'xtamaydi: to'xtab turgan kunlar qaytarilmaydi va reklama belgilangan sanada — {date} da tugaydi. Bu vaqtda ko'rsatilmay qolgan ko'rsatishlar yo'qoladi."
   },
   "resume": {
     "title": "Reklamani davom ettirish",
@@ -152,7 +154,15 @@
       "slotRequired": "Poster uchun joyni tanlang.",
       "lockedHint": "Bannerlarni faqat moderatsiyagacha o'zgartirish mumkin. Efirdagi bannerni vaqtincha o'chirib qo'yish mumkin.",
       "noImageSlots": "Bu reklamada posterli joy yo'q — faqat matnli banner.",
-      "cardSlotHint": "Matnli banner reklamaning hamma joylarida ko'rsatiladi."
+      "cardSlotHint": "Matnli banner reklamaning hamma joylarida ko'rsatiladi.",
+      "deactivate": {
+        "title": "Bannerni efirdan olasizmi?",
+        "text": "«{slot}» joyida reklamangiz ko'rinmay qoladi. Istalgan vaqt qayta yoqishingiz mumkin.",
+        "timeTitle": "O'chirib turgan vaqt saqlanmaydi",
+        "time": "Kampaniya muddati to'xtamaydi va {date} da tugaydi — banner o'chiq turgan paytdagi ko'rsatishlar yo'qoladi.",
+        "last": "Bu oxirgi faol banner — reklamangiz hech qayerda ko'rinmay qoladi.",
+        "confirm": "Efirdan olish"
+      }
     },
     "stats": {
       "impressions": "Ko'rsatishlar",

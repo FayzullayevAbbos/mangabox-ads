@@ -1,13 +1,19 @@
 "use client";
 
+import * as React from "react";
 import { RiCheckLine, RiCloseLine } from "@remixicon/react";
 
 import {
   CampaignAmount,
-  periodRange,
+  usePeriodText,
   slotsLabel,
 } from "@/components/dashboard/ads/campaign-format";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
+import {
+  MissingSlotCard,
+  SLOT_BANNER_GRID,
+  SlotBannerCard,
+} from "@/components/dashboard/ads/slot-banner-card";
 import { Button } from "@/components/ui/button";
 import type { AdCampaign } from "@/lib/api/ads";
 import { formatCount } from "@/lib/format";
@@ -15,13 +21,11 @@ import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
-import { AdPreview, type PosterPreview } from "./ad-preview";
 import { WizardSection } from "./wizard-section";
 import {
-  creativeFromCampaign,
   creativeReady,
-  mainCard,
-  startDayOk,
+  slotCreative,
+  uncoveredSlots,
   type WizardStep,
 } from "./wizard-model";
 
@@ -29,7 +33,6 @@ export function reviewChecks(campaign: AdCampaign) {
   return {
     place: campaign.slots.length > 0,
     creative: creativeReady(campaign),
-    date: startDayOk(campaign),
   };
 }
 
@@ -43,59 +46,89 @@ export function ReviewStep({
   const t = useT("ads");
   const w = useT("portal").wizard;
   const r = w.review;
-  const { specOf, labelOf } = useRateCard();
+  const { labelOf } = useRateCard();
   const checks = reviewChecks(campaign);
-
-  const posters: PosterPreview[] = campaign.creatives.flatMap((creative) => {
-    const ratio = specOf(creative.slot)?.image?.ratio;
-    return creative.type === "image" && creative.slot && creative.imageUrl && ratio
-      ? [{ slot: creative.slot, src: creative.imageUrl, ratio }]
-      : [];
-  });
+  const periodText = usePeriodText();
+  const missing = uncoveredSlots(campaign);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start xl:gap-8">
-      <div className="space-y-6">
-        <WizardSection>
-          <SectionHead title={r.summary} action={r.change} onAction={() => onGo("plan")} />
-          <dl className="grid gap-x-6 gap-y-4 sm:grid-cols-2">
-            <Item label={t.form.name} value={campaign.name} />
-            <Item label={r.slots} value={slotsLabel(campaign, labelOf)} />
-            <Item
-              label={r.period}
-              value={`${periodRange(campaign)} · ${interpolate(t.sheet.overview.days, { days: campaign.days })}`}
-            />
-            <Item label={r.impressions} value={formatCount(campaign.impressionsGoal)} mono />
-            <div className="sm:col-span-2">
-              <dt className="text-sm text-muted-foreground">{r.total}</dt>
-              <dd className="mt-1 text-xl">
-                <CampaignAmount campaign={campaign} />
-                <span className="ms-1.5 text-sm text-muted-foreground">
-                  {t.rateCard.currency}
-                </span>
-              </dd>
-            </div>
-          </dl>
-        </WizardSection>
+    <div className="space-y-8">
+      <section className="space-y-3">
+        <SectionHead title={r.summary} action={r.change} onAction={() => onGo("plan")} />
+        <dl className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <Cell label={t.form.name} className="sm:col-span-2 lg:col-span-4">
+            <span className="text-[0.9375rem] font-medium break-words">{campaign.name}</span>
+          </Cell>
+          <Cell label={r.slots} className="sm:col-span-2 lg:col-span-1">
+            <span className="text-sm">{slotsLabel(campaign, labelOf)}</span>
+          </Cell>
+          <Cell label={r.period}>
+            <span className="text-sm">{periodText(campaign)}</span>
+            <span className="block text-xs text-muted-foreground">
+              {interpolate(t.sheet.overview.days, { days: campaign.days })}
+            </span>
+          </Cell>
+          <Cell label={r.impressions}>
+            <span className="font-mono text-[0.9375rem] tabular-nums">
+              {formatCount(campaign.impressionsGoal)}
+            </span>
+          </Cell>
+          <Cell label={r.total}>
+            <span className="text-[0.9375rem]">
+              <CampaignAmount campaign={campaign} />
+              <span className="ms-1.5 text-xs text-muted-foreground">
+                {t.rateCard.currency}
+              </span>
+            </span>
+          </Cell>
+        </dl>
+      </section>
 
-        <WizardSection>
-          <SectionHead title={r.ad} action={r.change} onAction={() => onGo("creative")} />
-          <div className="max-w-sm">
-            <AdPreview
-              draft={creativeFromCampaign(campaign)}
-              logoSrc={mainCard(campaign)?.logoUrl ?? null}
-              posters={posters}
-            />
-          </div>
-        </WizardSection>
-      </div>
+      <section className="space-y-3">
+        <SectionHead title={r.ad} action={r.change} onAction={() => onGo("creative")} />
+        <ul className={SLOT_BANNER_GRID}>
+          {campaign.slots.map(({ slot }) => {
+            // Joyning o'z banneri; eski kampaniyada umumiy (`slot: null`) card.
+            const creative =
+              slotCreative(campaign, slot) ??
+              campaign.creatives.find((c) => c.slot === null);
+            return (
+              <li key={slot}>
+                {creative ? (
+                  <SlotBannerCard creative={creative} slot={slot} showStats={false} />
+                ) : (
+                  <MissingSlotCard
+                    slot={slot}
+                    label={interpolate(r.checks.creativeMissing, { slot: labelOf(slot) })}
+                    action={
+                      <Button type="button" size="sm" onClick={() => onGo("creative")}>
+                        {r.change}
+                      </Button>
+                    }
+                  />
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
 
-      <aside className="space-y-6 lg:sticky lg:top-6">
+      <div className="grid gap-6 md:grid-cols-2">
         <WizardSection title={r.checklist}>
           <ul className="space-y-2.5">
             <Check ok={checks.place} label={r.checks.place} onFix={() => onGo("place")} />
-            <Check ok={checks.creative} label={r.checks.creative} onFix={() => onGo("creative")} />
-            <Check ok={checks.date} label={r.checks.date} onFix={() => onGo("plan")} />
+            {missing.length === 0 ? (
+              <Check ok label={r.checks.creative} onFix={() => onGo("creative")} />
+            ) : (
+              missing.map((slot) => (
+                <Check
+                  key={slot}
+                  ok={false}
+                  label={interpolate(r.checks.creativeMissing, { slot: labelOf(slot) })}
+                  onFix={() => onGo("creative")}
+                />
+              ))
+            )}
           </ul>
         </WizardSection>
 
@@ -111,7 +144,24 @@ export function ReviewStep({
             ))}
           </ol>
         </WizardSection>
-      </aside>
+      </div>
+    </div>
+  );
+}
+
+function Cell({
+  label,
+  className,
+  children,
+}: {
+  label: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={cn("min-w-0 bg-card px-4 py-3", className)}>
+      <dt className="text-xs text-muted-foreground">{label}</dt>
+      <dd className="mt-1">{children}</dd>
     </div>
   );
 }
@@ -131,17 +181,6 @@ function SectionHead({
       <Button type="button" size="sm" variant="ghost" onClick={onAction}>
         {action}
       </Button>
-    </div>
-  );
-}
-
-function Item({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
-  return (
-    <div className="min-w-0">
-      <dt className="text-sm text-muted-foreground">{label}</dt>
-      <dd className={cn("mt-1 text-[0.9375rem] break-words", mono && "font-mono tabular-nums")}>
-        {value}
-      </dd>
     </div>
   );
 }

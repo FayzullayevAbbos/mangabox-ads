@@ -1,10 +1,18 @@
 "use client";
 
 import * as React from "react";
-import { RiAddLine, RiImageLine, RiUploadCloud2Line } from "@remixicon/react";
+import {
+  RiAddLine,
+  RiImageLine,
+  RiTimeLine,
+  RiUploadCloud2Line,
+} from "@remixicon/react";
 import { toast } from "sonner";
 
-import { CreativePreview } from "@/components/dashboard/ads/creative-preview";
+import {
+  SLOT_BANNER_GRID,
+  SlotBannerCard,
+} from "@/components/dashboard/ads/slot-banner-card";
 import { ratioLabel, readImageSize } from "@/components/dashboard/ads/image-file";
 import { CharCounter, TextField } from "@/components/dashboard/ads/text-field";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
@@ -29,6 +37,8 @@ import {
   deleteCreative,
   HEX_RE,
   HREF_RE,
+  isPausedByModerator,
+  needsFix,
   PortalApiError,
   updateCreative,
   uploadCreativeImage,
@@ -39,6 +49,7 @@ import {
   type AdImageSpec,
   type AdSlot,
 } from "@/lib/api/ads";
+import { formatDate } from "@/lib/format";
 import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 
@@ -46,6 +57,27 @@ import { useT } from "@/lib/i18n/provider";
 /** Kreativ matni faqat moderatsiyagacha o'zgaradi; `active` esa har doim. */
 function isEditable(campaign: AdCampaign): boolean {
   return campaign.status === "draft" || campaign.status === "rejected";
+}
+
+/**
+ * Tuzatish: moderator to'xtatgan kampaniyaning bannerlari yoki bloklangan
+ * banner tahrirlanadi (qo'shish/o'chirish emas) — admin qayta ko'rmaguncha
+ * efirga chiqmaydi.
+ */
+/** To'langan kampaniya: o'chirilgan banner muddatni to'xtatmaydi. */
+function isPaid(campaign: AdCampaign): boolean {
+  return ["scheduled", "active", "paused"].includes(campaign.status);
+}
+
+/** Qolgan barcha bannerlar o'chiq — reklama hech qayerda chiqmay qoladi. */
+function isLastActive(campaign: AdCampaign, creative: AdCreative): boolean {
+  return !campaign.creatives.some(
+    (c) => c.id !== creative.id && c.active && !c.blockedByAdmin,
+  );
+}
+
+function isFixable(campaign: AdCampaign, creative: AdCreative): boolean {
+  return isPausedByModerator(campaign) || creative.blockedByAdmin;
 }
 
 export function CreativeManager({
@@ -56,9 +88,19 @@ export function CreativeManager({
   onChanged: () => void;
 }) {
   const t = useT("ads");
-  const { specOf } = useRateCard();
+  const m = useT("portal").moderation;
+  const off = t.sheet.creatives.deactivate;
+  // Bannerlar kampaniyadagi joylar tartibida (plan qadamidagidek).
+  const slotOrder = campaign.slots.map((line) => line.slot);
+  const ordered = [...campaign.creatives].sort(
+    (x, y) =>
+      (x.slot ? slotOrder.indexOf(x.slot) : -1) -
+      (y.slot ? slotOrder.indexOf(y.slot) : -1),
+  );
+  const { specOf, labelOf } = useRateCard();
   const [editing, setEditing] = React.useState<AdCreative | "new" | null>(null);
   const [removing, setRemoving] = React.useState<AdCreative | null>(null);
+  const [deactivating, setDeactivating] = React.useState<AdCreative | null>(null);
   const [busy, setBusy] = React.useState(false);
 
   const editable = isEditable(campaign);
@@ -100,7 +142,11 @@ export function CreativeManager({
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs text-muted-foreground">
-          {editable ? t.sheet.creatives.cardSlotHint : t.sheet.creatives.lockedHint}
+          {editable
+            ? t.sheet.creatives.cardSlotHint
+            : needsFix(campaign)
+              ? m.fixHint
+              : t.sheet.creatives.lockedHint}
         </p>
         {editable && (
           <Button size="sm" onClick={() => setEditing("new")}>
@@ -115,38 +161,44 @@ export function CreativeManager({
           {t.sheet.creatives.empty}
         </p>
       ) : (
-        <ul className="grid gap-3 xl:grid-cols-2">
-          {campaign.creatives.map((creative) => (
+        <ul className={SLOT_BANNER_GRID}>
+          {ordered.map((creative) => (
             <li key={creative.id}>
-              <CreativePreview
+              <SlotBannerCard
                 creative={creative}
+                slot={campaign.slots[0]?.slot ?? null}
+                control={
+                  !creative.blockedByAdmin && (
+                    <Switch
+                      size="sm"
+                      aria-label={t.sheet.creatives.active}
+                      checked={creative.active}
+                      disabled={busy}
+                      onCheckedChange={(v) => {
+                        // O'chirishdan oldin har doim so'raymiz (yoqish darhol):
+                        // to'langan kampaniyada muddat ham to'xtamaydi.
+                        if (!v) setDeactivating(creative);
+                        else void toggleActive(creative, v === true);
+                      }}
+                    />
+                  )
+                }
                 actions={
-                  <div className="flex flex-wrap items-center gap-2">
-                    <label className="flex items-center gap-2 text-xs text-muted-foreground">
-                      {t.sheet.creatives.active}
-                      <Switch
-                        size="sm"
-                        checked={creative.active}
-                        disabled={busy}
-                        onCheckedChange={(v) =>
-                          void toggleActive(creative, v === true)
-                        }
+                  (editable || isFixable(campaign, creative)) && (
+                    <>
+                      <UploadButtons
+                        creative={creative}
+                        spec={specOf(creative.slot)?.image ?? null}
+                        onDone={onChanged}
                       />
-                    </label>
-                    {editable && (
-                      <>
-                        <UploadButtons
-                          creative={creative}
-                          spec={specOf(creative.slot)?.image ?? null}
-                          onDone={onChanged}
-                        />
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setEditing(creative)}
-                        >
-                          {t.actions.edit}
-                        </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setEditing(creative)}
+                      >
+                        {editable ? t.actions.edit : m.fixBanner}
+                      </Button>
+                      {editable && (
                         <Button
                           size="sm"
                           variant="destructive"
@@ -154,9 +206,9 @@ export function CreativeManager({
                         >
                           {t.sheet.creatives.remove}
                         </Button>
-                      </>
-                    )}
-                  </div>
+                      )}
+                    </>
+                  )
                 }
               />
             </li>
@@ -174,6 +226,66 @@ export function CreativeManager({
           onChanged();
         }}
       />
+
+      <Dialog
+        open={deactivating !== null}
+        onOpenChange={(open) => !open && !busy && setDeactivating(null)}
+      >
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>{off.title}</DialogTitle>
+            <DialogDescription>
+              {deactivating &&
+                interpolate(off.text, {
+                  slot: deactivating.slot
+                    ? labelOf(deactivating.slot)
+                    : t.sheet.creatives.anySlot,
+                })}
+            </DialogDescription>
+          </DialogHeader>
+          {(isPaid(campaign) ||
+            (deactivating && isLastActive(campaign, deactivating))) && (
+            <div className="flex items-start gap-3 rounded-lg bg-amber-500/10 px-4 py-3 text-amber-800 dark:text-amber-300">
+              <RiTimeLine className="mt-0.5 size-5 shrink-0" />
+              <div className="space-y-1 text-sm">
+                {isPaid(campaign) && (
+                  <>
+                    <p className="font-semibold">{off.timeTitle}</p>
+                    <p>
+                      {interpolate(off.time, { date: formatDate(campaign.endsAt) })}
+                    </p>
+                  </>
+                )}
+                {deactivating && isLastActive(campaign, deactivating) && (
+                  <p className="font-medium">{off.last}</p>
+                )}
+              </div>
+            </div>
+          )}
+          <div className="flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              disabled={busy}
+              onClick={() => setDeactivating(null)}
+            >
+              {t.actions.cancel}
+            </Button>
+            <Button
+              type="button"
+              variant="destructive"
+              disabled={busy}
+              onClick={() => {
+                const target = deactivating;
+                setDeactivating(null);
+                if (target) void toggleActive(target, false);
+              }}
+            >
+              {off.confirm}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Dialog
         open={removing !== null}

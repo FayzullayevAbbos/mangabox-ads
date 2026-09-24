@@ -101,6 +101,9 @@ export interface AdCreative {
   logoUrl: string | null;
   imageUrl: string | null;
   href: string;
+  /** Moderator efirdan olgan — mijoz tuzatib, qayta tekshiruvga yuboradi. */
+  blockedByAdmin: boolean;
+  blockReason: string | null;
   impressions: number;
   clicks: number;
 }
@@ -131,6 +134,14 @@ export interface AdCampaign {
   paymentClaimedAt: string | null;
   orderId: string | null;
   createdBy: "advertiser" | "admin";
+  /** Moderator to'xtatgan kampaniyani mijoz o'zi yoqa olmaydi. */
+  pausedBy: "advertiser" | "admin" | null;
+  pauseReason: string | null;
+  pausedAt: string | null;
+  /** Mijoz tuzatib, qayta tekshiruvga yuborgan — moderator javobi kutilmoqda. */
+  fixSubmittedAt: string | null;
+  /** To'lov oynasida tanlangan boshlanish; `null` — to'lovdan keyin darhol. */
+  requestedStartAt: string | null;
   createdAt: string | null;
   creatives: AdCreative[];
 }
@@ -264,6 +275,36 @@ export function isAwaitingPaymentCheck(campaign: AdCampaign): boolean {
   );
 }
 
+export function isPausedByModerator(campaign: AdCampaign): boolean {
+  return campaign.status === "paused" && campaign.pausedBy === "admin";
+}
+
+/** Moderator to'xtatgan yoki kamida bitta bannerni bloklagan. */
+export function needsFix(campaign: AdCampaign): boolean {
+  return (
+    isPausedByModerator(campaign) ||
+    campaign.creatives.some((creative) => creative.blockedByAdmin)
+  );
+}
+
+/** `null` — to'lovdan keyin darhol; aks holda ISO vaqt (Toshkent). */
+export async function setCampaignStart(id: string, startAt: string | null) {
+  const { data } = await portalRequest<{ data: AdCampaign }>(
+    `/campaigns/${id}/start`,
+    "POST",
+    { startAt },
+  );
+  return data;
+}
+
+export async function submitFix(id: string) {
+  const { data } = await portalRequest<{ data: AdCampaign }>(
+    `/campaigns/${id}/submit-fix`,
+    "POST",
+  );
+  return data;
+}
+
 export async function getRateCard() {
   const { data } = await portalRequest<{ data: AdSlotSpec[] }>("/rate-card");
   return data;
@@ -369,7 +410,7 @@ export async function createCreative(
 
 export async function updateCreative(
   id: string,
-  payload: Partial<Omit<CreativePayload, "type">> & { active?: boolean },
+  payload: Partial<CreativePayload> & { active?: boolean },
 ) {
   const { data } = await portalRequest<{ data: AdCreative }>(
     `/creatives/${id}`,

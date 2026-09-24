@@ -14,7 +14,7 @@ import {
   usePayLabel,
 } from "@/components/dashboard/ads/campaign-actions";
 import {
-  periodRange,
+  usePeriodText,
   slotsLabel,
 } from "@/components/dashboard/ads/campaign-format";
 import { CampaignStatusBadge } from "@/components/dashboard/ads/campaign-status-badge";
@@ -295,10 +295,11 @@ function NameBlock({
 }
 
 function PeriodBlock({ campaign }: { campaign: AdCampaign }) {
+  const periodText = usePeriodText();
   const t = useT("ads");
   return (
     <div className="min-w-0">
-      <p className="text-sm whitespace-nowrap">{periodRange(campaign)}</p>
+      <p className="text-sm whitespace-nowrap">{periodText(campaign)}</p>
       <p className="mt-1 text-sm text-muted-foreground">
         {interpolate(t.sheet.overview.days, { days: campaign.days })}
       </p>

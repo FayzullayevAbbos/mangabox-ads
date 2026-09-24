@@ -1,7 +1,9 @@
 "use client";
 
 import type { AdCampaign, AdSlot } from "@/lib/api/ads";
-import { formatDate, formatSomAmount } from "@/lib/format";
+import { formatDate, formatDateTime, formatSomAmount } from "@/lib/format";
+import { interpolate } from "@/lib/i18n/interpolate";
+import { useT } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
 
 /** "Bob oxiri 25% · Bosh sahifa karuseli 50%" */
@@ -13,6 +15,20 @@ export function slotsLabel(
   return campaign.slots
     .map((line) => `${labelOf(line.slot)} ${line.sharePercent}%`)
     .join(" · ");
+}
+
+/**
+ * To'lanmagan kampaniyaning sanalari hali yo'q — boshlanish to'lovda
+ * belgilanadi. To'langanda haqiqiy oyna.
+ */
+export function usePeriodText() {
+  const p = useT("portal").period;
+  return (campaign: AdCampaign): string => {
+    if (campaign.paidAt) return periodRange(campaign);
+    return campaign.requestedStartAt
+      ? interpolate(p.from, { date: formatDateTime(campaign.requestedStartAt) })
+      : p.afterPayment;
+  };
 }
 
 export function periodLabel(campaign: AdCampaign): string {

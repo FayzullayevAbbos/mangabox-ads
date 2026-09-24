@@ -73,7 +73,9 @@
   },
   "pause": {
     "title": "Pause ad",
-    "confirm": "The ad will be taken off air temporarily — impressions will stop. You can resume it any time. Do you really want to pause it?"
+    "confirm": "The ad will be taken off air temporarily — impressions will stop. You can resume it any time.",
+    "timeWarningTitle": "Paused time isn't kept",
+    "timeWarning": "The run doesn't stop: paused days aren't given back and the ad still ends on {date}. Impressions not delivered during the pause are lost."
   },
   "resume": {
     "title": "Resume ad",
@@ -152,7 +154,15 @@
       "slotRequired": "Select a placement for the poster.",
       "lockedHint": "Banners can only be changed before moderation. A live banner can still be switched off.",
       "noImageSlots": "This ad has no poster placements — text banner only.",
-      "cardSlotHint": "A text banner shows in every placement of the ad."
+      "cardSlotHint": "A text banner shows in every placement of the ad.",
+      "deactivate": {
+        "title": "Take this banner off air?",
+        "text": "Your ad will stop showing in «{slot}». You can turn it back on any time.",
+        "timeTitle": "Time off air isn't kept",
+        "time": "The campaign keeps running and ends on {date} — impressions while the banner is off are lost.",
+        "last": "This is your last active banner — your ad won't show anywhere.",
+        "confirm": "Take off air"
+      }
     },
     "stats": {
       "impressions": "Impressions",

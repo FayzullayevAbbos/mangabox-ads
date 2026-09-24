@@ -14,7 +14,12 @@ import { useCampaignActions } from "@/components/dashboard/ads/campaign-actions"
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import { useQuote } from "@/components/dashboard/ads/use-quote";
 import { Button } from "@/components/ui/button";
-import { PortalApiError, type AdCampaign, type AdSlot } from "@/lib/api/ads";
+import {
+  getCampaign,
+  PortalApiError,
+  type AdCampaign,
+  type AdSlot,
+} from "@/lib/api/ads";
 import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 
@@ -22,12 +27,14 @@ import { CreativeStep } from "./creative-step";
 import { PlaceStep } from "./place-step";
 import { PlanStep } from "./plan-step";
 import { reviewChecks, ReviewStep } from "./review-step";
-import { saveCreative, savePlan } from "./wizard-api";
+import { CreativeSaveError, saveCreative, savePlan } from "./wizard-api";
 import { setupHref } from "./wizard-links";
 import {
-  creativeFromCampaign,
-  emptyCreative,
+  draftOf,
+  draftsFromCampaign,
+  ensureDrafts,
   firstOpenStep,
+  isPlanField,
   newPlan,
   NO_FILES,
   planFromCampaign,
@@ -36,8 +43,12 @@ import {
   toggleSlot,
   validateCreative,
   WIZARD_STEPS,
-  type CreativeError,
+  type CreativeDraft,
+  type CreativeErrors,
   type CreativeFiles,
+  type SlotDrafts,
+  type SlotErrors,
+  type PlanErrors,
   type RateCardPick,
   type WizardStep,
 } from "./wizard-model";
@@ -53,6 +64,15 @@ function startStep(
   if (requested && (campaign || stepIndex(requested) <= 1)) return requested;
   if (campaign) return firstOpenStep(campaign);
   return pick ? "plan" : "place";
+}
+
+/** Xato matni DOM'ga tushgach birinchisini ko'rinadigan joyga olib keladi. */
+function revealFirstError() {
+  window.requestAnimationFrame(() => {
+    document
+      .querySelector("[data-field-error]")
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
 }
 
 function syncUrl(campaign: AdCampaign | null, step: WizardStep) {
@@ -75,6 +95,7 @@ export function CampaignWizard({
   requestedStep: WizardStep | null;
 }) {
   const w = useT("portal").wizard;
+  const c = useT("ads").sheet.creatives;
   const router = useRouter();
   const { labelOf, specOf } = useRateCard();
 
@@ -85,14 +106,15 @@ export function CampaignWizard({
   const [plan, setPlan] = React.useState(() =>
     initial ? planFromCampaign(initial) : newPlan(pick),
   );
-  const [creative, setCreative] = React.useState(() =>
-    initial ? creativeFromCampaign(initial) : emptyCreative(),
+  const [drafts, setDrafts] = React.useState<SlotDrafts>(() =>
+    initial ? draftsFromCampaign(initial) : {},
   );
+  const [pickedSlot, setPickedSlot] = React.useState<AdSlot | null>(null);
   const [files, setFiles] = React.useState<CreativeFiles>(NO_FILES);
   const [saving, setSaving] = React.useState(false);
   const [placeError, setPlaceError] = React.useState(false);
-  const [creativeError, setCreativeError] = React.useState<CreativeError | null>(null);
-  const [startDayError, setStartDayError] = React.useState<string>();
+  const [creativeErrors, setCreativeErrors] = React.useState<SlotErrors>({});
+  const [planErrors, setPlanErrors] = React.useState<PlanErrors>({});
 
   const quote = useQuote(plan.lines, plan.days);
   const actions = useCampaignActions({
@@ -102,6 +124,9 @@ export function CampaignWizard({
   React.useEffect(() => syncUrl(campaign, step), [campaign, step]);
 
   const suggestedName = plan.lines.length > 0 ? suggestName(plan, labelOf) : "";
+  const campaignSlots: AdSlot[] = (campaign?.slots ?? []).map((line) => line.slot);
+  const activeSlot =
+    pickedSlot && campaignSlots.includes(pickedSlot) ? pickedSlot : campaignSlots[0];
   const posterSlots: AdSlot[] = (campaign?.slots ?? [])
     .map((line) => line.slot)
     .filter((slot) => specOf(slot)?.image);
@@ -114,18 +139,33 @@ export function CampaignWizard({
   const canOpen = (target: WizardStep) =>
     stepIndex(target) <= 1 || campaign !== null;
 
-  const run = async (task: () => Promise<void>) => {
+  /** `place` — xato maydonga bog'landi, aks holda umumiy toast. */
+  const run = async (
+    task: () => Promise<void>,
+    place: (err: unknown) => boolean,
+  ) => {
     setSaving(true);
     try {
       await task();
     } catch (err) {
-      if (err instanceof PortalApiError && err.field === "startDay") {
-        setStartDayError(err.message);
-      }
-      toast.error(err instanceof Error ? err.message : String(err));
+      if (place(err)) revealFirstError();
+      else toast.error(err instanceof Error ? err.message : String(err));
     } finally {
       setSaving(false);
     }
+  };
+
+  const localCreativeErrors = (draft: CreativeDraft): CreativeErrors => {
+    const messages: CreativeErrors = {};
+    for (const field of validateCreative(draft)) {
+      if (field === "brandName") messages.brandName = c.brandRequired;
+      else if (field === "title") messages.title = w.creative.titleRequired;
+      else if (field === "accentColor") messages.accentColor = c.accentInvalid;
+      else if (field === "href") {
+        messages.href = draft.href.trim() ? c.hrefInvalid : w.creative.hrefRequired;
+      }
+    }
+    return messages;
   };
 
   const nextFromPlace = () => {
@@ -137,25 +177,59 @@ export function CampaignWizard({
   };
 
   const nextFromPlan = () =>
-    run(async () => {
-      setStartDayError(undefined);
-      const saved = await savePlan(campaign, plan, suggestedName);
-      setCampaign(saved);
-      setPlan(planFromCampaign(saved));
-      go("creative");
-    });
+    run(
+      async () => {
+        setPlanErrors({});
+        const saved = await savePlan(campaign, plan, suggestedName);
+        setCampaign(saved);
+        setPlan(planFromCampaign(saved));
+        setDrafts((prev) => ensureDrafts(prev, saved.slots.map((line) => line.slot)));
+        go("creative");
+      },
+      (err) => {
+        if (!(err instanceof PortalApiError) || !isPlanField(err.field)) return false;
+        setPlanErrors({ [err.field]: err.message });
+        return true;
+      },
+    );
 
   const nextFromCreative = () => {
-    const problem = validateCreative(creative);
-    setCreativeError(problem);
-    if (problem || !campaign) return;
-    void run(async () => {
-      const updated = await saveCreative(campaign, creative, files, posterSlots);
-      setCampaign(updated);
-      setFiles(NO_FILES);
-      go("review");
-    });
+    const local: SlotErrors = {};
+    for (const slot of campaignSlots) {
+      const problems = localCreativeErrors(draftOf(drafts, slot));
+      if (Object.keys(problems).length > 0) local[slot] = problems;
+    }
+    setCreativeErrors(local);
+    const failing = campaignSlots.find((slot) => local[slot]);
+    if (failing) {
+      // Xato boshqa joyda bo'lsa o'sha tabni ochamiz — mijoz qidirmasin.
+      setPickedSlot(failing);
+      revealFirstError();
+      return;
+    }
+    if (!campaign) return;
+    void run(
+      async () => {
+        const updated = await saveCreative(campaign, drafts, files, posterSlots);
+        setCampaign(updated);
+        setFiles(NO_FILES);
+        go("review");
+      },
+      (err) => {
+        // Saqlash yarim yo'lda to'xtagan bo'lishi mumkin (bir joy saqlandi,
+        // keyingisi yiqildi) — qayta urinishda dublikat yaratmaslik uchun
+        // kampaniyani serverdan yangilaymiz.
+        void getCampaign(campaign.id).then(setCampaign, () => undefined);
+        if (!(err instanceof CreativeSaveError) || !err.slot || !err.target) {
+          return false;
+        }
+        setCreativeErrors({ [err.slot]: { [err.target]: err.message } });
+        setPickedSlot(err.slot);
+        return true;
+      },
+    );
   };
+
 
   const keepDraft = () => {
     toast.success(w.review.draftSaved);
@@ -222,23 +296,26 @@ export function CampaignWizard({
           plan={plan}
           suggestedName={suggestedName}
           quote={quote}
-          startDayError={startDayError}
-          onChange={setPlan}
+          errors={planErrors}
+          onChange={(next) => {
+            setPlan(next);
+            setPlanErrors({});
+          }}
         />
       )}
 
-      {step === "creative" && campaign && (
+      {step === "creative" && campaign && activeSlot && (
         <CreativeStep
           campaign={campaign}
-          draft={creative}
+          drafts={drafts}
           files={files}
           posterSlots={posterSlots}
-          error={creativeError}
-          onDraft={(next) => {
-            setCreative(next);
-            setCreativeError(null);
-          }}
+          errors={creativeErrors}
+          active={activeSlot}
+          onActive={setPickedSlot}
+          onDrafts={setDrafts}
           onFiles={setFiles}
+          onErrors={setCreativeErrors}
         />
       )}
 

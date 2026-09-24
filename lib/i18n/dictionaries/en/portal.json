@@ -69,15 +69,39 @@
     "claimedText": "The ad goes live automatically once the transfer is confirmed. If you haven't sent the receipt yet, message us on Telegram.",
     "unavailable": "Payment details aren't configured yet. Please contact us on Telegram.",
     "telegramMessage": "Hello! I've paid {amount} for the \"{name}\" ad.\nAd ID: {id}\nReceipt attached.",
-    "onlineTitle": "Or pay online",
+    "onlineTitle": "Pay online",
     "close": "Close",
     "cardProvider": "Card transfer",
-    "hint": "You will be redirected to the payment page. The ad goes live automatically once payment is confirmed.",
+    "hint": "The payment page opens in a new window. The ad goes live automatically once payment is confirmed.",
     "contactTitle": "Message us on Telegram",
     "contactText": "An admin will send you the payment details. The ad name, amount and ID are added to the message automatically.",
     "receiptTitle": "Pay and send the receipt",
     "receiptText": "Transfer exactly this amount and send a screenshot of the receipt to the same chat.",
-    "contactMessage": "Hello! I'd like to pay {amount} for the \"{name}\" ad.\nAd ID: {id}\nPlease send me the payment details."
+    "contactMessage": "Hello! I'd like to pay {amount} for the \"{name}\" ad.\nAd ID: {id}\nPlease send me the payment details.",
+    "manualTitle": "Or pay by card transfer",
+    "opening": "Opening the payment page…",
+    "waitingTitle": "Waiting for payment via {provider}",
+    "waitingText": "Complete the payment in the window that opened. This window updates itself as soon as the payment arrives.",
+    "blockedText": "Your browser blocked the new window. Open the payment page with the button below.",
+    "reopen": "Open payment page",
+    "checkNow": "Check",
+    "checking": "Checking…",
+    "otherMethod": "Choose another method",
+    "otherMethodWarning": "If you've already paid, don't choose another method — you could be charged twice.",
+    "expiredTitle": "Payment not confirmed",
+    "expiredText": "The payment link has expired. If you were charged, message us on Telegram; otherwise try again.",
+    "retry": "Try again",
+    "paidTitle": "Payment received",
+    "paidText": "Your ad goes live automatically on its start day.",
+    "done": "Done",
+    "startTitle": "When should the ad start?",
+    "startNow": "Right after payment",
+    "startNowText": "Goes live as soon as the payment clears.",
+    "startLater": "Pick a date and hour",
+    "startLaterText": "Goes live at the time you choose.",
+    "startHour": "Hour",
+    "startTimezone": "Tashkent time. The run counts from this moment.",
+    "startPast": "That time has passed — pick a later one."
   },
   "orders": {
     "title": "Payments",
@@ -163,7 +187,9 @@
       "title": "How much and when?",
       "text": "Choose a share for each placement, a start date and a duration. The price updates instantly.",
       "nameHint": "Only for you. Leave empty to use “{name}”",
-      "advanced": "More settings"
+      "advanced": "More settings",
+      "startLaterTitle": "You'll pick the start time at payment",
+      "startLaterText": "After moderation, when you pay: right away or at a date and hour you choose. The run counts from the actual start, so no days are lost."
     },
     "creative": {
       "title": "Prepare your banner",
@@ -175,17 +201,28 @@
       "ctaPlaceholder": "Learn more",
       "hrefHint": "This page opens when someone taps the ad.",
       "hrefRequired": "Enter a link.",
+      "titleRequired": "Enter a headline.",
       "logo": "Logo",
       "logoHint": "Square image, optional.",
       "chooseFile": "Choose image",
       "replace": "Replace",
       "remove": "Remove",
       "posters": "Posters",
-      "postersText": "A poster is optional, but images get more attention. Without one, a text banner is shown there.",
+      "postersText": "The image is optional but gets more attention. Without one, a text banner is shown here.",
       "posterSpec": "At least {min} px, ratio {ratio}",
-      "preview": "In-app preview",
+      "preview": "On the site (phone)",
       "previewBrand": "Your brand",
-      "previewTitle": "Your headline goes here"
+      "previewTitle": "Your headline goes here",
+      "previewNote": "How the selected placement looks on a phone. Each placement goes to moderation as its own banner.",
+      "slotTabsHint": "Each placement gets its own banner — text, logo and image can differ. Pick a placement and fill it in.",
+      "applyAll": "Apply this text to all placements",
+      "appliedAll": "Text applied to all placements",
+      "poster": "Image",
+      "slotPickerTitle": "Which placement is this banner for?",
+      "statusReady": "Ready",
+      "statusError": "Has errors",
+      "statusEmpty": "Not filled in",
+      "bannerFor": "Banner for {slot}"
     },
     "review": {
       "title": "Review and submit",
@@ -201,13 +238,13 @@
       "checks": {
         "place": "Placement and dates chosen",
         "creative": "Banner text and link ready",
-        "date": "Start date hasn't passed"
+        "creativeMissing": "No banner for {slot}"
       },
       "next": "What happens next",
       "nextSteps": [
-        "A moderator checks your banner against the rules.",
-        "Once approved, payment opens — a card transfer.",
-        "After the payment is confirmed, the ad goes live on its start day automatically."
+        "A moderator checks each placement's banner against the rules.",
+        "Once approved, payment opens — via Payme, Click, Uzum, Paynet or card.",
+        "At payment you pick the start time: the ad goes live right away or at the time you set."
       ],
       "submit": "Submit for review",
       "submitting": "Submitting…",
@@ -220,5 +257,24 @@
       "text": "A submitted ad can't be changed. Track its status on the ad page.",
       "open": "Open ad"
     }
+  },
+  "moderation": {
+    "pausedTitle": "A moderator paused this ad",
+    "blockedTitle": "A moderator took some banners off air",
+    "reason": "Reason",
+    "pausedHelp": "Fix the banners in the Banners tab based on the note and send them for another review. Once approved the ad resumes, and the paused days are added to its run.",
+    "blockedHelp": "The campaign's other placements keep running. Fix the marked banners and send them for another review.",
+    "fixBanners": "Fix banners",
+    "submit": "Send for review",
+    "sending": "Sending…",
+    "submitted": "Fixes sent to the moderator",
+    "waiting": "Fixes sent — a moderator is reviewing them.",
+    "blockedBadge": "Taken off air by a moderator",
+    "fixBanner": "Fix",
+    "fixHint": "Fix the banners based on the moderator's note. Changes go live after the moderator approves them."
+  },
+  "period": {
+    "afterPayment": "Starts after payment",
+    "from": "from {date}"
   }
 }

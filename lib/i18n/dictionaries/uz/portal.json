@@ -69,15 +69,39 @@
     "claimedText": "Tushum tasdiqlangach reklama avtomatik efirga chiqadi. Chekni hali yubormagan bo'lsangiz, Telegram'da yozing.",
     "unavailable": "To'lov rekvizitlari hali sozlanmagan. Iltimos, biz bilan Telegram orqali bog'laning.",
     "telegramMessage": "Assalomu alaykum! \"{name}\" reklamasi uchun {amount} to'ladim.\nReklama ID: {id}\nChekni ilova qilyapman.",
-    "onlineTitle": "Yoki onlayn to'lang",
+    "onlineTitle": "Onlayn to'lang",
     "close": "Yopish",
     "cardProvider": "Karta o'tkazmasi",
-    "hint": "To'lov sahifasiga yo'naltirilasiz. To'lov tasdiqlangach reklama avtomatik efirga chiqadi.",
+    "hint": "To'lov sahifasi yangi oynada ochiladi. To'lov tasdiqlangach reklama avtomatik efirga chiqadi.",
     "contactTitle": "Telegram'da biz bilan bog'laning",
     "contactText": "Admin sizga to'lov rekvizitlarini yuboradi. Reklama nomi, summa va ID xabarga avtomatik qo'shiladi.",
     "receiptTitle": "To'lang va chekni yuboring",
     "receiptText": "Aynan shu summani o'tkazing va chek skrinshotini o'sha chatga yuboring.",
-    "contactMessage": "Assalomu alaykum! \"{name}\" reklamasi uchun {amount} to'lamoqchiman.\nReklama ID: {id}\nTo'lov rekvizitlarini yuborsangiz."
+    "contactMessage": "Assalomu alaykum! \"{name}\" reklamasi uchun {amount} to'lamoqchiman.\nReklama ID: {id}\nTo'lov rekvizitlarini yuborsangiz.",
+    "manualTitle": "Yoki kartaga o'tkazma orqali",
+    "opening": "To'lov sahifasi ochilmoqda…",
+    "waitingTitle": "{provider} orqali to'lov kutilmoqda",
+    "waitingText": "To'lovni ochilgan oynada yakunlang. Pul tushishi bilan bu oyna o'zi yangilanadi.",
+    "blockedText": "Brauzer yangi oynani to'sib qo'ydi. To'lov sahifasini quyidagi tugma orqali oching.",
+    "reopen": "To'lov sahifasini ochish",
+    "checkNow": "Tekshirish",
+    "checking": "Tekshirilmoqda…",
+    "otherMethod": "Boshqa usulni tanlash",
+    "otherMethodWarning": "To'lagan bo'lsangiz, boshqa usulni tanlamang — pul ikki marta yechilishi mumkin.",
+    "expiredTitle": "To'lov tasdiqlanmadi",
+    "expiredText": "To'lov havolasining muddati tugadi. Pul yechilgan bo'lsa, Telegram orqali bog'laning, aks holda qayta urinib ko'ring.",
+    "retry": "Qayta urinish",
+    "paidTitle": "To'lov qabul qilindi",
+    "paidText": "Reklamangiz boshlanish kunida avtomatik efirga chiqadi.",
+    "done": "Tayyor",
+    "startTitle": "Reklama qachon boshlansin?",
+    "startNow": "To'lovdan keyin darhol",
+    "startNowText": "To'lov o'tishi bilan efirga chiqadi.",
+    "startLater": "Sana va soatni tanlash",
+    "startLaterText": "O'zingiz belgilagan vaqtda chiqadi.",
+    "startHour": "Soat",
+    "startTimezone": "Toshkent vaqti. Muddat shu vaqtdan hisoblanadi.",
+    "startPast": "Bu vaqt o'tib ketgan — keyingi vaqtni tanlang."
   },
   "orders": {
     "title": "To'lovlar",
@@ -163,7 +187,9 @@
       "title": "Qancha va qachon?",
       "text": "Har bir joy uchun ulushni, boshlanish sanasi va muddatni tanlang. Narx darhol hisoblanadi.",
       "nameHint": "Faqat o'zingiz uchun. Bo'sh qoldirsangiz: «{name}»",
-      "advanced": "Qo'shimcha sozlamalar"
+      "advanced": "Qo'shimcha sozlamalar",
+      "startLaterTitle": "Boshlanish vaqtini to'lovda tanlaysiz",
+      "startLaterText": "Moderatsiyadan o'tgach to'lov paytida: darhol yoki o'zingiz belgilagan sana va soatda. Muddat haqiqiy boshlanishdan hisoblanadi — kun yo'qolmaydi."
     },
     "creative": {
       "title": "Banneringizni tayyorlang",
@@ -175,17 +201,28 @@
       "ctaPlaceholder": "Batafsil",
       "hrefHint": "Reklama bosilganda shu sahifa ochiladi.",
       "hrefRequired": "Havolani kiriting.",
+      "titleRequired": "Sarlavhani kiriting.",
       "logo": "Logotip",
       "logoHint": "Kvadrat rasm, ixtiyoriy.",
       "chooseFile": "Rasm tanlash",
       "replace": "Almashtirish",
       "remove": "Olib tashlash",
       "posters": "Posterlar",
-      "postersText": "Poster ixtiyoriy, lekin rasm ko'proq e'tibor tortadi. Poster bo'lmasa o'sha joyda matnli banner ko'rinadi.",
+      "postersText": "Rasm ixtiyoriy, lekin ko'proq e'tibor tortadi. Rasm bo'lmasa bu joyda matnli banner ko'rinadi.",
       "posterSpec": "Kamida {min} px, nisbat {ratio}",
-      "preview": "Ilovadagi ko'rinishi",
+      "preview": "Saytdagi ko'rinishi (telefon)",
       "previewBrand": "Brendingiz",
-      "previewTitle": "Sarlavha shu yerda ko'rinadi"
+      "previewTitle": "Sarlavha shu yerda ko'rinadi",
+      "previewNote": "Tanlangan joyning telefondagi ko'rinishi. Har bir joy moderatsiyaga alohida banner bo'lib yuboriladi.",
+      "slotTabsHint": "Har bir joy uchun alohida banner: matni, logotipi va rasmi boshqa-boshqa bo'lishi mumkin. Joyni tanlang va to'ldiring.",
+      "applyAll": "Bu matnni barcha joylarga qo'llash",
+      "appliedAll": "Matn barcha joylarga qo'llandi",
+      "poster": "Rasm",
+      "slotPickerTitle": "Qaysi joy uchun banner tayyorlaysiz?",
+      "statusReady": "Tayyor",
+      "statusError": "Xato bor",
+      "statusEmpty": "To'ldirilmagan",
+      "bannerFor": "{slot} uchun banner"
     },
     "review": {
       "title": "Tekshirib, moderatsiyaga yuboring",
@@ -201,13 +238,13 @@
       "checks": {
         "place": "Joy va muddat tanlangan",
         "creative": "Banner matni va havolasi tayyor",
-        "date": "Boshlanish sanasi hali o'tmagan"
+        "creativeMissing": "{slot} uchun banner yo'q"
       },
       "next": "Keyin nima bo'ladi",
       "nextSteps": [
-        "Moderator banneringizni qoidalarga mosligini tekshiradi.",
-        "Tasdiqlansa, to'lov ochiladi — kartaga o'tkazma.",
-        "To'lov tasdiqlangach reklama boshlanish kunida o'zi efirga chiqadi."
+        "Moderator har bir joyning bannerini qoidalarga mosligini tekshiradi.",
+        "Tasdiqlansa, to'lov ochiladi — Payme, Click, Uzum, Paynet yoki karta orqali.",
+        "To'lov paytida boshlanish vaqtini tanlaysiz: reklama darhol yoki o'zingiz belgilagan vaqtda efirga chiqadi."
       ],
       "submit": "Moderatsiyaga yuborish",
       "submitting": "Yuborilmoqda…",
@@ -220,5 +257,24 @@
       "text": "Yuborilgan reklama o'zgartirilmaydi. Holatini reklama sahifasida kuzating.",
       "open": "Reklamani ochish"
     }
+  },
+  "moderation": {
+    "pausedTitle": "Moderator reklamani to'xtatdi",
+    "blockedTitle": "Moderator ba'zi bannerlarni efirdan oldi",
+    "reason": "Sabab",
+    "pausedHelp": "«Bannerlar» tabida bannerlarni izohga ko'ra tuzating va qayta tekshiruvga yuboring. Moderator tasdiqlagach reklama efirga qaytadi, to'xtab turgan kunlar muddatga qo'shiladi.",
+    "blockedHelp": "Kampaniyaning boshqa joylari efirda davom etmoqda. Belgilangan bannerlarni tuzating va qayta tekshiruvga yuboring.",
+    "fixBanners": "Bannerlarni tuzatish",
+    "submit": "Qayta tekshiruvga yuborish",
+    "sending": "Yuborilmoqda…",
+    "submitted": "Tuzatish moderatorga yuborildi",
+    "waiting": "Tuzatish yuborildi — moderator ko'rib chiqmoqda.",
+    "blockedBadge": "Moderator efirdan oldi",
+    "fixBanner": "Tuzatish",
+    "fixHint": "Moderator izohiga ko'ra bannerlarni tuzating. O'zgarishlar moderator tasdiqlagandan keyin efirga chiqadi."
+  },
+  "period": {
+    "afterPayment": "To'lovdan keyin boshlanadi",
+    "from": "{date} dan"
   }
 }

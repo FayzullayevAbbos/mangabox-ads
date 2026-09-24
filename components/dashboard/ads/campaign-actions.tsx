@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { RiTimeLine } from "@remixicon/react";
 import { toast } from "sonner";
 
 import { PaymentDialog } from "@/components/dashboard/ads/payment-dialog";
@@ -14,14 +15,16 @@ import {
 } from "@/components/ui/dialog";
 import {
   claimCardPayment,
+  setCampaignStart,
   isAwaitingPaymentCheck,
+  isPausedByModerator,
   runCampaignAction,
-  startCheckout,
   type AdCampaign,
   type AdCampaignStatus,
   type CampaignAction,
-  type PaymentProvider,
 } from "@/lib/api/ads";
+import { formatDate } from "@/lib/format";
+import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 
 export type CampaignActionKey =
@@ -49,6 +52,8 @@ export function actionsFor(campaign: AdCampaign): CampaignActionKey[] {
   if (campaign.status === "approved" && !payable) {
     return allowed.filter((a) => a !== "pay");
   }
+  // Moderator to'xtatganini faqat moderator yoqadi — mijoz tuzatib yuboradi.
+  if (isPausedByModerator(campaign)) return allowed.filter((a) => a !== "resume");
   return allowed;
 }
 
@@ -121,10 +126,11 @@ export function useCampaignActions({
     }
   };
 
-  const claim = async (campaign: AdCampaign) => {
+  const claim = async (campaign: AdCampaign, startAt: string | null) => {
     if (busy) return;
     setBusy(campaign.id);
     try {
+      await setCampaignStart(campaign.id, startAt);
       const updated = await claimCardPayment(campaign.id);
       toast.success(p.toasts.paymentClaimed);
       setPaying(updated);
@@ -132,23 +138,6 @@ export function useCampaignActions({
     } catch (err) {
       toast.error(err instanceof Error ? err.message : String(err));
     } finally {
-      setBusy(null);
-    }
-  };
-
-  const pay = async (campaign: AdCampaign, provider: PaymentProvider) => {
-    if (busy) return;
-    setBusy(campaign.id);
-    try {
-      const session = await startCheckout(campaign.id, provider);
-      if (session.paymentUrl) {
-        window.location.assign(session.paymentUrl);
-        return;
-      }
-      toast.info(session.instructions);
-      setBusy(null);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : String(err));
       setBusy(null);
     }
   };
@@ -167,8 +156,8 @@ export function useCampaignActions({
           campaign={paying}
           busy={busy !== null}
           onClose={() => setPaying(null)}
-          onClaim={(campaign) => void claim(campaign)}
-          onOnlinePay={(campaign, provider) => void pay(campaign, provider)}
+          onClaim={(campaign, startAt) => void claim(campaign, startAt)}
+          onPaid={onDone}
         />
         <ToggleConfirmDialog
           pending={confirming}
@@ -204,6 +193,21 @@ function ToggleConfirmDialog({
           <DialogTitle>{copy?.title}</DialogTitle>
           <DialogDescription>{copy?.confirm}</DialogDescription>
         </DialogHeader>
+        {shown?.action === "pause" && (
+          // Mijoz pauzasi muddatni surmaydi (faqat moderator pauzasi suradi) —
+          // to'xtatishdan oldin buni aniq bilsin.
+          <div className="flex items-start gap-3 rounded-lg bg-amber-500/10 px-4 py-3 text-amber-800 dark:text-amber-300">
+            <RiTimeLine className="mt-0.5 size-5 shrink-0" />
+            <div>
+              <p className="text-sm font-semibold">{t.pause.timeWarningTitle}</p>
+              <p className="mt-1 text-sm">
+                {interpolate(t.pause.timeWarning, {
+                  date: formatDate(shown.campaign.endsAt),
+                })}
+              </p>
+            </div>
+          </div>
+        )}
         <div className="flex justify-end gap-2">
           <Button type="button" variant="outline" onClick={onCancel}>
             {t.actions.cancel}

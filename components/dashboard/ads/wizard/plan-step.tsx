@@ -1,12 +1,11 @@
 "use client";
 
-import { RiArrowDownSLine } from "@remixicon/react";
+import { RiArrowDownSLine, RiTimeLine } from "@remixicon/react";
 
 import { NumberField, QuoteSummary } from "@/components/dashboard/ads/quote-parts";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import { SlotPreview } from "@/components/dashboard/ads/slot-preview";
 import type { QuoteState } from "@/components/dashboard/ads/use-quote";
-import { DatePicker } from "@/components/dashboard/date-picker";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -22,19 +21,19 @@ import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 
 import { WizardSection } from "./wizard-section";
-import type { PlanDraft } from "./wizard-model";
+import type { PlanDraft, PlanErrors } from "./wizard-model";
 
 export function PlanStep({
   plan,
   suggestedName,
   quote,
-  startDayError,
+  errors,
   onChange,
 }: {
   plan: PlanDraft;
   suggestedName: string;
   quote: QuoteState;
-  startDayError?: string;
+  errors: PlanErrors;
   onChange: (plan: PlanDraft) => void;
 }) {
   const t = useT("ads");
@@ -66,6 +65,11 @@ export function PlanStep({
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start xl:gap-8">
       <div className="space-y-6">
         <WizardSection>
+          {errors.slots && (
+            <p data-field-error className="text-sm text-destructive">
+              {errors.slots}
+            </p>
+          )}
           <div className="space-y-4">
             {plan.lines.map((line) => (
               <div key={line.slot} className="flex gap-4">
@@ -91,27 +95,23 @@ export function PlanStep({
 
         <WizardSection>
           <div className="grid gap-5 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="wizard-start">{t.form.startDay}</Label>
-              <DatePicker
-                id="wizard-start"
-                className="h-10 text-[0.9375rem]"
-                value={plan.startDay}
-                onChange={(v) => set("startDay", v)}
-              />
-              {startDayError && (
-                <p className="text-xs text-destructive">{startDayError}</p>
-              )}
-            </div>
             <NumberField
               label={t.form.days}
               value={plan.days}
               min={MIN_CAMPAIGN_DAYS}
               max={MAX_CAMPAIGN_DAYS}
+              error={errors.days}
               onChange={(v) => set("days", v)}
               minLabel={interpolate(c.daysUnit, { days: MIN_CAMPAIGN_DAYS })}
               maxLabel={interpolate(c.daysUnit, { days: MAX_CAMPAIGN_DAYS })}
             />
+            <div className="flex items-start gap-3 rounded-lg bg-muted/60 px-4 py-3 text-sm">
+              <RiTimeLine className="mt-0.5 size-4 shrink-0 text-primary" />
+              <div>
+                <p className="font-medium">{w.plan.startLaterTitle}</p>
+                <p className="mt-0.5 text-muted-foreground">{w.plan.startLaterText}</p>
+              </div>
+            </div>
           </div>
         </WizardSection>
 
@@ -124,11 +124,18 @@ export function PlanStep({
               placeholder={suggestedName}
               className="h-10 text-[0.9375rem] md:text-[0.9375rem]"
               value={plan.name}
+              aria-invalid={errors.name ? true : undefined}
               onChange={(e) => set("name", e.target.value)}
             />
-            <p className="text-xs text-muted-foreground">
-              {interpolate(w.plan.nameHint, { name: suggestedName })}
-            </p>
+            {errors.name ? (
+              <p data-field-error className="text-xs text-destructive">
+                {errors.name}
+              </p>
+            ) : (
+              <p className="text-xs text-muted-foreground">
+                {interpolate(w.plan.nameHint, { name: suggestedName })}
+              </p>
+            )}
           </div>
         </WizardSection>
 

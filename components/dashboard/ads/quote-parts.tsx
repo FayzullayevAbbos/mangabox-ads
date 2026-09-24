@@ -83,6 +83,7 @@ export function NumberField({
   onChange,
   suffix,
   hint,
+  error,
   minLabel,
   maxLabel,
 }: {
@@ -93,6 +94,7 @@ export function NumberField({
   onChange: (value: number) => void;
   suffix?: string;
   hint?: string;
+  error?: string;
   minLabel?: string;
   maxLabel?: string;
 }) {
@@ -132,7 +134,13 @@ export function NumberField({
           <span>{maxLabel}</span>
         </div>
       )}
-      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+      {error ? (
+        <p data-field-error className="text-xs text-destructive">
+          {error}
+        </p>
+      ) : (
+        hint && <p className="text-xs text-muted-foreground">{hint}</p>
+      )}
     </div>
   );
 }

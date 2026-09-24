@@ -3,7 +3,13 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { RiArrowLeftLine, RiErrorWarningLine } from "@remixicon/react";
+import {
+  RiArrowLeftLine,
+  RiErrorWarningLine,
+  RiPauseCircleLine,
+  RiTimeLine,
+} from "@remixicon/react";
+import { toast } from "sonner";
 
 import {
   actionsFor,
@@ -12,12 +18,13 @@ import {
   usePayLabel,
 } from "@/components/dashboard/ads/campaign-actions";
 import { CampaignJourney } from "@/components/dashboard/ads/campaign-journey";
-import { periodRange } from "@/components/dashboard/ads/campaign-format";
+import { usePeriodText } from "@/components/dashboard/ads/campaign-format";
 import { CampaignOrders } from "@/components/dashboard/ads/campaign-orders";
 import { CampaignOverview } from "@/components/dashboard/ads/campaign-overview";
 import { CampaignStats } from "@/components/dashboard/ads/campaign-stats";
 import { CampaignStatusBadge } from "@/components/dashboard/ads/campaign-status-badge";
 import { CreativeManager } from "@/components/dashboard/ads/creative-manager";
+import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
 import { setupHref } from "@/components/dashboard/ads/wizard/wizard-links";
 import { LoadErrorState } from "@/components/dashboard/page-states";
 import { Button } from "@/components/ui/button";
@@ -27,6 +34,9 @@ import {
   getCampaign,
   isAwaitingPaymentCheck,
   type AdCampaign,
+  isPausedByModerator,
+  needsFix,
+  submitFix,
 } from "@/lib/api/ads";
 import { formatCount, formatDate, formatSomAmount } from "@/lib/format";
 import { interpolate } from "@/lib/i18n/interpolate";
@@ -207,6 +217,10 @@ function Loaded({
         </div>
       )}
 
+      {needsFix(campaign) && (
+        <ModerationNotice campaign={campaign} onDone={onActionDone} />
+      )}
+
       <CampaignJourney campaign={campaign} />
 
       <SummaryStrip campaign={campaign} />
@@ -218,7 +232,92 @@ function Loaded({
   );
 }
 
+/**
+ * Moderator to'xtatgan yoki bannerni bloklagan: sabab, nimani qilish kerakligi
+ * va tuzatishni qayta tekshiruvga yuborish.
+ */
+function ModerationNotice({
+  campaign,
+  onDone,
+}: {
+  campaign: AdCampaign;
+  onDone: (campaign: AdCampaign) => void;
+}) {
+  const m = useT("portal").moderation;
+  const { labelOf } = useRateCard();
+  const [busy, setBusy] = React.useState(false);
+  const paused = isPausedByModerator(campaign);
+  const blocked = campaign.creatives.filter((creative) => creative.blockedByAdmin);
+  const submitted = !!campaign.fixSubmittedAt;
+
+  const send = async () => {
+    setBusy(true);
+    try {
+      const updated = await submitFix(campaign.id);
+      toast.success(m.submitted);
+      onDone(updated);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="space-y-3 rounded-xl border border-destructive/30 bg-destructive/5 px-4 py-4 sm:px-5">
+      <div className="flex items-start gap-3">
+        <RiPauseCircleLine className="mt-0.5 size-5 shrink-0 text-destructive" />
+        <div className="min-w-0 space-y-2">
+          <p className="text-sm font-semibold text-destructive">
+            {paused ? m.pausedTitle : m.blockedTitle}
+          </p>
+          {paused && campaign.pauseReason && (
+            <p className="text-sm">
+              <span className="text-muted-foreground">{m.reason}: </span>
+              {campaign.pauseReason}
+            </p>
+          )}
+          {blocked.length > 0 && (
+            <ul className="space-y-1 text-sm">
+              {blocked.map((creative) => (
+                <li key={creative.id}>
+                  <span className="font-medium">{labelOf(creative.slot)}</span>
+                  {creative.blockReason && (
+                    <span className="text-muted-foreground"> — {creative.blockReason}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="text-sm text-muted-foreground">
+            {paused ? m.pausedHelp : m.blockedHelp}
+          </p>
+        </div>
+      </div>
+
+      {submitted ? (
+        <p className="flex items-center gap-2 rounded-lg bg-background px-3 py-2 text-sm text-muted-foreground">
+          <RiTimeLine className="size-4 shrink-0" />
+          {m.waiting}
+        </p>
+      ) : (
+        <div className="flex flex-wrap gap-2 sm:pl-8">
+          <Button asChild variant="outline" size="sm">
+            <Link href={`?tab=creatives`} scroll={false}>
+              {m.fixBanners}
+            </Link>
+          </Button>
+          <Button size="sm" disabled={busy} onClick={() => void send()}>
+            {busy ? m.sending : m.submit}
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SummaryStrip({ campaign }: { campaign: AdCampaign }) {
+  const periodText = usePeriodText();
   const t = useT("ads");
   const p = useT("portal");
   const o = t.sheet.overview;
@@ -233,7 +332,7 @@ function SummaryStrip({ campaign }: { campaign: AdCampaign }) {
     <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-4">
       <Cell label={o.period}>
         <span className="text-base font-semibold sm:text-lg">
-          {periodRange(campaign)}
+          {periodText(campaign)}
         </span>
         <Sub>{interpolate(o.days, { days: campaign.days })}</Sub>
       </Cell>
