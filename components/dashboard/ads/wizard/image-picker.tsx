@@ -6,7 +6,13 @@ import { toast } from "sonner";
 
 import { ratioLabel, readImageSize } from "@/components/dashboard/ads/image-file";
 import { Button } from "@/components/ui/button";
-import { checkImageAgainstSpec, type AdImageSpec } from "@/lib/api/ads";
+import {
+  checkImageAgainstSpec,
+  IMAGE_UPLOAD_MAX_MB,
+  isVideoFile,
+  VIDEO_UPLOAD_MAX_MB,
+  type AdImageSpec,
+} from "@/lib/api/ads";
 import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 import { cn } from "@/lib/utils";
@@ -26,6 +32,8 @@ export function ImagePicker({
   label,
   hint,
   src,
+  videoSrc,
+  allowVideo = false,
   spec,
   frameClassName,
   canRemove,
@@ -37,6 +45,10 @@ export function ImagePicker({
   label: string;
   hint?: string;
   src: string | null;
+  /** Bor bo'lsa ramkada rasm o'rniga ovozsiz aylanuvchi video. */
+  videoSrc?: string | null;
+  /** GIF va video (MP4/MOV/WebM) ham tanlanadi — server siqadi. */
+  allowVideo?: boolean;
   spec?: AdImageSpec | null;
   frameClassName?: string;
   canRemove: boolean;
@@ -49,7 +61,26 @@ export function ImagePicker({
   const w = useT("portal").wizard.creative;
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
+  const fail = (message: string) => {
+    if (onError) onError(message);
+    else toast.error(message);
+  };
+
   const accept = async (file: File) => {
+    // Video o'lchami va nisbatini server tekshiradi (brauzer GIF/MP4
+    // o'lchamini oldindan ishonchli o'qimaydi).
+    if (allowVideo && isVideoFile(file)) {
+      if (file.size > VIDEO_UPLOAD_MAX_MB * 1024 * 1024) {
+        fail(interpolate(t.sheet.creatives.videoTooBig, { max: String(VIDEO_UPLOAD_MAX_MB) }));
+        return;
+      }
+      onPick(file);
+      return;
+    }
+    if (file.size > IMAGE_UPLOAD_MAX_MB * 1024 * 1024) {
+      fail(interpolate(t.sheet.creatives.imageTooBig, { max: String(IMAGE_UPLOAD_MAX_MB) }));
+      return;
+    }
     if (spec) {
       const size = await readImageSize(file);
       const check = size && checkImageAgainstSpec(size.width, size.height, spec);
@@ -65,8 +96,7 @@ export function ImagePicker({
                 ratio: ratioLabel(spec.ratio),
                 actual,
               });
-        if (onError) onError(message);
-        else toast.error(message);
+        fail(message);
         return;
       }
     }
@@ -86,7 +116,16 @@ export function ImagePicker({
           frameClassName,
         )}
       >
-        {src ? (
+        {videoSrc ? (
+          <video
+            src={videoSrc}
+            muted
+            loop
+            autoPlay
+            playsInline
+            className="size-full object-cover"
+          />
+        ) : src ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={src} alt="" className="size-full object-cover" />
         ) : (
@@ -100,7 +139,7 @@ export function ImagePicker({
       </div>
 
       <div className="flex shrink-0 items-center gap-2 max-sm:w-full">
-        {src && canRemove && (
+        {(src || videoSrc) && canRemove && (
           <Button type="button" size="sm" variant="ghost" onClick={onRemove}>
             {w.remove}
           </Button>
@@ -113,7 +152,7 @@ export function ImagePicker({
           onClick={() => inputRef.current?.click()}
         >
           <RiUploadCloud2Line data-icon="inline-start" />
-          {src ? w.replace : w.chooseFile}
+          {src || videoSrc ? w.replace : allowVideo ? w.chooseMedia : w.chooseFile}
         </Button>
       </div>
 
@@ -126,7 +165,7 @@ export function ImagePicker({
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept={allowVideo ? "image/*,video/mp4,video/quicktime,video/webm" : "image/*"}
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];

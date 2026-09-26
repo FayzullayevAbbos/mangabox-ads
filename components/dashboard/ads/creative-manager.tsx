@@ -3,9 +3,8 @@
 import * as React from "react";
 import {
   RiAddLine,
-  RiImageLine,
+  RiEditLine,
   RiTimeLine,
-  RiUploadCloud2Line,
 } from "@remixicon/react";
 import { toast } from "sonner";
 
@@ -13,9 +12,11 @@ import {
   SLOT_BANNER_GRID,
   SlotBannerCard,
 } from "@/components/dashboard/ads/slot-banner-card";
-import { ratioLabel, readImageSize } from "@/components/dashboard/ads/image-file";
+import { ratioLabel } from "@/components/dashboard/ads/image-file";
 import { CharCounter, TextField } from "@/components/dashboard/ads/text-field";
 import { useRateCard } from "@/components/dashboard/ads/rate-card-context";
+import { ImagePicker, useObjectUrl } from "@/components/dashboard/ads/wizard/image-picker";
+import { SitePreview } from "@/components/dashboard/ads/wizard/site-preview";
 import { SelectMenu } from "@/components/dashboard/select-menu";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,27 +32,33 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
 import {
-  checkImageAgainstSpec,
   createCreative,
   CREATIVE_LIMITS,
   deleteCreative,
   HEX_RE,
   HREF_RE,
+  isEditingPaused,
   isPausedByModerator,
   needsFix,
+  isVideoFile,
+  isVideoPreview,
   PortalApiError,
+  startCreativeEdit,
   updateCreative,
   uploadCreativeImage,
+  uploadCreativeVideo,
+  removeCreativeVideo,
+  VIDEO_UPLOAD_MAX_MB,
   uploadCreativeLogo,
   type AdCampaign,
   type AdCreative,
   type AdCreativeType,
-  type AdImageSpec,
   type AdSlot,
 } from "@/lib/api/ads";
 import { formatDate } from "@/lib/format";
 import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
+import { cn } from "@/lib/utils";
 
 
 /** Kreativ matni faqat moderatsiyagacha o'zgaradi; `active` esa har doim. */
@@ -77,7 +84,12 @@ function isLastActive(campaign: AdCampaign, creative: AdCreative): boolean {
 }
 
 function isFixable(campaign: AdCampaign, creative: AdCreative): boolean {
-  return isPausedByModerator(campaign) || creative.blockedByAdmin;
+  return (
+    isPausedByModerator(campaign) ||
+    isEditingPaused(campaign) ||
+    !!creative.editStartedAt ||
+    creative.blockedByAdmin
+  );
 }
 
 export function CreativeManager({
@@ -101,6 +113,8 @@ export function CreativeManager({
   const [editing, setEditing] = React.useState<AdCreative | "new" | null>(null);
   const [removing, setRemoving] = React.useState<AdCreative | null>(null);
   const [deactivating, setDeactivating] = React.useState<AdCreative | null>(null);
+  const [reactivating, setReactivating] = React.useState<AdCreative | null>(null);
+  const r = useT("portal").bannerResume;
   const [busy, setBusy] = React.useState(false);
 
   const editable = isEditable(campaign);
@@ -116,6 +130,40 @@ export function CreativeManager({
       await updateCreative(creative.id, { active });
       toast.success(t.toasts.creativeSaved);
       onChanged();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  // Tahrirlashni tanladi: banner yoqiladi va forma ochiladi. O'zgartirsa —
+  // faqat shu banner moderatsiyadan o'tadi, qolganlari efirda qoladi.
+  const editBeforeOn = async (creative: AdCreative) => {
+    setBusy(true);
+    try {
+      await startCreativeEdit(creative.id);
+      const updated = await updateCreative(creative.id, { active: true });
+      setReactivating(null);
+      onChanged();
+      setEditing(updated);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  // To'langan kampaniyada tahrir rejimi serverda ochiladi — o'zgarish faqat
+  // shu bannerni tekshiruvga yuboradi.
+  const openEdit = async (creative: AdCreative) => {
+    if (editable || isFixable(campaign, creative) || !isPaid(campaign)) {
+      setEditing(creative);
+      return;
+    }
+    setBusy(true);
+    try {
+      setEditing(await startCreativeEdit(creative.id));
     } catch (err) {
       toast.error(err instanceof Error ? err.message : String(err));
     } finally {
@@ -178,25 +226,25 @@ export function CreativeManager({
                         // O'chirishdan oldin har doim so'raymiz (yoqish darhol):
                         // to'langan kampaniyada muddat ham to'xtamaydi.
                         if (!v) setDeactivating(creative);
-                        else void toggleActive(creative, v === true);
+                        // To'langan kampaniyada yoqishdan oldin tahrir taklifi.
+                        else if (isPaid(campaign) && !creative.pendingReview) {
+                          setReactivating(creative);
+                        } else void toggleActive(creative, v === true);
                       }}
                     />
                   )
                 }
                 actions={
-                  (editable || isFixable(campaign, creative)) && (
+                  (editable || isPaid(campaign) || isFixable(campaign, creative)) && (
                     <>
-                      <UploadButtons
-                        creative={creative}
-                        spec={specOf(creative.slot)?.image ?? null}
-                        onDone={onChanged}
-                      />
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => setEditing(creative)}
+                        disabled={busy}
+                        onClick={() => void openEdit(creative)}
                       >
-                        {editable ? t.actions.edit : m.fixBanner}
+                        <RiEditLine className="size-4" />
+                        {t.actions.edit}
                       </Button>
                       {editable && (
                         <Button
@@ -288,6 +336,56 @@ export function CreativeManager({
       </Dialog>
 
       <Dialog
+        open={reactivating !== null}
+        onOpenChange={(open) => !open && !busy && setReactivating(null)}
+      >
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>{r.title}</DialogTitle>
+            <DialogDescription>
+              {reactivating &&
+                interpolate(r.text, {
+                  slot: reactivating.slot
+                    ? labelOf(reactivating.slot)
+                    : t.sheet.creatives.anySlot,
+                })}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2">
+            <div className="flex items-start gap-3 rounded-lg bg-muted/60 px-4 py-3 text-sm">
+              <RiEditLine className="mt-0.5 size-4 shrink-0 text-primary" />
+              <p>{r.editNote}</p>
+            </div>
+            <div className="flex items-start gap-3 rounded-lg bg-amber-500/10 px-4 py-3 text-sm text-amber-800 dark:text-amber-300">
+              <RiTimeLine className="mt-0.5 size-4 shrink-0" />
+              <p>{interpolate(r.endDate, { date: formatDate(campaign.endsAt) })}</p>
+            </div>
+          </div>
+          <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+            <Button
+              type="button"
+              variant="outline"
+              disabled={busy}
+              onClick={() => reactivating && void editBeforeOn(reactivating)}
+            >
+              {r.edit}
+            </Button>
+            <Button
+              type="button"
+              disabled={busy}
+              onClick={() => {
+                const target = reactivating;
+                setReactivating(null);
+                if (target) void toggleActive(target, true);
+              }}
+            >
+              {r.asIs}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
         open={removing !== null}
         onOpenChange={(open) => !open && !busy && setRemoving(null)}
       >
@@ -327,121 +425,6 @@ export function CreativeManager({
  * nisbat serverga yuborilgunga qadar tekshiriladi — 400 ning matni
  * foydalanuvchiga tushunarsiz bo'ladi.
  */
-function UploadButtons({
-  creative,
-  spec,
-  onDone,
-}: {
-  creative: AdCreative;
-  spec: AdImageSpec | null;
-  onDone: () => void;
-}) {
-  const t = useT("ads");
-  const [uploading, setUploading] = React.useState<"image" | "logo" | null>(
-    null,
-  );
-  const imageRef = React.useRef<HTMLInputElement | null>(null);
-  const logoRef = React.useRef<HTMLInputElement | null>(null);
-
-  const canUploadImage = creative.type === "image" && !!creative.slot && !!spec;
-
-  const send = async (kind: "image" | "logo", file: File) => {
-    if (kind === "image" && spec) {
-      const size = await readImageSize(file);
-      if (size) {
-        const check = checkImageAgainstSpec(size.width, size.height, spec);
-        if (!check.ok) {
-          toast.error(
-            check.reason === "size"
-              ? interpolate(t.sheet.creatives.imageTooSmall, {
-                  min: `${spec.minWidth}×${spec.minHeight}`,
-                  actual: `${size.width}×${size.height}`,
-                })
-              : interpolate(t.sheet.creatives.imageWrongRatio, {
-                  ratio: ratioLabel(spec.ratio),
-                  actual: `${size.width}×${size.height}`,
-                }),
-          );
-          return;
-        }
-      }
-    }
-    setUploading(kind);
-    try {
-      await (kind === "image"
-        ? uploadCreativeImage(creative.id, file)
-        : uploadCreativeLogo(creative.id, file));
-      toast.success(t.toasts.uploaded);
-      onDone();
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : String(err));
-    } finally {
-      setUploading(null);
-      if (imageRef.current) imageRef.current.value = "";
-      if (logoRef.current) logoRef.current.value = "";
-    }
-  };
-
-  return (
-    <>
-      {canUploadImage && (
-        <>
-          <Button
-            size="sm"
-            variant="outline"
-            disabled={uploading !== null}
-            title={
-              spec
-                ? interpolate(t.sheet.creatives.imageHint, {
-                    min: `${spec.minWidth}×${spec.minHeight}`,
-                    ratio: ratioLabel(spec.ratio),
-                  })
-                : undefined
-            }
-            onClick={() => imageRef.current?.click()}
-          >
-            <RiImageLine className="size-4" />
-            {uploading === "image"
-              ? t.sheet.creatives.uploading
-              : t.sheet.creatives.image}
-          </Button>
-          <input
-            ref={imageRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) void send("image", file);
-            }}
-          />
-        </>
-      )}
-      <Button
-        size="sm"
-        variant="outline"
-        disabled={uploading !== null}
-        onClick={() => logoRef.current?.click()}
-      >
-        <RiUploadCloud2Line className="size-4" />
-        {uploading === "logo"
-          ? t.sheet.creatives.uploading
-          : t.sheet.creatives.logo}
-      </Button>
-      <input
-        ref={logoRef}
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) void send("logo", file);
-        }}
-      />
-    </>
-  );
-}
-
 type FormState = {
   type: AdCreativeType;
   slot: AdSlot | "";
@@ -492,8 +475,28 @@ function CreativeDialog({
   onSaved: () => void;
 }) {
   const t = useT("ads");
-  const { labelOf } = useRateCard();
+  const w = useT("portal").wizard.creative;
+  const r = useT("portal").bannerResume;
+  const { labelOf, specOf } = useRateCard();
   const isNew = target === "new";
+  const existing = target && target !== "new" ? target : null;
+  // Rasm/video va logotip — faqat mavjud bannerda (yangi banner ustada yaratiladi).
+  const spec =
+    existing?.type === "image" && existing.slot
+      ? (specOf(existing.slot)?.image ?? null)
+      : null;
+  const videoSpec = spec && existing?.slot ? (specOf(existing.slot)?.video ?? null) : null;
+  const [posterFile, setPosterFile] = React.useState<File | null>(null);
+  const [logoFile, setLogoFile] = React.useState<File | null>(null);
+  const [dropVideo, setDropVideo] = React.useState(false);
+  const [mediaError, setMediaError] = React.useState<{
+    target: "poster" | "logo";
+    message: string;
+  } | null>(null);
+  // Saqlash bosqichi — video siqilishi bir necha soniya oladi.
+  const [phase, setPhase] = React.useState<"text" | "video" | "upload" | null>(null);
+  const posterUrl = useObjectUrl(posterFile);
+  const logoUrl = useObjectUrl(logoFile);
   const [form, setForm] = React.useState<FormState>(() =>
     toForm(target ?? "new"),
   );
@@ -507,8 +510,22 @@ function CreativeDialog({
     if (target) {
       setForm(toForm(target));
       setError(null);
+      setPosterFile(null);
+      setLogoFile(null);
+      setDropVideo(false);
+      setMediaError(null);
     }
   }, [target]);
+
+  const posterSrc = posterFile ? posterUrl : (existing?.imageUrl ?? null);
+  const posterVideo = posterFile
+    ? isVideoPreview(posterFile)
+      ? posterUrl
+      : null
+    : dropVideo
+      ? null
+      : (existing?.videoUrl ?? null);
+  const logoSrc = logoUrl ?? existing?.logoUrl ?? null;
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((f) => ({ ...f, [key]: value }));
@@ -549,20 +566,43 @@ function CreativeDialog({
         accentColor: form.accentColor.trim(),
         href: form.href.trim(),
       };
+      setPhase("text");
       if (isNew) {
         await createCreative(campaign.id, { type: form.type, ...payload });
-      } else if (target) {
-        await updateCreative(target.id, payload);
+      } else if (existing) {
+        await updateCreative(existing.id, payload);
+        if (posterFile) {
+          const video = isVideoFile(posterFile);
+          setPhase(video ? "video" : "upload");
+          try {
+            await (video
+              ? uploadCreativeVideo(existing.id, posterFile)
+              : uploadCreativeImage(existing.id, posterFile));
+          } catch (err) {
+            setMediaError({
+              target: "poster",
+              message: err instanceof Error ? err.message : String(err),
+            });
+            throw err;
+          }
+        } else if (dropVideo && existing.videoUrl) {
+          await removeCreativeVideo(existing.id);
+        }
+        if (logoFile) {
+          setPhase("upload");
+          await uploadCreativeLogo(existing.id, logoFile);
+        }
       }
       toast.success(t.toasts.creativeSaved);
       onSaved();
     } catch (err) {
-      if (err instanceof PortalApiError && err.field) {
+      if (err instanceof PortalApiError && err.field && err.field !== "file") {
         setError({ field: err.field, message: err.message });
       }
       toast.error(err instanceof Error ? err.message : String(err));
     } finally {
       setSaving(false);
+      setPhase(null);
     }
   };
 
@@ -583,13 +623,24 @@ function CreativeDialog({
       open={target !== null}
       onOpenChange={(open) => !open && !saving && onClose()}
     >
-      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
+      <DialogContent
+        className={cn(
+          "max-h-[90vh] overflow-y-auto",
+          existing ? "sm:max-w-4xl" : "sm:max-w-lg",
+        )}
+      >
         <DialogHeader>
           <DialogTitle>
             {isNew
               ? t.sheet.creatives.createTitle
               : t.sheet.creatives.editTitle}
           </DialogTitle>
+          {existing && isPaid(campaign) && (
+            <p className="flex items-start gap-2 rounded-lg bg-amber-500/10 px-3 py-2 text-sm text-amber-800 dark:text-amber-300">
+              <RiTimeLine className="mt-0.5 size-4 shrink-0" />
+              {interpolate(r.liveEditNote, { date: formatDate(campaign.endsAt) })}
+            </p>
+          )}
           <DialogDescription>
             {imageSlots.length === 0
               ? t.sheet.creatives.noImageSlots
@@ -597,6 +648,11 @@ function CreativeDialog({
           </DialogDescription>
         </DialogHeader>
 
+        <div
+          className={cn(
+            existing && "grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start",
+          )}
+        >
         <div className="space-y-4">
           {isNew && (
             <div className="space-y-2">
@@ -703,6 +759,90 @@ function CreativeDialog({
             mono
             placeholder="https://"
           />
+
+          {existing && (
+            <div className="space-y-4 border-t border-border pt-4">
+              <ImagePicker
+                label={w.logo}
+                hint={w.logoHint}
+                src={logoSrc}
+                frameClassName="size-16 rounded-full"
+                canRemove={!!logoFile}
+                error={mediaError?.target === "logo" ? mediaError.message : undefined}
+                onPick={(file) => {
+                  setLogoFile(file);
+                  setMediaError(null);
+                }}
+                onRemove={() => setLogoFile(null)}
+                onError={(message) => setMediaError({ target: "logo", message })}
+              />
+              {spec && (
+                <ImagePicker
+                  label={videoSpec ? w.posterMedia : w.poster}
+                  hint={
+                    interpolate(w.posterSpec, {
+                      min: `${spec.minWidth}×${spec.minHeight}`,
+                      ratio: ratioLabel(spec.ratio),
+                    }) +
+                    (videoSpec
+                      ? `. ${interpolate(w.posterVideoSpec, {
+                          min: `${videoSpec.minWidth}×${videoSpec.minHeight}`,
+                          max: String(VIDEO_UPLOAD_MAX_MB),
+                        })}`
+                      : "")
+                  }
+                  src={posterSrc}
+                  videoSrc={posterVideo}
+                  allowVideo={!!videoSpec}
+                  spec={spec}
+                  frameClassName={spec.ratio < 1 ? "h-24 w-16" : "h-16 w-28"}
+                  // Tanlangan faylni bekor qilish yoki mavjud videoni olib
+                  // tashlash (poster rasm sifatida qoladi).
+                  canRemove={!!posterFile || (!dropVideo && !!existing.videoUrl)}
+                  error={mediaError?.target === "poster" ? mediaError.message : undefined}
+                  onPick={(file) => {
+                    setPosterFile(file);
+                    setDropVideo(false);
+                    setMediaError(null);
+                  }}
+                  onRemove={() => {
+                    if (posterFile) setPosterFile(null);
+                    else setDropVideo(true);
+                  }}
+                  onError={(message) => setMediaError({ target: "poster", message })}
+                />
+              )}
+              {videoSpec && (
+                <p className="rounded-lg bg-muted/60 px-3 py-2 text-xs text-muted-foreground">
+                  {w.videoTipText}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+
+        {existing && existing.slot && (
+          <aside className="space-y-2 lg:sticky lg:top-0">
+            <p className="text-sm font-medium text-muted-foreground">{w.preview}</p>
+            <SitePreview
+              slots={[existing.slot]}
+              note={false}
+              dataOf={() => ({
+                draft: {
+                  brandName: form.brandName,
+                  title: form.title,
+                  body: form.body,
+                  ctaText: form.ctaText,
+                  accentColor: form.accentColor,
+                  href: form.href,
+                },
+                logoSrc,
+                imageSrc: spec ? posterSrc : null,
+                videoSrc: spec ? posterVideo : null,
+              })}
+            />
+          </aside>
+        )}
         </div>
 
         <div className="flex justify-end gap-2">
@@ -716,7 +856,11 @@ function CreativeDialog({
           </Button>
           <Button type="button" disabled={saving} onClick={() => void save()}>
             {saving
-              ? t.sheet.creatives.saving
+              ? phase === "video"
+                ? t.sheet.creatives.videoProcessing
+                : phase === "upload"
+                  ? t.sheet.creatives.uploading
+                  : t.sheet.creatives.saving
               : isNew
                 ? t.sheet.creatives.create
                 : t.sheet.creatives.save}

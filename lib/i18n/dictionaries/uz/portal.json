@@ -210,6 +210,11 @@
       "posters": "Posterlar",
       "postersText": "Rasm ixtiyoriy, lekin ko'proq e'tibor tortadi. Rasm bo'lmasa bu joyda matnli banner ko'rinadi.",
       "posterSpec": "Kamida {min} px, nisbat {ratio}",
+      "posterMedia": "Rasm, GIF yoki video",
+      "chooseMedia": "Fayl tanlash",
+      "posterVideoSpec": "GIF/video: kamida {min} px, {max} MB gacha, ovozsiz, 8 soniyagacha aylanadi",
+      "videoTipTitle": "Video yoki GIF ham yuklashingiz mumkin",
+      "videoTipText": "Fayl qancha yengil bo'lsa, foydalanuvchida shuncha tez ochiladi va uning internet trafigini kam sarflaydi. Tavsiya: 3–6 soniya, 2 MB dan kichik, sodda harakat. Og'ir fayl sekin yuklanadi — video chiqquncha foydalanuvchi faqat rasmni ko'radi.",
       "preview": "Saytdagi ko'rinishi (telefon)",
       "previewBrand": "Brendingiz",
       "previewTitle": "Sarlavha shu yerda ko'rinadi",
@@ -276,5 +281,56 @@
   "period": {
     "afterPayment": "To'lovdan keyin boshlanadi",
     "from": "{date} dan"
+  },
+  "resumeChoice": {
+    "title": "Yoqishdan oldin tahrirlaysizmi?",
+    "description": "Reklamani o'zgartirmasdan yoqishingiz yoki avval bannerlarini tahrirlashingiz mumkin.",
+    "editNote": "Bannerlarni o'zgartirsangiz, reklama yana moderatsiyaga boradi va tasdiqlangach efirga qaytadi.",
+    "endDate": "Tugash sanasi o'zgarmaydi: {date}. To'xtab turgan kunlar qaytarilmaydi.",
+    "edit": "Tahrirlash",
+    "resumeAsIs": "O'zgartirmasdan yoqish",
+    "opening": "Ochilmoqda…",
+    "pendingNote": "Moderatsiyadagi banner tasdiqlangach efirga chiqadi — ungacha qolgan bannerlar ko'rsatiladi."
+  },
+  "editMode": {
+    "title": "Tahrirlash rejimi",
+    "help": "Bannerlarni \"Bannerlar\" tabida o'zgartiring. Hech narsa o'zgartirmasangiz, reklamani darhol yoqishingiz mumkin.",
+    "helpEdited": "Bannerlar o'zgartirildi — ularni tekshiruvga yuboring. Tasdiqlangach reklama efirga qaytadi.",
+    "endDate": "Tugash sanasi: {date} — o'zgarmaydi.",
+    "openBanners": "Bannerlarni tahrirlash",
+    "submit": "Tekshiruvga yuborish",
+    "resume": "O'zgartirmasdan yoqish",
+    "waiting": "Tekshiruvga yuborildi — moderator tasdiqlagach reklama efirga qaytadi."
+  },
+  "renew": {
+    "action": "Qayta efirga chiqarish",
+    "title": "Reklamani qayta efirga chiqarish",
+    "description": "O'sha joylar, {days} kun va o'sha bannerlar bilan yangi kampaniya yaratiladi — joriy narxlarda.",
+    "fast": "Bannerlarni o'zgartirmasangiz, to'g'ridan-to'g'ri to'lovga o'tasiz va to'lovdan keyin reklama darhol efirga chiqadi.",
+    "review": "Bu reklamani moderator to'xtatgan yoki bannerlaridan biri bloklangan — shuning uchun u avval moderatsiyadan qayta o'tadi.",
+    "editNote": "Nimanidir o'zgartirmoqchimisiz? Tahrirlang — reklama moderatsiyadan qayta o'tadi.",
+    "edit": "Tahrirlab yuborish",
+    "pay": "To'lovga o'tish",
+    "creating": "Yaratilmoqda…",
+    "created": "Yangi kampaniya yaratildi"
+  },
+  "bannerResume": {
+    "title": "Bannerni yoqishdan oldin tahrirlaysizmi?",
+    "text": "\"{slot}\" bannerini o'zgartirmasdan yoqishingiz yoki avval tahrirlashingiz mumkin.",
+    "editNote": "Tahrirlasangiz, faqat shu banner moderatsiyadan o'tadi va tasdiqlangach efirga chiqadi. Kampaniyaning boshqa bannerlari efirda qolaveradi.",
+    "endDate": "Kampaniyaning tugash sanasi o'zgarmaydi: {date}.",
+    "edit": "Tahrirlash",
+    "asIs": "O'zgartirmasdan yoqish",
+    "reviewBadge": "Tekshiruvda",
+    "liveEditNote": "O'zgartirib saqlasangiz, bu banner moderatsiyadan o'tguncha efirdan olinadi, qolgan bannerlar efirda qoladi. Tugash sanasi o'zgarmaydi: {date}.",
+    "reviewStrip": "Moderatsiyada — tasdiqlangach efirga chiqadi. Ungacha bu joyda ko'rsatilmaydi."
+  },
+  "airtime": {
+    "pausedTitle": "Reklama to'xtatilgan",
+    "pausedText": "Siz to'xtatgansiz — hozir hech qayerda ko'rsatilmayapti. Muddat to'xtamaydi: reklama {date} da tugaydi, to'xtab turgan kunlar qaytarilmaydi.",
+    "pausedExpired": "Muddat tugadi — reklamani yoqsangiz, u yakunlanadi. Qayta chiqarish uchun «Qayta efirga chiqarish»dan foydalaning.",
+    "reviewTitle": "Banner moderatsiyada",
+    "reviewLive": "{slots} banneri tahrirlandi va moderatsiyada. Tasdiqlanguncha bu joyda reklamangiz ko'rinmaydi, qolgan bannerlar efirda.",
+    "reviewPaused": "{slots} banneri tahrirlandi va moderatsiyada. Tasdiqlansa ham, reklamani o'zingiz yoqmaguningizcha efirga chiqmaydi."
   }
 }

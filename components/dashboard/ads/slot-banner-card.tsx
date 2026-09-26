@@ -38,11 +38,18 @@ export function SlotBannerCard({
 }) {
   const t = useT("ads");
   const m = useT("portal").moderation;
+  const b = useT("portal").bannerResume;
   const { labelOf } = useRateCard();
   const c = t.sheet.creatives;
 
   const slot = creative.slot ?? fallbackSlot ?? null;
-  const state = creative.blockedByAdmin ? "blocked" : creative.active ? "on" : "off";
+  const state = creative.blockedByAdmin
+    ? "blocked"
+    : creative.pendingReview
+      ? "review"
+      : creative.active
+        ? "on"
+        : "off";
 
   return (
     <div
@@ -66,15 +73,28 @@ export function SlotBannerCard({
                 state === "on" && "bg-success",
                 state === "off" && "bg-muted-foreground/50",
                 state === "blocked" && "bg-destructive",
+                state === "review" && "bg-amber-500",
               )}
             />
-            {state === "blocked" ? m.blockedBadge : state === "on" ? c.active : c.inactive}
+            {state === "blocked"
+              ? m.blockedBadge
+              : state === "review"
+                ? b.reviewBadge
+                : state === "on"
+                  ? c.active
+                  : c.inactive}
             {" · "}
             {creative.type === "image" ? c.typeImage : c.typeCard}
           </p>
         </div>
         {control}
       </div>
+
+      {state === "review" && (
+        <p className="border-b border-amber-500/20 bg-amber-500/5 px-3 py-1.5 text-xs text-amber-800 dark:text-amber-300">
+          {b.reviewStrip}
+        </p>
+      )}
 
       {creative.blockedByAdmin && creative.blockReason && (
         <p className="border-b border-destructive/20 bg-destructive/5 px-3 py-1.5 text-xs text-destructive">
@@ -93,6 +113,7 @@ export function SlotBannerCard({
               draft: toDraft(creative),
               logoSrc: creative.logoUrl,
               imageSrc: creative.type === "image" ? creative.imageUrl : null,
+              videoSrc: creative.type === "image" ? (creative.videoUrl ?? null) : null,
             })}
           />
         )}

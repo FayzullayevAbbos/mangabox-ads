@@ -343,7 +343,7 @@ function StatusBlock({ campaign }: { campaign: AdCampaign }) {
   );
 }
 
-const PRIMARY_ORDER = ["continue", "pay", "resume", "pause"] as const;
+const PRIMARY_ORDER = ["continue", "pay", "resume", "renew", "pause"] as const;
 
 function RowActions({
   campaign,
@@ -351,6 +351,7 @@ function RowActions({
   className,
 }: Omit<RowProps, "onOpen"> & { className?: string }) {
   const t = useT("ads");
+  const p = useT("portal");
   const allowed = actionsFor(campaign);
   const primary = PRIMARY_ORDER.find((key) => allowed.includes(key));
   const busy = actions.isBusy(campaign.id);
@@ -375,11 +376,13 @@ function RowActions({
           onClick={() => {
             if (primary === "pay") actions.askPay(campaign);
             else if (primary === "resume") actions.resume(campaign);
+            else if (primary === "renew") actions.renew(campaign);
             else actions.pause(campaign);
           }}
         >
           {primary === "pay" && payLabel(campaign)}
           {primary === "resume" && t.actions.resume}
+          {primary === "renew" && p.renew.action}
           {primary === "pause" && t.actions.pause}
         </Button>
       )

@@ -74,12 +74,30 @@ type PreviewItem = {
   accent: Accent;
   logoUrl: string | null;
   imageUrl: string | null;
+  videoUrl: string | null;
   label: string;
 };
 
 function Img({ src, className }: { src: string; className?: string }) {
   // eslint-disable-next-line @next/next/no-img-element
   return <img src={src} alt="" className={className} draggable={false} />;
+}
+
+/** Saytdagidek: ovozsiz, cheksiz aylanadi. */
+function Media({
+  image,
+  video,
+  className,
+}: {
+  image: string;
+  video: string | null;
+  className?: string;
+}) {
+  return video ? (
+    <video src={video} muted loop autoPlay playsInline className={className} />
+  ) : (
+    <Img src={image} className={className} />
+  );
 }
 
 function Label({ text, className }: { text: string; className?: string }) {
@@ -105,7 +123,11 @@ function CarouselSlide({ item }: { item: PreviewItem }) {
     >
       {item.imageUrl ? (
         <div aria-hidden className="absolute inset-0">
-          <Img src={item.imageUrl} className="size-full scale-110 object-cover blur-[8px]" />
+          <Media
+            image={item.imageUrl}
+            video={item.videoUrl}
+            className="size-full scale-110 object-cover blur-[8px]"
+          />
         </div>
       ) : (
         <div
@@ -167,8 +189,9 @@ function CarouselSlide({ item }: { item: PreviewItem }) {
               background: "oklch(0.11 0.006 305 / 0.35)",
             }}
           >
-            <Img
-              src={poster}
+            <Media
+              image={poster}
+              video={item.imageUrl ? item.videoUrl : null}
               className={cn(
                 "size-full",
                 item.imageUrl ? "object-cover" : "object-contain p-[12%]",
@@ -257,7 +280,7 @@ function ImageCreative({ item, imageUrl }: { item: PreviewItem; imageUrl: string
       style={{ borderColor: SITE.line, background: SITE.bgSecondary }}
     >
       <div className="relative aspect-video w-full overflow-hidden" style={{ background: SITE.bgEtc }}>
-        <Img src={imageUrl} className="size-full object-cover" />
+        <Media image={imageUrl} video={item.videoUrl} className="size-full object-cover" />
         <Label
           text={item.label}
           className="absolute top-2.5 left-2.5 bg-black/55 text-white backdrop-blur-sm"
@@ -419,6 +442,8 @@ export type SlotPreviewData = {
   logoSrc: string | null;
   /** Joyning rasmi — faqat rasm qabul qiladigan joylarda. */
   imageSrc: string | null;
+  /** Joyning videosi (ovozsiz sikl); bor bo'lsa rasm o'rniga o'ynaydi. */
+  videoSrc?: string | null;
 };
 
 /**
@@ -444,7 +469,7 @@ export function SitePreview({
   const active = controlled ?? own;
   if (!active) return null;
 
-  const { draft, logoSrc, imageSrc } = dataOf(active);
+  const { draft, logoSrc, imageSrc, videoSrc = null } = dataOf(active);
   const item: PreviewItem = {
     brandName: draft.brandName.trim() || w.previewBrand,
     title: draft.title.trim() || w.previewTitle,
@@ -453,6 +478,7 @@ export function SitePreview({
     accent: siteAccent(draft.accentColor),
     logoUrl: logoSrc,
     imageUrl: imageSrc,
+    videoUrl: videoSrc,
     label: SITE_LABEL,
   };
 

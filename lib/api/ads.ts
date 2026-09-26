@@ -77,6 +77,8 @@ export interface AdSlotSpec {
   cpmSom: number;
   dailyImpressions: number;
   image: AdImageSpec | null;
+  /** Ovozsiz video sikl (GIF o'rniga); `null` — slotda video yo'q. */
+  video?: AdImageSpec | null;
   position: number;
 }
 
@@ -100,10 +102,16 @@ export interface AdCreative {
   accentColor: string | null;
   logoUrl: string | null;
   imageUrl: string | null;
+  /** Ovozsiz MP4 sikl; bor bo'lsa `imageUrl` uning birinchi kadri. */
+  videoUrl?: string | null;
   href: string;
   /** Moderator efirdan olgan — mijoz tuzatib, qayta tekshiruvga yuboradi. */
   blockedByAdmin: boolean;
   blockReason: string | null;
+  /** O'chirilgan bannerni yoqishda tahrirlash tanlangan. */
+  editStartedAt?: string | null;
+  /** Tahrirlangan — moderator tasdig'ini kutmoqda, efirda emas. */
+  pendingReview?: boolean;
   impressions: number;
   clicks: number;
 }
@@ -140,6 +148,12 @@ export interface AdCampaign {
   pausedAt: string | null;
   /** Mijoz tuzatib, qayta tekshiruvga yuborgan — moderator javobi kutilmoqda. */
   fixSubmittedAt: string | null;
+  /** Mijoz to'xtatgan reklamani yoqishdan oldin tahrirlash rejimida. */
+  editStartedAt?: string | null;
+  /** Tahrirda banner o'zgargan — efirga moderatsiyadan keyin qaytadi. */
+  editedAt?: string | null;
+  /** "Qayta efirga chiqarish" — shu kampaniyadan nusxa olingan. */
+  renewedFrom?: string | null;
   /** To'lov oynasida tanlangan boshlanish; `null` — to'lovdan keyin darhol. */
   requestedStartAt: string | null;
   createdAt: string | null;
@@ -279,6 +293,27 @@ export function isPausedByModerator(campaign: AdCampaign): boolean {
   return campaign.status === "paused" && campaign.pausedBy === "admin";
 }
 
+/** Mijoz o'zi to'xtatib, yoqishdan oldin bannerlarni tahrirlayapti. */
+export function isEditingPaused(campaign: AdCampaign): boolean {
+  return (
+    campaign.status === "paused" &&
+    campaign.pausedBy === "advertiser" &&
+    !!campaign.editStartedAt
+  );
+}
+
+/**
+ * Tugagan reklama tahrirsiz qayta chiqsa moderatsiyasiz to'lovga o'tadi:
+ * muddati tabiiy tugagan va hech bir banner bloklanmagan bo'lishi kerak
+ * (backend `renew` bilan bir xil shart).
+ */
+export function renewSkipsReview(campaign: AdCampaign): boolean {
+  return (
+    (campaign.finishReason === "window" || campaign.finishReason === "goal") &&
+    !campaign.creatives.some((creative) => creative.blockedByAdmin)
+  );
+}
+
 /** Moderator to'xtatgan yoki kamida bitta bannerni bloklagan. */
 export function needsFix(campaign: AdCampaign): boolean {
   return (
@@ -293,6 +328,25 @@ export async function setCampaignStart(id: string, startAt: string | null) {
     `/campaigns/${id}/start`,
     "POST",
     { startAt },
+  );
+  return data;
+}
+
+/** Yoqishdan oldin tahrirlash rejimini ochadi (tugash sanasi o'zgarmaydi). */
+export async function startCampaignEdit(id: string) {
+  const { data } = await portalRequest<{ data: AdCampaign }>(
+    `/campaigns/${id}/edit`,
+    "POST",
+  );
+  return data;
+}
+
+/** Tugagan reklamadan yangi nusxa: `edit` — qoralama, aks holda to'lovga tayyor. */
+export async function renewCampaign(id: string, edit: boolean) {
+  const { data } = await portalRequest<{ data: AdCampaign }>(
+    `/campaigns/${id}/renew`,
+    "POST",
+    { edit },
   );
   return data;
 }
@@ -420,6 +474,15 @@ export async function updateCreative(
   return data;
 }
 
+/** O'chirilgan bannerni yoqib, tahrirlashni ochadi (to'langan kampaniyada). */
+export async function startCreativeEdit(id: string) {
+  const { data } = await portalRequest<{ data: AdCreative }>(
+    `/creatives/${id}/edit`,
+    "POST",
+  );
+  return data;
+}
+
 export async function deleteCreative(id: string) {
   const { data } = await portalRequest<{ data: { ok: boolean } }>(
     `/creatives/${id}`,
@@ -430,7 +493,7 @@ export async function deleteCreative(id: string) {
 
 async function uploadCreativeFile(
   id: string,
-  kind: "image" | "logo",
+  kind: "image" | "logo" | "video",
   file: File,
 ) {
   const form = new FormData();
@@ -451,6 +514,35 @@ export function uploadCreativeImage(id: string, file: File) {
 
 export function uploadCreativeLogo(id: string, file: File) {
   return uploadCreativeFile(id, "logo", file);
+}
+
+/** GIF/MP4/MOV/WebM — server ovozsiz MP4 ga siqadi va poster yasaydi. */
+export function uploadCreativeVideo(id: string, file: File) {
+  return uploadCreativeFile(id, "video", file);
+}
+
+export async function removeCreativeVideo(id: string) {
+  const { data } = await portalRequest<{ data: AdCreative }>(
+    `/creatives/${id}/video`,
+    "DELETE",
+  );
+  return data;
+}
+
+/** Server chegarasi bilan bir xil (`AD_VIDEO_UPLOAD_MAX_BYTES`). */
+export const VIDEO_UPLOAD_MAX_MB = 10;
+
+/** Server multipart chegarasi (`main.ts`) — rasm uchun. */
+export const IMAGE_UPLOAD_MAX_MB = 8;
+
+/** GIF ham video yo'lidan o'tadi: server uni ovozsiz MP4 ga aylantiradi. */
+export function isVideoFile(file: File): boolean {
+  return file.type.startsWith("video/") || file.type === "image/gif";
+}
+
+/** Brauzerda `<video>` bilan ko'rsatiladigan fayl (GIF `<img>` da o'zi aylanadi). */
+export function isVideoPreview(file: File): boolean {
+  return file.type.startsWith("video/");
 }
 
 export function checkImageAgainstSpec(

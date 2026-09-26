@@ -1,7 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { RiCheckLine, RiErrorWarningLine, RiFileCopyLine } from "@remixicon/react";
+import {
+  RiCheckLine,
+  RiErrorWarningLine,
+  RiFileCopyLine,
+  RiLightbulbLine,
+} from "@remixicon/react";
 import { toast } from "sonner";
 
 import { ratioLabel } from "@/components/dashboard/ads/image-file";
@@ -15,6 +20,8 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   CREATIVE_LIMITS,
   HEX_RE,
+  isVideoPreview,
+  VIDEO_UPLOAD_MAX_MB,
   type AdCampaign,
   type AdSlot,
 } from "@/lib/api/ads";
@@ -91,6 +98,7 @@ export function CreativeStep({
   const draft = draftOf(drafts, active);
   const slotErrors = errors[active] ?? {};
   const spec = posterSlots.includes(active) ? (specOf(active)?.image ?? null) : null;
+  const videoSpec = spec ? (specOf(active)?.video ?? null) : null;
 
   const setError = (target: CreativeTarget, message?: string) => {
     if (slotErrors[target] === message) return;
@@ -116,6 +124,16 @@ export function CreativeStep({
     if (localPosters[slot]) return localPosters[slot] ?? null;
     if (files.removedPosters.includes(slot)) return null;
     return posterOf(campaign, slot)?.imageUrl ?? null;
+  };
+
+  // Tanlangan video fayl yoki saqlangan kreativning videosi (GIF `<img>` da
+  // o'zi aylanadi, shuning uchun u bu yerga tushmaydi).
+  const posterVideo = (slot: AdSlot): string | null => {
+    if (!posterSlots.includes(slot)) return null;
+    const file = files.posters[slot];
+    if (file) return isVideoPreview(file) ? (localPosters[slot] ?? null) : null;
+    if (files.removedPosters.includes(slot)) return null;
+    return posterOf(campaign, slot)?.videoUrl ?? null;
   };
 
   const pickPoster = (file: File) => {
@@ -345,12 +363,22 @@ export function CreativeStep({
             />
             {spec && (
               <ImagePicker
-                label={w.poster}
-                hint={interpolate(w.posterSpec, {
-                  min: `${spec.minWidth}×${spec.minHeight}`,
-                  ratio: ratioLabel(spec.ratio),
-                })}
+                label={videoSpec ? w.posterMedia : w.poster}
+                hint={
+                  interpolate(w.posterSpec, {
+                    min: `${spec.minWidth}×${spec.minHeight}`,
+                    ratio: ratioLabel(spec.ratio),
+                  }) +
+                  (videoSpec
+                    ? `. ${interpolate(w.posterVideoSpec, {
+                        min: `${videoSpec.minWidth}×${videoSpec.minHeight}`,
+                        max: String(VIDEO_UPLOAD_MAX_MB),
+                      })}`
+                    : "")
+                }
                 src={posterSrc(active)}
+                videoSrc={posterVideo(active)}
+                allowVideo={!!videoSpec}
                 spec={spec}
                 frameClassName={spec.ratio < 1 ? "h-24 w-16" : "h-16 w-28"}
                 canRemove
@@ -361,6 +389,15 @@ export function CreativeStep({
               />
             )}
             {spec && <p className="text-xs text-muted-foreground">{w.postersText}</p>}
+            {videoSpec && (
+              <div className="flex items-start gap-3 rounded-lg bg-muted/60 px-4 py-3 text-sm">
+                <RiLightbulbLine className="mt-0.5 size-4 shrink-0 text-primary" />
+                <div>
+                  <p className="font-medium">{w.videoTipTitle}</p>
+                  <p className="mt-0.5 text-muted-foreground">{w.videoTipText}</p>
+                </div>
+              </div>
+            )}
             {slots.length > 1 && (
               <div className="border-t border-border pt-4">
                 <Button type="button" variant="outline" size="sm" onClick={applyToAll}>
@@ -384,6 +421,7 @@ export function CreativeStep({
               draft: draftOf(drafts, slot),
               logoSrc: logoSrc(slot),
               imageSrc: posterSrc(slot),
+              videoSrc: posterVideo(slot),
             })}
           />
         </aside>

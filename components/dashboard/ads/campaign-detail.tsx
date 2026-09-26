@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   RiArrowLeftLine,
+  RiEditLine,
   RiErrorWarningLine,
   RiPauseCircleLine,
   RiTimeLine,
@@ -34,8 +35,10 @@ import {
   getCampaign,
   isAwaitingPaymentCheck,
   type AdCampaign,
+  isEditingPaused,
   isPausedByModerator,
   needsFix,
+  runCampaignAction,
   submitFix,
 } from "@/lib/api/ads";
 import { formatCount, formatDate, formatSomAmount } from "@/lib/format";
@@ -134,7 +137,15 @@ function Loaded({
 }) {
   const t = useT("ads");
   const p = useT("portal");
-  const actions = useCampaignActions({ onDone: onActionDone, onPreview });
+  const params = useSearchParams();
+  // "Qayta efirga chiqarish" nusxasi `?pay=1` bilan ochiladi — to'lov oynasi
+  // darhol. Faqat birinchi renderda o'qiladi (useState boshlang'ich qiymati).
+  const actions = useCampaignActions({
+    onDone: onActionDone,
+    onPreview,
+    initialPay:
+      params.get("pay") === "1" && campaign.nextAction === "pay" ? campaign : null,
+  });
   const allowed = actionsFor(campaign);
   const busy = actions.isBusy(campaign.id);
   const payLabel = usePayLabel();
@@ -193,6 +204,15 @@ function Loaded({
                 {t.actions.resume}
               </Button>
             )}
+            {allowed.includes("renew") && (
+              <Button
+                className="flex-1 sm:flex-none"
+                disabled={busy}
+                onClick={() => actions.renew(campaign)}
+              >
+                {p.renew.action}
+              </Button>
+            )}
             {allowed.includes("pay") && (
               <Button
                 variant={awaitingCheck ? "outline" : "default"}
@@ -220,6 +240,12 @@ function Loaded({
       {needsFix(campaign) && (
         <ModerationNotice campaign={campaign} onDone={onActionDone} />
       )}
+
+      {isEditingPaused(campaign) && (
+        <EditModeNotice campaign={campaign} onDone={onActionDone} />
+      )}
+
+      {!isEditingPaused(campaign) && <AirtimeNotice campaign={campaign} />}
 
       <CampaignJourney campaign={campaign} />
 
@@ -312,6 +338,131 @@ function ModerationNotice({
           </Button>
         </div>
       )}
+    </div>
+  );
+}
+
+/**
+ * Mijoz o'zi to'xtatgan reklamani tahrirlayapti. O'zgartirmagan bo'lsa —
+ * darhol yoqadi; o'zgartirgan bo'lsa — tekshiruvga yuboradi. Tugash sanasi
+ * har doim o'zgarmaydi.
+ */
+function EditModeNotice({
+  campaign,
+  onDone,
+}: {
+  campaign: AdCampaign;
+  onDone: (campaign: AdCampaign) => void;
+}) {
+  const e = useT("portal").editMode;
+  const m = useT("portal").moderation;
+  const [busy, setBusy] = React.useState(false);
+  const edited = !!campaign.editedAt;
+  const submitted = !!campaign.fixSubmittedAt;
+
+  const act = async (task: () => Promise<AdCampaign>, success: string) => {
+    setBusy(true);
+    try {
+      const updated = await task();
+      toast.success(success);
+      onDone(updated);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="space-y-3 rounded-xl border border-primary/30 bg-primary/5 px-4 py-4 sm:px-5">
+      <div className="flex items-start gap-3">
+        <RiEditLine className="mt-0.5 size-5 shrink-0 text-primary" />
+        <div className="min-w-0 space-y-1.5">
+          <p className="text-sm font-semibold">{e.title}</p>
+          <p className="text-sm text-muted-foreground">
+            {edited ? e.helpEdited : e.help}
+          </p>
+          <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            <RiTimeLine className="size-4 shrink-0" />
+            {interpolate(e.endDate, { date: formatDate(campaign.endsAt) })}
+          </p>
+        </div>
+      </div>
+
+      {submitted ? (
+        <p className="flex items-center gap-2 rounded-lg bg-background px-3 py-2 text-sm text-muted-foreground">
+          <RiTimeLine className="size-4 shrink-0" />
+          {e.waiting}
+        </p>
+      ) : (
+        <div className="flex flex-wrap gap-2 sm:pl-8">
+          <Button asChild variant="outline" size="sm">
+            <Link href={`?tab=creatives`} scroll={false}>
+              {e.openBanners}
+            </Link>
+          </Button>
+          {edited ? (
+            <Button
+              size="sm"
+              disabled={busy}
+              onClick={() => void act(() => submitFix(campaign.id), m.submitted)}
+            >
+              {busy ? m.sending : e.submit}
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              disabled={busy}
+              onClick={() =>
+                void act(() => runCampaignAction(campaign.id, "resume"), e.resume)
+              }
+            >
+              {e.resume}
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Mijoz o'zi to'xtatgan kampaniya va/yoki moderatsiyadagi tahrirlangan
+ * bannerlar: nima bo'lyapti, muddat qachon tugaydi va keyin nima bo'ladi.
+ */
+function AirtimeNotice({ campaign }: { campaign: AdCampaign }) {
+  const a = useT("portal").airtime;
+  const { labelOf } = useRateCard();
+  // Sahifa ochilgan vaqt — render sof qolsin (muddat daqiqalab o'zgarmaydi).
+  const [now] = React.useState(() => Date.now());
+  const selfPaused = campaign.status === "paused" && campaign.pausedBy === "advertiser";
+  const pending = campaign.creatives.filter((creative) => creative.pendingReview);
+  const expired = new Date(campaign.endsAt).getTime() <= now;
+  const slots = pending
+    .map((creative) => (creative.slot ? labelOf(creative.slot) : campaign.name))
+    .join(", ");
+  if (!selfPaused && pending.length === 0) return null;
+
+  return (
+    <div className="flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-4 sm:px-5">
+      <RiTimeLine className="mt-0.5 size-5 shrink-0 text-amber-600 dark:text-amber-400" />
+      <div className="min-w-0 space-y-1.5 text-sm">
+        <p className="font-semibold">
+          {selfPaused ? a.pausedTitle : a.reviewTitle}
+        </p>
+        {selfPaused && (
+          <p className="text-muted-foreground">
+            {expired
+              ? a.pausedExpired
+              : interpolate(a.pausedText, { date: formatDate(campaign.endsAt) })}
+          </p>
+        )}
+        {pending.length > 0 && (
+          <p className="text-muted-foreground">
+            {interpolate(selfPaused ? a.reviewPaused : a.reviewLive, { slots })}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

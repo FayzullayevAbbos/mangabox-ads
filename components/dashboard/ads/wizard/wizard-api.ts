@@ -8,6 +8,8 @@ import {
   updateCreative,
   uploadCreativeImage,
   uploadCreativeLogo,
+  uploadCreativeVideo,
+  isVideoFile,
   type AdCampaign,
   type AdSlot,
 } from "@/lib/api/ads";
@@ -116,7 +118,13 @@ export async function saveCreative(
         : createCreative(campaign.id, { ...fields, type, slot }),
     );
     if (file && withImage) {
-      await within(slot, "poster", uploadCreativeImage(saved.id, file));
+      await within(
+        slot,
+        "poster",
+        isVideoFile(file)
+          ? uploadCreativeVideo(saved.id, file)
+          : uploadCreativeImage(saved.id, file),
+      );
     }
     const logo = files.logos[slot];
     if (logo) await within(slot, "logo", uploadCreativeLogo(saved.id, logo));

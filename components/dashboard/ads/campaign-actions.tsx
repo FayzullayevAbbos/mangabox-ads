@@ -1,9 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { RiTimeLine } from "@remixicon/react";
+import { useRouter } from "next/navigation";
+import { RiEditLine, RiTimeLine } from "@remixicon/react";
 import { toast } from "sonner";
 
+import { setupHref } from "@/components/dashboard/ads/wizard/wizard-links";
 import { PaymentDialog } from "@/components/dashboard/ads/payment-dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +20,10 @@ import {
   setCampaignStart,
   isAwaitingPaymentCheck,
   isPausedByModerator,
+  renewCampaign,
+  renewSkipsReview,
   runCampaignAction,
+  startCampaignEdit,
   type AdCampaign,
   type AdCampaignStatus,
   type CampaignAction,
@@ -32,7 +37,8 @@ export type CampaignActionKey =
   | "continue"
   | "pay"
   | "pause"
-  | "resume";
+  | "resume"
+  | "renew";
 
 const BY_STATUS: Record<AdCampaignStatus, CampaignActionKey[]> = {
   draft: ["continue", "details"],
@@ -42,7 +48,7 @@ const BY_STATUS: Record<AdCampaignStatus, CampaignActionKey[]> = {
   scheduled: ["pause", "details"],
   active: ["pause", "details"],
   paused: ["resume", "details"],
-  finished: ["details"],
+  finished: ["renew", "details"],
 };
 
 export function actionsFor(campaign: AdCampaign): CampaignActionKey[] {
@@ -53,7 +59,10 @@ export function actionsFor(campaign: AdCampaign): CampaignActionKey[] {
     return allowed.filter((a) => a !== "pay");
   }
   // Moderator to'xtatganini faqat moderator yoqadi — mijoz tuzatib yuboradi.
-  if (isPausedByModerator(campaign)) return allowed.filter((a) => a !== "resume");
+  // Tahrirda banner o'zgargan bo'lsa ham — o'zgarish moderatsiyadan o'tadi.
+  if (isPausedByModerator(campaign) || campaign.editedAt) {
+    return allowed.filter((a) => a !== "resume");
+  }
   return allowed;
 }
 
@@ -91,17 +100,23 @@ function optimisticStatus(
 export function useCampaignActions({
   onDone,
   onPreview,
+  initialPay = null,
 }: {
   onDone: CampaignListener;
   onPreview?: CampaignListener;
+  /** "Qayta efirga chiqarish" dan keyin to'lov oynasi darhol ochilsin. */
+  initialPay?: AdCampaign | null;
 }) {
   const t = useT("ads");
   const p = useT("portal");
+  const router = useRouter();
   const [busy, setBusy] = React.useState<string | null>(null);
-  const [paying, setPaying] = React.useState<AdCampaign | null>(null);
+  const [paying, setPaying] = React.useState<AdCampaign | null>(initialPay);
   const [confirming, setConfirming] = React.useState<PendingToggle | null>(
     null,
   );
+  const [choosing, setChoosing] = React.useState<AdCampaign | null>(null);
+  const [renewing, setRenewing] = React.useState<AdCampaign | null>(null);
 
   const TOASTS: Record<CampaignAction, string> = {
     submit: p.toasts.submitted,
@@ -142,13 +157,54 @@ export function useCampaignActions({
     }
   };
 
+  // Tahrir rejimi: tugash sanasi o'zgarmaydi, bannerlar tabiga o'tiladi.
+  const edit = async (campaign: AdCampaign) => {
+    if (busy) return;
+    setBusy(campaign.id);
+    try {
+      const updated = await startCampaignEdit(campaign.id);
+      setChoosing(null);
+      onDone(updated);
+      router.push(`/dashboard/campaigns/${campaign.id}?tab=creatives`);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  // Nusxa to'lovga tayyor bo'lsa — to'lov oynasi bilan ochiladi, aks holda
+  // (tahrir yoki moderatsiya kerak) banner qadamiga o'tiladi.
+  const renew = async (campaign: AdCampaign, withEdit: boolean) => {
+    if (busy) return;
+    setBusy(campaign.id);
+    try {
+      const created = await renewCampaign(campaign.id, withEdit);
+      toast.success(p.renew.created);
+      setRenewing(null);
+      router.push(
+        created.nextAction === "pay"
+          ? `/dashboard/campaigns/${created.id}?pay=1`
+          : setupHref(created.id),
+      );
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(null);
+    }
+  };
+
   return {
     busy,
     isBusy: (id: string) => busy === id,
     submit: (c: AdCampaign) => void run(c, "submit"),
     pause: (c: AdCampaign) => setConfirming({ campaign: c, action: "pause" }),
+    // O'zi to'xtatgan reklamani yoqishdan oldin tahrirlash taklif qilinadi.
     resume: (c: AdCampaign) =>
-      setConfirming({ campaign: c, action: "resume" }),
+      c.pausedBy === "advertiser" && !c.editStartedAt
+        ? setChoosing(c)
+        : setConfirming({ campaign: c, action: "resume" }),
+    renew: setRenewing,
     askPay: setPaying,
     dialogs: (
       <>
@@ -166,6 +222,22 @@ export function useCampaignActions({
             setConfirming(null);
             void run(campaign, action);
           }}
+        />
+        <ResumeChoiceDialog
+          campaign={choosing}
+          busy={busy !== null}
+          onCancel={() => setChoosing(null)}
+          onEdit={(campaign) => void edit(campaign)}
+          onResume={(campaign) => {
+            setChoosing(null);
+            void run(campaign, "resume");
+          }}
+        />
+        <RenewDialog
+          campaign={renewing}
+          busy={busy !== null}
+          onCancel={() => setRenewing(null)}
+          onRenew={(campaign, withEdit) => void renew(campaign, withEdit)}
         />
       </>
     ),
@@ -218,6 +290,129 @@ function ToggleConfirmDialog({
             onClick={() => pending && onConfirm(pending)}
           >
             {shown ? t.actions[shown.action] : null}
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+/** O'zi to'xtatgan reklamani yoqish: tahrirlab (moderatsiya) yoki shundayligicha. */
+function ResumeChoiceDialog({
+  campaign,
+  busy,
+  onCancel,
+  onEdit,
+  onResume,
+}: {
+  campaign: AdCampaign | null;
+  busy: boolean;
+  onCancel: () => void;
+  onEdit: (campaign: AdCampaign) => void;
+  onResume: (campaign: AdCampaign) => void;
+}) {
+  const r = useT("portal").resumeChoice;
+  const [shown, setShown] = React.useState(campaign);
+  if (campaign && campaign !== shown) setShown(campaign);
+
+  return (
+    <Dialog open={campaign !== null} onOpenChange={(open) => !open && onCancel()}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>{r.title}</DialogTitle>
+          <DialogDescription>{r.description}</DialogDescription>
+        </DialogHeader>
+        <div className="space-y-2">
+          <div className="flex items-start gap-3 rounded-lg bg-muted/60 px-4 py-3 text-sm">
+            <RiEditLine className="mt-0.5 size-4 shrink-0 text-primary" />
+            <p>{r.editNote}</p>
+          </div>
+          <div className="flex items-start gap-3 rounded-lg bg-amber-500/10 px-4 py-3 text-sm text-amber-800 dark:text-amber-300">
+            <RiTimeLine className="mt-0.5 size-4 shrink-0" />
+            <p>
+              {shown &&
+                interpolate(r.endDate, { date: formatDate(shown.endsAt) })}
+            </p>
+          </div>
+          {shown?.creatives.some((creative) => creative.pendingReview) && (
+            <p className="px-1 text-sm text-muted-foreground">{r.pendingNote}</p>
+          )}
+        </div>
+        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <Button
+            type="button"
+            variant="outline"
+            disabled={busy}
+            onClick={() => campaign && onEdit(campaign)}
+          >
+            {busy ? r.opening : r.edit}
+          </Button>
+          <Button
+            type="button"
+            disabled={busy}
+            onClick={() => campaign && onResume(campaign)}
+          >
+            {r.resumeAsIs}
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+/** Tugagan reklamani qayta chiqarish: shundayligicha (to'lov) yoki tahrirlab. */
+function RenewDialog({
+  campaign,
+  busy,
+  onCancel,
+  onRenew,
+}: {
+  campaign: AdCampaign | null;
+  busy: boolean;
+  onCancel: () => void;
+  onRenew: (campaign: AdCampaign, withEdit: boolean) => void;
+}) {
+  const r = useT("portal").renew;
+  const [shown, setShown] = React.useState(campaign);
+  if (campaign && campaign !== shown) setShown(campaign);
+  const fast = shown ? renewSkipsReview(shown) : true;
+
+  return (
+    <Dialog open={campaign !== null} onOpenChange={(open) => !open && onCancel()}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>{r.title}</DialogTitle>
+          <DialogDescription>
+            {shown && interpolate(r.description, { days: shown.days })}
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-2 text-sm">
+          <p
+            className={
+              fast
+                ? "rounded-lg bg-muted/60 px-4 py-3"
+                : "rounded-lg bg-amber-500/10 px-4 py-3 text-amber-800 dark:text-amber-300"
+            }
+          >
+            {fast ? r.fast : r.review}
+          </p>
+          <p className="text-muted-foreground">{r.editNote}</p>
+        </div>
+        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <Button
+            type="button"
+            variant="outline"
+            disabled={busy}
+            onClick={() => campaign && onRenew(campaign, true)}
+          >
+            {r.edit}
+          </Button>
+          <Button
+            type="button"
+            disabled={busy}
+            onClick={() => campaign && onRenew(campaign, false)}
+          >
+            {busy ? r.creating : fast ? r.pay : r.action}
           </Button>
         </div>
       </DialogContent>

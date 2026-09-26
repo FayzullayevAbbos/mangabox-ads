@@ -210,6 +210,11 @@
       "posters": "Posters",
       "postersText": "The image is optional but gets more attention. Without one, a text banner is shown here.",
       "posterSpec": "At least {min} px, ratio {ratio}",
+      "posterMedia": "Image, GIF or video",
+      "chooseMedia": "Choose file",
+      "posterVideoSpec": "GIF/video: at least {min} px, up to {max} MB, muted, loops up to 8 seconds",
+      "videoTipTitle": "You can also upload a video or GIF",
+      "videoTipText": "The lighter the file, the faster it opens for users and the less of their data it uses. Recommended: 3–6 seconds, under 2 MB, simple motion. Heavy files load slowly — until the video loads, users only see the still image.",
       "preview": "On the site (phone)",
       "previewBrand": "Your brand",
       "previewTitle": "Your headline goes here",
@@ -276,5 +281,56 @@
   "period": {
     "afterPayment": "Starts after payment",
     "from": "from {date}"
+  },
+  "resumeChoice": {
+    "title": "Edit before resuming?",
+    "description": "You can resume the ad as it is, or change its banners first.",
+    "editNote": "If you change the banners, the ad goes back to moderation and returns to air once approved.",
+    "endDate": "The end date stays the same: {date}. Paused days are not added back.",
+    "edit": "Edit",
+    "resumeAsIs": "Resume without changes",
+    "opening": "Opening…",
+    "pendingNote": "The banner in review goes on air once approved — until then the other banners are shown."
+  },
+  "editMode": {
+    "title": "Editing mode",
+    "help": "Change the banners in the Banners tab. If you change nothing, you can resume the ad right away.",
+    "helpEdited": "Banners were changed — send them for review. The ad returns to air once approved.",
+    "endDate": "End date: {date} — it does not change.",
+    "openBanners": "Edit banners",
+    "submit": "Send for review",
+    "resume": "Resume without changes",
+    "waiting": "Sent for review — the ad returns to air once the moderator approves it."
+  },
+  "renew": {
+    "action": "Run again",
+    "title": "Run the ad again",
+    "description": "A new campaign is created with the same placements, {days} days and the same banners, at current prices.",
+    "fast": "If you keep the banners as they are, you go straight to payment and the ad airs right after it's paid.",
+    "review": "This ad was stopped by a moderator or has a blocked banner, so it goes through moderation again first.",
+    "editNote": "Want to change something? Edit it — it will go through moderation again.",
+    "edit": "Edit and send",
+    "pay": "Go to payment",
+    "creating": "Creating…",
+    "created": "New campaign created"
+  },
+  "bannerResume": {
+    "title": "Edit the banner before turning it on?",
+    "text": "You can turn the \"{slot}\" banner on as it is, or edit it first.",
+    "editNote": "If you change it, only this banner goes through moderation and airs once approved. The campaign's other banners stay on air.",
+    "endDate": "The campaign end date does not change: {date}.",
+    "edit": "Edit",
+    "asIs": "Turn on without changes",
+    "reviewBadge": "In review",
+    "liveEditNote": "If you save changes, this banner goes off air until a moderator approves it; the other banners stay on. The end date does not change: {date}.",
+    "reviewStrip": "In review — goes on air once approved. Not shown in this placement until then."
+  },
+  "airtime": {
+    "pausedTitle": "The ad is paused",
+    "pausedText": "You paused it — it isn't shown anywhere right now. The period keeps running: the ad ends on {date}, and paused days are not added back.",
+    "pausedExpired": "The period has ended — if you turn the ad on, it will finish. Use “Run again” to relaunch it.",
+    "reviewTitle": "Banner in review",
+    "reviewLive": "The {slots} banner was edited and is in review. Until it's approved your ad isn't shown there; the other banners stay on air.",
+    "reviewPaused": "The {slots} banner was edited and is in review. Even once approved, it won't air until you turn the ad back on."
   }
 }
