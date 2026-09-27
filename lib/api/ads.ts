@@ -46,11 +46,11 @@ export const MAX_SHARE_PERCENT = 100;
 export const MIN_ORDER_SOM = 100_000;
 
 export const CREATIVE_LIMITS = {
-  brandName: 64,
-  title: 128,
-  body: 256,
-  ctaText: 64,
-  accentColor: 16,
+  brandName: 24,
+  title: 40,
+  body: 90,
+  ctaText: 16,
+  accentColor: 7,
   href: 500,
 } as const;
 
@@ -67,6 +67,7 @@ export interface AdImageSpec {
   targetWidth: number;
   targetHeight: number;
   ratio: number;
+  ratioTolerance?: number;
 }
 
 export interface AdSlotSpec {
@@ -535,6 +536,20 @@ export const VIDEO_UPLOAD_MAX_MB = 10;
 /** Server multipart chegarasi (`main.ts`) — rasm uchun. */
 export const IMAGE_UPLOAD_MAX_MB = 8;
 
+/** Server `AdsImageService.storeLogo` bilan bir xil. */
+export const LOGO_SPEC: AdImageSpec = {
+  minWidth: 200,
+  minHeight: 200,
+  targetWidth: 256,
+  targetHeight: 256,
+  ratio: 1,
+  ratioTolerance: 0.05,
+};
+
+/** Server faqat shularni qabul qiladi (`AdsImageService.readMeta`). */
+export const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
+export const VIDEO_TYPES = ["image/gif", "video/mp4", "video/quicktime", "video/webm"];
+
 /** GIF ham video yo'lidan o'tadi: server uni ovozsiz MP4 ga aylantiradi. */
 export function isVideoFile(file: File): boolean {
   return file.type.startsWith("video/") || file.type === "image/gif";
@@ -555,5 +570,7 @@ export function checkImageAgainstSpec(
   }
   const ratio = width / height;
   const drift = Math.abs(ratio - spec.ratio) / spec.ratio;
-  return drift <= IMAGE_RATIO_TOLERANCE ? { ok: true } : { ok: false, reason: "ratio" };
+  return drift <= (spec.ratioTolerance ?? IMAGE_RATIO_TOLERANCE)
+    ? { ok: true }
+    : { ok: false, reason: "ratio" };
 }

@@ -146,6 +146,7 @@
       "videoHint": "GIF or MP4 up to {max} MB, ratio {ratio}. Muted, loops up to 8 seconds. The smaller the file, the faster it opens.",
       "videoTooBig": "File too large: up to {max} MB.",
       "imageTooBig": "Image too large: up to {max} MB.",
+      "imageFormat": "Only JPEG, PNG or WebP images.",
       "videoProcessing": "Compressing video…",
       "videoRemoved": "Video removed",
       "cardOnlySlot": "This placement shows text banners only — no image upload.",

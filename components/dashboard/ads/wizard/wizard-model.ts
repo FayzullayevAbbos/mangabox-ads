@@ -1,4 +1,5 @@
 import {
+  CREATIVE_LIMITS,
   HEX_RE,
   HREF_RE,
   MIN_SHARE_PERCENT,
@@ -57,6 +58,18 @@ export const NO_FILES: CreativeFiles = {
   posters: {},
   removedPosters: [],
 };
+
+export function dropSlotFiles(files: CreativeFiles, slot: AdSlot): CreativeFiles {
+  const logos = { ...files.logos };
+  const posters = { ...files.posters };
+  delete logos[slot];
+  delete posters[slot];
+  return {
+    logos,
+    posters,
+    removedPosters: files.removedPosters.filter((s) => s !== slot),
+  };
+}
 
 export function newPlan(pick: RateCardPick | null): PlanDraft {
   return {
@@ -215,7 +228,7 @@ export type CreativeTarget = CreativeField | "poster" | "logo";
 export type CreativeErrors = Partial<Record<CreativeTarget, string>>;
 export type SlotErrors = Partial<Record<AdSlot, CreativeErrors>>;
 
-export function hasErrors(errors: CreativeErrors | undefined): boolean {
+export function hasErrors(errors: object | undefined): boolean {
   return !!errors && Object.keys(errors).length > 0;
 }
 
@@ -223,13 +236,26 @@ export function isCreativeField(value: unknown): value is CreativeField {
   return CREATIVE_FIELDS.includes(value as CreativeField);
 }
 
-export function validateCreative(draft: CreativeDraft): CreativeField[] {
-  const problems: CreativeField[] = [];
-  if (!draft.brandName.trim()) problems.push("brandName");
-  if (!draft.title.trim()) problems.push("title");
-  if (!HREF_RE.test(draft.href.trim())) problems.push("href");
-  const accent = draft.accentColor.trim();
-  if (accent && !HEX_RE.test(accent)) problems.push("accentColor");
+export type CreativeProblem = "required" | "invalid" | "tooLong";
+export type CreativeProblems = Partial<Record<CreativeField, CreativeProblem>>;
+
+const REQUIRED_FIELDS: readonly CreativeField[] = ["brandName", "title", "href"];
+
+function fieldProblem(field: CreativeField, raw: string): CreativeProblem | undefined {
+  const value = raw.trim();
+  if (!value) return REQUIRED_FIELDS.includes(field) ? "required" : undefined;
+  if (value.length > CREATIVE_LIMITS[field]) return "tooLong";
+  if (field === "href" && !HREF_RE.test(value)) return "invalid";
+  if (field === "accentColor" && !HEX_RE.test(value)) return "invalid";
+  return undefined;
+}
+
+export function validateCreative(draft: CreativeDraft): CreativeProblems {
+  const problems: CreativeProblems = {};
+  for (const field of CREATIVE_FIELDS) {
+    const problem = fieldProblem(field, draft[field]);
+    if (problem) problems[field] = problem;
+  }
   return problems;
 }
 

@@ -21,6 +21,7 @@ import {
   CREATIVE_LIMITS,
   HEX_RE,
   isVideoPreview,
+  LOGO_SPEC,
   VIDEO_UPLOAD_MAX_MB,
   type AdCampaign,
   type AdSlot,
@@ -40,8 +41,10 @@ import {
   slotCreative,
   validateCreative,
   type CreativeDraft,
+  type CreativeErrors,
   type CreativeField,
   type CreativeFiles,
+  type CreativeProblem,
   type CreativeTarget,
   type SlotDrafts,
   type SlotErrors,
@@ -62,6 +65,25 @@ function useObjectUrlMap(
     [urls],
   );
   return urls;
+}
+
+export function useCreativeErrors(): (draft: CreativeDraft) => CreativeErrors {
+  const c = useT("ads").sheet.creatives;
+  const w = useT("portal").wizard.creative;
+
+  const messageOf = (field: CreativeField, problem: CreativeProblem): string => {
+    if (problem === "tooLong") return interpolate(w.tooLong, { max: CREATIVE_LIMITS[field] });
+    if (problem === "invalid") return field === "href" ? c.hrefInvalid : c.accentInvalid;
+    if (field === "brandName") return c.brandRequired;
+    return field === "title" ? w.titleRequired : w.hrefRequired;
+  };
+
+  return (draft) => {
+    const messages: CreativeErrors = {};
+    const problems = Object.entries(validateCreative(draft)) as [CreativeField, CreativeProblem][];
+    for (const [field, problem] of problems) messages[field] = messageOf(field, problem);
+    return messages;
+  };
 }
 
 export function CreativeStep({
@@ -91,6 +113,7 @@ export function CreativeStep({
   const w = useT("portal").wizard.creative;
   const c = t.sheet.creatives;
   const { specOf, labelOf } = useRateCard();
+  const errorsOf = useCreativeErrors();
   const localLogos = useObjectUrlMap(files.logos);
   const localPosters = useObjectUrlMap(files.posters);
 
@@ -108,9 +131,14 @@ export function CreativeStep({
     onErrors({ ...errors, [active]: next });
   };
 
-  const set = <K extends keyof CreativeDraft>(key: K, value: CreativeDraft[K]) => {
-    onDrafts({ ...drafts, [active]: { ...draft, [key]: value } });
-    setError(key);
+  const set = (field: CreativeField, value: string) => {
+    const next = { ...draft, [field]: value };
+    onDrafts({ ...drafts, [active]: next });
+    if (slotErrors[field]) setError(field, errorsOf(next)[field]);
+  };
+
+  const check = (field: CreativeField) => {
+    if (draft[field].trim()) setError(field, errorsOf(draft)[field]);
   };
 
   const logoSrc = (slot: AdSlot): string | null => {
@@ -189,14 +217,12 @@ export function CreativeStep({
 
   const slotStatus = (slot: AdSlot): "ready" | "error" | "empty" => {
     if (hasErrors(errors[slot])) return "error";
-    return validateCreative(draftOf(drafts, slot)).length === 0 ? "ready" : "empty";
+    return hasErrors(validateCreative(draftOf(drafts, slot))) ? "empty" : "ready";
   };
 
   const accentValid = HEX_RE.test(draft.accentColor.trim());
-  const accentLive =
-    draft.accentColor.trim() && !accentValid ? c.accentInvalid : undefined;
-  const errorText = (field: CreativeField, fallback?: string) => {
-    const message = slotErrors[field] ?? fallback;
+  const errorText = (field: CreativeField) => {
+    const message = slotErrors[field];
     return message ? (
       <p data-field-error className="text-xs text-destructive">
         {message}
@@ -282,6 +308,7 @@ export function CreativeStep({
               limit={CREATIVE_LIMITS.brandName}
               placeholder={w.brandPlaceholder}
               onChange={(v) => set("brandName", v)}
+              onBlur={() => check("brandName")}
               error={errorText("brandName")}
             />
             <TextField
@@ -290,6 +317,7 @@ export function CreativeStep({
               limit={CREATIVE_LIMITS.title}
               placeholder={w.titlePlaceholder}
               onChange={(v) => set("title", v)}
+              onBlur={() => check("title")}
               error={errorText("title")}
             />
             <div className="space-y-2">
@@ -306,6 +334,7 @@ export function CreativeStep({
                 value={draft.body}
                 aria-invalid={slotErrors.body ? true : undefined}
                 onChange={(e) => set("body", e.target.value)}
+                onBlur={() => check("body")}
               />
               {errorText("body")}
             </div>
@@ -317,6 +346,7 @@ export function CreativeStep({
               mono
               hint={w.hrefHint}
               onChange={(v) => set("href", v)}
+              onBlur={() => check("href")}
               error={errorText("href")}
             />
             <div className="grid gap-5 sm:grid-cols-2">
@@ -326,6 +356,7 @@ export function CreativeStep({
                 limit={CREATIVE_LIMITS.ctaText}
                 placeholder={w.ctaPlaceholder}
                 onChange={(v) => set("ctaText", v)}
+                onBlur={() => check("ctaText")}
                 error={errorText("ctaText")}
               />
               <div className="space-y-2">
@@ -345,15 +376,17 @@ export function CreativeStep({
                     className="h-10 font-mono text-[0.9375rem] md:text-[0.9375rem]"
                     value={draft.accentColor}
                     onChange={(e) => set("accentColor", e.target.value)}
+                    onBlur={() => check("accentColor")}
                   />
                 </div>
-                {errorText("accentColor", accentLive)}
+                {errorText("accentColor")}
               </div>
             </div>
             <ImagePicker
               label={w.logo}
               hint={w.logoHint}
               src={logoSrc(active)}
+              spec={LOGO_SPEC}
               frameClassName="size-16 rounded-full"
               canRemove={!!files.logos[active]}
               error={slotErrors.logo}
@@ -378,7 +411,7 @@ export function CreativeStep({
                 }
                 src={posterSrc(active)}
                 videoSrc={posterVideo(active)}
-                allowVideo={!!videoSpec}
+                videoSpec={videoSpec}
                 spec={spec}
                 frameClassName={spec.ratio < 1 ? "h-24 w-16" : "h-16 w-28"}
                 canRemove

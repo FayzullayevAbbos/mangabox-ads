@@ -11,6 +11,8 @@ import {
   uploadCreativeVideo,
   isVideoFile,
   type AdCampaign,
+  type AdCreative,
+  type AdCreativeType,
   type AdSlot,
 } from "@/lib/api/ads";
 import { todayKey } from "@/lib/format";
@@ -87,54 +89,99 @@ function fieldsOf(draft: CreativeDraft) {
   };
 }
 
+type CreativeFields = ReturnType<typeof fieldsOf>;
+
+function isUnchanged(
+  existing: AdCreative,
+  fields: CreativeFields,
+  type: AdCreativeType,
+): boolean {
+  return (
+    existing.active &&
+    existing.type === type &&
+    (Object.keys(fields) as (keyof CreativeFields)[]).every(
+      (key) => (existing[key] ?? "") === fields[key],
+    )
+  );
+}
+
+async function saveSlot(
+  campaign: AdCampaign,
+  slot: AdSlot,
+  draft: CreativeDraft,
+  files: CreativeFiles,
+  posterSlots: AdSlot[],
+): Promise<string> {
+  const fields = fieldsOf(draft);
+  const existing = slotCreative(campaign, slot);
+  const file = files.posters[slot];
+  const withImage =
+    posterSlots.includes(slot) &&
+    !files.removedPosters.includes(slot) &&
+    (!!file || !!posterOf(campaign, slot));
+  const type = withImage ? "image" : "card";
+
+  const saved =
+    existing && isUnchanged(existing, fields, type)
+      ? existing
+      : await within(
+          slot,
+          null,
+          existing
+            ? updateCreative(existing.id, { ...fields, type, slot, active: true })
+            : createCreative(campaign.id, { ...fields, type, slot }),
+        );
+
+  const logo = files.logos[slot];
+  await Promise.all([
+    file && withImage
+      ? within(
+          slot,
+          "poster",
+          isVideoFile(file)
+            ? uploadCreativeVideo(saved.id, file)
+            : uploadCreativeImage(saved.id, file),
+        )
+      : null,
+    logo ? within(slot, "logo", uploadCreativeLogo(saved.id, logo)) : null,
+  ]);
+  return saved.id;
+}
+
 /**
  * Har bir sotib olingan joyga aynan bitta kreativ — o'z matni, logotipi va
  * rasmi bilan: rasm bo'lsa `image`, bo'lmasa `card`. Moderator har joyni
  * alohida ko'radi, sayt esa joyda faqat o'sha kreativni chiqaradi.
+ *
+ * Joylar parallel saqlanadi; saqlangan joy `onSlotSaved` orqali bildiriladi,
+ * shunda xatodan keyingi qayta urinish uning fayllarini qayta yuklamaydi.
  */
 export async function saveCreative(
   campaign: AdCampaign,
   drafts: SlotDrafts,
   files: CreativeFiles,
   posterSlots: AdSlot[],
+  onSlotSaved: (slot: AdSlot) => void,
 ): Promise<AdCampaign> {
-  const kept = new Set<string>();
-
-  for (const { slot } of campaign.slots) {
-    const fields = fieldsOf(draftOf(drafts, slot));
-    const existing = slotCreative(campaign, slot);
-    const file = files.posters[slot];
-    const withImage =
-      posterSlots.includes(slot) &&
-      !files.removedPosters.includes(slot) &&
-      (!!file || !!posterOf(campaign, slot));
-    const type = withImage ? "image" : "card";
-
-    const saved = await within(
-      slot,
-      null,
-      existing
-        ? updateCreative(existing.id, { ...fields, type, slot, active: true })
-        : createCreative(campaign.id, { ...fields, type, slot }),
-    );
-    if (file && withImage) {
-      await within(
-        slot,
-        "poster",
-        isVideoFile(file)
-          ? uploadCreativeVideo(saved.id, file)
-          : uploadCreativeImage(saved.id, file),
-      );
-    }
-    const logo = files.logos[slot];
-    if (logo) await within(slot, "logo", uploadCreativeLogo(saved.id, logo));
-    kept.add(saved.id);
-  }
+  const results = await Promise.allSettled(
+    campaign.slots.map(async ({ slot }) => {
+      const id = await saveSlot(campaign, slot, draftOf(drafts, slot), files, posterSlots);
+      onSlotSaved(slot);
+      return id;
+    }),
+  );
+  const failed = results.find((result) => result.status === "rejected");
+  if (failed) throw failed.reason;
 
   // Eski umumiy card, dublikatlar va rejadan olib tashlangan joylar
   // kreativlari. Yangilari yaratilgach o'chiriladi — logotip ko'chib ulguradi.
-  for (const creative of campaign.creatives) {
-    if (!kept.has(creative.id)) await within(null, null, deleteCreative(creative.id));
-  }
+  const kept = new Set(
+    results.flatMap((result) => (result.status === "fulfilled" ? [result.value] : [])),
+  );
+  await Promise.all(
+    campaign.creatives
+      .filter((creative) => !kept.has(creative.id))
+      .map((creative) => within(null, null, deleteCreative(creative.id))),
+  );
   return getCampaign(campaign.id);
 }

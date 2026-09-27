@@ -146,6 +146,7 @@
       "videoHint": "GIF yoki MP4, {max} MB gacha, nisbat {ratio}. Ovozsiz, 8 soniyagacha aylanadi. Fayl qancha kichik bo'lsa, shuncha tez ochiladi.",
       "videoTooBig": "Fayl juda katta: {max} MB gacha.",
       "imageTooBig": "Rasm juda katta: {max} MB gacha.",
+      "imageFormat": "Faqat JPEG, PNG yoki WebP rasm.",
       "videoProcessing": "Video siqilmoqda…",
       "videoRemoved": "Video olib tashlandi",
       "cardOnlySlot": "Bu joyda faqat matnli banner ko'rsatiladi — rasm yuklanmaydi.",

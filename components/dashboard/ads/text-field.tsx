@@ -7,6 +7,7 @@ export function TextField({
   value,
   limit,
   onChange,
+  onBlur,
   error,
   mono,
   placeholder,
@@ -16,6 +17,7 @@ export function TextField({
   value: string;
   limit: number;
   onChange: (value: string) => void;
+  onBlur?: () => void;
   error?: React.ReactNode;
   mono?: boolean;
   placeholder?: string;
@@ -35,7 +37,9 @@ export function TextField({
           mono && "font-mono",
         )}
         value={value}
+        aria-invalid={error ? true : undefined}
         onChange={(e) => onChange(e.target.value)}
+        onBlur={onBlur}
       />
       {error ?? (hint && <p className="text-xs text-muted-foreground">{hint}</p>)}
     </div>

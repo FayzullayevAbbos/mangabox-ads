@@ -37,6 +37,7 @@ import {
   deleteCreative,
   HEX_RE,
   HREF_RE,
+  LOGO_SPEC,
   isEditingPaused,
   isPausedByModerator,
   needsFix,
@@ -766,6 +767,7 @@ function CreativeDialog({
                 label={w.logo}
                 hint={w.logoHint}
                 src={logoSrc}
+                spec={LOGO_SPEC}
                 frameClassName="size-16 rounded-full"
                 canRemove={!!logoFile}
                 error={mediaError?.target === "logo" ? mediaError.message : undefined}
@@ -793,7 +795,7 @@ function CreativeDialog({
                   }
                   src={posterSrc}
                   videoSrc={posterVideo}
-                  allowVideo={!!videoSpec}
+                  videoSpec={videoSpec}
                   spec={spec}
                   frameClassName={spec.ratio < 1 ? "h-24 w-16" : "h-16 w-28"}
                   // Tanlangan faylni bekor qilish yoki mavjud videoni olib

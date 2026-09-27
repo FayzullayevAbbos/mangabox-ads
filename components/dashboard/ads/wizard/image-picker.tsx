@@ -4,12 +4,14 @@ import * as React from "react";
 import { RiImageAddLine, RiUploadCloud2Line } from "@remixicon/react";
 import { toast } from "sonner";
 
-import { ratioLabel, readImageSize } from "@/components/dashboard/ads/image-file";
+import { ratioLabel, readMediaSize } from "@/components/dashboard/ads/image-file";
 import { Button } from "@/components/ui/button";
 import {
   checkImageAgainstSpec,
+  IMAGE_TYPES,
   IMAGE_UPLOAD_MAX_MB,
   isVideoFile,
+  VIDEO_TYPES,
   VIDEO_UPLOAD_MAX_MB,
   type AdImageSpec,
 } from "@/lib/api/ads";
@@ -33,8 +35,8 @@ export function ImagePicker({
   hint,
   src,
   videoSrc,
-  allowVideo = false,
   spec,
+  videoSpec,
   frameClassName,
   canRemove,
   error,
@@ -47,9 +49,9 @@ export function ImagePicker({
   src: string | null;
   /** Bor bo'lsa ramkada rasm o'rniga ovozsiz aylanuvchi video. */
   videoSrc?: string | null;
-  /** GIF va video (MP4/MOV/WebM) ham tanlanadi — server siqadi. */
-  allowVideo?: boolean;
   spec?: AdImageSpec | null;
+  /** Bor bo'lsa GIF va video (MP4/MOV/WebM) ham tanlanadi — server siqadi. */
+  videoSpec?: AdImageSpec | null;
   frameClassName?: string;
   canRemove: boolean;
   error?: string;
@@ -57,7 +59,7 @@ export function ImagePicker({
   onRemove: () => void;
   onError?: (message: string) => void;
 }) {
-  const t = useT("ads");
+  const c = useT("ads").sheet.creatives;
   const w = useT("portal").wizard.creative;
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -67,36 +69,34 @@ export function ImagePicker({
   };
 
   const accept = async (file: File) => {
-    // Video o'lchami va nisbatini server tekshiradi (brauzer GIF/MP4
-    // o'lchamini oldindan ishonchli o'qimaydi).
-    if (allowVideo && isVideoFile(file)) {
-      if (file.size > VIDEO_UPLOAD_MAX_MB * 1024 * 1024) {
-        fail(interpolate(t.sheet.creatives.videoTooBig, { max: String(VIDEO_UPLOAD_MAX_MB) }));
-        return;
-      }
-      onPick(file);
+    const video = !!videoSpec && isVideoFile(file);
+    if (!video && !IMAGE_TYPES.includes(file.type)) {
+      fail(c.imageFormat);
       return;
     }
-    if (file.size > IMAGE_UPLOAD_MAX_MB * 1024 * 1024) {
-      fail(interpolate(t.sheet.creatives.imageTooBig, { max: String(IMAGE_UPLOAD_MAX_MB) }));
+    const maxMb = video ? VIDEO_UPLOAD_MAX_MB : IMAGE_UPLOAD_MAX_MB;
+    if (file.size > maxMb * 1024 * 1024) {
+      fail(interpolate(video ? c.videoTooBig : c.imageTooBig, { max: String(maxMb) }));
       return;
     }
-    if (spec) {
-      const size = await readImageSize(file);
-      const check = size && checkImageAgainstSpec(size.width, size.height, spec);
+    const target = video ? videoSpec : spec;
+    if (target) {
+      // O'qib bo'lmagan format (masalan brauzer ochmaydigan MOV) serverda tekshiriladi.
+      const size = await readMediaSize(file);
+      const check = size && checkImageAgainstSpec(size.width, size.height, target);
       if (size && check && !check.ok) {
         const actual = `${size.width}×${size.height}`;
-        const message =
+        fail(
           check.reason === "size"
-            ? interpolate(t.sheet.creatives.imageTooSmall, {
-                min: `${spec.minWidth}×${spec.minHeight}`,
+            ? interpolate(c.imageTooSmall, {
+                min: `${target.minWidth}×${target.minHeight}`,
                 actual,
               })
-            : interpolate(t.sheet.creatives.imageWrongRatio, {
-                ratio: ratioLabel(spec.ratio),
+            : interpolate(c.imageWrongRatio, {
+                ratio: ratioLabel(target.ratio),
                 actual,
-              });
-        fail(message);
+              }),
+        );
         return;
       }
     }
@@ -152,7 +152,7 @@ export function ImagePicker({
           onClick={() => inputRef.current?.click()}
         >
           <RiUploadCloud2Line data-icon="inline-start" />
-          {src || videoSrc ? w.replace : allowVideo ? w.chooseMedia : w.chooseFile}
+          {src || videoSrc ? w.replace : videoSpec ? w.chooseMedia : w.chooseFile}
         </Button>
       </div>
 
@@ -165,7 +165,7 @@ export function ImagePicker({
       <input
         ref={inputRef}
         type="file"
-        accept={allowVideo ? "image/*,video/mp4,video/quicktime,video/webm" : "image/*"}
+        accept={(videoSpec ? [...IMAGE_TYPES, ...VIDEO_TYPES] : IMAGE_TYPES).join(",")}
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];

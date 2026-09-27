@@ -23,7 +23,7 @@ import {
 import { interpolate } from "@/lib/i18n/interpolate";
 import { useT } from "@/lib/i18n/provider";
 
-import { CreativeStep } from "./creative-step";
+import { CreativeStep, useCreativeErrors } from "./creative-step";
 import { PlaceStep } from "./place-step";
 import { PlanStep } from "./plan-step";
 import { reviewChecks, ReviewStep } from "./review-step";
@@ -32,6 +32,7 @@ import { setupHref } from "./wizard-links";
 import {
   draftOf,
   draftsFromCampaign,
+  dropSlotFiles,
   ensureDrafts,
   firstOpenStep,
   isPlanField,
@@ -41,10 +42,7 @@ import {
   stepIndex,
   suggestName,
   toggleSlot,
-  validateCreative,
   WIZARD_STEPS,
-  type CreativeDraft,
-  type CreativeErrors,
   type CreativeFiles,
   type SlotDrafts,
   type SlotErrors,
@@ -95,7 +93,7 @@ export function CampaignWizard({
   requestedStep: WizardStep | null;
 }) {
   const w = useT("portal").wizard;
-  const c = useT("ads").sheet.creatives;
+  const creativeErrorsOf = useCreativeErrors();
   const router = useRouter();
   const { labelOf, specOf } = useRateCard();
 
@@ -155,19 +153,6 @@ export function CampaignWizard({
     }
   };
 
-  const localCreativeErrors = (draft: CreativeDraft): CreativeErrors => {
-    const messages: CreativeErrors = {};
-    for (const field of validateCreative(draft)) {
-      if (field === "brandName") messages.brandName = c.brandRequired;
-      else if (field === "title") messages.title = w.creative.titleRequired;
-      else if (field === "accentColor") messages.accentColor = c.accentInvalid;
-      else if (field === "href") {
-        messages.href = draft.href.trim() ? c.hrefInvalid : w.creative.hrefRequired;
-      }
-    }
-    return messages;
-  };
-
   const nextFromPlace = () => {
     if (plan.lines.length === 0) {
       setPlaceError(true);
@@ -196,7 +181,7 @@ export function CampaignWizard({
   const nextFromCreative = () => {
     const local: SlotErrors = {};
     for (const slot of campaignSlots) {
-      const problems = localCreativeErrors(draftOf(drafts, slot));
+      const problems = creativeErrorsOf(draftOf(drafts, slot));
       if (Object.keys(problems).length > 0) local[slot] = problems;
     }
     setCreativeErrors(local);
@@ -210,7 +195,9 @@ export function CampaignWizard({
     if (!campaign) return;
     void run(
       async () => {
-        const updated = await saveCreative(campaign, drafts, files, posterSlots);
+        const updated = await saveCreative(campaign, drafts, files, posterSlots, (slot) =>
+          setFiles((prev) => dropSlotFiles(prev, slot)),
+        );
         setCampaign(updated);
         setFiles(NO_FILES);
         go("review");

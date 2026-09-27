@@ -202,6 +202,7 @@
       "hrefHint": "Reklama bosilganda shu sahifa ochiladi.",
       "hrefRequired": "Havolani kiriting.",
       "titleRequired": "Sarlavhani kiriting.",
+      "tooLong": "{max} belgidan oshmasin.",
       "logo": "Logotip",
       "logoHint": "Kvadrat rasm, ixtiyoriy.",
       "chooseFile": "Rasm tanlash",
